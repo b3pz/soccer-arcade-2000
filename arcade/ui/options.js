@@ -61,19 +61,21 @@ function open({parent=document.body,onClose,inMatch=false,setup=false}={}){
  // Guided setup: each button of the drawn pad blinks in turn; the first raw input that changes is recorded for it.
  function wizPad(){const raw=window.S9ArcadePads.raw();return raw.find(p=>p.index===padSlot)||raw[0]||null}
  function startWizard(){const pad=wizPad();if(!pad){say('COLLEGA IL JOYPAD E PREMI UN TASTO');return}window.S9ArcadePads.capture=true;wiz={pad:pad.index,id:pad.id,step:0,map:{},base:null,release:false,done:false,since:performance.now()}}
- function pollWizard(now){if(!wiz||wiz.done&&wiz.testing)return;const pad=window.S9ArcadePads.raw().find(p=>p.index===wiz.pad);if(!pad)return;const pressed=pad.buttons.map(b=>b.pressed||b.value>.5);
+ function pollWizard(now){if(!wiz)return;const pad=window.S9ArcadePads.raw().find(p=>p.index===wiz.pad);if(!pad)return;const pressed=pad.buttons.map(b=>b.pressed||b.value>.5);
+  // After the last button (START) the menus stay deaf to the pad until every button is released.
+  if(wiz.done){if(wiz.waitRelease&&!pressed.some(Boolean)&&pad.axes.every((v,i)=>Math.abs(v-(wiz.base?.axes[i]??0))<.4)){wiz.waitRelease=false;window.S9ArcadePads.capture=false;quietUntil=now+300}return}
   if(!wiz.base){wiz.base={axes:pad.axes.slice(),held:pressed.map(Boolean)};return}
   const active=pressed.some((p,i)=>p&&!wiz.base.held[i])||pad.axes.some((v,i)=>Math.abs(v-wiz.base.axes[i])>.5);
   if(wiz.release){if(!active){wiz.release=false;wiz.since=now}return}
   if(now-wiz.since>9000){wiz.step++;wiz.since=now;say('TASTO SALTATO');}else{let src=null;pressed.forEach((p,i)=>{if(!src&&p&&!wiz.base.held[i])src={t:'b',i}});if(!src)pad.axes.forEach((v,i)=>{if(!src&&Math.abs(v-wiz.base.axes[i])>.6)src={t:'a',i,s:Math.sign(v-wiz.base.axes[i])}});
    if(src){const dup=Object.values(wiz.map).some(m=>m.t===src.t&&m.i===src.i&&(m.s||0)===(src.s||0));if(dup){say('QUESTO TASTO È GIÀ ASSEGNATO');wiz.release=true;return}wiz.map[window.S9ArcadePads.SLOTS[wiz.step][0]]=src;wiz.step++;wiz.release=true;window.S9SFX?.kick?.()}}
-  if(wiz.step>=window.S9ArcadePads.SLOTS.length){window.S9ArcadePads.set(pad,wiz.map);wiz.done=true;wiz.testing=true;window.S9ArcadePads.capture=false;quietUntil=now+600;say('JOYPAD CONFIGURATO')}}
+  if(wiz.step>=window.S9ArcadePads.SLOTS.length){window.S9ArcadePads.set(pad,wiz.map);wiz.done=true;wiz.testing=true;wiz.waitRelease=true;say('JOYPAD CONFIGURATO')}}
  function endWizard(){wiz=null;window.S9ArcadePads.capture=false;quietUntil=performance.now()+500}
  function key(e){if(!alive)return;const k=(e.key||'').toLowerCase();e.preventDefault();e.stopImmediatePropagation();
-  if(wiz){if(wiz.testing&&performance.now()>quietUntil&&(B.keyboard('menu',e)==='back'||k==='escape'||B.keyboard('system',e)==='pause')){endWizard();return}if(!wiz.testing&&k==='escape'&&e.isTrusted){endWizard();say('CONFIGURAZIONE ANNULLATA')}return}
+  if(wiz){if(wiz.testing&&!wiz.waitRelease&&performance.now()>quietUntil&&(B.keyboard('menu',e)==='back'||k==='escape'&&e.isTrusted)){endWizard();return}if(!wiz.testing&&k==='escape'&&e.isTrusted){endWizard();say('CONFIGURAZIONE ANNULLATA')}return}
   if(listen){if(k==='escape'&&e.isTrusted){listen=null;say('ANNULLATO');return}if(!listen.pad&&e.isTrusted&&e.type==='keydown'&&!e.repeat)assign(e.key);return}
   if(performance.now()<quietUntil)return;
-  const act=B.keyboard('menu',e)||({escape:'back',enter:'confirm',' ':'confirm'})[k]||(B.keyboard('system',e)==='pause'?'back':null),list=rows(),sel=selectable(list);
+  const act=B.keyboard('menu',e)||({escape:e.isTrusted?'back':null,enter:'confirm',' ':'confirm'})[k]||(e.isTrusted&&B.keyboard('system',e)==='pause'?'back':null),list=rows(),sel=selectable(list);
   if(act==='back'){close();return}
   if(act==='previous'||act==='next'||row<0&&(act==='arrowleft'||act==='arrowright')){tab=(tab+((act==='previous'||act==='arrowleft')?-1:1)+tabs.length)%tabs.length;row=-1;scroll=0;confirmReset=false;return}
   if(act==='arrowup'||act==='arrowdown'){const at=sel.indexOf(row),next=act==='arrowdown'?at+1:at-1;row=row<0?(act==='arrowdown'?sel[0]:-1):next<0?-1:sel[Math.min(sel.length-1,next)];if(row>=0){scroll=Math.max(0,Math.min(scroll,row-1),row-10)}if(list[row]?.label?.startsWith('CONFERMI'))return;confirmReset=false;return}
@@ -96,7 +98,7 @@ function open({parent=document.body,onClose,inMatch=false,setup=false}={}){
   r.text((padNow?'CROCE':'FRECCE')+' · SCEGLI    '+pk('confirm')+' · CONFERMA    '+pk('back')+' · INDIETRO    '+pk('previous')+' / '+pk('next')+' · SCHEDA',640,668,17,'#ffe55b');
   if(note&&now-noteAt<2600)r.text(note,640,700,16,'#7dff9a');
   if(wiz){const P=window.S9ArcadePads,slot=P.SLOTS[Math.min(wiz.step,P.SLOTS.length-1)];c.fillStyle='#030716f2';c.fillRect(0,0,1280,720);r.text('CONFIGURA JOYPAD',640,90,40,'#ffe447');
-   if(wiz.testing){const pad=pads().find(p=>p.index===wiz.pad),lit=new Set((pad?.buttons||[]).map((b,i)=>b.pressed||b.value>.5?i:-1).filter(i=>i>=0));drawPad(c,640,370,2.3,lit,-1,now);r.text('FATTO! PREMI I TASTI: SI ILLUMINANO',640,600,26,'#7dff9a');r.text('START O ○ PER FINIRE',640,640,18,'#fff')}
+   if(wiz.testing){const pad=pads().find(p=>p.index===wiz.pad),lit=new Set((pad?.buttons||[]).map((b,i)=>b.pressed||b.value>.5?i:-1).filter(i=>i>=0));drawPad(c,640,370,2.3,lit,-1,now);r.text('FATTO! PREMI I TASTI: SI ILLUMINANO',640,600,26,'#7dff9a');r.text('○ PER FINIRE  ·  ESC DA TASTIERA',640,640,18,'#fff')}
    else{drawPad(c,640,370,2.3,new Set(),slot[0],now);r.text('PREMI  '+slot[2],640,600,34,'#fff');r.text((Math.min(wiz.step+1,P.SLOTS.length))+' / '+P.SLOTS.length+'   ·   ESC ANNULLA   ·   TASTO ASSENTE: ASPETTA 9 SECONDI',640,644,15,'#9fc2d4')}
    if(note&&now-noteAt<2000)r.text(note,640,684,16,'#ffb36b');return}
   if(listen){c.fillStyle='#000a';c.fillRect(0,0,1280,720);r.panel(290,250,700,220,20);r.text(listen.pad?'PREMI IL PULSANTE DEL JOYPAD':'PREMI IL TASTO',640,318,30,'#ffe447');r.text('PER: '+listen.label,640,368,22,'#fff');const left=Math.max(0,1-(now-listen.since)/6000);c.fillStyle='#1b3150';c.fillRect(390,404,500,12);c.fillStyle='#ffe447';c.fillRect(390,404,500*left,12);r.text(listen.pad?'ATTENDI PER ANNULLARE':'ESC PER ANNULLARE',640,446,15,'#9fc2d4')}
