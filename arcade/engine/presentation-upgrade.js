@@ -41,5 +41,5 @@ R.draw=function(m){this.stadiumKit=m.teams?.[this.stadiumCelebration?.team]?.kit
  }
 };
 // Replace the old duplicate replay caption with one consistent cabinet strip.
-R.text=function(s,x,y,size,color,align){if(s==='REPLAY · Z SALTA'){this.panel(430,160,420,58,12);return text.call(this,window.S9ArcadeControls?.padConnected?'REPLAY · A SALTA':'REPLAY · Z SALTA',640,197,25,'#ffde4b')}return text.call(this,s,x,y,size,color,align)};
+R.text=function(s,x,y,size,color,align){if(s==='REPLAY · Z SALTA'){this.panel(430,160,420,58,12);return this.text('REPLAY · {p:z} SALTA',640,197,25,'#ffde4b')}return text.call(this,s,x,y,size,color,align)};
 })();

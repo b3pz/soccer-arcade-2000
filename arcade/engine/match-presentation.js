@@ -70,9 +70,18 @@ R.drawPenalty=function(m){const c=this.ctx,pen=m.pen,team=pen.turn%2,g=m.teams[1
  if(!pen.single)for(const side of [0,1]){const x=side?1010:30;this.panel(x,560,240,64,10);this.text(this.teamCode?.(m.teams[side])||'',x+40,600,18,'#fff');this.text(pen.history[side].map(v=>v?'●':'○').join(' ')||'—',x+150,600,20,'#ffe55b')}
  const shooterHuman=(m.humans||[]).some(h=>h.team===team),keeperHuman=(m.humans||[]).some(h=>h.team===1-team),chosen=shooterHuman?pen.aim:pen.saveCell,a=PEN.left,z=PEN.right,top=PEN.bar,bottom=PEN.line;
  if((shooterHuman||keeperHuman)&&(pen.stage==='ready'||keeperHuman&&pen.stage==='flight'&&!pen.keeperCommitted)){for(let row=0;row<3;row++)for(let col=0;col<3;col++){const x=a+col*(z-a)/3,y=top+row*(bottom-top)/3,on=row*3+col===chosen;c.strokeStyle=on?'#fff257':'#87dfff88';c.lineWidth=on?5:2;c.strokeRect(x+3,y+3,(z-a)/3-6,(bottom-top)/3-6);if(on){c.fillStyle='#ffe85122';c.fillRect(x+3,y+3,(z-a)/3-6,(bottom-top)/3-6)}this.text(String(row*3+col+1),x+(z-a)/6,y+(bottom-top)/6+7,20,on?'#fff257':'#9fc2d4')}}
- if(pen.stage==='result'){this.panel(330,96,620,140,18);this.text(pen.outcome.label,640,156,48,pen.outcome.goal?'#ffe743':'#ff8294');this.text((pen.single?'RIGORE':'RIGORE '+(Math.floor(pen.turn/2)+1))+' · '+m.teams[team].name,640,190,20,'#b3eaff');if(pen.age>=.7)this.text(pad?'A · CONTINUA':'Z · CONTINUA',640,222,22,'#fff06a')} // above the bar: the goal stays visible
- else{this.panel(250,84,780,42,10);this.text(shooterHuman?'FRECCE · 9 POSIZIONI   '+(pad?'A':'Z')+' · TIRA':'FRECCE · 9 POSIZIONI   '+(pad?'B / X':'X / C')+' · TUFFO DOPO IL TIRO',640,112,19,'#ffe55b')}
+ if(pen.stage==='result'){this.panel(330,96,620,140,18);this.text(pen.outcome.label,640,156,48,pen.outcome.goal?'#ffe743':'#ff8294');this.text((pen.single?'RIGORE':'RIGORE '+(Math.floor(pen.turn/2)+1))+' · '+m.teams[team].name,640,190,20,'#b3eaff');if(pen.age>=.7)this.text('{p:z} CONTINUA',640,222,22,'#fff06a')} // above the bar: the goal stays visible
+ else{this.panel(250,84,780,42,10);this.text(shooterHuman?'{arrows} 9 POSIZIONI   {p:z} TIRA':'{arrows} 9 POSIZIONI   {p:x}{p:c} TUFFO DOPO IL TIRO',640,112,19,'#ffe55b')}
 };
+
+// ---------------------------------------------------------------- pause
+// Same look as OPZIONI: banner, the match at a glance, three large entries with a selection bar, button prompts with icons.
+R.pauseScreen=function(m){const c=this.ctx,at=this.pauseIndex||0,golden=m.rules.period==='GOLDEN',sec=Math.max(0,Math.ceil(golden?m.rules.goldenRemaining:m.rules.remaining));
+ c.fillStyle='#020612d0';c.fillRect(0,0,1280,720);this.arcadeBanner?this.arcadeBanner('PAUSA','#ffe447',128,1):this.text('PAUSA',640,120,52,'#ffe447');
+ this.panel(300,196,680,92,14);this.teamCrest(m.teams[0],326,208,54,68);this.teamCrest(m.teams[1],900,208,54,68);
+ this.text(code(m.teams[0]),430,252,26,'#fff');this.text(code(m.teams[1]),850,252,26,'#fff');this.text(m.rules.score[0]+' - '+m.rules.score[1],640,256,40,'#ffe62f');this.text((golden?'GOLDEN GOAL · ':'')+Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0'),640,280,15,'#9fc2d4');
+ this.panel(360,310,560,250,18);['RIPRENDI','OPZIONI','ESCI SENZA REGISTRARE'].forEach((label,i)=>{const y=362+i*72;if(i===at){c.fillStyle='#ffe44726';c.fillRect(384,y-34,512,58);c.fillStyle='#ffe447';c.fillRect(384,y-34,8,58)}this.text(label,640,y+6,i===at?30:24,i===at?'#fff':i===2?'#ff8fa3':'#c9dbe6')});
+ this.text('{arrows} SCEGLI    {m:confirm} CONFERMA    {m:back} RIPRENDI',640,612,18,'#ffe55b')};
 
 // ---------------------------------------------------------------- scorer caption
 // Under the GOAL! banner: shirt number and (fictional) name of the scorer, or own goal.
@@ -83,5 +92,5 @@ const draw=R.draw;
 R.draw=function(m){draw.call(this,m);if(!this.replayMode&&!m.cardScene&&m.phase!=='FINISHED'&&m.phase!=='PENALTIES'&&m.phase!=='FREEKICK')this.scorerCaption(m);if(m.demo)this.demoOverlay(m)};
 // Attract mode: DEMO tag, blinking start prompt and the button the bot is using right now.
 R.demoOverlay=function(m){const t=performance?.now?.()/1000||0,cap=m.demo.caption;this.panel(1000,14,262,50,10);this.text('DEMO',1060,47,24,'#ff8fa3');if(Math.floor(t*2)%2===0)this.text('PREMI START',1192,46,15,'#fff');
- if(cap){const w=Math.min(760,cap.text.length*15+150),x=640-w/2,y=590;this.panel(x,y,w,58,12);const c=this.ctx;c.fillStyle='#ffe447';c.fillRect(x+16,y+12,Math.max(46,cap.keys.length*14+20),34);this.text(cap.keys,x+16+Math.max(46,cap.keys.length*14+20)/2,y+36,20,'#101830');this.text(cap.text,x+w/2+Math.max(46,cap.keys.length*14+20)/2,y+37,20,'#fff')}};
+ if(cap){const w=Math.min(820,cap.text.length*15+260),x=640-w/2,y=590;this.panel(x,y,w,58,12);this.text(cap.keys+'  '+cap.text,640,y+37,20,'#fff')}};
 })();

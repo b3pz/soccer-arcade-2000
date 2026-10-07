@@ -127,3 +127,6 @@
  #arcade-select .arcade-selected-crest{width:128px;height:128px}
 }
 #arcade-select .arcade-mode-extra{display:flex;justify-content:center;gap:24px;max-width:950px;margin:0 auto 18px}#arcade-select .arcade-mode-extra button{flex:1;padding:14px 10px;font-size:20px!important}
+
+#arcade-match>.sa-options{position:fixed!important;inset:0!important;width:auto!important;box-shadow:none!important;z-index:100000}#arcade-match .sa-options canvas{width:min(100vw,calc(100vh*16/9))!important;height:auto!important;max-height:100vh!important;border:0!important}
+.sa-options.evo-settings{padding:0!important;border:0!important;border-radius:0!important;max-height:none!important;overflow:hidden!important;background:#000!important}

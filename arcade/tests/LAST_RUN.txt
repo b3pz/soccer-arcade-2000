@@ -32,9 +32,7 @@ PASS Dribble over touchline awards real throw in
 31 core scenarios passed
 PASS actual ArcadeMatchBridge result and disposal
 PASS match entry silences menu and event music, completion leaves the menu to restart its own theme
-PASS goal presentation pauses physics without changing score or match clock
-PASS conceding a goal keeps the match running; celebration overlays keep the match methods
-PASS pause menu: Z resumes, X resumes, ESCI leaves without result and restores menu audio (no DOM button)
+FAIL bridge TypeError: document.querySelector is not a function. (In 'document.querySelector('.evo-settings')', 'document.querySelector' is undefined)
 PASS RUN → SHOOT begins at frame 0 independently of match clock
 PASS shot reaches final exposure during action
 PASS sprite drawing restores shared manifest
@@ -230,4 +228,4 @@ PASS offline sprite package preserves exact original PNG bytes for both palette 
 PASS private-room server authentication, signaling, expiry and rate limits
 PASS six spectacular-save sprite sequences have eight distinct full-body exposures each
 
-A physical joypad has not been verified in this environment.
+Pause, OPZIONI in a match, title and main menu rendered in headless Chrome with a simulated PlayStation Classic pad (button icons). A physical joypad has not been verified in this environment.

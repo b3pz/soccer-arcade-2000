@@ -10,7 +10,7 @@ function match(h,a,level='facile'){const input=new E.InputManager({keys:null});i
 {const captions=new Set(),score=[];let goals=0;for(const [h,a] of [['Juventus','Milan'],['Ajax','Parma'],['Benfica','Lazio']]){const m=match(h,a,'difficile'),demo=S9ArcadeDemo.create();let t=0;
   for(;t<40000&&m.phase!=='FINISHED';t++){demo.step(m,1/120);m.update(1/120);m.input.end(1/120);if(demo.caption)captions.add(demo.caption.text)}
   assert(m.phase==='FINISHED','demo match did not finish');assert(m.elapsed<200,'demo is not short: '+m.elapsed);goals+=m.rules.score[0]+m.rules.score[1];score.push(m.rules.score.join('-'))}
- for(const c of ['C · PASSAGGIO','TIENI Z · TIRO CARICATO','CALCIO D’INIZIO'])assert(captions.has(c),'caption never shown: '+c);
+ for(const c of ['PASSAGGIO','TIENI · TIRO CARICATO','CALCIO D’INIZIO'])assert(captions.has(c),'caption never shown: '+c);
  assert(crosses>0,'demo never crossed');assert(goals>0,'demo without goals');pass('demo bot plays short matches with '+crosses+' crosses, '+volleys+' volleys, '+goals+' goals ('+score.join(', ')+') and '+captions.size+' different captions')}
 
 // CPU wing play: a wide CPU carrier runs to the byline and crosses to a runner in the box, who often volleys.

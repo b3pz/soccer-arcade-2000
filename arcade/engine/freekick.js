@@ -78,13 +78,13 @@ R.drawFreeKick=function(m){const views=this.fkViews=this.fkViews||new Map(),view
   if(fk.button){this.panel(1010,560,240,70,12);for(let i=0;i<12;i++){c.fillStyle=i<Math.ceil(pw*12)?i>8?'#ff6436':i>4?'#ffe44a':'#79e752':'#253c50';c.fillRect(1040+i*15,592,12,20)}this.text('POTENZA · EFFETTO '+(fk.curl<-.15?'◀':fk.curl>.15?'▶':'—'),1130,585,14,'#ffe569')}}
  const rm=this.replayMode;this.replayMode=true;try{this.hud({...m,messageTime:0})}finally{this.replayMode=rm}this.panel(470,104,340,48,12);this.text('PUNIZIONE · '+fk.dist+' M',640,136,22,'#ffe55a');
  if(fk.stage==='result'&&(o.kind!=='wall'||fk.age>.55)){this.panel(250,262,780,170,22);this.text(o.label,640,340,54,o.kind==='goal'?'#ffe743':'#ff8294');this.text(m.teams[fk.team].name,640,388,22,'#b3eaff')}
- else if(fk.stage!=='result'){const pad=!!window.S9ArcadeControls?.padConnected;this.panel(250,158,780,46,10);this.text(shooter?(fk.button?'TIENI = POTENZA · ←/→ EFFETTO · RILASCIA = TIRO':(pad?'A/B/X':'Z/C/X')+' FERMA LA MIRA'):keeper?'←/→ PORTIERE · '+(pad?'B/X':'X/C')+' TUFFO · '+(pad?'A':'Z')+' SALTO BARRIERA':'PUNIZIONE',640,188,19,'#ffe55b')}};
+ else if(fk.stage!=='result'){const pad=!!window.S9ArcadeControls?.padConnected;this.panel(250,158,780,46,10);this.text(shooter?(fk.button?'TIENI = POTENZA · {p:arrowleft}{p:arrowright} EFFETTO · RILASCIA = TIRO':'{p:z}{p:c}{p:x} FERMA LA MIRA'):keeper?'{p:arrowleft}{p:arrowright} PORTIERE · {p:x}{p:c} TUFFO · {p:z} SALTO BARRIERA':'PUNIZIONE',640,188,19,'#ffe55b')}};
 // Free-kick goals get their own replay: the recorded scene is played back instead of the pitch frames.
 const RP=E.ReplayManager.prototype,record=RP.record,start=RP.start,replayDraw=RP.draw;
 RP.record=function(m,dt,camera){this.match=m;return record.call(this,m,dt,camera)};
 RP.start=function(){const m=this.match;if(m?.fkReplay?.film.length){this.fkFilm=m.fkReplay;m.fkReplay=null;this.playback=this.fkFilm.film;this.index=0;return}this.fkFilm=null;return start.call(this)};
 RP.draw=function(m,renderer,dt=1/60){if(!this.fkFilm)return replayDraw.call(this,m,renderer,dt);const film=this.fkFilm.film,f=film[Math.floor(this.index)];if(!f){this.playback=null;this.fkFilm=null;return false}
- const fk={...this.fkFilm.fk,...f,stage:'flight'};renderer.drawFreeKick({...m,fk,phase:'FREEKICK',fkHumans:()=>({shooter:null,keeper:null})});renderer.panel(430,226,420,58,12);renderer.text(window.S9ArcadeControls?.padConnected?'REPLAY · A SALTA':'REPLAY · Z SALTA',640,263,25,'#ffde4b');this.index+=dt*120*.55;return true};
+ const fk={...this.fkFilm.fk,...f,stage:'flight'};renderer.drawFreeKick({...m,fk,phase:'FREEKICK',fkHumans:()=>({shooter:null,keeper:null})});renderer.panel(430,226,420,58,12);renderer.text('REPLAY · {p:z} SALTA',640,263,25,'#ffde4b');this.index+=dt*120*.55;return true};
 const draw=R.draw;
 R.draw=function(m){if(m.phase==='FREEKICK'&&m.fk){this.drawFreeKick(m);if(m.cardScene)this.cardCutscene?.(m);return}return draw.call(this,m)};
 })();

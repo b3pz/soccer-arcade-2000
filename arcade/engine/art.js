@@ -34,9 +34,9 @@ R.resultScreen=function(m){const c=this.ctx,age=(m.presentationTime??m.elapsed)-
  c.fillStyle='#02061299';c.fillRect(0,0,1280,720);this.panel(250,160,780,410,30);this.text('MATCH RESULT',640,224,36,'#ffe55a');
  for(const i of [0,1]){const cx=i?850:430,t=m.teams[i];this.teamCrest(t,cx-58,250,116,150);this.text(t.name,cx,432,Math.min(22,300/Math.max(1,t.name.length)*1.6),i?'#ff8294':'#81bcff')}
  this.text(m.rules.score.join(' : '),640,350,70,'#fff');if(m.pen&&!m.pen.single)this.text('RIGORI '+m.pen.goals.join(' - '),640,392,22,'#ffe55a');
- this.text(m.message,640,482,24,'#75dbff');if(age>.8&&Math.floor(age*2.5)%2===0)this.text(pad?'A / START · CONTINUA':'Z / INVIO · CONTINUA',640,530,22,'#ffe55a')};
+ this.text(m.message,640,482,24,'#75dbff');if(age>.8&&Math.floor(age*2.5)%2===0)this.text('{m:confirm} CONTINUA',640,530,22,'#ffe55a')};
 R.pauseScreen=function(m){const c=this.ctx,pad=!!window.S9ArcadeControls?.padConnected;c.fillStyle='#02061299';c.fillRect(0,0,1280,720);this.panel(330,200,620,320,26);
  this.text('PAUSA',640,268,44,'#ffe55a');this.text(m.teams[0].name+'  '+m.rules.score.join(' : ')+'  '+m.teams[1].name,640,314,20,'#b3eaff');
  const items=['RIPRENDI','OPZIONI','ESCI SENZA REGISTRARE'],at=this.pauseIndex||0;items.forEach((label,i)=>{const y=372+i*44;if(i===at){c.fillStyle='#ffe44730';c.fillRect(400,y-28,480,38);c.fillStyle='#ffe447';c.fillRect(400,y-28,6,38)}this.text(label,640,y,i===at?26:22,i===at?'#fff':i===2?'#ff8294':'#9fc2d4')});
- const B=window.S9ArcadeBindings,P=window.S9ArcadeOptions,first=pad&&[...(navigator.getGamepads?.()||[])].find(Boolean),name=a=>first&&P?P.buttonName(B.map('padmenu')[a],first):B?B.label(B.key(a,'menu')):a.toUpperCase();this.text((pad?'CROCE':'FRECCE')+' · SCEGLI    '+name('confirm')+' · CONFERMA    '+name('back')+' · RIPRENDI',640,500,16,'#ffe55b')};
+ const B=window.S9ArcadeBindings,P=window.S9ArcadeOptions,first=pad&&[...(navigator.getGamepads?.()||[])].find(Boolean),name=a=>first&&P?P.buttonName(B.map('padmenu')[a],first):B?B.label(B.key(a,'menu')):a.toUpperCase();this.text('{arrows} SCEGLI    {m:confirm} CONFERMA    {m:back} RIPRENDI',640,500,16,'#ffe55b')};
 })();

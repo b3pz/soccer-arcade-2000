@@ -87,3 +87,7 @@ Il filmato d'apertura (12 s) racconta un'azione continua in un'unica notte, semp
 - Le parate in tuffo, in volo sulla traversa e in stacco verticale usano i fotogrammi originali del portiere (tuffo, presa, attesa), ruotati e riallineati (`tools/add-keeper-save-frames.py`). Valgono anche in partita.
 - In partita il tiro al volo usa il fotogramma della gamba tesa invece della corsa.
 - Le aree di rigore hanno la lunetta.
+
+### Icone dei tasti
+
+Ogni indicazione di comando mostra il tasto della tastiera e, con un joypad collegato, l'icona vera del pulsante: ✕ ○ □ △ colorati, L1/R1, START e croce direzionale sui PlayStation, A B X Y colorati sugli Xbox. Le icone seguono i comandi personalizzati. Sul titolo START del joypad avvia il gioco. Lo schermo intero da SELECT funziona solo subito dopo un tasto della tastiera o un clic, perché il browser non lo concede al solo joypad: se viene rifiutato, il gioco lo attiva al primo tasto o clic successivo e lo segnala.

@@ -95,7 +95,7 @@ function open({parent=document.body,onClose,inMatch=false,setup=false}={}){
   if(list.length>11){const h=380*11/list.length,y=228+380*scroll/list.length;c.fillStyle='#ffe44788';c.fillRect(1112,y,5,h)}
   // Hint line, in the glyphs of the device in use
   const pk=a=>padNow?buttonName(B.map('padmenu')[a],padNow):B.label(B.map('menu')[a]);
-  r.text((padNow?'CROCE':'FRECCE')+' · SCEGLI    '+pk('confirm')+' · CONFERMA    '+pk('back')+' · INDIETRO    '+pk('previous')+' / '+pk('next')+' · SCHEDA',640,668,17,'#ffe55b');
+  r.text('{arrows} SCEGLI    {m:confirm} CONFERMA    {m:back} INDIETRO    {m:previous}{m:next} SCHEDA',640,668,17,'#ffe55b');
   if(note&&now-noteAt<2600)r.text(note,640,700,16,'#7dff9a');
   if(wiz){const P=window.S9ArcadePads,slot=P.SLOTS[Math.min(wiz.step,P.SLOTS.length-1)];c.fillStyle='#030716f2';c.fillRect(0,0,1280,720);r.text('CONFIGURA JOYPAD',640,90,40,'#ffe447');
    if(wiz.testing){const pad=pads().find(p=>p.index===wiz.pad),lit=new Set((pad?.buttons||[]).map((b,i)=>b.pressed||b.value>.5?i:-1).filter(i=>i>=0));drawPad(c,640,370,2.3,lit,-1,now);r.text('FATTO! PREMI I TASTI: SI ILLUMINANO',640,600,26,'#7dff9a');r.text('○ PER FINIRE  ·  ESC DA TASTIERA',640,640,18,'#fff')}
@@ -112,5 +112,5 @@ let offered=false;function offerSetup(){if(offered||window.S9ArcadeActive||docum
 if(typeof addEventListener==='function'){let t=0;const watch=()=>{if(!offered){offerSetup();t=requestAnimationFrame(watch)}};addEventListener('gamepadconnected',()=>{cancelAnimationFrame(t);watch()});if(window.S9ArcadePads?.raw().length)watch()}
 window.S9ArcadeOptions={open,buttonName,drawPad};
 // Every existing entry point (Centro Arcade, pause in match) opens this screen.
-if(window.S9ArcadeHub)window.S9ArcadeHub.settings=(parent,onClose)=>open({parent:parent?.closest?.('#arcade-match')||document.body,onClose,inMatch:!!parent?.closest?.('#arcade-match')});
+if(window.S9ArcadeHub)window.S9ArcadeHub.settings=(parent,onClose)=>open({parent:document.body,onClose,inMatch:!!parent?.closest?.('#arcade-match')});
 })();

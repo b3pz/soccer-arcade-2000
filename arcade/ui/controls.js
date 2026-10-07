@@ -6,7 +6,11 @@ const typing=el=>!!el&&(el.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(e
 
 // ---------------------------------------------------------------- fullscreen
 function isFullscreen(){return !!(doc.fullscreenElement||doc.webkitFullscreenElement)}
-function toggleFullscreen(){try{const p=isFullscreen()?(doc.exitFullscreen||doc.webkitExitFullscreen).call(doc):(root.requestFullscreen||root.webkitRequestFullscreen).call(root,{navigationUI:'hide'});p?.catch?.(()=>{})}catch(e){}}
+let pendingFullscreen=false;
+function notice(text){let n=doc.getElementById('sa-notice');if(!n){n=doc.createElement('div');n.id='sa-notice';n.style.cssText='position:fixed;left:50%;bottom:6vh;transform:translateX(-50%);z-index:200000;background:#071933ee;border:3px solid #ffe447;color:#ffe96b;font:bold 18px monospace;padding:10px 18px;pointer-events:none';doc.body.append(n)}n.textContent=text;n.style.display='block';clearTimeout(n.t);n.t=setTimeout(()=>n.style.display='none',3500)}
+function enter(){const p=(root.requestFullscreen||root.webkitRequestFullscreen).call(root,{navigationUI:'hide'});return p?.then?p:Promise.resolve()}
+function toggleFullscreen(){try{if(isFullscreen()){pendingFullscreen=false;const p=(doc.exitFullscreen||doc.webkitExitFullscreen).call(doc);p?.catch?.(()=>{});return}enter().then(()=>{pendingFullscreen=false},()=>{pendingFullscreen=true;notice('SCHERMO INTERO: PREMI UN TASTO DELLA TASTIERA O CLICCA (IL BROWSER NON LO PERMETTE DAL SOLO JOYPAD)')})}catch(e){pendingFullscreen=true}}
+for(const type of ['keydown','pointerdown','touchend'])addEventListener(type,e=>{if(pendingFullscreen&&e.isTrusted&&!isFullscreen()){pendingFullscreen=false;try{enter().catch(()=>{})}catch(_){}}},true);
 
 // ------------------------------------------------- arrow-key focus navigation
 // Outside the Arcade screens (which have their own keys), arrows move focus between visible controls and Enter activates.
