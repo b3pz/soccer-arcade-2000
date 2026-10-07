@@ -117,3 +117,7 @@ Squadre e calciatori hanno nomi inventati, inclusi quelli delle vecchie formazio
 - La CPU non entra più in scivolata alle spalle del giocatore umano: prima erano circa 7 falli a partita, ora meno di uno.
 - **HOW TO PLAY** mostra i comandi attuali (scatto, lancio a pressione, pressing, scivolata) con le icone del joypad.
 - **Musica dei menu:** cinque brani originali sintetizzati (`cabinet-theme` più `arcade/assets/music/`, generatore `tools/create-arcade-soundtracks.py`) che si alternano; in OPZIONI → GIOCO, *MUSICA DEI MENU* passa al brano successivo.
+
+### Stemmi
+
+Ogni squadra ha il suo stemma ricamato (scudo con bordo oro) con il **nome arcade** in alto, sigla nel medaglione, colori della maglia o della bandiera e anno: `arcade/assets/crests-arcade/`, generati da `tools/rename-crests.py` con lo stesso disegno di `tools/generate-coherent-crests.py`. Gli stemmi originali restano in `assets/crests/` e `arcade/assets/crests/` (il catalogo ne conserva il percorso in `crestOriginal`).

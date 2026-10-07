@@ -10,7 +10,7 @@ aliases={};number=0
 for ti,t in enumerate(catalog['club']+catalog['national']):
  plan={e['id']:e['name'] for e in json.loads((root/'arcade/assets/art/crests/branding-plan.json').read_text())}
  aliases[t['name']]=plan.get(t['id']) or prefix[ti%len(prefix)]+' '+suffix[(ti//len(prefix))%len(suffix)]
- t['name']=aliases.get(t['name'],t['name']);t['season']='';t['arcadeFictional']=True;t['crest']='arcade/assets/art/crests/team-'+str(ti).zfill(3)+'.png'
+ t['name']=aliases.get(t['name'],t['name']);t['season']='';t['arcadeFictional']=True  # crests: the original per-team crests are kept (owner's choice)
  number+=len(t['players'])  # player names come from tools/fictional-player-names.py (nation-flavoured, owner-chosen names kept)
 path.write_text('/* Fictional arcade identities; stable internal IDs preserve existing saves. */\nwindow.SA2000_CATALOG='+json.dumps(catalog,separators=(',',':'),ensure_ascii=False)+';\n')
 # Keep scenario tests tied to the same squads, now under their fictional display names.
