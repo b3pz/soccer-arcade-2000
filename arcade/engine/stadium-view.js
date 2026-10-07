@@ -37,8 +37,9 @@ R.pitch=function(){const c=this.ctx,a=this.project(0,0),b=this.project(100,62),t
  }
  // Grass apron, boards, benches
  if(!trackPainted){c.fillStyle='#1d7533';c.fillRect(apron.l,apron.t,apron.r-apron.l,apron.b-apron.t)}
- this.adBoards(a.x-60,b.x+60,a.y-52,24);this.adBoards(a.x-60,b.x+60,b.y+26,24);
- for(const [x,id] of [[38,0],[62,1]]){const p=this.project(x,0);this.bench(p.x,track.t+28,m?.teams?.[id],(m?.teams?.[id]?.name||(id?'OSPITI':'CASA')).toUpperCase())}
+ // Hoardings about half a player tall (scale with the camera); dugouts stand in front of the top ones, on the grass.
+ const zb=(this.camera?.zoom||36)/36,bh=50*zb;this.adBoards(a.x-60,b.x+60,a.y-14*zb-bh,bh);this.adBoards(a.x-60,b.x+60,b.y+14*zb,bh);
+ for(const [x,id] of [[38,0],[62,1]]){const p=this.project(x,0);this.bench(p.x,a.y-6*zb-106*zb,m?.teams?.[id],(m?.teams?.[id]?.name||(id?'OSPITI':'CASA')).toUpperCase())}
  c.fillStyle='#8c9880';c.fillRect(a.x-6,a.y-6,b.x-a.x+12,b.y-a.y+12);c.drawImage(turf(this),a.x,a.y,b.x-a.x,b.y-a.y);
  const cam=this.camera||{zoom:36},line=pts=>{c.beginPath();pts.forEach(([x,y],i)=>{const p=this.project(x,y);i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y)});c.strokeStyle='#173e2444';c.lineWidth=5;c.stroke();c.strokeStyle='#f1f1cb';c.lineWidth=2.7;c.stroke()};
  line([[0,0],[100,0],[100,62],[0,62],[0,0]]);line([[50,0],[50,62]]);const mid=this.project(50,31);c.strokeStyle='#f1f1cb';c.lineWidth=2.7;c.beginPath();c.ellipse(mid.x,mid.y,9.15*cam.zoom,9.15*cam.zoom*.65,0,0,Math.PI*2);c.stroke();

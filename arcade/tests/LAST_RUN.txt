@@ -1,6 +1,6 @@
 .....
 ----------------------------------------------------------------------
-Ran 5 tests in 0.000s
+Ran 5 tests in 0.001s
 
 OK
 PASS 1 Kickoff C, clock starts only after pass
@@ -218,7 +218,7 @@ PASS kick-off camera pulls back slowly from the centre ball
 PASS slim scoreboard and scorer name under the GOAL banner
 PASS crowd celebration cutaway uses animated bitmap artwork
 PASS slow motion when a shot is about to reach the goal frame, not for shots going wide
-PASS coin toss: call, flip, choice of end, kick-off to the other side (CPU)
+PASS coin toss: call, flip, choice of end, kick-off to the other side (1P)
 PASS holding the pass button in defence shadows the carrier goal-side
 PASS CPU label on the player the CPU is driving
 PASS demo bot plays short matches with 24 crosses, 0 volleys, 16 goals (4-0, 5-0, 7-0) and 12 different captions
