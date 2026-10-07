@@ -126,3 +126,4 @@
  #arcade-select .arcade-map-picker .arcade-player-card{display:flex;flex-direction:column;align-items:center}
  #arcade-select .arcade-selected-crest{width:128px;height:128px}
 }
+#arcade-select .arcade-mode-extra{display:flex;justify-content:center;gap:24px;max-width:950px;margin:0 auto 18px}#arcade-select .arcade-mode-extra button{flex:1;padding:14px 10px;font-size:20px!important}

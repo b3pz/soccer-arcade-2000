@@ -19,8 +19,11 @@ function launchArcadeMatch(config){if(window.S9ArcadeActive)return Promise.rejec
   if(finished){if(menuAction==='confirm'){e.preventDefault();e.stopImmediatePropagation();proceed()}return}
   if(paused&&panel.querySelector('.evo-settings')){if(systemAction==='pause'){panel.querySelector('.evo-settings').remove();e.preventDefault();e.stopImmediatePropagation()}return}
   if(paused&&systemAction==='settings'){e.preventDefault();e.stopImmediatePropagation();window.S9ArcadeHub?.settings(panel);return}
-  if(systemAction==='pause'){e.preventDefault();e.stopImmediatePropagation();paused=!paused;inputs.forEach(i=>{i.onBlur();i.active=!paused});window.S9ArcadeActive&&(window.S9ArcadeActive.paused=paused);return}
-  if(!paused||systemAction==='fullscreen')return;e.preventDefault();e.stopImmediatePropagation();if(menuAction==='confirm'){paused=false;inputs.forEach(i=>{i.onBlur();i.active=true});window.S9ArcadeActive&&(window.S9ArcadeActive.paused=false)}else if(menuAction==='back'){close();resolve(null)}}
+  if(systemAction==='pause'){e.preventDefault();e.stopImmediatePropagation();paused=!paused;renderer.pauseIndex=0;inputs.forEach(i=>{i.onBlur();i.active=!paused});window.S9ArcadeActive&&(window.S9ArcadeActive.paused=paused);return}
+  if(!paused||systemAction==='fullscreen')return;e.preventDefault();e.stopImmediatePropagation();const resume=()=>{paused=false;inputs.forEach(i=>{i.onBlur();i.active=true});window.S9ArcadeActive&&(window.S9ArcadeActive.paused=false)};
+  if(menuAction==='arrowup'||menuAction==='arrowdown'){renderer.pauseIndex=((renderer.pauseIndex||0)+(menuAction==='arrowup'?2:1))%3;return}
+  if(menuAction==='back'){resume();return}
+  if(menuAction==='confirm'){const choice=renderer.pauseIndex||0;if(choice===0)resume();else if(choice===1)window.S9ArcadeHub?.settings(panel);else{close();resolve(null)}}}
 
  addEventListener('keydown',onKey,true);canvas.addEventListener?.('click',()=>{if(config.demo&&alive){close();resolve({demo:'exit'});return}if(finished)proceed()});if(config.demo)m.demo=config.demo;canvas.focus?.({preventScroll:true});
  window.S9ArcadeFinal?.configure(m,config.specialFinal);

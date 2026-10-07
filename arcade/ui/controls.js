@@ -38,7 +38,7 @@ function keyFor(button,index=0){const online=window.S9ArcadeOnline?.session,acti
  if(!B)return active?(button===9?'Escape':active.paused||active.finished?{0:'z',2:'x'}[button]||null:null):{0:'z',1:'x',8:'f',9:'z',12:'ArrowUp',13:'ArrowDown',14:'ArrowLeft',15:'ArrowRight'}[button]||null;
  const action=B.padAction(button,index,active?'play':'menu');
  if(['pause','fullscreen','settings'].includes(action))return B.key(action);
- if(active){if(!active.paused&&!active.finished)return null;return action==='z'?B.key('confirm','menu'):action==='x'||action==='c'?B.key('back','menu'):null}
+ if(active){if(!active.paused&&!active.finished)return null;if(active.paused&&action?.startsWith('arrow'))return B.key(action,'menu');return action==='z'?B.key('confirm','menu'):action==='x'||action==='c'?B.key('back','menu'):null}
  return action?B.key(action,'menu'):null;
 }
 
@@ -49,7 +49,7 @@ function poll(now){const pads=(navigator.getGamepads?.()||[]).filter(Boolean);co
  for(const pad of pads){pad.buttons.forEach((b,i)=>{if(b.pressed||b.value>.5)pressed.add(pad.index*100+i)});const [x=0,y=0]=pad.axes;if(x<-.5)arrows.add(window.S9ArcadeBindings?.key('arrowleft','menu')||'ArrowLeft');if(x>.5)arrows.add(window.S9ArcadeBindings?.key('arrowright','menu')||'ArrowRight');if(y<-.5)arrows.add(window.S9ArcadeBindings?.key('arrowup','menu')||'ArrowUp');if(y>.5)arrows.add(window.S9ArcadeBindings?.key('arrowdown','menu')||'ArrowDown')}
  for(const i of pressed)if(!held.has(i)){const k=keyFor(i%100,Math.floor(i/100));if(k){held.set(i,k);send('keydown',k);repeat.set('b'+i,now+420)}}
  for(const [i,k] of [...held])if(!pressed.has(i)){held.delete(i);repeat.delete('b'+i);send('keyup',k)}
- if(window.S9ArcadeActive||window.S9ArcadeOnline?.session?.role==='guest')arrows.clear();
+ if(window.S9ArcadeActive&&!window.S9ArcadeActive.paused||window.S9ArcadeOnline?.session?.role==='guest')arrows.clear();
  for(const k of arrows)if(!stick.has(k)){stick.set(k,k);send('keydown',k);repeat.set('s'+k,now+420)}
  for(const [k] of [...stick])if(!arrows.has(k)){stick.delete(k);repeat.delete('s'+k);send('keyup',k)}
  // Menu auto-repeat for held directions (never during a match: the match reads held arrows directly).
