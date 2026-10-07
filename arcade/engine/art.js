@@ -9,7 +9,7 @@ R.bitmap=bitmap;
 R.panel=function(x,y,w,h,edge=16){const c=this.ctx,im=bitmap(BEZEL);if(w<=0||h<=0)return;if(!ready(im)){c.fillStyle='#071933';c.fillRect(x,y,w,h);return}
  const sw=im.naturalWidth,sy=im.naturalHeight*.074,sh=im.naturalHeight*.85,s=sw*.12,dx=Math.min(edge,w/3),dy=Math.min(edge,h/3),xs=[0,s,sw-s,sw],ys=[sy,sy+s,sy+sh-s,sy+sh],xd=[x,x+dx,x+w-dx,x+w],yd=[y,y+dy,y+h-dy,y+h],smooth=c.imageSmoothingEnabled;
  c.imageSmoothingEnabled=false;for(let j=0;j<3;j++)for(let i=0;i<3;i++)c.drawImage(im,xs[i],ys[j],xs[i+1]-xs[i],ys[j+1]-ys[j],xd[i],yd[j],xd[i+1]-xd[i],yd[j+1]-yd[j]);c.imageSmoothingEnabled=smooth};
-R.crestSource=team=>{const src=team?.source?.crest||(team?.source?.id&&!team.source.arcadeCreatures?'assets/crests/italian/'+team.source.id+'.png':null);return src&&src+'?v=crest-2'};
+R.crestSource=team=>{const src=team?.source?.crest||(team?.source?.id&&!team.source.arcadeCreatures?'assets/crests/italian/'+team.source.id+'.png':null);return src&&src+'?v=crest-3'};
 // Team patch, contained in the box; falls back to the pixel shirt while loading or for crest-less teams.
 R.teamCrest=function(team,x,y,w,h){const c=this.ctx,im=bitmap(R.crestSource(team));if(ready(im)){const k=Math.min(w/im.naturalWidth,h/im.naturalHeight),iw=im.naturalWidth*k,ih=im.naturalHeight*k,smooth=c.imageSmoothingEnabled;c.imageSmoothingEnabled=true;c.drawImage(im,x+(w-iw)/2,y+(h-ih)/2,iw,ih);c.imageSmoothingEnabled=smooth;return true}
  const kit=team?.kit||{},cx=x+w/2,cy=y+h/2,u=Math.min(w,h)/40;c.fillStyle='#071326';c.fillRect(cx-13*u,cy-14*u,26*u,30*u);c.fillStyle=kit.shirtPrimary||'#24bdff';c.fillRect(cx-11*u,cy-12*u,22*u,26*u);c.fillRect(cx-17*u,cy-12*u,34*u,9*u);c.fillStyle=kit.shirtSecondary||'#fff';c.fillRect(cx-8*u,cy-7*u,16*u,4*u);return false};

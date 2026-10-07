@@ -135,8 +135,8 @@ class Session {
 function updateBadge(){let badge=document.getElementById('arcade-online-badge');if(!session){badge?.remove();return}if(!badge){badge=node('button',undefined,document.body);badge.id='arcade-online-badge';badge.type='button';badge.onclick=()=>open()}badge.textContent='ONLINE · '+session.code+' · '+(session.message||'collegamento…')}
 function open(onClose){
  if(roomPanel)return;
- returnToMenu=onClose||null;const panel=roomPanel=node('div',undefined,document.body);panel.id='arcade-online';panel.setAttribute('role','dialog');panel.setAttribute('aria-label','Stanza privata online');const main=node('main',undefined,panel);node('h1','ONLINE · STANZA PRIVATA',main);
- const closePanel=()=>{panel.remove();roomPanel=null;returnToMenu?.();returnToMenu=null};
+ returnToMenu=onClose||null;const panel=roomPanel=node('div',undefined,document.body);panel.id='arcade-online';panel.setAttribute('role','dialog');panel.setAttribute('aria-label','Stanza privata online');const disposeArt=window.S9ArcadeDrawnMenu?.mount(panel);const main=node('main',undefined,panel);node('h1','ONLINE · STANZA PRIVATA',main);
+ const closePanel=()=>{disposeArt?.();panel.remove();roomPanel=null;returnToMenu?.();returnToMenu=null};
  if(session){renderRoom(session);return}
  node('p','Crea una stanza e condividi il codice. L’host sceglie le modalità e conserva il progresso.',main);
  const label=node('label','Server stanze',main),server=node('input',undefined,label);server.type='url';server.value=prefs().onlineServer||((location.protocol==='http:'||location.protocol==='https:')?location.origin:'http://localhost:8080');server.placeholder='https://server-online.example';

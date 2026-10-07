@@ -1,6 +1,6 @@
 var window=globalThis;function addEventListener(){}function removeEventListener(){};load('arcade/engine/core.js');load('arcade/engine/controllers.js');load('arcade/engine/penalties.js');load('arcade/engine/arcade-features.js');load('arcade/engine/assist.js');load('arcade/bridge.js');
 function assert(v,s){if(!v)throw Error(s)}function pass(s){print('PASS '+s)}
-load('game/catalog.js');const home=SA2000_CATALOG.club.find(t=>t.name==='Atalanta'),away={...SA2000_CATALOG.club.find(t=>t.name==='Bari')};
+load('game/catalog.js');const home=SA2000_CATALOG.club.find(t=>t.name==='Sorya Comets'),away={...SA2000_CATALOG.club.find(t=>t.name==='Lumex Comets')};
 let seed=7;const rnd=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};
 function make(){const m=new S9ArcadeEngine.Match(new S9ArcadeEngine.InputManager());m.rules.allowDraw=true;ArcadeMatchBridge.setupTeam(m.teams[0],home,{formation:'4-4-2',cleanNames:true});ArcadeMatchBridge.setupTeam(m.teams[1],away,{formation:'4-4-2',cleanNames:true});m.restarts.kickoff(0);m.phase='PLAY';m.restarts.data=null;return m}
 function step(m,n=1){for(let i=0;i<n;i++){m.update(1/120);m.input.end(1/120)}}

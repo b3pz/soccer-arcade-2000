@@ -16,6 +16,12 @@ R.draw=function(m){this.mirror=!!m.mirror&&!['PENALTIES','FREEKICK'].includes(m.
  const flipped=[];for(const p of [...m.players,this.referee].filter(Boolean)){for(const key of ['face','visualKickFace'])if(p[key]&&typeof p[key].x==='number'){flipped.push([p[key],p[key].x]);p[key].x=-p[key].x}}
  const b=m.ball,vx=b.vx;b.vx=-vx;try{return draw.call(this,m)}finally{for(const [o,x] of flipped)o.x=x;b.vx=vx;this.mirror=false}};
 const radar=R.radar;R.radar=function(m){if(!this.mirror)return radar.call(this,m);const saved=m.players.map(p=>p.x),bx=m.ball.x;m.players.forEach(p=>p.x=100-p.x);m.ball.x=100-bx;try{return radar.call(this,m)}finally{m.players.forEach((p,i)=>p.x=saved[i]);m.ball.x=bx}};
+// The stadium is symmetric: drawn unmirrored with the camera reflected (track, stands and boards keep their geometry).
+const pitch=R.pitch;R.pitch=function(...args){if(!this.mirror||!this.camera)return pitch.apply(this,args);const cam=this.camera,x=cam.x;this.mirror=false;cam.x=100-x;try{return pitch.apply(this,args)}finally{cam.x=x;this.mirror=true}};
+// Goals: drawn as the goal at the other end with the mirror off, so the net depth points away from the pitch.
+const goal=R.goal;R.goal=function(x){if(!this.mirror)return goal.call(this,x);this.mirror=false;try{return goal.call(this,100-x)}finally{this.mirror=true}};
+// Set-piece arrow: the aim is a world angle; on the mirrored picture it is drawn reflected.
+const arrow=R.setPieceArrow;if(arrow)R.setPieceArrow=function(m){const a=m.restarts?.data?.aim;if(!this.mirror||!a)return arrow.call(this,m);const angle=a.angle;a.angle=Math.PI-angle;try{return arrow.call(this,m)}finally{a.angle=angle}};
 const axis=IM.axis;IM.axis=function(){const a=axis.call(this),m=this.context;if(m?.mirror&&!['PENALTIES','FREEKICK'].includes(m.phase))return {x:-a.x,y:a.y};return a};
 
 // ---------------------------------------------------------------- ceremony
@@ -33,7 +39,7 @@ function create(m,config={}){
    const winnerLeft=side===0;m.mirror=winner===0?winnerLeft:!winnerLeft;m.restarts.kickoff(1-winner)}}
  function drawCoin(r,x,y,size){const im=r.bitmap(COIN);if(!im?.complete||!im.naturalWidth)return;const c=r.ctx;let f;if(stage==='flip'){const spin=age*14;f=Math.floor(spin)%8;if(age>1.7)f=result===0?0:7}else if(stage==='call')f=call===0?0:7;else f=result===0?0:7;
   const lift=stage==='flip'?Math.sin(clamp(age/1.7,0,1)*Math.PI)*170:0,s=c.imageSmoothingEnabled;c.imageSmoothingEnabled=false;c.fillStyle='#0006';c.beginPath();c.ellipse(x,y+size*.62,size*.45*(1-lift/400),size*.12,0,0,7);c.fill();c.drawImage(im,f*64,0,64,64,x-size/2,y-size/2-lift,size,size);c.imageSmoothingEnabled=s}
- function drawScene(r){const c=r.ctx,team=t=>m.teams[t],code=t=>r.teamCode?.(team(t))||team(t).name;c.fillStyle='#020612a8';c.fillRect(0,0,1280,720);
+ function drawScene(r){const c=r.ctx;if(window.S9ArcadeArt?.ready(S9ArcadeArt.image('ceremonies.png')))S9ArcadeArt.frame(c,'ceremonies.png',0,2,2,0,0,1280,720);const team=t=>m.teams[t],code=t=>r.teamCode?.(team(t))||team(t).name;c.fillStyle='#020612a8';c.fillRect(0,0,1280,720);
   r.arcadeBanner?.(stage==='call'?'TESTA O CROCE?':stage==='flip'?'LANCIO DELLA MONETA':'SCELTA DEL CAMPO','#ffe447',120,1);
   // Captains either side of the referee, the coin in front.
   r.referee=r.referee||{role:'REF',action:'idle',team:{},face:{x:1,y:0},x:50,y:31};const ref={...r.referee,action:stage==='flip'&&age<.4?'whistle':'idle',face:{x:1,y:0}};

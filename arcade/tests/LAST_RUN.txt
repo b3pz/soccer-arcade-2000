@@ -1,8 +1,3 @@
-.....
-----------------------------------------------------------------------
-Ran 5 tests in 0.000s
-
-OK
 PASS 1 Kickoff C, clock starts only after pass
 PASS 2 Lateral pass chooses teammate in facing direction
 PASS 3 Pressed player always passes
@@ -201,6 +196,7 @@ PASS supporter flags animate using club colors and celebrate the scoring team
 PASS 12-second cinematic has seven continuous shots and renders all action, goal and logo frames with finite geometry
 PASS cinematic fire trails follow the fantasy-effects preference
 PASS intro runs for 12 seconds before the ready title; keyboard skip remains available
+PASS intro uses panoramic paintings and keeps the flame-free net fallback when fantasy is disabled
 PASS stored action bindings migrate and both players can remap movement and actions
 PASS duplicates swap within a profile, conflicting shared keys are rejected, and special keys can be assigned
 PASS remapped shooting retains hold, full charge and release behavior
@@ -215,9 +211,9 @@ PASS catalog players carry invented, unique names
 PASS free kick into the wall stops at the wall and rebounds, never shown as a goal first
 PASS kick-off camera pulls back slowly from the centre ball
 PASS slim scoreboard and scorer name under the GOAL banner
-PASS crowd celebration cutaway is a tinted bitmap
+PASS crowd celebration cutaway uses animated bitmap artwork
 PASS slow motion when a shot is about to reach the goal frame, not for shots going wide
-PASS coin toss: call, flip, choice of end, kick-off to the other side (1P)
+PASS coin toss: call, flip, choice of end, kick-off to the other side (CPU)
 PASS holding the pass button in defence shadows the carrier goal-side
 PASS CPU label on the player the CPU is driving
 PASS demo bot plays short matches with 25 crosses, 5 volleys, 14 goals (5-0, 3-0, 6-0) and 12 different captions
@@ -226,14 +222,12 @@ PASS human cross: control moves to the striker and holding Z volleys it
 PASS keeper holds the middle of the goal on wing play and still moves onto shots
 PASS tapping the special button sprints (1.41x); next to an opponent it still dribbles
 PASS long ball distance follows the hold: tap 15 m, full 50 m
-PASS JavaScript syntax (modules and all root inline scripts)
-PASS extracted animation assets
-PASS 34 animation sequences, populated cells and unified baseline
-PASS referee gestures and goalkeeper glove actions have distinct bitmap exposures
-PASS requested sequences contain full silhouettes, not detached balls or tiny fragments
-PASS twelve complete creature poses, transparent trophy and original menu soundtrack asset
-PASS offline sprite package preserves exact original PNG bytes for both palette atlases
-PASS private-room server authentication, signaling, expiry and rate limits
-PASS six spectacular-save sprite sequences have eight distinct full-body exposures each
+Traceback (most recent call last):
+  File "/Users/milanog91gmail.com/Desktop/soccer-arcade-2000/tools/run-arcade-tests.py", line 17, in <module>
+    run=subprocess.run([str(jsc),str(root/f'arcade/tests/{name}-tests.js')],cwd=root,check=True,capture_output=True,text=True);print(run.stdout,end='');print(run.stderr,end='')
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpers/jsc', '/Users/milanog91gmail.com/Desktop/soccer-arcade-2000/arcade/tests/artwork-tests.js']' returned non-zero exit status 3.
 
-Friendly result screen rendered in headless Chrome. A physical joypad has not been verified in this environment.
+PENDING: artwork crest test waits for crest atlases page-04 and page-09 (image generation in progress). A physical joypad has not been verified in this environment.

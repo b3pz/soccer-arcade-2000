@@ -34,7 +34,8 @@ M.chooseTarget=function(p,aerial=false){const t=p.team;if(aerial||this.restarts.
 const update=AI.update;
 AI.update=function(m,dt){const t=this.team,b=m.ball,p=b.owner?.team===t&&!m.isControlled(b.owner)&&b.owner.role!=='GK'&&b.controlMode!=='HANDS'&&m.phase==='PLAY'?b.owner:null;
  const wing=p&&window.S9ArcadeWingPlay?.onWing(t,p),mine=p&&!wing&&!m.teamHasHumans(t)?p:null,from=mine?{x:mine.x,y:mine.y}:null,wait=mine?mine.aiWait:0;
- if(mine)mine.aiWait=Math.max(wait,1);update.call(this,m,dt);if(!m.teamHasHumans(t))goalSide(m,t,dt);if(!mine||b.owner!==mine)return;mine.aiWait=wait;mine.x=from.x;mine.y=from.y;if(mine.cpuSettle>0){mine.move(0,0,dt);return}
+ const o=b.owner,behind=[];if(o&&o.team!==t&&m.isControlled(o)){const v=Math.hypot(o.vx,o.vy),fx=v>1?o.vx/v:o.face?.x||0,fy=v>1?o.vy/v:o.face?.y||0;for(const p of t.players){if(p.sentOff||p.role==='GK'||m.isControlled(p)||dist(p,o)>3.4)continue;const d=dist(p,o)||1;if(((p.x-o.x)*fx+(p.y-o.y)*fy)/d<-.25){behind.push([p,p.aiWait]);p.aiWait=Math.max(p.aiWait||0,.2)}}}
+ if(mine)mine.aiWait=Math.max(wait,1);update.call(this,m,dt);for(const [p,w] of behind)if(p.aiWait>w)p.aiWait=Math.max(w||0,p.aiWait-.2);if(!m.teamHasHumans(t))goalSide(m,t,dt);if(!mine||b.owner!==mine)return;mine.aiWait=wait;mine.x=from.x;mine.y=from.y;if(mine.cpuSettle>0){mine.move(0,0,dt);return}
  const s=style(m),near=foes(m,t).map(o=>({o,d:dist(o,mine)})).sort((a,c)=>a.d-c.d),closest=near[0],goal={x:t.dir>0?100:0,y:31},range=Math.hypot(goal.x-mine.x,goal.y-mine.y);
  const ahead=near.filter(({o})=>(o.x-mine.x)*t.dir>0),lane=ahead.some(({o,d})=>d<5&&Math.abs((o.y-mine.y)-(goal.y-mine.y)*((o.x-mine.x)/(goal.x-mine.x||1)))<1.6);
  // Shot: inside the level's range with a lane, or anywhere near the box when pressed.

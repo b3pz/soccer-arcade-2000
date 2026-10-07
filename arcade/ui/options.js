@@ -1,7 +1,7 @@
 /* OPZIONI: cabinet-style options screen drawn on canvas. Fully usable with a joypad alone; controls are remapped by pressing the button. */
 (function(){
 'use strict';
-const V=window.S9ArcadeEvolution,S=V?.settings,BG='arcade/assets/arcade-menu-background.png';
+const V=window.S9ArcadeEvolution,S=V?.settings,BG='arcade/assets/art/stadium-menu.png';
 const XBOX={0:'A',1:'B',2:'X',3:'Y',4:'LB',5:'RB',6:'LT',7:'RT',8:'VIEW',9:'MENU',10:'L3',11:'R3',12:'↑',13:'↓',14:'←',15:'→',16:'HOME'};
 const PS={0:'✕',1:'○',2:'□',3:'△',4:'L1',5:'R1',6:'L2',7:'R2',8:'SHARE',9:'OPTIONS',10:'L3',11:'R3',12:'↑',13:'↓',14:'←',15:'→',16:'PS'};
 const pads=()=>{try{return [...(navigator.getGamepads?.()||[])].filter(Boolean)}catch(e){return []}};
@@ -43,6 +43,7 @@ function open({parent=document.body,onClose,inMatch=false,setup=false}={}){
   if(id==='game')return [
    {label:'CAMERA',value:()=>CAMERA.find(x=>x[0]===S.camera)?.[1]||'PANORAMICA',step:d=>{const i=CAMERA.findIndex(x=>x[0]===S.camera);S.camera=CAMERA[(i+d+CAMERA.length)%CAMERA.length][0]}},
    {label:'RADAR',toggle:'radar'},{label:'VIBRAZIONE JOYPAD',toggle:'vibration'},{label:'FANTASIA ARCADE · FIAMME E SCIE',toggle:'fantasy'},
+   {label:'MUSICA DEI MENU',value:()=>{const t=window.S9ArcadeMusic?.track||'';return t.split('/').pop().replace('.wav','').replace('cabinet-theme','cabinet theme').toUpperCase()},step:()=>{window.S9ArcadeMusic?.next()}},
    {label:'VOLUME',bar:'volume'},{label:'FLASH E SCANLINE',bar:'effects'},
    {label:confirmReset?'CONFERMI? PREMI DI NUOVO':'RIPRISTINA TUTTI I COMANDI',action:()=>{if(!confirmReset){confirmReset=true;return}confirmReset=false;B.reset();say('COMANDI RIPRISTINATI')}},
    {label:inMatch?'TORNA ALLA PAUSA':'ESCI',action:close}];

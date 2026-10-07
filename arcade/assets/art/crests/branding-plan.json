@@ -1,0 +1,2467 @@
+[
+  {
+    "index": 0,
+    "id": "ajax_9495",
+    "name": "Ajaks",
+    "referenceName": "Ajax",
+    "referenceCrest": "assets/crests/foreign/ajax_9495.png",
+    "kit": {
+      "shirtPrimary": "#f9f9f8",
+      "shirtSecondary": "#fff",
+      "shorts": "#3e2d29",
+      "socks": "#000000",
+      "pattern": "solid"
+    },
+    "page": 0,
+    "cell": 0,
+    "file": "team-000.png"
+  },
+  {
+    "index": 1,
+    "id": "arc_club_alahly",
+    "name": "Al Ahra",
+    "referenceName": "Al Ahly",
+    "referenceCrest": "arcade/assets/crests/arc_club_alahly.png",
+    "kit": {
+      "shirtPrimary": "#ed293b",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#ed293b",
+      "pattern": "trim"
+    },
+    "page": 0,
+    "cell": 1,
+    "file": "team-001.png"
+  },
+  {
+    "index": 2,
+    "id": "arc_club_alhilal",
+    "name": "Al Hilan",
+    "referenceName": "Al Hilal",
+    "referenceCrest": "arcade/assets/crests/arc_club_alhilal.png",
+    "kit": {
+      "shirtPrimary": "#216be3",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#216be3",
+      "pattern": "trim"
+    },
+    "page": 0,
+    "cell": 2,
+    "file": "team-002.png"
+  },
+  {
+    "index": 3,
+    "id": "hamburg_0809",
+    "name": "Amburgon",
+    "referenceName": "Amburgo",
+    "referenceCrest": "assets/crests/foreign/hamburg_0809.png",
+    "kit": {
+      "shirtPrimary": "#edeced",
+      "shirtSecondary": "#fff",
+      "shorts": "#040000",
+      "socks": "#0031dd",
+      "pattern": "solid"
+    },
+    "page": 0,
+    "cell": 3,
+    "file": "team-003.png"
+  },
+  {
+    "index": 4,
+    "id": "arsenal_0304",
+    "name": "Arsenia",
+    "referenceName": "Arsenal",
+    "referenceCrest": "assets/crests/foreign/arsenal_0304.png",
+    "kit": {
+      "shirtPrimary": "#ea0210",
+      "shirtSecondary": "#fff",
+      "shorts": "#fafafa",
+      "socks": "#fefafa",
+      "pattern": "solid"
+    },
+    "page": 0,
+    "cell": 4,
+    "file": "team-004.png"
+  },
+  {
+    "index": 5,
+    "id": "arc_club_atalanta",
+    "name": "Ataluna",
+    "referenceName": "Atalanta",
+    "referenceCrest": "arcade/assets/crests/arc_club_atalanta.png",
+    "kit": {
+      "shirtPrimary": "#2070dd",
+      "shirtSecondary": "#111111",
+      "shorts": "#111111",
+      "socks": "#2070dd",
+      "pattern": "vertical_stripes"
+    },
+    "page": 0,
+    "cell": 5,
+    "file": "team-005.png"
+  },
+  {
+    "index": 6,
+    "id": "arc_club_atletico",
+    "name": "Atletika Madridia",
+    "referenceName": "Atlético Madrid",
+    "referenceCrest": "arcade/assets/crests/arc_club_atletico.png",
+    "kit": {
+      "shirtPrimary": "#eb293c",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#eb293c",
+      "pattern": "vertical_stripes"
+    },
+    "page": 0,
+    "cell": 6,
+    "file": "team-006.png"
+  },
+  {
+    "index": 7,
+    "id": "arc_club_auckland",
+    "name": "Auklandia",
+    "referenceName": "Auckland City",
+    "referenceCrest": "arcade/assets/crests/arc_club_auckland.png",
+    "kit": {
+      "shirtPrimary": "#164590",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#164590",
+      "pattern": "trim"
+    },
+    "page": 0,
+    "cell": 7,
+    "file": "team-007.png"
+  },
+  {
+    "index": 8,
+    "id": "barcelona_0809",
+    "name": "Barceluna",
+    "referenceName": "Barcellona",
+    "referenceCrest": "assets/crests/foreign/barcelona_0809.png",
+    "kit": {
+      "shirtPrimary": "#002691",
+      "shirtSecondary": "#fff",
+      "shorts": "#2c0b03",
+      "socks": "#af061f",
+      "pattern": "solid"
+    },
+    "page": 0,
+    "cell": 8,
+    "file": "team-008.png"
+  },
+  {
+    "index": 9,
+    "id": "bari_9900",
+    "name": "Baria",
+    "referenceName": "Bari",
+    "referenceCrest": "assets/crests/italian/bari_9900.png",
+    "kit": {
+      "shirtPrimary": "#237cec",
+      "shirtSecondary": "#fff",
+      "shorts": "#fbf6f1",
+      "socks": "#fdf2e9",
+      "pattern": "solid"
+    },
+    "page": 0,
+    "cell": 9,
+    "file": "team-009.png"
+  },
+  {
+    "index": 10,
+    "id": "bayern_0001",
+    "name": "Bayron Monaco",
+    "referenceName": "Bayern Monaco",
+    "referenceCrest": "assets/crests/foreign/bayern_0001.png",
+    "kit": {
+      "shirtPrimary": "#d2030f",
+      "shirtSecondary": "#fff",
+      "shorts": "#f9ddd5",
+      "socks": "#661a07",
+      "pattern": "solid"
+    },
+    "page": 0,
+    "cell": 10,
+    "file": "team-010.png"
+  },
+  {
+    "index": 11,
+    "id": "benfica_0910",
+    "name": "Benfika",
+    "referenceName": "Benfica",
+    "referenceCrest": "assets/crests/foreign/benfica_0910.png",
+    "kit": {
+      "shirtPrimary": "#e00a14",
+      "shirtSecondary": "#fff",
+      "shorts": "#170701",
+      "socks": "#ea0913",
+      "pattern": "solid"
+    },
+    "page": 0,
+    "cell": 11,
+    "file": "team-011.png"
+  },
+  {
+    "index": 12,
+    "id": "arc_club_boca",
+    "name": "Boka Juniors",
+    "referenceName": "Boca Juniors",
+    "referenceCrest": "arcade/assets/crests/arc_club_boca.png",
+    "kit": {
+      "shirtPrimary": "#153f9c",
+      "shirtSecondary": "#ffda28",
+      "shorts": "#ffda28",
+      "socks": "#153f9c",
+      "pattern": "horizontal_band"
+    },
+    "page": 0,
+    "cell": 12,
+    "file": "team-012.png"
+  },
+  {
+    "index": 13,
+    "id": "arc_club_bologna",
+    "name": "Bolognia",
+    "referenceName": "Bologna",
+    "referenceCrest": "arcade/assets/crests/arc_club_bologna.png",
+    "kit": {
+      "shirtPrimary": "#dc2234",
+      "shirtSecondary": "#183180",
+      "shorts": "#183180",
+      "socks": "#dc2234",
+      "pattern": "vertical_stripes"
+    },
+    "page": 0,
+    "cell": 13,
+    "file": "team-013.png"
+  },
+  {
+    "index": 14,
+    "id": "dortmund_9697",
+    "name": "Boruska Dortmundia",
+    "referenceName": "Borussia Dortmund",
+    "referenceCrest": "assets/crests/foreign/dortmund_9697.png",
+    "kit": {
+      "shirtPrimary": "#fcd904",
+      "shirtSecondary": "#fff",
+      "shorts": "#060605",
+      "socks": "#030100",
+      "pattern": "solid"
+    },
+    "page": 0,
+    "cell": 14,
+    "file": "team-014.png"
+  },
+  {
+    "index": 15,
+    "id": "brescia_0001",
+    "name": "Breska",
+    "referenceName": "Brescia",
+    "referenceCrest": "assets/crests/italian/brescia_0001.png",
+    "kit": {
+      "shirtPrimary": "#2762a8",
+      "shirtSecondary": "#fff",
+      "shorts": "#f4efeb",
+      "socks": "#0342ce",
+      "pattern": "solid"
+    },
+    "page": 0,
+    "cell": 15,
+    "file": "team-015.png"
+  },
+  {
+    "index": 16,
+    "id": "arc_club_cagliari",
+    "name": "Cagliara",
+    "referenceName": "Cagliari",
+    "referenceCrest": "arcade/assets/crests/arc_club_cagliari.png",
+    "kit": {
+      "shirtPrimary": "#da2336",
+      "shirtSecondary": "#172b65",
+      "shorts": "#172b65",
+      "socks": "#da2336",
+      "pattern": "halves"
+    },
+    "page": 1,
+    "cell": 0,
+    "file": "team-016.png"
+  },
+  {
+    "index": 17,
+    "id": "celtic_0203",
+    "name": "Keltik",
+    "referenceName": "Celtic",
+    "referenceCrest": "assets/crests/foreign/celtic_0203.png",
+    "kit": {
+      "shirtPrimary": "#037927",
+      "shirtSecondary": "#fff",
+      "shorts": "#f6f6f6",
+      "socks": "#058030",
+      "pattern": "solid"
+    },
+    "page": 1,
+    "cell": 1,
+    "file": "team-017.png"
+  },
+  {
+    "index": 18,
+    "id": "chelsea_0405",
+    "name": "Chelsia",
+    "referenceName": "Chelsea",
+    "referenceCrest": "assets/crests/foreign/chelsea_0405.png",
+    "kit": {
+      "shirtPrimary": "#001aa4",
+      "shirtSecondary": "#fff",
+      "shorts": "#000001",
+      "socks": "#000000",
+      "pattern": "solid"
+    },
+    "page": 1,
+    "cell": 2,
+    "file": "team-018.png"
+  },
+  {
+    "index": 19,
+    "id": "chievo_0102",
+    "name": "Kievo",
+    "referenceName": "Chievo",
+    "referenceCrest": "assets/crests/italian/chievo_0102.png",
+    "kit": {
+      "shirtPrimary": "#e4d42c",
+      "shirtSecondary": "#2d5ca8",
+      "shorts": "#0950d0",
+      "socks": "#fac901",
+      "pattern": "solid"
+    },
+    "page": 1,
+    "cell": 3,
+    "file": "team-019.png"
+  },
+  {
+    "index": 20,
+    "id": "arc_club_america",
+    "name": "Club Amerika",
+    "referenceName": "Club América",
+    "referenceCrest": "arcade/assets/crests/arc_club_america.png",
+    "kit": {
+      "shirtPrimary": "#ffdf6b",
+      "shirtSecondary": "#163785",
+      "shorts": "#163785",
+      "socks": "#ffdf6b",
+      "pattern": "trim"
+    },
+    "page": 1,
+    "cell": 4,
+    "file": "team-020.png"
+  },
+  {
+    "index": 21,
+    "id": "arc_club_corinthians",
+    "name": "Korintia",
+    "referenceName": "Corinthians",
+    "referenceCrest": "arcade/assets/crests/arc_club_corinthians.png",
+    "kit": {
+      "shirtPrimary": "#ffffff",
+      "shirtSecondary": "#111111",
+      "shorts": "#111111",
+      "socks": "#ffffff",
+      "pattern": "trim"
+    },
+    "page": 1,
+    "cell": 5,
+    "file": "team-021.png"
+  },
+  {
+    "index": 22,
+    "id": "cska_0405",
+    "name": "Krasna Moska",
+    "referenceName": "CSKA Mosca",
+    "referenceCrest": "assets/crests/foreign/cska_0405.png",
+    "kit": {
+      "shirtPrimary": "#ce0118",
+      "shirtSecondary": "#fff",
+      "shorts": "#0130a9",
+      "socks": "#e5021b",
+      "pattern": "solid"
+    },
+    "page": 1,
+    "cell": 6,
+    "file": "team-022.png"
+  },
+  {
+    "index": 23,
+    "id": "arc_club_dcunited",
+    "name": "D.C. Unitas",
+    "referenceName": "DC United",
+    "referenceCrest": "arcade/assets/crests/arc_club_dcunited.png",
+    "kit": {
+      "shirtPrimary": "#151515",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#151515",
+      "pattern": "trim"
+    },
+    "page": 1,
+    "cell": 7,
+    "file": "team-023.png"
+  },
+  {
+    "index": 24,
+    "id": "deportivo_0304",
+    "name": "Deportiva Corunia",
+    "referenceName": "Deportivo La Coruña",
+    "referenceCrest": "assets/crests/foreign/deportivo_0304.png",
+    "kit": {
+      "shirtPrimary": "#0c0d0c",
+      "shirtSecondary": "#fff",
+      "shorts": "#002bb5",
+      "socks": "#030000",
+      "pattern": "solid"
+    },
+    "page": 1,
+    "cell": 8,
+    "file": "team-024.png"
+  },
+  {
+    "index": 25,
+    "id": "empoli_0607",
+    "name": "Emporia",
+    "referenceName": "Empoli",
+    "referenceCrest": "assets/crests/italian/empoli_0607.png",
+    "kit": {
+      "shirtPrimary": "#237cec",
+      "shirtSecondary": "#fff",
+      "shorts": "#0347d1",
+      "socks": "#0f44ad",
+      "pattern": "solid"
+    },
+    "page": 1,
+    "cell": 9,
+    "file": "team-025.png"
+  },
+  {
+    "index": 26,
+    "id": "espanyol_0607",
+    "name": "Espania",
+    "referenceName": "Espanyol",
+    "referenceCrest": "assets/crests/foreign/espanyol_0607.png",
+    "kit": {
+      "shirtPrimary": "#fbfbfb",
+      "shirtSecondary": "#fff",
+      "shorts": "#0130cb",
+      "socks": "#f4f8fb",
+      "pattern": "solid"
+    },
+    "page": 1,
+    "cell": 10,
+    "file": "team-026.png"
+  },
+  {
+    "index": 27,
+    "id": "arc_club_fener",
+    "name": "Fenerbasha",
+    "referenceName": "Fenerbahçe",
+    "referenceCrest": "arcade/assets/crests/arc_club_fener.png",
+    "kit": {
+      "shirtPrimary": "#ffd52d",
+      "shirtSecondary": "#17317d",
+      "shorts": "#17317d",
+      "socks": "#ffd52d",
+      "pattern": "vertical_stripes"
+    },
+    "page": 1,
+    "cell": 11,
+    "file": "team-027.png"
+  },
+  {
+    "index": 28,
+    "id": "feyenoord_0102",
+    "name": "Feyonord",
+    "referenceName": "Feyenoord",
+    "referenceCrest": "assets/crests/foreign/feyenoord_0102.png",
+    "kit": {
+      "shirtPrimary": "#e9020b",
+      "shirtSecondary": "#fff",
+      "shorts": "#1a0000",
+      "socks": "#020000",
+      "pattern": "solid"
+    },
+    "page": 1,
+    "cell": 12,
+    "file": "team-028.png"
+  },
+  {
+    "index": 29,
+    "id": "fiorentina_9899",
+    "name": "Fiorentia",
+    "referenceName": "Fiorentina",
+    "referenceCrest": "assets/crests/italian/fiorentina_9899.png",
+    "kit": {
+      "shirtPrimary": "#7034b7",
+      "shirtSecondary": "#fff",
+      "shorts": "#7817c8",
+      "socks": "#580f9a",
+      "pattern": "solid"
+    },
+    "page": 1,
+    "cell": 13,
+    "file": "team-029.png"
+  },
+  {
+    "index": 30,
+    "id": "arc_club_flamengo",
+    "name": "Flamenga",
+    "referenceName": "Flamengo",
+    "referenceCrest": "arcade/assets/crests/arc_club_flamengo.png",
+    "kit": {
+      "shirtPrimary": "#e82c35",
+      "shirtSecondary": "#111111",
+      "shorts": "#111111",
+      "socks": "#e82c35",
+      "pattern": "horizontal_band"
+    },
+    "page": 1,
+    "cell": 14,
+    "file": "team-030.png"
+  },
+  {
+    "index": 31,
+    "id": "foggia_9192",
+    "name": "Foggara",
+    "referenceName": "Foggia",
+    "referenceCrest": "assets/crests/italian/foggia_9192.png",
+    "kit": {
+      "shirtPrimary": "#c62c31",
+      "shirtSecondary": "#111",
+      "shorts": "#1e1a19",
+      "socks": "#ea180a",
+      "pattern": "solid"
+    },
+    "page": 1,
+    "cell": 15,
+    "file": "team-031.png"
+  },
+  {
+    "index": 32,
+    "id": "galatasaray_9900",
+    "name": "Galatasara",
+    "referenceName": "Galatasaray",
+    "referenceCrest": "assets/crests/foreign/galatasaray_9900.png",
+    "kit": {
+      "shirtPrimary": "#fdca18",
+      "shirtSecondary": "#fff",
+      "shorts": "#f8f7f8",
+      "socks": "#ab041e",
+      "pattern": "solid"
+    },
+    "page": 2,
+    "cell": 0,
+    "file": "team-032.png"
+  },
+  {
+    "index": 33,
+    "id": "genoa_9091",
+    "name": "Genuva",
+    "referenceName": "Genoa",
+    "referenceCrest": "assets/crests/italian/genoa_9091.png",
+    "kit": {
+      "shirtPrimary": "#237cec",
+      "shirtSecondary": "#fff",
+      "shorts": "#112349",
+      "socks": "#151c39",
+      "pattern": "halves"
+    },
+    "page": 2,
+    "cell": 1,
+    "file": "team-033.png"
+  },
+  {
+    "index": 34,
+    "id": "arc_club_chivas",
+    "name": "Guadalajora",
+    "referenceName": "Guadalajara",
+    "referenceCrest": "arcade/assets/crests/arc_club_chivas.png",
+    "kit": {
+      "shirtPrimary": "#ed293b",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#ed293b",
+      "pattern": "vertical_stripes"
+    },
+    "page": 2,
+    "cell": 2,
+    "file": "team-034.png"
+  },
+  {
+    "index": 35,
+    "id": "inter_0910",
+    "name": "Internova",
+    "referenceName": "Inter",
+    "referenceCrest": "assets/crests/italian/inter_0910.png",
+    "kit": {
+      "shirtPrimary": "#0873d1",
+      "shirtSecondary": "#111",
+      "shorts": "#1e1e1e",
+      "socks": "#021849",
+      "pattern": "vertical_stripes"
+    },
+    "page": 2,
+    "cell": 3,
+    "file": "team-035.png"
+  },
+  {
+    "index": 36,
+    "id": "arc_club_jeonbuk",
+    "name": "Jeonbuka",
+    "referenceName": "Jeonbuk Motors",
+    "referenceCrest": "arcade/assets/crests/arc_club_jeonbuk.png",
+    "kit": {
+      "shirtPrimary": "#28b453",
+      "shirtSecondary": "#153979",
+      "shorts": "#153979",
+      "socks": "#28b453",
+      "pattern": "trim"
+    },
+    "page": 2,
+    "cell": 4,
+    "file": "team-036.png"
+  },
+  {
+    "index": 37,
+    "id": "juve_9798",
+    "name": "Joventis",
+    "referenceName": "Juventus",
+    "referenceCrest": "assets/crests/italian/juve_9798.png",
+    "kit": {
+      "shirtPrimary": "#fff",
+      "shirtSecondary": "#111",
+      "shorts": "#24201f",
+      "socks": "#f7efec",
+      "pattern": "vertical_stripes"
+    },
+    "page": 2,
+    "cell": 5,
+    "file": "team-037.png"
+  },
+  {
+    "index": 38,
+    "id": "arc_club_kashima",
+    "name": "Kashira Antlers",
+    "referenceName": "Kashima Antlers",
+    "referenceCrest": "arcade/assets/crests/arc_club_kashima.png",
+    "kit": {
+      "shirtPrimary": "#db2340",
+      "shirtSecondary": "#133968",
+      "shorts": "#133968",
+      "socks": "#db2340",
+      "pattern": "trim"
+    },
+    "page": 2,
+    "cell": 6,
+    "file": "team-038.png"
+  },
+  {
+    "index": 39,
+    "id": "arc_club_galaxy",
+    "name": "Los Angeles Galaxia",
+    "referenceName": "LA Galaxy",
+    "referenceCrest": "arcade/assets/crests/arc_club_galaxy.png",
+    "kit": {
+      "shirtPrimary": "#ffffff",
+      "shirtSecondary": "#143a86",
+      "shorts": "#143a86",
+      "socks": "#ffffff",
+      "pattern": "trim"
+    },
+    "page": 2,
+    "cell": 7,
+    "file": "team-039.png"
+  },
+  {
+    "index": 40,
+    "id": "lazio_9798",
+    "name": "Lazura",
+    "referenceName": "Lazio",
+    "referenceCrest": "assets/crests/italian/lazio_9798.png",
+    "kit": {
+      "shirtPrimary": "#78c9ee",
+      "shirtSecondary": "#fff",
+      "shorts": "#faf5f1",
+      "socks": "#3197f0",
+      "pattern": "trim"
+    },
+    "page": 2,
+    "cell": 8,
+    "file": "team-040.png"
+  },
+  {
+    "index": 41,
+    "id": "leeds_0001",
+    "name": "Leeds Unita",
+    "referenceName": "Leeds United",
+    "referenceCrest": "assets/crests/foreign/leeds_0001.png",
+    "kit": {
+      "shirtPrimary": "#f8f7f7",
+      "shirtSecondary": "#fff",
+      "shorts": "#3b4366",
+      "socks": "#331100",
+      "pattern": "solid"
+    },
+    "page": 2,
+    "cell": 9,
+    "file": "team-041.png"
+  },
+  {
+    "index": 42,
+    "id": "liverpool_0405",
+    "name": "Liverport",
+    "referenceName": "Liverpool",
+    "referenceCrest": "assets/crests/foreign/liverpool_0405.png",
+    "kit": {
+      "shirtPrimary": "#ce0215",
+      "shirtSecondary": "#fff",
+      "shorts": "#270404",
+      "socks": "#000000",
+      "pattern": "solid"
+    },
+    "page": 2,
+    "cell": 10,
+    "file": "team-042.png"
+  },
+  {
+    "index": 43,
+    "id": "arc_club_sundowns",
+    "name": "Mamelora Sundown",
+    "referenceName": "Mamelodi Sundowns",
+    "referenceCrest": "arcade/assets/crests/arc_club_sundowns.png",
+    "kit": {
+      "shirtPrimary": "#ffdb28",
+      "shirtSecondary": "#189553",
+      "shorts": "#189553",
+      "socks": "#ffdb28",
+      "pattern": "trim"
+    },
+    "page": 2,
+    "cell": 11,
+    "file": "team-043.png"
+  },
+  {
+    "index": 44,
+    "id": "manutd_9899",
+    "name": "Manchesta Uniteda",
+    "referenceName": "Manchester United",
+    "referenceCrest": "assets/crests/foreign/manutd_9899.png",
+    "kit": {
+      "shirtPrimary": "#b0000c",
+      "shirtSecondary": "#fff",
+      "shorts": "#f5f5f4",
+      "socks": "#0f0e0f",
+      "pattern": "solid"
+    },
+    "page": 2,
+    "cell": 12,
+    "file": "team-044.png"
+  },
+  {
+    "index": 45,
+    "id": "milan_0607",
+    "name": "Milara",
+    "referenceName": "Milan",
+    "referenceCrest": "assets/crests/italian/milan_0607.png",
+    "kit": {
+      "shirtPrimary": "#d71920",
+      "shirtSecondary": "#111",
+      "shorts": "#2e2e2c",
+      "socks": "#300a0b",
+      "pattern": "vertical_stripes"
+    },
+    "page": 2,
+    "cell": 13,
+    "file": "team-045.png"
+  },
+  {
+    "index": 46,
+    "id": "arc_club_nacional",
+    "name": "Nacionalia",
+    "referenceName": "Nacional",
+    "referenceCrest": "arcade/assets/crests/arc_club_nacional.png",
+    "kit": {
+      "shirtPrimary": "#ffffff",
+      "shirtSecondary": "#16438c",
+      "shorts": "#16438c",
+      "socks": "#ffffff",
+      "pattern": "trim"
+    },
+    "page": 2,
+    "cell": 14,
+    "file": "team-046.png"
+  },
+  {
+    "index": 47,
+    "id": "arc_club_napoli",
+    "name": "Napolia",
+    "referenceName": "Napoli",
+    "referenceCrest": "arcade/assets/crests/arc_club_napoli.png",
+    "kit": {
+      "shirtPrimary": "#29b9ed",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#29b9ed",
+      "pattern": "trim"
+    },
+    "page": 2,
+    "cell": 15,
+    "file": "team-047.png"
+  },
+  {
+    "index": 48,
+    "id": "marseille_9293",
+    "name": "Olympika Marsilia",
+    "referenceName": "Olympique Marsiglia",
+    "referenceCrest": "assets/crests/foreign/marseille_9293.png",
+    "kit": {
+      "shirtPrimary": "#0a79ef",
+      "shirtSecondary": "#fff",
+      "shorts": "#2c2325",
+      "socks": "#000000",
+      "pattern": "solid"
+    },
+    "page": 3,
+    "cell": 0,
+    "file": "team-048.png"
+  },
+  {
+    "index": 49,
+    "id": "palermo_0708",
+    "name": "Palermia",
+    "referenceName": "Palermo",
+    "referenceCrest": "assets/crests/italian/palermo_0708.png",
+    "kit": {
+      "shirtPrimary": "#237cec",
+      "shirtSecondary": "#fff",
+      "shorts": "#191816",
+      "socks": "#2e0b18",
+      "pattern": "solid"
+    },
+    "page": 3,
+    "cell": 1,
+    "file": "team-049.png"
+  },
+  {
+    "index": 50,
+    "id": "arc_club_palmeiras",
+    "name": "Palmeira",
+    "referenceName": "Palmeiras",
+    "referenceCrest": "arcade/assets/crests/arc_club_palmeiras.png",
+    "kit": {
+      "shirtPrimary": "#159549",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#159549",
+      "pattern": "trim"
+    },
+    "page": 3,
+    "cell": 2,
+    "file": "team-050.png"
+  },
+  {
+    "index": 51,
+    "id": "arc_club_psg",
+    "name": "Paris Saint Germaine",
+    "referenceName": "Paris Saint-Germain",
+    "referenceCrest": "arcade/assets/crests/arc_club_psg.png",
+    "kit": {
+      "shirtPrimary": "#153580",
+      "shirtSecondary": "#e8223b",
+      "shorts": "#e8223b",
+      "socks": "#153580",
+      "pattern": "horizontal_band"
+    },
+    "page": 3,
+    "cell": 3,
+    "file": "team-051.png"
+  },
+  {
+    "index": 52,
+    "id": "parma_9899",
+    "name": "Parmia",
+    "referenceName": "Parma",
+    "referenceCrest": "assets/crests/italian/parma_9899.png",
+    "kit": {
+      "shirtPrimary": "#ffd333",
+      "shirtSecondary": "#17439b",
+      "shorts": "#eee6e3",
+      "socks": "#cac6be",
+      "pattern": "horizontal_band"
+    },
+    "page": 3,
+    "cell": 4,
+    "file": "team-052.png"
+  },
+  {
+    "index": 53,
+    "id": "arc_club_penarol",
+    "name": "Penyarol",
+    "referenceName": "Peñarol",
+    "referenceCrest": "arcade/assets/crests/arc_club_penarol.png",
+    "kit": {
+      "shirtPrimary": "#ffd82c",
+      "shirtSecondary": "#111111",
+      "shorts": "#111111",
+      "socks": "#ffd82c",
+      "pattern": "vertical_stripes"
+    },
+    "page": 3,
+    "cell": 5,
+    "file": "team-053.png"
+  },
+  {
+    "index": 54,
+    "id": "perugia_9900",
+    "name": "Perugina",
+    "referenceName": "Perugia",
+    "referenceCrest": "assets/crests/italian/perugia_9900.png",
+    "kit": {
+      "shirtPrimary": "#b12c2c",
+      "shirtSecondary": "#fff",
+      "shorts": "#fcf8f5",
+      "socks": "#e60712",
+      "pattern": "solid"
+    },
+    "page": 3,
+    "cell": 6,
+    "file": "team-054.png"
+  },
+  {
+    "index": 55,
+    "id": "porto_0304",
+    "name": "Portua",
+    "referenceName": "Porto",
+    "referenceCrest": "assets/crests/foreign/porto_0304.png",
+    "kit": {
+      "shirtPrimary": "#002ba0",
+      "shirtSecondary": "#fff",
+      "shorts": "#002fa6",
+      "socks": "#1031ac",
+      "pattern": "solid"
+    },
+    "page": 3,
+    "cell": 7,
+    "file": "team-055.png"
+  },
+  {
+    "index": 56,
+    "id": "arc_club_psv",
+    "name": "PSV Eindhovia",
+    "referenceName": "PSV Eindhoven",
+    "referenceCrest": "arcade/assets/crests/arc_club_psv.png",
+    "kit": {
+      "shirtPrimary": "#e82639",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#e82639",
+      "pattern": "vertical_stripes"
+    },
+    "page": 3,
+    "cell": 8,
+    "file": "team-056.png"
+  },
+  {
+    "index": 57,
+    "id": "arc_club_raja",
+    "name": "Raja Casablanka",
+    "referenceName": "Raja Casablanca",
+    "referenceCrest": "arcade/assets/crests/arc_club_raja.png",
+    "kit": {
+      "shirtPrimary": "#16a866",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#16a866",
+      "pattern": "trim"
+    },
+    "page": 3,
+    "cell": 9,
+    "file": "team-057.png"
+  },
+  {
+    "index": 58,
+    "id": "arc_club_rangers",
+    "name": "Ranjers",
+    "referenceName": "Rangers",
+    "referenceCrest": "arcade/assets/crests/arc_club_rangers.png",
+    "kit": {
+      "shirtPrimary": "#235bda",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#235bda",
+      "pattern": "trim"
+    },
+    "page": 3,
+    "cell": 10,
+    "file": "team-058.png"
+  },
+  {
+    "index": 59,
+    "id": "real_0203",
+    "name": "Reale Madridia",
+    "referenceName": "Real Madrid",
+    "referenceCrest": "assets/crests/foreign/real_0203.png",
+    "kit": {
+      "shirtPrimary": "#f6f6f6",
+      "shirtSecondary": "#fff",
+      "shorts": "#f5f5f5",
+      "socks": "#f9f9f9",
+      "pattern": "solid"
+    },
+    "page": 3,
+    "cell": 11,
+    "file": "team-059.png"
+  },
+  {
+    "index": 60,
+    "id": "reggina_0203",
+    "name": "Reggira",
+    "referenceName": "Reggina",
+    "referenceCrest": "assets/crests/italian/reggina_0203.png",
+    "kit": {
+      "shirtPrimary": "#791d24",
+      "shirtSecondary": "#fff",
+      "shorts": "#262527",
+      "socks": "#81051b",
+      "pattern": "solid"
+    },
+    "page": 3,
+    "cell": 12,
+    "file": "team-060.png"
+  },
+  {
+    "index": 61,
+    "id": "arc_club_river",
+    "name": "River Plata",
+    "referenceName": "River Plate",
+    "referenceCrest": "arcade/assets/crests/arc_club_river.png",
+    "kit": {
+      "shirtPrimary": "#ffffff",
+      "shirtSecondary": "#ed2639",
+      "shorts": "#ed2639",
+      "socks": "#ffffff",
+      "pattern": "horizontal_band"
+    },
+    "page": 3,
+    "cell": 13,
+    "file": "team-061.png"
+  },
+  {
+    "index": 62,
+    "id": "roma_0001",
+    "name": "Romara",
+    "referenceName": "Roma",
+    "referenceCrest": "assets/crests/italian/roma_0001.png",
+    "kit": {
+      "shirtPrimary": "#9c1526",
+      "shirtSecondary": "#ffd333",
+      "shorts": "#f5f0ea",
+      "socks": "#262325",
+      "pattern": "solid"
+    },
+    "page": 3,
+    "cell": 14,
+    "file": "team-062.png"
+  },
+  {
+    "index": 63,
+    "id": "samp_9091",
+    "name": "Sampdora",
+    "referenceName": "Sampdoria",
+    "referenceCrest": "assets/crests/italian/samp_9091.png",
+    "kit": {
+      "shirtPrimary": "#2465a7",
+      "shirtSecondary": "#fff",
+      "shorts": "#eee6e3",
+      "socks": "#0349c2",
+      "pattern": "horizontal_band"
+    },
+    "page": 3,
+    "cell": 15,
+    "file": "team-063.png"
+  },
+  {
+    "index": 64,
+    "id": "arc_club_santos",
+    "name": "Santora",
+    "referenceName": "Santos",
+    "referenceCrest": "arcade/assets/crests/arc_club_santos.png",
+    "kit": {
+      "shirtPrimary": "#ffffff",
+      "shirtSecondary": "#111111",
+      "shorts": "#111111",
+      "socks": "#ffffff",
+      "pattern": "trim"
+    },
+    "page": 4,
+    "cell": 0,
+    "file": "team-064.png"
+  },
+  {
+    "index": 65,
+    "id": "arc_club_saopaulo",
+    "name": "San Paula",
+    "referenceName": "São Paulo",
+    "referenceCrest": "arcade/assets/crests/arc_club_saopaulo.png",
+    "kit": {
+      "shirtPrimary": "#ffffff",
+      "shirtSecondary": "#d52337",
+      "shorts": "#d52337",
+      "socks": "#ffffff",
+      "pattern": "horizontal_band"
+    },
+    "page": 4,
+    "cell": 1,
+    "file": "team-065.png"
+  },
+  {
+    "index": 66,
+    "id": "arc_club_shanghai",
+    "name": "Shanghaia Shenhua",
+    "referenceName": "Shanghai Shenhua",
+    "referenceCrest": "arcade/assets/crests/arc_club_shanghai.png",
+    "kit": {
+      "shirtPrimary": "#205de0",
+      "shirtSecondary": "#e1283c",
+      "shorts": "#e1283c",
+      "socks": "#205de0",
+      "pattern": "trim"
+    },
+    "page": 4,
+    "cell": 2,
+    "file": "team-066.png"
+  },
+  {
+    "index": 67,
+    "id": "sevilla_0506",
+    "name": "Sivellia",
+    "referenceName": "Siviglia",
+    "referenceCrest": "assets/crests/foreign/sevilla_0506.png",
+    "kit": {
+      "shirtPrimary": "#f8f8f9",
+      "shirtSecondary": "#fff",
+      "shorts": "#933a28",
+      "socks": "#000000",
+      "pattern": "solid"
+    },
+    "page": 4,
+    "cell": 3,
+    "file": "team-067.png"
+  },
+  {
+    "index": 68,
+    "id": "arc_club_sporting",
+    "name": "Sportika Lisbona",
+    "referenceName": "Sporting Lisbona",
+    "referenceCrest": "arcade/assets/crests/arc_club_sporting.png",
+    "kit": {
+      "shirtPrimary": "#21aa64",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#21aa64",
+      "pattern": "horizontal_band"
+    },
+    "page": 4,
+    "cell": 4,
+    "file": "team-068.png"
+  },
+  {
+    "index": 69,
+    "id": "arc_club_sydney",
+    "name": "Sydnia",
+    "referenceName": "Sydney FC",
+    "referenceCrest": "arcade/assets/crests/arc_club_sydney.png",
+    "kit": {
+      "shirtPrimary": "#78d8f4",
+      "shirtSecondary": "#15376a",
+      "shorts": "#15376a",
+      "socks": "#78d8f4",
+      "pattern": "trim"
+    },
+    "page": 4,
+    "cell": 5,
+    "file": "team-069.png"
+  },
+  {
+    "index": 70,
+    "id": "torino_9293",
+    "name": "Torina",
+    "referenceName": "Torino",
+    "referenceCrest": "assets/crests/italian/torino_9293.png",
+    "kit": {
+      "shirtPrimary": "#237cec",
+      "shirtSecondary": "#fff",
+      "shorts": "#f4f3ef",
+      "socks": "#5d0a15",
+      "pattern": "solid"
+    },
+    "page": 4,
+    "cell": 6,
+    "file": "team-070.png"
+  },
+  {
+    "index": 71,
+    "id": "udinese_9798",
+    "name": "Udina",
+    "referenceName": "Udinese",
+    "referenceCrest": "assets/crests/italian/udinese_9798.png",
+    "kit": {
+      "shirtPrimary": "#111",
+      "shirtSecondary": "#eee",
+      "shorts": "#262426",
+      "socks": "#c8bdbc",
+      "pattern": "solid"
+    },
+    "page": 4,
+    "cell": 7,
+    "file": "team-071.png"
+  },
+  {
+    "index": 72,
+    "id": "arc_club_urawa",
+    "name": "Urawa Rubra",
+    "referenceName": "Urawa Reds",
+    "referenceCrest": "arcade/assets/crests/arc_club_urawa.png",
+    "kit": {
+      "shirtPrimary": "#e32738",
+      "shirtSecondary": "#111111",
+      "shorts": "#111111",
+      "socks": "#e32738",
+      "pattern": "trim"
+    },
+    "page": 4,
+    "cell": 8,
+    "file": "team-072.png"
+  },
+  {
+    "index": 73,
+    "id": "valencia_0304",
+    "name": "Valentia",
+    "referenceName": "Valencia",
+    "referenceCrest": "assets/crests/foreign/valencia_0304.png",
+    "kit": {
+      "shirtPrimary": "#f8f8f8",
+      "shirtSecondary": "#fff",
+      "shorts": "#e6ebe5",
+      "socks": "#040000",
+      "pattern": "solid"
+    },
+    "page": 4,
+    "cell": 9,
+    "file": "team-073.png"
+  },
+  {
+    "index": 74,
+    "id": "venezia_9899",
+    "name": "Venezora",
+    "referenceName": "Venezia",
+    "referenceCrest": "assets/crests/italian/venezia_9899.png",
+    "kit": {
+      "shirtPrimary": "#111",
+      "shirtSecondary": "#e67e22",
+      "shorts": "#21211e",
+      "socks": "#10100f",
+      "pattern": "solid"
+    },
+    "page": 4,
+    "cell": 10,
+    "file": "team-074.png"
+  },
+  {
+    "index": 75,
+    "id": "vicenza_9697",
+    "name": "Vicenzia",
+    "referenceName": "Vicenza",
+    "referenceCrest": "assets/crests/italian/vicenza_9697.png",
+    "kit": {
+      "shirtPrimary": "#c72e32",
+      "shirtSecondary": "#fff",
+      "shorts": "#fbf5f1",
+      "socks": "#ffeeec",
+      "pattern": "solid"
+    },
+    "page": 4,
+    "cell": 11,
+    "file": "team-075.png"
+  },
+  {
+    "index": 76,
+    "id": "villarreal_0506",
+    "name": "Villareale",
+    "referenceName": "Villarreal",
+    "referenceCrest": "assets/crests/foreign/villarreal_0506.png",
+    "kit": {
+      "shirtPrimary": "#f8e506",
+      "shirtSecondary": "#fff",
+      "shorts": "#8b5d65",
+      "socks": "#d6be03",
+      "pattern": "solid"
+    },
+    "page": 4,
+    "cell": 12,
+    "file": "team-076.png"
+  },
+  {
+    "index": 77,
+    "id": "werder_0607",
+    "name": "Werda Brema",
+    "referenceName": "Werder Brema",
+    "referenceCrest": "assets/crests/foreign/werder_0607.png",
+    "kit": {
+      "shirtPrimary": "#fafbfb",
+      "shirtSecondary": "#fff",
+      "shorts": "#f1f0ee",
+      "socks": "#0f7351",
+      "pattern": "solid"
+    },
+    "page": 4,
+    "cell": 13,
+    "file": "team-077.png"
+  },
+  {
+    "index": 78,
+    "id": "arc_club_zamalek",
+    "name": "Zamalika",
+    "referenceName": "Zamalek",
+    "referenceCrest": "arcade/assets/crests/arc_club_zamalek.png",
+    "kit": {
+      "shirtPrimary": "#ffffff",
+      "shirtSecondary": "#e6243b",
+      "shorts": "#e6243b",
+      "socks": "#ffffff",
+      "pattern": "horizontal_band"
+    },
+    "page": 4,
+    "cell": 14,
+    "file": "team-078.png"
+  },
+  {
+    "index": 79,
+    "id": "zenit_0708",
+    "name": "Zenita Petersburg",
+    "referenceName": "Zenit San Pietroburgo",
+    "referenceCrest": "assets/crests/foreign/zenit_0708.png",
+    "kit": {
+      "shirtPrimary": "#34abfd",
+      "shirtSecondary": "#fff",
+      "shorts": "#239cf9",
+      "socks": "#16acfd",
+      "pattern": "solid"
+    },
+    "page": 4,
+    "cell": 15,
+    "file": "team-079.png"
+  },
+  {
+    "index": 80,
+    "id": "arc_national_algeria",
+    "name": "Aljeria",
+    "referenceName": "Algeria",
+    "referenceCrest": "arcade/assets/crests/arc_national_algeria.png",
+    "kit": {
+      "shirtPrimary": "#ffffff",
+      "shirtSecondary": "#1b9b58",
+      "shorts": "#1b9b58",
+      "socks": "#ffffff",
+      "pattern": "trim"
+    },
+    "page": 5,
+    "cell": 0,
+    "file": "team-080.png"
+  },
+  {
+    "index": 81,
+    "id": "saudi_1994",
+    "name": "Saudira",
+    "referenceName": "Arabia Saudita",
+    "referenceCrest": "assets/crests/national/saudi_1994.png",
+    "kit": {
+      "shirtPrimary": "#029544",
+      "shirtSecondary": "#fff",
+      "shorts": "#078140",
+      "socks": "#1aa354",
+      "pattern": "solid"
+    },
+    "page": 5,
+    "cell": 1,
+    "file": "team-081.png"
+  },
+  {
+    "index": 82,
+    "id": "argentina_2006",
+    "name": "Argentia",
+    "referenceName": "Argentina",
+    "referenceCrest": "assets/crests/national/argentina_2006.png",
+    "kit": {
+      "shirtPrimary": "#75b9fb",
+      "shirtSecondary": "#fff",
+      "shorts": "#16151b",
+      "socks": "#f8f7f8",
+      "pattern": "solid"
+    },
+    "page": 5,
+    "cell": 2,
+    "file": "team-082.png"
+  },
+  {
+    "index": 83,
+    "id": "australia_2006",
+    "name": "Australis",
+    "referenceName": "Australia",
+    "referenceCrest": "assets/crests/national/australia_2006.png",
+    "kit": {
+      "shirtPrimary": "#fbcb2b",
+      "shirtSecondary": "#fff",
+      "shorts": "#04673b",
+      "socks": "#fdd23c",
+      "pattern": "solid"
+    },
+    "page": 5,
+    "cell": 3,
+    "file": "team-083.png"
+  },
+  {
+    "index": 84,
+    "id": "austria_1990",
+    "name": "Austrenia",
+    "referenceName": "Austria",
+    "referenceCrest": "assets/crests/national/austria_1990.png",
+    "kit": {
+      "shirtPrimary": "#ee1614",
+      "shirtSecondary": "#fff",
+      "shorts": "#f9f8f8",
+      "socks": "#ed1916",
+      "pattern": "solid"
+    },
+    "page": 5,
+    "cell": 4,
+    "file": "team-084.png"
+  },
+  {
+    "index": 85,
+    "id": "belgium_2002",
+    "name": "Belgora",
+    "referenceName": "Belgio",
+    "referenceCrest": "assets/crests/national/belgium_2002.png",
+    "kit": {
+      "shirtPrimary": "#de111c",
+      "shirtSecondary": "#fff",
+      "shorts": "#db121d",
+      "socks": "#dd121d",
+      "pattern": "solid"
+    },
+    "page": 5,
+    "cell": 5,
+    "file": "team-085.png"
+  },
+  {
+    "index": 86,
+    "id": "arc_national_bolivia",
+    "name": "Bolivara",
+    "referenceName": "Bolivia",
+    "referenceCrest": "arcade/assets/crests/arc_national_bolivia.png",
+    "kit": {
+      "shirtPrimary": "#16974f",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#16974f",
+      "pattern": "trim"
+    },
+    "page": 5,
+    "cell": 6,
+    "file": "team-086.png"
+  },
+  {
+    "index": 87,
+    "id": "brazil_2002",
+    "name": "Brasilia",
+    "referenceName": "Brasile",
+    "referenceCrest": "assets/crests/national/brazil_2002.png",
+    "kit": {
+      "shirtPrimary": "#fde817",
+      "shirtSecondary": "#fff",
+      "shorts": "#013df6",
+      "socks": "#f5f5f5",
+      "pattern": "solid"
+    },
+    "page": 5,
+    "cell": 7,
+    "file": "team-087.png"
+  },
+  {
+    "index": 88,
+    "id": "bulgaria_1994",
+    "name": "Bulgaris",
+    "referenceName": "Bulgaria",
+    "referenceCrest": "assets/crests/national/bulgaria_1994.png",
+    "kit": {
+      "shirtPrimary": "#f7f9f9",
+      "shirtSecondary": "#fff",
+      "shorts": "#037946",
+      "socks": "#fbfafa",
+      "pattern": "solid"
+    },
+    "page": 5,
+    "cell": 8,
+    "file": "team-088.png"
+  },
+  {
+    "index": 89,
+    "id": "cameroon_1990",
+    "name": "Cameria",
+    "referenceName": "Camerun",
+    "referenceCrest": "assets/crests/national/cameroon_1990.png",
+    "kit": {
+      "shirtPrimary": "#037e4b",
+      "shirtSecondary": "#fff",
+      "shorts": "#d7171f",
+      "socks": "#fbd827",
+      "pattern": "solid"
+    },
+    "page": 5,
+    "cell": 9,
+    "file": "team-089.png"
+  },
+  {
+    "index": 90,
+    "id": "arc_national_canada",
+    "name": "Canadia",
+    "referenceName": "Canada",
+    "referenceCrest": "arcade/assets/crests/arc_national_canada.png",
+    "kit": {
+      "shirtPrimary": "#e52b3d",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#e52b3d",
+      "pattern": "trim"
+    },
+    "page": 5,
+    "cell": 10,
+    "file": "team-090.png"
+  },
+  {
+    "index": 91,
+    "id": "chile_1998",
+    "name": "Chilora",
+    "referenceName": "Cile",
+    "referenceCrest": "assets/crests/national/chile_1998.png",
+    "kit": {
+      "shirtPrimary": "#f11013",
+      "shirtSecondary": "#fff",
+      "shorts": "#1448d5",
+      "socks": "#0036d4",
+      "pattern": "solid"
+    },
+    "page": 5,
+    "cell": 11,
+    "file": "team-091.png"
+  },
+  {
+    "index": 92,
+    "id": "arc_national_china",
+    "name": "Cinara",
+    "referenceName": "Cina",
+    "referenceCrest": "arcade/assets/crests/arc_national_china.png",
+    "kit": {
+      "shirtPrimary": "#e72b3b",
+      "shirtSecondary": "#ffda27",
+      "shorts": "#ffda27",
+      "socks": "#e72b3b",
+      "pattern": "trim"
+    },
+    "page": 5,
+    "cell": 12,
+    "file": "team-092.png"
+  },
+  {
+    "index": 93,
+    "id": "colombia_1994",
+    "name": "Columbra",
+    "referenceName": "Colombia",
+    "referenceCrest": "assets/crests/national/colombia_1994.png",
+    "kit": {
+      "shirtPrimary": "#fde622",
+      "shirtSecondary": "#fff",
+      "shorts": "#0034d1",
+      "socks": "#f21a23",
+      "pattern": "solid"
+    },
+    "page": 5,
+    "cell": 13,
+    "file": "team-093.png"
+  },
+  {
+    "index": 94,
+    "id": "korea_2002",
+    "name": "Koreana",
+    "referenceName": "Corea del Sud",
+    "referenceCrest": "assets/crests/national/korea_2002.png",
+    "kit": {
+      "shirtPrimary": "#f92d45",
+      "shirtSecondary": "#fff",
+      "shorts": "#465772",
+      "socks": "#f82441",
+      "pattern": "solid"
+    },
+    "page": 5,
+    "cell": 14,
+    "file": "team-094.png"
+  },
+  {
+    "index": 95,
+    "id": "ivory_2006",
+    "name": "Avoria",
+    "referenceName": "Costa d’Avorio",
+    "referenceCrest": "assets/crests/national/ivory_2006.png",
+    "kit": {
+      "shirtPrimary": "#fa8e19",
+      "shirtSecondary": "#fff",
+      "shorts": "#fa8913",
+      "socks": "#fbebc9",
+      "pattern": "solid"
+    },
+    "page": 5,
+    "cell": 15,
+    "file": "team-095.png"
+  },
+  {
+    "index": 96,
+    "id": "costarica_1990",
+    "name": "Costarika",
+    "referenceName": "Costa Rica",
+    "referenceCrest": "assets/crests/national/costarica_1990.png",
+    "kit": {
+      "shirtPrimary": "#cb1716",
+      "shirtSecondary": "#fff",
+      "shorts": "#0532cb",
+      "socks": "#6e5f85",
+      "pattern": "solid"
+    },
+    "page": 6,
+    "cell": 0,
+    "file": "team-096.png"
+  },
+  {
+    "index": 97,
+    "id": "croatia_1998",
+    "name": "Kroatia",
+    "referenceName": "Croazia",
+    "referenceCrest": "assets/crests/national/croatia_1998.png",
+    "kit": {
+      "shirtPrimary": "#f3f1f2",
+      "shirtSecondary": "#fff",
+      "shorts": "#f9f7f8",
+      "socks": "#033acd",
+      "pattern": "solid"
+    },
+    "page": 6,
+    "cell": 1,
+    "file": "team-097.png"
+  },
+  {
+    "index": 98,
+    "id": "denmark_1992",
+    "name": "Danoria",
+    "referenceName": "Danimarca",
+    "referenceCrest": "assets/crests/national/denmark_1992.png",
+    "kit": {
+      "shirtPrimary": "#d41015",
+      "shirtSecondary": "#fff",
+      "shorts": "#f9f9fa",
+      "socks": "#d71519",
+      "pattern": "solid"
+    },
+    "page": 6,
+    "cell": 2,
+    "file": "team-098.png"
+  },
+  {
+    "index": 99,
+    "id": "arc_national_ecuador",
+    "name": "Ekuadora",
+    "referenceName": "Ecuador",
+    "referenceCrest": "arcade/assets/crests/arc_national_ecuador.png",
+    "kit": {
+      "shirtPrimary": "#ffdc28",
+      "shirtSecondary": "#1e4599",
+      "shorts": "#1e4599",
+      "socks": "#ffdc28",
+      "pattern": "trim"
+    },
+    "page": 6,
+    "cell": 3,
+    "file": "team-099.png"
+  },
+  {
+    "index": 100,
+    "id": "arc_national_egypt",
+    "name": "Egitara",
+    "referenceName": "Egitto",
+    "referenceCrest": "arcade/assets/crests/arc_national_egypt.png",
+    "kit": {
+      "shirtPrimary": "#ed293b",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#ed293b",
+      "pattern": "trim"
+    },
+    "page": 6,
+    "cell": 4,
+    "file": "team-100.png"
+  },
+  {
+    "index": 101,
+    "id": "arc_national_uae",
+    "name": "Emiratia",
+    "referenceName": "Emirati Arabi Uniti",
+    "referenceCrest": "arcade/assets/crests/arc_national_uae.png",
+    "kit": {
+      "shirtPrimary": "#ffffff",
+      "shirtSecondary": "#e7283b",
+      "shorts": "#e7283b",
+      "socks": "#ffffff",
+      "pattern": "trim"
+    },
+    "page": 6,
+    "cell": 5,
+    "file": "team-101.png"
+  },
+  {
+    "index": 102,
+    "id": "france_2000",
+    "name": "Francora",
+    "referenceName": "Francia",
+    "referenceCrest": "assets/crests/national/france_2000.png",
+    "kit": {
+      "shirtPrimary": "#0128bf",
+      "shirtSecondary": "#fff",
+      "shorts": "#0025cd",
+      "socks": "#ea0718",
+      "pattern": "solid"
+    },
+    "page": 6,
+    "cell": 6,
+    "file": "team-102.png"
+  },
+  {
+    "index": 103,
+    "id": "germany_1990",
+    "name": "Germara",
+    "referenceName": "Germania",
+    "referenceCrest": "assets/crests/national/germany_1990.png",
+    "kit": {
+      "shirtPrimary": "#fbf6f3",
+      "shirtSecondary": "#fff",
+      "shorts": "#141317",
+      "socks": "#f7f7f7",
+      "pattern": "solid"
+    },
+    "page": 6,
+    "cell": 7,
+    "file": "team-103.png"
+  },
+  {
+    "index": 104,
+    "id": "ghana_2010",
+    "name": "Ghanora",
+    "referenceName": "Ghana",
+    "referenceCrest": "assets/crests/national/ghana_2010.png",
+    "kit": {
+      "shirtPrimary": "#fafafa",
+      "shirtSecondary": "#fff",
+      "shorts": "#f7f7f7",
+      "socks": "#fafaf9",
+      "pattern": "solid"
+    },
+    "page": 6,
+    "cell": 8,
+    "file": "team-104.png"
+  },
+  {
+    "index": 105,
+    "id": "arc_national_jamaica",
+    "name": "Jamaika",
+    "referenceName": "Giamaica",
+    "referenceCrest": "arcade/assets/crests/arc_national_jamaica.png",
+    "kit": {
+      "shirtPrimary": "#ffdc28",
+      "shirtSecondary": "#19944a",
+      "shorts": "#19944a",
+      "socks": "#ffdc28",
+      "pattern": "trim"
+    },
+    "page": 6,
+    "cell": 9,
+    "file": "team-105.png"
+  },
+  {
+    "index": 106,
+    "id": "japan_2002",
+    "name": "Giapora",
+    "referenceName": "Giappone",
+    "referenceCrest": "assets/crests/national/japan_2002.png",
+    "kit": {
+      "shirtPrimary": "#11289c",
+      "shirtSecondary": "#fff",
+      "shorts": "#fcfcfc",
+      "socks": "#0139be",
+      "pattern": "solid"
+    },
+    "page": 6,
+    "cell": 10,
+    "file": "team-106.png"
+  },
+  {
+    "index": 107,
+    "id": "greece_2004",
+    "name": "Grekia",
+    "referenceName": "Grecia",
+    "referenceCrest": "assets/crests/national/greece_2004.png",
+    "kit": {
+      "shirtPrimary": "#0039e0",
+      "shirtSecondary": "#fff",
+      "shorts": "#0136de",
+      "socks": "#d06b29",
+      "pattern": "solid"
+    },
+    "page": 6,
+    "cell": 11,
+    "file": "team-107.png"
+  },
+  {
+    "index": 108,
+    "id": "arc_national_honduras",
+    "name": "Honduria",
+    "referenceName": "Honduras",
+    "referenceCrest": "arcade/assets/crests/arc_national_honduras.png",
+    "kit": {
+      "shirtPrimary": "#ffffff",
+      "shirtSecondary": "#2671ce",
+      "shorts": "#2671ce",
+      "socks": "#ffffff",
+      "pattern": "trim"
+    },
+    "page": 6,
+    "cell": 12,
+    "file": "team-108.png"
+  },
+  {
+    "index": 109,
+    "id": "england_1996",
+    "name": "Albiona",
+    "referenceName": "Inghilterra",
+    "referenceCrest": "assets/crests/national/england_1996.png",
+    "kit": {
+      "shirtPrimary": "#f3f0f0",
+      "shirtSecondary": "#fff",
+      "shorts": "#0a245c",
+      "socks": "#f7f7f7",
+      "pattern": "solid"
+    },
+    "page": 6,
+    "cell": 13,
+    "file": "team-109.png"
+  },
+  {
+    "index": 110,
+    "id": "arc_national_iran",
+    "name": "Irana",
+    "referenceName": "Iran",
+    "referenceCrest": "arcade/assets/crests/arc_national_iran.png",
+    "kit": {
+      "shirtPrimary": "#ffffff",
+      "shirtSecondary": "#e22d41",
+      "shorts": "#e22d41",
+      "socks": "#ffffff",
+      "pattern": "trim"
+    },
+    "page": 6,
+    "cell": 14,
+    "file": "team-110.png"
+  },
+  {
+    "index": 111,
+    "id": "arc_national_iraq",
+    "name": "Iraqa",
+    "referenceName": "Iraq",
+    "referenceCrest": "arcade/assets/crests/arc_national_iraq.png",
+    "kit": {
+      "shirtPrimary": "#269b53",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#269b53",
+      "pattern": "trim"
+    },
+    "page": 6,
+    "cell": 15,
+    "file": "team-111.png"
+  },
+  {
+    "index": 112,
+    "id": "ireland_1990",
+    "name": "Erinia",
+    "referenceName": "Irlanda",
+    "referenceCrest": "assets/crests/national/ireland_1990.png",
+    "kit": {
+      "shirtPrimary": "#04833d",
+      "shirtSecondary": "#fff",
+      "shorts": "#fdfdfd",
+      "socks": "#069245",
+      "pattern": "solid"
+    },
+    "page": 7,
+    "cell": 0,
+    "file": "team-112.png"
+  },
+  {
+    "index": 113,
+    "id": "italy_2006",
+    "name": "Italika",
+    "referenceName": "Italia",
+    "referenceCrest": "assets/crests/national/italy_2006.png",
+    "kit": {
+      "shirtPrimary": "#0037d7",
+      "shirtSecondary": "#fff",
+      "shorts": "#0136d4",
+      "socks": "#0c4de1",
+      "pattern": "solid"
+    },
+    "page": 7,
+    "cell": 1,
+    "file": "team-113.png"
+  },
+  {
+    "index": 114,
+    "id": "yugoslavia_1990",
+    "name": "Jugoravia",
+    "referenceName": "Jugoslavia",
+    "referenceCrest": "assets/crests/national/yugoslavia_1990.png",
+    "kit": {
+      "shirtPrimary": "#0030cc",
+      "shirtSecondary": "#fff",
+      "shorts": "#0132d3",
+      "socks": "#0537d3",
+      "pattern": "solid"
+    },
+    "page": 7,
+    "cell": 2,
+    "file": "team-114.png"
+  },
+  {
+    "index": 115,
+    "id": "arc_national_mali",
+    "name": "Malika",
+    "referenceName": "Mali",
+    "referenceCrest": "arcade/assets/crests/arc_national_mali.png",
+    "kit": {
+      "shirtPrimary": "#ffdb29",
+      "shirtSecondary": "#249e55",
+      "shorts": "#249e55",
+      "socks": "#ffdb29",
+      "pattern": "trim"
+    },
+    "page": 7,
+    "cell": 3,
+    "file": "team-115.png"
+  },
+  {
+    "index": 116,
+    "id": "morocco_1998",
+    "name": "Marokia",
+    "referenceName": "Marocco",
+    "referenceCrest": "assets/crests/national/morocco_1998.png",
+    "kit": {
+      "shirtPrimary": "#f21211",
+      "shirtSecondary": "#fff",
+      "shorts": "#007e5e",
+      "socks": "#d86928",
+      "pattern": "solid"
+    },
+    "page": 7,
+    "cell": 4,
+    "file": "team-116.png"
+  },
+  {
+    "index": 117,
+    "id": "mexico_1998",
+    "name": "Mexika",
+    "referenceName": "Messico",
+    "referenceCrest": "assets/crests/national/mexico_1998.png",
+    "kit": {
+      "shirtPrimary": "#015028",
+      "shirtSecondary": "#fff",
+      "shorts": "#fcfcfb",
+      "socks": "#d7131e",
+      "pattern": "solid"
+    },
+    "page": 7,
+    "cell": 5,
+    "file": "team-117.png"
+  },
+  {
+    "index": 118,
+    "id": "nigeria_1994",
+    "name": "Nigerra",
+    "referenceName": "Nigeria",
+    "referenceCrest": "assets/crests/national/nigeria_1994.png",
+    "kit": {
+      "shirtPrimary": "#01793c",
+      "shirtSecondary": "#fff",
+      "shorts": "#01864f",
+      "socks": "#049055",
+      "pattern": "solid"
+    },
+    "page": 7,
+    "cell": 6,
+    "file": "team-118.png"
+  },
+  {
+    "index": 119,
+    "id": "norway_1998",
+    "name": "Norvika",
+    "referenceName": "Norvegia",
+    "referenceCrest": "assets/crests/national/norway_1998.png",
+    "kit": {
+      "shirtPrimary": "#e60e17",
+      "shirtSecondary": "#fff",
+      "shorts": "#fcfdfd",
+      "socks": "#062a98",
+      "pattern": "solid"
+    },
+    "page": 7,
+    "cell": 7,
+    "file": "team-119.png"
+  },
+  {
+    "index": 120,
+    "id": "arc_national_newzealand",
+    "name": "Zelandia",
+    "referenceName": "Nuova Zelanda",
+    "referenceCrest": "arcade/assets/crests/arc_national_newzealand.png",
+    "kit": {
+      "shirtPrimary": "#ffffff",
+      "shirtSecondary": "#111111",
+      "shorts": "#111111",
+      "socks": "#ffffff",
+      "pattern": "trim"
+    },
+    "page": 7,
+    "cell": 8,
+    "file": "team-120.png"
+  },
+  {
+    "index": 121,
+    "id": "netherlands_2000",
+    "name": "Olandia",
+    "referenceName": "Olanda",
+    "referenceCrest": "assets/crests/national/netherlands_2000.png",
+    "kit": {
+      "shirtPrimary": "#f8560a",
+      "shirtSecondary": "#fff",
+      "shorts": "#f8f7f8",
+      "socks": "#f95a0b",
+      "pattern": "solid"
+    },
+    "page": 7,
+    "cell": 9,
+    "file": "team-121.png"
+  },
+  {
+    "index": 122,
+    "id": "arc_national_panama",
+    "name": "Panamia",
+    "referenceName": "Panama",
+    "referenceCrest": "arcade/assets/crests/arc_national_panama.png",
+    "kit": {
+      "shirtPrimary": "#eb2d3b",
+      "shirtSecondary": "#235cc3",
+      "shorts": "#235cc3",
+      "socks": "#eb2d3b",
+      "pattern": "trim"
+    },
+    "page": 7,
+    "cell": 10,
+    "file": "team-122.png"
+  },
+  {
+    "index": 123,
+    "id": "paraguay_1998",
+    "name": "Paraguara",
+    "referenceName": "Paraguay",
+    "referenceCrest": "assets/crests/national/paraguay_1998.png",
+    "kit": {
+      "shirtPrimary": "#cf1b1b",
+      "shirtSecondary": "#fff",
+      "shorts": "#1044c6",
+      "socks": "#2e66de",
+      "pattern": "solid"
+    },
+    "page": 7,
+    "cell": 11,
+    "file": "team-123.png"
+  },
+  {
+    "index": 124,
+    "id": "arc_national_peru",
+    "name": "Peruva",
+    "referenceName": "Perù",
+    "referenceCrest": "arcade/assets/crests/arc_national_peru.png",
+    "kit": {
+      "shirtPrimary": "#ffffff",
+      "shirtSecondary": "#df2941",
+      "shorts": "#df2941",
+      "socks": "#ffffff",
+      "pattern": "trim"
+    },
+    "page": 7,
+    "cell": 12,
+    "file": "team-124.png"
+  },
+  {
+    "index": 125,
+    "id": "poland_2002",
+    "name": "Polania",
+    "referenceName": "Polonia",
+    "referenceCrest": "assets/crests/national/poland_2002.png",
+    "kit": {
+      "shirtPrimary": "#f7f7f7",
+      "shirtSecondary": "#fff",
+      "shorts": "#d71a16",
+      "socks": "#f2f0e5",
+      "pattern": "solid"
+    },
+    "page": 7,
+    "cell": 13,
+    "file": "team-125.png"
+  },
+  {
+    "index": 126,
+    "id": "portugal_2006",
+    "name": "Lusitania",
+    "referenceName": "Portogallo",
+    "referenceCrest": "assets/crests/national/portugal_2006.png",
+    "kit": {
+      "shirtPrimary": "#90141f",
+      "shirtSecondary": "#fff",
+      "shorts": "#075f35",
+      "socks": "#8b121e",
+      "pattern": "solid"
+    },
+    "page": 7,
+    "cell": 14,
+    "file": "team-126.png"
+  },
+  {
+    "index": 127,
+    "id": "arc_national_qatar",
+    "name": "Qatara",
+    "referenceName": "Qatar",
+    "referenceCrest": "arcade/assets/crests/arc_national_qatar.png",
+    "kit": {
+      "shirtPrimary": "#8b1a43",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#8b1a43",
+      "pattern": "trim"
+    },
+    "page": 7,
+    "cell": 15,
+    "file": "team-127.png"
+  },
+  {
+    "index": 128,
+    "id": "arc_national_congo",
+    "name": "Kongora",
+    "referenceName": "RD Congo",
+    "referenceCrest": "arcade/assets/crests/arc_national_congo.png",
+    "kit": {
+      "shirtPrimary": "#25a6e5",
+      "shirtSecondary": "#ffd72b",
+      "shorts": "#ffd72b",
+      "socks": "#25a6e5",
+      "pattern": "trim"
+    },
+    "page": 8,
+    "cell": 0,
+    "file": "team-128.png"
+  },
+  {
+    "index": 129,
+    "id": "czech_1996",
+    "name": "Cekia",
+    "referenceName": "Repubblica Ceca",
+    "referenceCrest": "assets/crests/national/czech_1996.png",
+    "kit": {
+      "shirtPrimary": "#d31114",
+      "shirtSecondary": "#fff",
+      "shorts": "#f8f8f8",
+      "socks": "#0238c7",
+      "pattern": "solid"
+    },
+    "page": 8,
+    "cell": 1,
+    "file": "team-129.png"
+  },
+  {
+    "index": 130,
+    "id": "romania_1994",
+    "name": "Romanika",
+    "referenceName": "Romania",
+    "referenceCrest": "assets/crests/national/romania_1994.png",
+    "kit": {
+      "shirtPrimary": "#fce225",
+      "shirtSecondary": "#ffd333",
+      "shorts": "#fde026",
+      "socks": "#ffe12c",
+      "pattern": "solid"
+    },
+    "page": 8,
+    "cell": 2,
+    "file": "team-130.png"
+  },
+  {
+    "index": 131,
+    "id": "russia_2008",
+    "name": "Russara",
+    "referenceName": "Russia",
+    "referenceCrest": "assets/crests/national/russia_2008.png",
+    "kit": {
+      "shirtPrimary": "#082fb2",
+      "shirtSecondary": "#fff",
+      "shorts": "#f11011",
+      "socks": "#f50f19",
+      "pattern": "solid"
+    },
+    "page": 8,
+    "cell": 3,
+    "file": "team-131.png"
+  },
+  {
+    "index": 132,
+    "id": "scotland_1998",
+    "name": "Skotia",
+    "referenceName": "Scozia",
+    "referenceCrest": "assets/crests/national/scotland_1998.png",
+    "kit": {
+      "shirtPrimary": "#011145",
+      "shirtSecondary": "#fff",
+      "shorts": "#f7f7f7",
+      "socks": "#83a7c8",
+      "pattern": "solid"
+    },
+    "page": 8,
+    "cell": 4,
+    "file": "team-132.png"
+  },
+  {
+    "index": 133,
+    "id": "senegal_2002",
+    "name": "Senegara",
+    "referenceName": "Senegal",
+    "referenceCrest": "assets/crests/national/senegal_2002.png",
+    "kit": {
+      "shirtPrimary": "#fbfafb",
+      "shirtSecondary": "#fff",
+      "shorts": "#f7f6f7",
+      "socks": "#f9fafa",
+      "pattern": "solid"
+    },
+    "page": 8,
+    "cell": 5,
+    "file": "team-133.png"
+  },
+  {
+    "index": 134,
+    "id": "spain_2010",
+    "name": "Hispania",
+    "referenceName": "Spagna",
+    "referenceCrest": "assets/crests/national/spain_2010.png",
+    "kit": {
+      "shirtPrimary": "#e00d18",
+      "shirtSecondary": "#fff",
+      "shorts": "#0a245d",
+      "socks": "#0c2b63",
+      "pattern": "solid"
+    },
+    "page": 8,
+    "cell": 6,
+    "file": "team-134.png"
+  },
+  {
+    "index": 135,
+    "id": "southafrica_1998",
+    "name": "Sudafrika",
+    "referenceName": "Sudafrica",
+    "referenceCrest": "assets/crests/national/southafrica_1998.png",
+    "kit": {
+      "shirtPrimary": "#fcd311",
+      "shirtSecondary": "#fff",
+      "shorts": "#006246",
+      "socks": "#f9cb11",
+      "pattern": "solid"
+    },
+    "page": 8,
+    "cell": 7,
+    "file": "team-135.png"
+  },
+  {
+    "index": 136,
+    "id": "sweden_1994",
+    "name": "Svedora",
+    "referenceName": "Svezia",
+    "referenceCrest": "assets/crests/national/sweden_1994.png",
+    "kit": {
+      "shirtPrimary": "#f1ce21",
+      "shirtSecondary": "#fff",
+      "shorts": "#023cc6",
+      "socks": "#fcd826",
+      "pattern": "solid"
+    },
+    "page": 8,
+    "cell": 8,
+    "file": "team-136.png"
+  },
+  {
+    "index": 137,
+    "id": "switzerland_2006",
+    "name": "Elvetia",
+    "referenceName": "Svizzera",
+    "referenceCrest": "assets/crests/national/switzerland_2006.png",
+    "kit": {
+      "shirtPrimary": "#faeaec",
+      "shirtSecondary": "#fff",
+      "shorts": "#bbb7c6",
+      "socks": "#32070a",
+      "pattern": "solid"
+    },
+    "page": 8,
+    "cell": 9,
+    "file": "team-137.png"
+  },
+  {
+    "index": 138,
+    "id": "arc_national_tunisia",
+    "name": "Tunira",
+    "referenceName": "Tunisia",
+    "referenceCrest": "arcade/assets/crests/arc_national_tunisia.png",
+    "kit": {
+      "shirtPrimary": "#ed293b",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#ed293b",
+      "pattern": "trim"
+    },
+    "page": 8,
+    "cell": 10,
+    "file": "team-138.png"
+  },
+  {
+    "index": 139,
+    "id": "turkey_2002",
+    "name": "Turkia",
+    "referenceName": "Turchia",
+    "referenceCrest": "assets/crests/national/turkey_2002.png",
+    "kit": {
+      "shirtPrimary": "#dd0a14",
+      "shirtSecondary": "#fff",
+      "shorts": "#e20c17",
+      "socks": "#e40914",
+      "pattern": "solid"
+    },
+    "page": 8,
+    "cell": 11,
+    "file": "team-139.png"
+  },
+  {
+    "index": 140,
+    "id": "uruguay_2010",
+    "name": "Uruguaia",
+    "referenceName": "Uruguay",
+    "referenceCrest": "assets/crests/national/uruguay_2010.png",
+    "kit": {
+      "shirtPrimary": "#499bf5",
+      "shirtSecondary": "#fff",
+      "shorts": "#252324",
+      "socks": "#222222",
+      "pattern": "solid"
+    },
+    "page": 8,
+    "cell": 12,
+    "file": "team-140.png"
+  },
+  {
+    "index": 141,
+    "id": "usa_2002",
+    "name": "Usonia",
+    "referenceName": "USA",
+    "referenceCrest": "assets/crests/national/usa_2002.png",
+    "kit": {
+      "shirtPrimary": "#f8f8f8",
+      "shirtSecondary": "#fff",
+      "shorts": "#12235c",
+      "socks": "#fafafa",
+      "pattern": "solid"
+    },
+    "page": 8,
+    "cell": 13,
+    "file": "team-141.png"
+  },
+  {
+    "index": 142,
+    "id": "arc_national_uzbek",
+    "name": "Uzbekia",
+    "referenceName": "Uzbekistan",
+    "referenceCrest": "arcade/assets/crests/arc_national_uzbek.png",
+    "kit": {
+      "shirtPrimary": "#ffffff",
+      "shirtSecondary": "#2c9bd5",
+      "shorts": "#2c9bd5",
+      "socks": "#ffffff",
+      "pattern": "trim"
+    },
+    "page": 8,
+    "cell": 14,
+    "file": "team-142.png"
+  },
+  {
+    "index": 143,
+    "id": "arc_national_venezuela",
+    "name": "Venezuelia",
+    "referenceName": "Venezuela",
+    "referenceCrest": "arcade/assets/crests/arc_national_venezuela.png",
+    "kit": {
+      "shirtPrimary": "#8e193c",
+      "shirtSecondary": "#ffffff",
+      "shorts": "#ffffff",
+      "socks": "#8e193c",
+      "pattern": "trim"
+    },
+    "page": 8,
+    "cell": 15,
+    "file": "team-143.png"
+  },
+  {
+    "index": 144,
+    "id": "arc_national_zambia",
+    "name": "Zambora",
+    "referenceName": "Zambia",
+    "referenceCrest": "arcade/assets/crests/arc_national_zambia.png",
+    "kit": {
+      "shirtPrimary": "#20a253",
+      "shirtSecondary": "#ff8a25",
+      "shorts": "#ff8a25",
+      "socks": "#20a253",
+      "pattern": "trim"
+    },
+    "page": 9,
+    "cell": 0,
+    "file": "team-144.png"
+  }
+]

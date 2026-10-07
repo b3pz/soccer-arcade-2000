@@ -11,9 +11,9 @@ with tempfile.TemporaryDirectory(prefix='sa2000-qa-') as tmp:
   if script.strip():
    f=Path(tmp)/f'inline-{i}.js';f.write_text(script);files.append(f)
  for index,f in enumerate(files):
-  syntax=Path(tmp)/f'check-{index}.js';syntax.write_text(f'checkSyntax({str(f)!r});')
+  snapshot=Path(tmp)/f'source-{index}.js';snapshot.write_text(f.read_text());syntax=Path(tmp)/f'check-{index}.js';syntax.write_text(f'checkSyntax({str(snapshot)!r});')
   subprocess.run([str(jsc),str(syntax)],cwd=root,check=True)
- for name in ['core','visual','features','tournament','drawn-menu','cabinet','catalog','stadium','offline','full-match-balance','assist','coop','evolution','evolution-ui','fantasy','online','cinematic','bindings','saves','presentation','demo']:
+ for name in ['core','visual','features','tournament','drawn-menu','cabinet','catalog','stadium','offline','full-match-balance','assist','coop','evolution','evolution-ui','fantasy','online','cinematic','bindings','saves','presentation','demo','artwork']:
   run=subprocess.run([str(jsc),str(root/f'arcade/tests/{name}-tests.js')],cwd=root,check=True,capture_output=True,text=True);print(run.stdout,end='');print(run.stderr,end='')
   # Async blocks report failures by printing FAIL without a non-zero exit: treat them as failures too.
   assert not any(line.startswith('FAIL') for line in run.stdout.splitlines()),name+' tests printed FAIL'
@@ -74,3 +74,22 @@ for action,indices in frames.items():
  cells=[sheet.crop((i%8*128,i//8*128,i%8*128+128,i//8*128+128)) for i in indices]
  assert len(cells)==8 and len({hashlib.sha256(cell.tobytes()).hexdigest() for cell in cells})==8, action
 print('PASS six spectacular-save sprite sequences have eight distinct full-body exposures each')
+
+art=root/'arcade/assets/art'
+for name in ['title-logo.png','stadium-menu.png','crowd-sheet.png','cinematic-wide-sheet.png','ceremonies.png','sponsors.png','world-map.png']:
+ im=Image.open(art/name);im.verify()
+assert Image.open(art/'title-logo.png').getchannel('A').getextrema()==(0,255)
+assert Image.open(art/'favicon-32.png').size==(32,32)
+assert Image.open(art/'apple-touch-icon.png').size==(180,180)
+assert len(list((art/'maps').glob('*.png')))==12
+crest_manifest=json.loads((art/'crests/manifest.json').read_text());assert len(crest_manifest)==145
+crest_hashes=set()
+for entry in crest_manifest:
+ im=Image.open(art/'crests'/entry['file']);assert im.size==(320,320) and im.mode=='RGBA' and im.getchannel('A').getextrema()==(0,255)
+ bounds=im.getbbox();assert bounds and bounds[0]>=20 and bounds[1]>=20 and bounds[2]<=300 and bounds[3]<=300,entry['file']
+ crest_hashes.add(hashlib.sha256(im.tobytes()).hexdigest())
+assert len(crest_hashes)==145
+assert Image.open(art/'crests/jurassic.png').getchannel('A').getextrema()==(0,255)
+for path in (art/'maps').glob('*.png'):assert Image.open(path).size==(420,500)
+film=Image.open(art/'cinematic-wide-sheet.png');assert abs((film.width/3)/(film.height/2)-16/9)<.03
+print('PASS raster environments, transparent title, favicon, 145 unique arcade crests + Jurassic Kickers and 12 regional maps')

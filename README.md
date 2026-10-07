@@ -1,6 +1,6 @@
 # Soccer Arcade 2000
 
-Gioco di calcio arcade stile anni '90, indipendente da Soccer Sim.
+Gioco di calcio arcade stile anni '90, indipendente da Soccer Sim. Sviluppato da B3pZ.
 
 ## Avvio
 Apri `index.html` nel browser (doppio clic va bene: funziona anche da file locale). Premi un tasto, guarda l'intro, poi START.
@@ -104,3 +104,16 @@ Ogni indicazione di comando mostra il tasto della tastiera e, con un joypad coll
 - **Lancio della moneta:** scegli TESTA o CROCE con le frecce e conferma; chi vince sceglie se attaccare a sinistra o a destra, l'altra squadra batte il calcio d'inizio. Il campo scelto specchia immagine e comandi (la simulazione non cambia). Non c'è in demo, allenamento, sfide, finale segreta e online.
 - I tasti già premuti quando parte la partita vengono ignorati finché non li rilasci (prima il pulsante usato per avviare poteva battere il calcio d'inizio da solo).
 - **Rallenty:** quando un tiro sta per arrivare nello specchio della porta (gol o parata) la partita rallenta per circa un secondo, con bande nere da cinema.
+
+### Tema grafico arcade
+
+Logo e favicon originali, fondali illustrati, intro panoramica da 12 secondi, pubblico bitmap con bandiere, dodici mappe PNG, stemmi fantastici e quattro sponsor inventati sono integrati nel gioco. Il tabellone mostra soltanto sigle, punteggi e tempo; il radar è piccolo e in basso. Il calcio d'inizio parte dal pallone e apre la telecamera in 3,2 secondi. Sulle punizioni, un colpo sulla barriera mostra reazione, contatto e rimbalzo prima del messaggio.
+
+Squadre e calciatori hanno nomi inventati, inclusi quelli delle vecchie formazioni caricate. Il rendering dei menu usa immagini e canvas; il DOM serve come strato invisibile per input e accessibilità. Dettagli e asset in [arcade/assets/art/README.md](arcade/assets/art/README.md).
+
+### Campo da destra a sinistra, falli, musica
+
+- Scegliendo di attaccare verso sinistra, immagine e comandi vengono ribaltati in modo coerente: porte con la rete verso l'esterno, pista e tribune dietro le porte, frecce dei calci piazzati, movimento. Le regole della partita non cambiano.
+- La CPU non entra più in scivolata alle spalle del giocatore umano: prima erano circa 7 falli a partita, ora meno di uno.
+- **HOW TO PLAY** mostra i comandi attuali (scatto, lancio a pressione, pressing, scivolata) con le icone del joypad.
+- **Musica dei menu:** cinque brani originali sintetizzati (`cabinet-theme` più `arcade/assets/music/`, generatore `tools/create-arcade-soundtracks.py`) che si alternano; in OPZIONI → GIOCO, *MUSICA DEI MENU* passa al brano successivo.

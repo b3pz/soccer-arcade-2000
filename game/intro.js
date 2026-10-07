@@ -3,7 +3,7 @@
 'use strict';
 const W=1280,H=720,canvas=document.getElementById('sa2000-stage'),c=canvas.getContext('2d');
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),ease=p=>1-(1-p)*(1-p),img=src=>{const i=new Image();i.src=src;return i};
-const bg=img('arcade/assets/arcade-menu-background.png');
+const bg=img('arcade/assets/art/stadium-menu.png');
 let renderer=null,ballRenderer=null,ballCanvas=null,state='idle',start=0,raf=0,shake=0,flash=0,landed=new Set(),cues=new Set(),crowd=null,roar=null,music=null,idleSince=0;
 function engine(){if(!renderer&&window.S9ArcadeEngine){renderer=new S9ArcadeEngine.Renderer(canvas);ballCanvas=document.createElement('canvas');ballCanvas.width=ballCanvas.height=100;ballRenderer=new S9ArcadeEngine.Renderer(ballCanvas)}return renderer}
 // Pixel ball rendered once per frame at 96 px, then scaled with hard edges.
@@ -24,7 +24,7 @@ function starburst(x,y,r,rot,color){c.save();c.translate(x,y);c.rotate(rot);c.be
 // Light from the two floodlights painted in the background (measured on the cover-fitted image), aimed at the pitch.
 function beams(t){c.save();c.globalCompositeOperation='lighter';for(const [x,y,dir] of [[62,115,1],[1217,115,-1]]){const a=Math.sin(t*.6+x)*.04;c.save();c.translate(x,y);c.rotate(-dir*.62+a);const g=c.createLinearGradient(0,0,0,720);g.addColorStop(0,'#fff6c84a');g.addColorStop(1,'#fff6c800');c.fillStyle=g;c.beginPath();c.moveTo(-22,0);c.lineTo(22,0);c.lineTo(190,720);c.lineTo(-190,720);c.closePath();c.fill();c.restore()}c.restore()}
 // ------------------------------------------------------------------ scenes
-function drawBoot(t){c.fillStyle='#000';c.fillRect(0,0,W,H);for(let y=0;y<H;y+=4){c.fillStyle='#ffffff05';c.fillRect(0,y,W,1)}text('SOCCER ARCADE 2000',W/2,300,40,'#ffe14a');if(Math.floor(t*2)%2===0)text(window.S9ArcadeControls?.padConnected?'PREMI START':'PREMI UN TASTO',W/2,400,28,'#fff');text('TASTIERA · JOYPAD · F SCHERMO INTERO',W/2,660,16,'#7fd8ff')}
+function drawBoot(t){c.fillStyle='#000';c.fillRect(0,0,W,H);for(let y=0;y<H;y+=4){c.fillStyle='#ffffff05';c.fillRect(0,y,W,1)}if(!window.S9ArcadeArt?.logo(c,{box:{x:220,y:120,w:840,h:270}}))text('SOCCER ARCADE 2000',W/2,300,40,'#ffe14a');if(Math.floor(t*2)%2===0)text(window.S9ArcadeControls?.padConnected?'PREMI START':'PREMI UN TASTO',W/2,400,28,'#fff');text('TASTIERA · JOYPAD · F SCHERMO INTERO',W/2,660,16,'#7fd8ff');text('SVILUPPATO DA B3pZ',W/2,700,15,'#ffe14a')}
 function drawIntro(t){
  const film=window.S9ArcadeCinematic;
  if(!film){goTitle(1.8);return}
@@ -34,7 +34,7 @@ function drawIntro(t){
   cue(key,kind){if(cues.has(key))return;cues.add(key);window.S9SFX?.[kind]?.();if(key==='netBreak'){try{roar.currentTime=5.1;roar.play().catch(()=>{})}catch(_){}}},
   impact(p){if(p<.35)shake=Math.max(shake,9)},
   titleBackground(time){cover(bg,.65);beams(time)},
-  logo(progress){
+  logo(progress,u){if(window.S9ArcadeArt?.ready(S9ArcadeArt.image('logo'))){S9ArcadeArt.logo(c,{hole:true,alpha:progress});if(u>.75)S9ArcadeArt.logo(c,{alpha:clamp((u-.75)/.25,0,1)});return}
    // Leave the O empty: the ball from the broken net fills this exact slot.
    word('SOCCER'.replace('O','o'),W/2,80,170,['#fffbe0','#ffe36b','#ffb21f','#ff6a00'],['#3b0f05','#5d1a08','#7d2a0c'],2,0,0,'none',true);
    c.save();c.globalAlpha=progress;word('ARCADE',W/2-120,290,130,['#f4ffff','#9feaff','#35b8ff','#1450c8'],['#06143a','#0a1f5a','#12307a'],2,0,0,'none');
@@ -43,12 +43,12 @@ function drawIntro(t){
  });
 }
 function lerp(a,b,t){return a+(b-a)*t}
-function drawTitle(u,t){cover(bg,.55);beams(t);for(let i=0;i<40;i++){const x=(i*173+t*40*(i%3+1))%W,y=(i*97+Math.sin(t+i)*20)%H;c.fillStyle=i%2?'#ffe14a55':'#7fd8ff44';c.fillRect(x,y,3,3)}
+function drawTitle(u,t){cover(bg,.4);beams(t);if(window.S9ArcadeArt?.ready(S9ArcadeArt.image('logo'))){const k=clamp(u/1.2,0,1);S9ArcadeArt.logo(c,{alpha:k});if(u>1.8){startMusic();if(Math.floor(t*2.2)%2===0)text('PREMI START  {s:pause}  O  {m:confirm}',W/2,620,30,'#ffffff');text('1–4 GIOCATORI · ARCADE LEAGUE',W/2,674,16,'#7fd8ff');text('SVILUPPATO DA B3pZ',24,30,13,'#7fd8ff','left');text('© 2026 SOCCER ARCADE 2000',W-24,30,13,'#ffe14a','right')}return}for(let i=0;i<40;i++){const x=(i*173+t*40*(i%3+1))%W,y=(i*97+Math.sin(t+i)*20)%H;c.fillStyle=i%2?'#ffe14a55':'#7fd8ff44';c.fillRect(x,y,3,3)}
  const reveal=clamp((u-1.35)/.3,0,1);if(reveal>0){if(!cues.has('2000')){cues.add('2000');flash=Math.max(flash,.6);shake=14;try{if(roar){roar.currentTime=5.1;roar.play().catch(()=>{})}}catch(e){}startMusic()}
   const s=lerp(3.5,1,ease(reveal));starburst(1000,470,128*s,t*.4,'#ffd21f');c.save();c.translate(1000,470);c.rotate(-.12);c.scale(s,s);c.translate(-1000,-470);word('2000',1005,392,145,['#ffffff','#ffe9a8','#ff4b3a','#9c0018'],['#3a0010','#5c0018','#7c0a1e'],u,1.35,0,'none');c.restore()}
  word('SOCCER'.replace('O','o'),W/2,80,170,['#fffbe0','#ffe36b','#ffb21f','#ff6a00'],['#3b0f05','#5d1a08','#7d2a0c'],u,0,.12,'drop');
  word('ARCADE',W/2-120,290,130,['#f4ffff','#9feaff','#35b8ff','#1450c8'],['#06143a','#0a1f5a','#12307a'],u,.9,.05,'slide');
- if(u>1.8){if(Math.floor(t*2.2)%2===0)text('PREMI START  {s:pause}  O  {m:confirm}',W/2,640,30,'#ffffff');text('1–4 GIOCATORI  ·  TASTIERA / JOYPAD  ·  F SCHERMO INTERO',W/2,692,15,'#7fd8ff');text('© 2026 SOCCER ARCADE 2000',W-24,30,13,'#ffe14a','right')}}
+ if(u>1.8){if(Math.floor(t*2.2)%2===0)text('PREMI START  {s:pause}  O  {m:confirm}',W/2,640,30,'#ffffff');text('1–4 GIOCATORI  ·  TASTIERA / JOYPAD  ·  F SCHERMO INTERO',W/2,692,15,'#7fd8ff');text('© 2026 SOCCER ARCADE 2000',W-24,30,13,'#ffe14a','right');text('SVILUPPATO DA B3pZ',24,30,13,'#7fd8ff','left')}}
 function frame(now){raf=requestAnimationFrame(frame);const t=(now-start)/1000;c.save();if(shake>0){c.translate((Math.random()-.5)*shake*(window.S9ArcadeEvolution?.settings.effects??1),(Math.random()-.5)*shake*(window.S9ArcadeEvolution?.settings.effects??1));shake=Math.max(0,shake-1.2)}
  if(state==='boot')drawBoot(t);else if(state==='intro'){drawIntro(t);if(t>=(window.S9ArcadeCinematic?.duration||12))goTitle(1.8)}else if(state==='title'){drawTitle(t,t);if(t>20){idleSince=now;demo()}}
  c.restore();if(flash>0){c.fillStyle='rgba(255,255,255,'+(flash*(window.S9ArcadeEvolution?.settings.effects??1))+')';c.fillRect(0,0,W,H);flash=Math.max(0,flash-.05)}if(state!=='intro')for(let y=0;y<H;y+=4){c.fillStyle='rgba(0,0,0,'+(.09*(window.S9ArcadeEvolution?.settings.effects??1))+')';c.fillRect(0,y,W,1)}}

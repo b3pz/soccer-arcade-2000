@@ -1,0 +1,47 @@
+[
+  {
+    "file": "world/pitch-turf.png",
+    "transparent": false,
+    "prompt": "An opaque 16:10 rectangular grass playing-surface texture for a late-1990s Japanese arcade football game, seen STRICTLY straight top-down. Rich emerald green with 10 subtly alternating long vertical mowing bands, tiny pixel-painted blade clusters and restrained worn patches; beautiful Sega-era 32-bit sprite art, crisp bold pixels, three-tone shading, no photorealism. Completely flat overhead, NO perspective, NO people, NO ball, NO pitch markings, NO white lines, NO text, NO border, NO surrounding track. Grass fills the whole image. This texture will be mapped onto an interactive pitch with separately drawn regulation lines."
+  },
+  {
+    "file": "world/track-floor.png",
+    "transparent": false,
+    "prompt": "Opaque rectangular straight TOP-DOWN overhead floor artwork for a 1998 arcade soccer stadium, overall 16:10. A beautiful terracotta red athletics track, with eight white running lanes, broad curved left/right ends and parallel top/bottom straights, surrounds an EMPTY rectangular green-grass center. The grass center occupies approximately x=10%..90%, y=14%..86% of the whole canvas; keep track visible around it. Grey-blue concrete apron in the four outside corners. No stands, people, benches, goalposts, football pitch markings, text, lane numbers, lettering or logos. Flat overhead geometry, no perspective. Authentic bright crisp pixel-painted 32-bit stadium graphics, ochre/red rubber lane texture, white pixel lines, subtle teal/concrete shadows; not photorealistic. The game will overlay the playable field, actual lines and sprites onto this floor."
+  },
+  {
+    "file": "world/bench-sheet.png",
+    "transparent": true,
+    "prompt": "Transparent production sprite atlas, exact 2x2 equal grid, overall 16:9, each cell a complete football dugout with eight seated substitute players. Four variants in left-right top-bottom order: blue shirts/white shorts; red shirts/black shorts; yellow shirts/blue shorts; green shirts/white shorts. Each dugout is the SAME architectural design: low wide blue-steel frame, curved pale cyan translucent roof, eight compact navy bench seats, players seated facing the viewer, feet on the ground. View from above at a modest angle, matching a 2.5D soccer game. Authentic late-1990s 32-bit arcade pixel-art sprites, bold stepped outlines, chunky faces, hard three-tone shading. NO coach in this atlas, no real emblems, words, brands or letters, no ground slab or background. Exactly 4 isolated full dugouts, generous transparent padding inside each equal cell. Maintain consistent size, angle, roof position and baseline across all four. No objects crossing cells."
+  },
+  {
+    "file": "world/coach-sheet.png",
+    "transparent": true,
+    "prompt": "Transparent sprite atlas, strict evenly spaced 4 columns by 2 rows, eight frames of ONE SAME fictional football coach, full body visible, feet at consistent bottom baseline within every equal cell, 20% transparent padding. Late-1990s Japanese 32-bit arcade soccer pixel art, thick dark stepped outlines, hard 3-tone shading, athletic middle-aged man with short brown hair in navy tracksuit with cobalt and yellow trim, white trainers. Camera modest above-ground 2.5D angle, face three-quarter right. Left-to-right top-to-bottom actions: 1 idle arms relaxed; 2 idle shifts weight; 3 points forward low; 4 points forward high; 5 cups hands to shout; 6 clenches fists in celebration; 7 both arms raised in celebration; 8 disappointed hands on hips. Keep same person, uniform, scale and angle in every frame. NO text, brands, numbers, ball, props, scenery, floor or shadows outside the sprite."
+  },
+  {
+    "file": "ui/panel.png",
+    "transparent": true,
+    "prompt": "ONE empty rectangular 2:1 arcade UI frame, transparent outside its silhouette, centered with only 3% transparent padding, no other objects. Used as a nine-slice panel for every menu, scoreboard, button and popup of a 1998 Japanese arcade soccer game. Clean thick stepped dark-navy outer outline; bright cobalt blue beveled frame; narrow gold/yellow inner trim; restrained cyan highlights and four chunky metallic corner brackets. Entire inside is a uniform very dark navy fill, completely blank, NO text, icons, screws protruding outside, patterns in the center, words, numbers, logos or decorative illustrations. Authentic crisp pixel-painted 32-bit arcade graphics, bold limited-color shading, no smooth 3D gradients, no photorealism. Symmetric rectangular design with small clipped corners, frame fills almost all the canvas; must stretch horizontally/vertically while corners remain fixed."
+  },
+  {
+    "file": "effects/fire-sheet.png",
+    "transparent": true,
+    "prompt": "Transparent VFX sprite atlas, strict 4 columns x2 rows, eight sequential frames of ONE orange/yellow fire trail for a maximum-power soccer ball moving RIGHT. Each equal square cell is transparent, same scale and aligned origin: broad brilliant white-yellow flame head near 82% width/50% height, long tapering orange-red tail pointing LEFT to 10% width, changing tongues and a few tiny embers over the eight frames. NO soccer ball inside, only fire so the game can draw its own ball on top of the right end. Bright authentic 1998 Japanese arcade pixel-art effects, hard three-tone shading, thick crisp luminous pixel edges, no blurry glow, no black backing, no words, labels, frames or scenery. Exactly eight isolated exposures, all contained with 10% transparent margin; consistent head position across all cells."
+  },
+  {
+    "file": "effects/meteor-sheet.png",
+    "transparent": true,
+    "prompt": "Transparent VFX sprite atlas, strict 4 columns x2 rows, eight sequential frames of ONE violet/magenta/cyan meteor-energy trail for a spectacular arcade soccer volley moving RIGHT. Same scale and origin in all equal square cells: brilliant white-pink energy head near 82% width/50% height, jagged purple/magenta tail pointing LEFT to 10% width, little cyan star sparks. NO meteor rock, NO ball, no words, labels, boxes, scenery or backing. Crisp authentic 1998 Japanese 32-bit arcade pixel-art effects, bold hard 3-tone luminous pixels, no blurry gradients. Eight isolated sequential exposures showing changing flame tongues/energy spikes with consistent head position, 10% transparent cell padding, genuine alpha background."
+  },
+  {
+    "file": "effects/speed-sheet.png",
+    "transparent": true,
+    "prompt": "Transparent production VFX sprite atlas for a 1998 Japanese arcade soccer game, strict 4 columns x2 rows, eight sequential frames of a cyan-white SPRINT SPEED TRAIL, NO runner or body, only graphic effect. Every equal cell: 3-5 clean long tapered speed slashes running horizontally, trailing LEFT from an invisible runner at 85% width/50% height, tiny electric cyan sparks, thin secondary ice-blue motion strokes. Changing slash lengths across frames, consistent origin, 10% transparent margin. Authentic crisp stepped-pixel 32-bit arcade sprite style, strong clear silhouette and hard-edged 2-3 tone shading. NO ball, objects, scenery, lettering, labels, grid lines, backing or soft blur; true transparent alpha between streaks."
+  },
+  {
+    "file": "effects/impact-sheet.png",
+    "transparent": true,
+    "prompt": "Transparent production VFX atlas for a 1998 Japanese arcade soccer game, strict 4 columns by4 rows equal square cells, exactly16 isolated pixel-art sprites. Row1: four consecutive frames of a GOLD FULL-CHARGE AURA, a glowing oval ring viewed from slightly above, with rising yellow sparks, empty transparent center. Row2: four expanding ORANGE-WHITE IMPACT SHOCKWAVES, starburst/ring with empty center. Row3: four WHITE-CYAN CONTACT SPARK BURSTS, compact radial broken sparks for post/barrier/save impacts. Row4: four GREY-TAN DUST PUFF frames, low horizontal wisps for sliding tackles and acceleration, small stones. Each row is a coherent four-frame animation, centered consistent scale/origin, 15% transparent padding, no overlap. Crisp stepped-pixel 32-bit arcade shading, bold limited colors, no smooth blurry glow. No bodies, ball, scenery, words, numbers, labels, frames or background; genuine transparent alpha."
+  }
+]

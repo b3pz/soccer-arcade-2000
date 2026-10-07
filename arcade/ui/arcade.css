@@ -55,7 +55,7 @@
 #arcade-select .arcade-map-picker{margin-top:10px;gap:18px}
 .arcade-europe-panel{position:relative;background:#082040;border:5px ridge #57accc;box-shadow:5px 5px #0009}
 .arcade-map-title{font-size:16px;color:#9df6ff;letter-spacing:4px;margin:6px}
-#arcade-select svg.arcade-europe-map{display:block;width:100%!important;height:auto!important;max-width:none!important;border:0;box-shadow:none;background:#082a50}
+#arcade-select canvas.arcade-europe-map{display:block;width:100%!important;height:auto!important;max-width:none!important;border:0;box-shadow:none;background:#082a50}
 .arcade-city-name{margin:0;padding:6px;background:#0a1632;color:#ffe95b;letter-spacing:3px;font-size:18px;border-top:2px solid #37779c}
 #arcade-select .arcade-map-team-strip{gap:5px;margin-top:10px}
 #arcade-select .arcade-map-team-strip .arcade-team-tile{min-height:48px;font-size:12px!important;padding:4px;flex-direction:row;gap:5px;border-width:2px!important}
@@ -66,10 +66,10 @@
 @media(max-width:750px){#arcade-select .arcade-map-picker{grid-template-columns:minmax(0,1fr) 200px}.arcade-map-title{font-size:12px;letter-spacing:1px}.arcade-city-name{font-size:15px}.arcade-player-card h2{font-size:20px}.arcade-player-card canvas{width:120px;height:132px}}
 @media(max-width:500px){#arcade-select .arcade-map-picker{grid-template-columns:1fr}.arcade-map-picker .arcade-player-card{display:grid;grid-template-columns:130px 1fr;gap:4px}.arcade-map-picker .arcade-player-card h2{grid-column:1/-1}.arcade-map-picker .arcade-player-card canvas{grid-column:1;grid-row:2/5}.arcade-map-picker .arcade-player-card button{margin:0;font-size:14px!important}.arcade-map-picker .arcade-stats{gap:3px}.arcade-map-picker .arcade-stat{font-size:11px;padding:4px}.arcade-map-picker .arcade-stat strong{font-size:19px}}
 
-#arcade-select svg.arcade-europe-map{height:clamp(180px,calc(100vh - 390px),380px)!important}
+#arcade-select canvas.arcade-europe-map{height:clamp(180px,calc(100vh - 390px),380px)!important}
 #arcade-select .arcade-map-picker .arcade-player-card canvas{width:130px;height:143px}
 #arcade-select .arcade-map-picker .arcade-player-card{align-self:start}
-@media(max-width:500px){#arcade-select svg.arcade-europe-map{height:220px!important}}
+@media(max-width:500px){#arcade-select canvas.arcade-europe-map{height:220px!important}}
 
 #arcade-select .arcade-map-picker{margin-bottom:8px}
 
@@ -81,12 +81,12 @@
 
 .arcade-victory{height:clamp(236px,35vh,350px);max-width:1050px;margin:auto}#arcade-select:has(.arcade-victory)>h2{margin:8px}#arcade-select:has(.arcade-victory) .arcade-prompt{font-size:13px}
 
-.arcade-region-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:5px}#arcade-select .arcade-region-tabs button{font-size:13px!important;padding:8px 2px;min-height:40px}.arcade-region-detail{font-size:12px;margin:6px;color:#8be8ff;letter-spacing:1px}.arcade-regional-content{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}#arcade-select .arcade-regional-picker .arcade-map-team-strip{grid-template-columns:repeat(2,minmax(0,1fr));margin:0;gap:8px}#arcade-select .arcade-regional-picker svg.arcade-europe-map{height:clamp(220px,calc(100vh - 305px),390px)!important}.arcade-regional-picker .arcade-map-title{font-size:13px;letter-spacing:2px}.arcade-regional-picker .arcade-city-name{font-size:14px;letter-spacing:1px}#arcade-select .arcade-regional-picker .arcade-player-card{margin-top:0}#arcade-select .arcade-regional-picker .arcade-player-card canvas{width:130px;height:143px}
-@media(max-width:750px){#arcade-select .arcade-regional-picker{grid-template-columns:minmax(0,1fr) 190px}.arcade-regional-content{gap:6px}#arcade-select .arcade-regional-picker .arcade-map-team-strip .arcade-team-tile{flex-direction:column;font-size:10px!important;min-height:55px}#arcade-select .arcade-regional-picker svg.arcade-europe-map{height:250px!important}.arcade-region-detail{font-size:10px}}@media(max-width:500px){#arcade-select .arcade-regional-picker{grid-template-columns:1fr}#arcade-select .arcade-regional-picker .arcade-player-card{margin-top:0}.arcade-region-tabs{gap:4px}}
+.arcade-region-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:5px}#arcade-select .arcade-region-tabs button{font-size:13px!important;padding:8px 2px;min-height:40px}.arcade-region-detail{font-size:12px;margin:6px;color:#8be8ff;letter-spacing:1px}.arcade-regional-content{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}#arcade-select .arcade-regional-picker .arcade-map-team-strip{grid-template-columns:repeat(2,minmax(0,1fr));margin:0;gap:8px}#arcade-select .arcade-regional-picker canvas.arcade-europe-map{height:clamp(220px,calc(100vh - 305px),390px)!important}.arcade-regional-picker .arcade-map-title{font-size:13px;letter-spacing:2px}.arcade-regional-picker .arcade-city-name{font-size:14px;letter-spacing:1px}#arcade-select .arcade-regional-picker .arcade-player-card{margin-top:0}#arcade-select .arcade-regional-picker .arcade-player-card canvas{width:130px;height:143px}
+@media(max-width:750px){#arcade-select .arcade-regional-picker{grid-template-columns:minmax(0,1fr) 190px}.arcade-regional-content{gap:6px}#arcade-select .arcade-regional-picker .arcade-map-team-strip .arcade-team-tile{flex-direction:column;font-size:10px!important;min-height:55px}#arcade-select .arcade-regional-picker canvas.arcade-europe-map{height:250px!important}.arcade-region-detail{font-size:10px}}@media(max-width:500px){#arcade-select .arcade-regional-picker{grid-template-columns:1fr}#arcade-select .arcade-regional-picker .arcade-player-card{margin-top:0}.arcade-region-tabs{gap:4px}}
 
-#arcade-select{background:repeating-linear-gradient(0deg,#0001 0,#0001 1px,transparent 1px,transparent 4px),url('../assets/cabinet-90s.png?v=cabinet-1') center/cover fixed!important}#arcade-select .arcade-howto{margin:12px auto}#arcade-select .arcade-command{margin:5px 0;padding:8px}.arcade-command strong{font-size:20px}#arcade-select .arcade-national-picker svg.arcade-europe-map{height:clamp(180px,calc(100vh - 370px),330px)!important}.arcade-national-picker .arcade-region-tabs{gap:5px}#arcade-select .arcade-national-picker .arcade-region-tabs button{min-height:32px;padding:5px 1px}.arcade-national-picker .arcade-region-detail{margin:4px;font-size:11px}
+#arcade-select{background:repeating-linear-gradient(0deg,#0001 0,#0001 1px,transparent 1px,transparent 4px),url('../assets/cabinet-90s.png?v=cabinet-1') center/cover fixed!important}#arcade-select .arcade-howto{margin:12px auto}#arcade-select .arcade-command{margin:5px 0;padding:8px}.arcade-command strong{font-size:20px}#arcade-select .arcade-national-picker canvas.arcade-europe-map{height:clamp(180px,calc(100vh - 370px),330px)!important}.arcade-national-picker .arcade-region-tabs{gap:5px}#arcade-select .arcade-national-picker .arcade-region-tabs button{min-height:32px;padding:5px 1px}.arcade-national-picker .arcade-region-detail{margin:4px;font-size:11px}
 
-#arcade-select .arcade-world-picker svg.arcade-europe-map{height:clamp(160px,calc(100vh - 405px),300px)!important}
+#arcade-select .arcade-world-picker canvas.arcade-europe-map{height:clamp(160px,calc(100vh - 405px),300px)!important}
 /* Full-screen match canvas: no DOM frame, every overlay is drawn on the canvas. */
 #arcade-match canvas{border:0!important;outline:none;width:min(100vw,calc(100vh*16/9))!important;height:auto!important;max-height:100vh!important;max-width:100vw!important}
 .arcade-formation-layout{grid-template-columns:minmax(0,760px) 220px!important}
@@ -114,7 +114,7 @@
 #arcade-select .arcade-team-tile img{width:76px;height:76px;margin:0;object-fit:contain;filter:drop-shadow(0 3px 3px #0008)}
 #arcade-select .arcade-team-name{display:block;width:100%;font-size:14px;line-height:1.15;text-align:center;font-weight:900}
 #arcade-select .arcade-selected-crest{display:block;width:140px;height:140px;margin:12px auto;object-fit:contain;filter:drop-shadow(0 4px 5px #0009)}
-#arcade-select .arcade-regional-picker svg.arcade-europe-map{height:clamp(180px,calc(100vh - 420px),270px)!important}
+#arcade-select .arcade-regional-picker canvas.arcade-europe-map{height:clamp(180px,calc(100vh - 420px),270px)!important}
 #arcade-select .arcade-regional-picker .arcade-player-card canvas{width:100px;height:110px}
 @media(max-width:750px){
  #arcade-select .arcade-regional-content{grid-template-columns:1fr}
@@ -131,3 +131,9 @@
 #arcade-match>.sa-options{position:fixed!important;inset:0!important;width:auto!important;box-shadow:none!important;z-index:100000}#arcade-match .sa-options canvas{width:min(100vw,calc(100vh*16/9))!important;height:auto!important;max-height:100vh!important;border:0!important}
 .sa-options.evo-settings{padding:0!important;border:0!important;border-radius:0!important;max-height:none!important;overflow:hidden!important;background:#000!important}
 #arcade-select .evo-result{width:min(640px,86vw);margin:14px auto;padding:14px 22px;border:0;background:none;box-sizing:border-box}#arcade-select .evo-result table{width:100%;table-layout:fixed;text-align:center}#arcade-select .evo-result th:first-child{width:46%;text-align:left}#arcade-select .evo-result td,#arcade-select .evo-result th{padding:7px 4px;border-bottom:0}#arcade-select .evo-result p{text-align:center;margin:8px 0}
+
+.arcade-europe-map{display:block;width:100%;object-fit:contain;image-rendering:pixelated}
+
+#arcade-evolution.arcade-drawn>*,#arcade-online.arcade-drawn>*{opacity:0!important}
+#arcade-evolution.arcade-drawn,#arcade-online.arcade-drawn{background:transparent!important}
+#arcade-online-badge{background:transparent url('../assets/drawn-panel.png') center/100% 100%!important;border:0!important;border-radius:0!important;font-family:monospace!important}

@@ -19,11 +19,11 @@ function settings(parent,onClose){const panel=node('section',undefined,parent);p
 function schedule(ids){const list=ids.slice(),rounds=[];if(list.length%2)list.push(null);for(let r=0;r<list.length-1;r++){const fixtures=[];for(let i=0;i<list.length/2;i++){const h=list[i],a=list[list.length-1-i];if(h&&a)fixtures.push(r%2?[a,h]:[h,a])}rounds.push(fixtures);list.splice(1,0,list.pop())}return rounds}
 function standings(run){const table=Object.fromEntries(run.ids.map(id=>[id,{id,played:0,pts:0,gf:0,ga:0}]));for(const r of run.results){for(const [id,gf,ga] of [[r.h,r.hg,r.ag],[r.a,r.ag,r.hg]]){const t=table[id];t.played++;t.gf+=gf;t.ga+=ga;t.pts+=gf>ga?3:gf===ga?1:0}}return Object.values(table).sort((a,b)=>b.pts-a.pts||(b.gf-b.ga)-(a.gf-a.ga)||b.gf-a.gf||run.ids.indexOf(a.id)-run.ids.indexOf(b.id))}
 function open(onClose){
- const box=node('div');box.id='arcade-evolution';box.setAttribute('role','dialog');box.setAttribute('aria-label','Centro Arcade');document.body.append(box);let view='home',last=null,busy=false,mode='quick',challenge='comeback';let run=null;let category='club';let selected=V.settings.lastHome,opponent=V.settings.lastAway,difficulty=S.lastDifficulty||'normale',formation=S.lastFormation||'4-4-2';let lastConfig=null;
+ const box=node('div');box.id='arcade-evolution';box.setAttribute('role','dialog');box.setAttribute('aria-label','Centro Arcade');document.body.append(box);const disposeArt=window.S9ArcadeDrawnMenu?.mount(box);let view='home',last=null,busy=false,mode='quick',challenge='comeback';let run=null;let category='club';let selected=V.settings.lastHome,opponent=V.settings.lastAway,difficulty=S.lastDifficulty||'normale',formation=S.lastFormation||'4-4-2';let lastConfig=null;
  const get=id=>S9ArcadeRoster.get(id),pool=()=>S9ArcadeRoster.pool(category);
  const load=()=>{try{return JSON.parse(localStorage.getItem('sa2000:evolutionRun'))}catch(_){return null}};
  const persist=()=>{try{localStorage.setItem('sa2000:evolutionRun',JSON.stringify(run))}catch(_){}};
- function close(){if(busy)return;box.remove();document.removeEventListener('keydown',keys,true);onClose?.()}
+ function close(){if(busy)return;disposeArt?.();box.remove();document.removeEventListener('keydown',keys,true);onClose?.()}
  function frame(title){box.replaceChildren();const head=node('header',undefined,box);node('h1',title,head);button(head,'MENU',close);return node('main',undefined,box)}
  function action(parent,text,fn){return button(parent,text,async()=>{if(busy)return;try{await fn()}catch(e){node('p',e.message,parent).setAttribute('role','alert')}})}
  async function launch(config){busy=true;box.style.display='none';lastConfig=config;try{last=await launchArcadeMatch(config);return last}finally{box.style.display='';busy=false}}

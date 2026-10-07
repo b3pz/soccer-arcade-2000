@@ -108,9 +108,9 @@ def invent(team, player):
 # Names chosen by the project owner, kept on every run (player id -> name).
 NAMED = {}
 for team in data['club']:
-    if team['name'] == 'Fiorentina':
+    if team['id'].startswith('fiorentina'):
         NAMED[[p for p in team['players'] if p['pos'] == 'ST'][0]['id']] = 'Marco Paolini'
-    if team['name'] == 'Inter':
+    if team['id'].startswith('inter_'):
         strikers = [p for p in team['players'] if p['pos'] == 'ST']
         NAMED[strikers[0]['id']] = 'Francesco Infusini'
         NAMED[strikers[1]['id']] = 'Giuseppe Milano'

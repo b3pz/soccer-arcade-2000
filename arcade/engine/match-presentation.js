@@ -8,33 +8,25 @@ R.bitmap?.(CROWD);
 
 // ---------------------------------------------------------------- kick-off camera
 // Every kick-off opens close on the ball at the centre spot and pulls back slowly to the playing view.
-const KICKOFF_CAMERA=2.6,update=CAM.update,ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const KICKOFF_CAMERA=3.2,update=CAM.update,ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
 CAM.update=function(m,dt){update.call(this,m,dt);const d=m.restarts?.data;
  if(m.phase==='RESTART'&&d?.type==='KICKOFF'&&d!==this.kickoffSeen){this.kickoffSeen=d;this.kickoff={age:0};if(!m.rules?.period||m.rules.period!=='PENALTIES')d.delay=Math.max(d.delay||0,KICKOFF_CAMERA-.5)}
  const k=this.kickoff;if(!k)return;k.age+=Math.min(dt,.1);const t=Math.min(1,k.age/KICKOFF_CAMERA);if(t>=1){this.kickoff=null;return}
  const e=ease(t),b=m.ball,zoom=this.zoom;this.x=b.x+(this.x-b.x)*e;this.y=b.y+.6*(1-e)+(this.y-b.y)*e;this.zoom=zoom*(3.4-2.4*e)};
 
 // ---------------------------------------------------------------- compact scoreboard
-// One slim strip, top left: crest, three-letter code, score, clock. Cards as small pips under the code.
+// Two compact corner scoreboards and a central clock.
 const code=t=>{const name=(t?.name||'---').normalize('NFD').replace(/[̀-ͯ]/g,'').toUpperCase().replace(/[^A-Z ]/g,'');const words=name.split(/\s+/).filter(w=>w.length>2);return (words.length>1&&words[0].length<=4?words[0][0]+words[1].slice(0,2):(words[0]||name)).slice(0,3)};
 R.teamCode=code;
-R.hud=function(m){const c=this.ctx,pen=m.phase==='PENALTIES',golden=m.rules.period==='GOLDEN',score=pen&&!m.pen?.single?m.pen.goals:m.rules.score,x=18,y=14,w=pen||this.replayMode?318:404,h=50;
- this.panel(x,y,w,h,10);
- for(const team of [0,1]){const t=m.teams[team],tx=team?x+196:x+14,color=team?'#ff8fa3':'#7fdcff';
-  this.teamCrest(t,team?tx+60:tx,y+9,30,32);this.text(code(t),team?tx+34:tx+66,y+33,20,'#fff');c.fillStyle=t.kit?.shirtPrimary||color;c.fillRect(team?tx+20:tx+50,y+40,30,3);
-  const warned=t.players.filter(p=>(p.yellowCards||0)>0&&!p.sentOff).length,off=t.players.filter(p=>p.sentOff).length;for(let i=0;i<Math.min(4,warned+off);i++){c.fillStyle=i<off?'#fa4151':'#ffe340';c.fillRect((team?tx+20:tx+50)+i*7,y+5,5,7)}}
- c.fillStyle='#050b1fcc';c.fillRect(x+120,y+8,78,34);this.text(score[0]+' - '+score[1],x+159,y+35,26,'#ffe62f');
- if(pen)this.text('RIGORI',x+w-6,y+h+16,13,'#ff8fa3','right');
- else if(!this.replayMode){const sec=Math.max(0,Math.ceil(golden?m.rules.goldenRemaining:m.rules.remaining));c.fillStyle='#050b1fcc';c.fillRect(x+w-88,y+8,76,34);this.text((golden?'GG ':'')+Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0'),x+w-50,y+34,golden?18:22,golden?'#ffb52b':'#fff')}
+R.hud=function(m){this.chargeMeter?.(m);const c=this.ctx,pen=m.phase==='PENALTIES',golden=m.rules.period==='GOLDEN',score=pen&&!m.pen?.single?m.pen.goals:m.rules.score;
+ for(const side of [0,1]){const x=side?1100:16,t=m.teams[side];this.panel(x,12,164,46,8);this.teamCrest(t,side?x+119:x+8,18,30,32);this.text(code(t),side?x+86:x+75,41,19,'#fff');this.text(String(score[side]).padStart(2,'0'),side?x+33:x+129,45,30,'#ffe62f')}
+ const sec=Math.max(0,Math.ceil(golden?m.rules.goldenRemaining:m.rules.remaining));this.panel(564,12,152,46,8);this.text(pen?'RIGORI':(golden?'GG ':'')+Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0'),640,43,pen?20:27,golden?'#ffb52b':'#ffe62f');
  if(!pen&&!this.replayMode)this.radar(m);
- if(m.messageTime>0){if(this.eventMessage!==m.message){this.eventMessage=m.message;this.eventStart=m.elapsed}const age=m.elapsed-this.eventStart,big=/GOAL|VINCE|FINISHED/i.test(m.message);
-  // GOAL gets its own banner; everything else is a short strip under the scoreboard area, out of the way.
-  if(!/^GOAL!|^GOLDEN GOAL!$|CALCIO D’INIZIO/.test(m.message)){c.save();c.translate(Math.max(0,3-Math.floor(age*30))*14,0);const tw=Math.min(620,Math.max(260,m.message.length*15+60));this.panel(640-tw/2,96,tw,big?56:42,10);this.text(m.message,640,big?133:124,big?26:19,'#fff06b');c.restore()}}
+ if(m.messageTime>0&&/CORNER|FALLO|FOUL|FUORI|PALO|TRAVERSA|CARTELLINO|FINISHED|INTERVALLO/.test(m.message)&&!m.cardScene&&!m.preMatch){this.panel(420,72,440,35,8);this.text(m.message,640,96,17,'#fff06b')}
  if(!this.replayMode)this.chargeMeter?.(m);
- const fx=effects();if(fx>0)for(let yy=0;yy<720;yy+=4){c.fillStyle='rgba(0,0,0,'+(.04*fx)+')';c.fillRect(0,yy,1280,1)}
 };
 // Radar, when switched on: small and low in the corner, away from the play.
-R.radar=function(m){if(m.phase==='PENALTIES'||this.replayMode||window.S9ArcadeEvolution&&!S9ArcadeEvolution.settings.radar)return;const c=this.ctx,w=150,h=93,x=1280-w-22,y=720-h-22;
+R.radar=function(m){if(m.phase==='PENALTIES'||this.replayMode||window.S9ArcadeEvolution&&!S9ArcadeEvolution.settings.radar)return;const c=this.ctx,w=150,h=93,x=640-w/2,y=720-h-16;
  c.fillStyle='#03101aa8';c.fillRect(x-4,y-4,w+8,h+8);c.fillStyle='#1268477a';c.fillRect(x,y,w,h);c.strokeStyle='#bfead088';c.lineWidth=1;c.strokeRect(x,y,w,h);c.beginPath();c.moveTo(x+w/2,y);c.lineTo(x+w/2,y+h);c.stroke();
  const at=(px,py)=>({x:x+Math.max(0,Math.min(100,px))*w/100,y:y+Math.max(0,Math.min(62,py))*h/62});
  for(const p of m.players){if(p.sentOff)continue;const a=at(p.x,p.y),human=(m.humans||[]).find(hh=>hh.selected===p);c.fillStyle=human?human.color:p.team.id?'#ff5673':'#35cfff';c.fillRect(a.x-2,a.y-2,human?5:4,human?5:4)}
@@ -42,16 +34,8 @@ R.radar=function(m){if(m.phase==='PENALTIES'||this.replayMode||window.S9ArcadeEv
 
 // ---------------------------------------------------------------- crowd celebration (bitmap)
 // The sheet holds the stand plus two grey masks; the masks are tinted with the scoring kit once per kit.
-function tinted(r,kit){const im=r.bitmap(CROWD);if(!im||!im.complete||!im.naturalWidth||typeof document==='undefined')return null;
- const key=(kit?.shirtPrimary||'#2f7de8')+'|'+(kit?.shirtSecondary||'#ffffff');r.crowdSheets=r.crowdSheets||new Map();if(r.crowdSheets.has(key))return r.crowdSheets.get(key);
- const out=document.createElement('canvas');out.width=CROWD_W;out.height=CROWD_H*CROWD_FRAMES;const o=out.getContext('2d');if(!o)return null;o.imageSmoothingEnabled=false;o.drawImage(im,0,0,CROWD_W,out.height,0,0,CROWD_W,out.height);
- const layer=document.createElement('canvas');layer.width=CROWD_W;layer.height=out.height;const l=layer.getContext('2d');
- [kit?.shirtPrimary||'#2f7de8',kit?.shirtSecondary||'#ffffff'].forEach((color,i)=>{l.globalCompositeOperation='source-over';l.clearRect(0,0,CROWD_W,out.height);l.drawImage(im,CROWD_W*(i+1),0,CROWD_W,out.height,0,0,CROWD_W,out.height);l.globalCompositeOperation='multiply';l.fillStyle=color;l.fillRect(0,0,CROWD_W,out.height);l.globalCompositeOperation='destination-in';l.drawImage(im,CROWD_W*(i+1),0,CROWD_W,out.height,0,0,CROWD_W,out.height);o.drawImage(layer,0,0)});
- l.globalCompositeOperation='source-over';r.crowdSheets.set(key,out);return out}
-R.crowdCutaway=function(m){const event=this.stadiumCelebration;if(!event||event.age>1.6)return;const sheet=tinted(this,m.teams?.[event.team]?.kit);if(!sheet)return;const c=this.ctx;
- const w=CROWD_W*2,h=CROWD_H*2,slide=Math.min(1,event.age/.18),out=Math.max(0,(event.age-1.4)/.2),x=640-w/2,y=720-h-26+Math.round((1-slide+out)*(h+40)),frame=Math.floor(event.age*9)%CROWD_FRAMES;
- this.panel(x-10,y-10,w+20,h+20,12);const smooth=c.imageSmoothingEnabled;c.imageSmoothingEnabled=false;c.drawImage(sheet,0,frame*CROWD_H,CROWD_W,CROWD_H,x,y,w,h);c.imageSmoothingEnabled=smooth};
-
+function tinted(r,kit){return null}
+R.crowdCutaway=function(m){const event=this.stadiumCelebration;if(!event||event.age>1.6)return;const art=window.S9ArcadeArt;if(!art?.ready(art.image('crowd')))return;const c=this.ctx,w=720,h=420,slide=Math.min(1,event.age/.18),out=Math.max(0,(event.age-1.4)/.2),x=280,y=720-h-22+Math.round((1-slide+out)*(h+40));this.panel(x-8,y-8,w+16,h+16,12);art.crowd(c,event.age,x,y,w,h)};
 // ---------------------------------------------------------------- penalties
 // Shoot-out and single penalties on the goal backdrop seen from behind the spot (same picture as close free kicks):
 // nothing of the match stadium shows around it. Picture geometry: posts x 360/920, bar y 246, goal line y 430, spot (640,554).
@@ -60,7 +44,7 @@ const PEN={left:360,right:920,bar:246,line:430,spotX:640,spotY:554,perY:560/12,p
 R.drawPenalty=function(m){const c=this.ctx,pen=m.pen,team=pen.turn%2,g=m.teams[1-team].players.find(p=>!p.sentOff&&p.role==='GK'),shooter=m.teams[team].players.find(p=>!p.sentOff&&p.role==='ST')||m.teams[team].players.find(p=>!p.sentOff&&p.role!=='GK'),b=m.ball,bg=this.bitmap(GOAL_BG),pad=!!window.S9ArcadeControls?.padConnected;
  c.clearRect(0,0,1280,720);if(bg?.complete&&bg.naturalWidth){const sm=c.imageSmoothingEnabled;c.imageSmoothingEnabled=false;c.drawImage(bg,0,0,1280,720);c.imageSmoothingEnabled=sm}else{c.fillStyle='#1d7a35';c.fillRect(0,0,1280,720)}
  // Detailed supporters over the backdrop's stand, in the shooting side's colours.
- const sheet=tinted(this,m.teams[team]?.kit);if(sheet){const h=218,w=h*CROWD_W/CROWD_H,f=Math.floor((m.presentationTime??m.elapsed)*4)%CROWD_FRAMES,sm=c.imageSmoothingEnabled;c.imageSmoothingEnabled=false;for(let x=0;x<1280;x+=w)c.drawImage(sheet,0,f*CROWD_H,CROWD_W,CROWD_H,x,4,w,h);c.imageSmoothingEnabled=sm}
+ const sheet=tinted(this,m.teams[team]?.kit);if(window.S9ArcadeArt?.ready(S9ArcadeArt.image('crowd')))S9ArcadeArt.crowd(c,m.elapsed,0,0,1280,218);if(sheet){const h=218,w=h*CROWD_W/CROWD_H,f=Math.floor((m.presentationTime??m.elapsed)*4)%CROWD_FRAMES,sm=c.imageSmoothingEnabled;c.imageSmoothingEnabled=false;for(let x=0;x<1280;x+=w)c.drawImage(sheet,0,f*CROWD_H,CROWD_W,CROWD_H,x,4,w,h);c.imageSmoothingEnabled=sm}
  const lift=pen.keeperCommitted?Math.max(0,E.PenaltyTargets.cell(pen.diveCell).z-1.2)*PEN.perZ:0;c.save();c.translate(PEN.spotX+(g.y-31)*PEN.perY,PEN.line+2-lift);this.sprite(g,m,{scale:2.1});c.restore();
  const progress=pen.flight?Math.max(0,Math.min(1,Math.abs(b.x-(team?18:82))/18)):0,bx=PEN.spotX+(b.y-31)*PEN.perY*progress,ground=PEN.spotY-progress*(PEN.spotY-PEN.line),by=ground-b.z*PEN.perZ;
  c.fillStyle='#0005';c.beginPath();c.ellipse(bx,ground+4,10-progress*5,4-progress*2,0,0,7);c.fill();this.drawBall(bx,by,11-progress*5,m);

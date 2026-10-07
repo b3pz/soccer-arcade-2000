@@ -55,10 +55,15 @@ function draw(c,t,h={}){
  t=clamp(t,0,DURATION);const scene=sceneAt(t),u=(t-scene.start)/(scene.end-scene.start),fx=h.effects??1,fire=h.fantasy!==false;
  c.save();c.imageSmoothingEnabled=true;
  if(scene.name==='logo'){
-  const p=smooth(clamp(u/.72)),target=logoTarget(c);h.titleBackground?.(t);
-  h.logo?.(clamp(u*2));const x=mix(710,target.x,p),y=mix(360,target.y,p),r=mix(72,target.r,p);
-  ball(c,x,y,r,t,fire&&u<.75,-1,fx);
+  const p=smooth(clamp(u/.72)),target=window.S9ArcadeArt?.ready(S9ArcadeArt.image('logo'))?S9ArcadeArt.logoTarget():logoTarget(c);h.titleBackground?.(t);
+  h.logo?.(clamp(u*2),u);const x=mix(710,target.x,p),y=mix(360,target.y,p),r=mix(72,target.r,p);
+  c.save();c.globalAlpha*=u>.75?clamp((1-u)/.25):1;ball(c,x,y,r,t,fire&&u<.75,-1,fx);c.restore();
   if(u<.65){c.save();c.globalAlpha=(1-u/.65)*fx;for(let i=0;i<18;i++){const a=i*2.399,radius=80+u*400;oval(c,x+Math.cos(a)*radius,y+Math.sin(a)*radius,3,2,i%2?'#ffb51b':'#e5f6ff')}c.restore()}
+ }else if((scene.name!=='net'||fire)&&window.S9ArcadeArt?.cinematic(c,scene.name,u)){
+  // The six painted widescreen shots share one finale; code only animates the camera, cuts and sound cues.
+  if(scene.name==='final'){title(c,'LA FINALE',640,125,46,'#ffe36b');title(c,'AZURO × RAVORA · 89:59 · 2–2',640,178,24,'#d6e7ff');flash(c,1-clamp(u*4),'#000')}
+  for(const [key,when,kind] of [['whistle',.6,'whistle'],['dribble1',2.05,'kick'],['dribble2',2.8,'kick'],['bicycle',4.35,'powerShot'],['save',6.25,'saveSound'],['decidingShot',7.945,'powerShot'],['netBreak',9.091,'slam']])cue(h,key,when,t,kind);
+  if(scene.name==='net'&&u>.38){const impact=clamp((u-.38)/.25);h.impact?.(impact);flash(c,(1-impact)*.25*fx)}
  }else if(scene.name==='final'){
   // One night, one stadium for the whole film: wide push-in on the final's last minute.
   shot(c,ART.night,1+u*.12,.5,.62,0,.15);title(c,'LA FINALE',640,150,64,'#ffe36b');title(c,'89:59   •   2 – 2',640,205,26,'#d6e7ff');
