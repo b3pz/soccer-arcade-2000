@@ -1,0 +1,25 @@
+<!doctype html><html lang="it"><meta charset="utf-8"><title>Arcade · verifica visiva</title>
+<style>body{margin:0;background:#10182d;color:white;font:14px monospace}header{min-height:72px;flex-wrap:wrap;display:flex;align-items:center;gap:10px;padding:0 10px}button{padding:8px}iframe{width:100%;height:calc(100vh - 90px);border:0}</style>
+<header>SOLO TEST <button id="start">APRI MATCH DATABASE</button><button id="pens">RIGORI</button><button id="yellow">FALLO / GIALLO</button><button id="red">ROSSO</button><button id="freeze">FERMA SCENA</button><button id="resume">RIPRENDI</button><button id="hold">TIENI Z</button><button id="release">RILASCIA Z</button><button id="goal">GOAL / REPLAY</button><button id="golden">GOLDEN</button><button id="sideline">BORDOCAMPO</button><button id="goalview">PORTA</button><button id="finish">TERMINA TEST 2–1</button><button id="preparefinal">PREPARA FINALE</button><button id="restorecup">RIPRISTINA COPPA</button><span id="status"></span></header>
+<iframe id="app" src="../../index.html" title="Gioco originale con modulo Arcade"></iframe>
+<script>
+let qaOriginalCup,qaOriginalBest,qaCupPrepared=false,sceneFreeze=false,worldFreeze=false;const frame=document.getElementById('app'),status=document.getElementById('status');
+document.getElementById('start').onclick=async()=>{try{const w=frame.contentWindow,ids=w.S9V10.italianIds;status.textContent='MATCH IN CORSO';const launched=w.launchArcadeMatch({home:w.T(ids[0]),away:w.T(ids[1])});worldFreeze=false;sceneFreeze=false;const m=w.S9ArcadeActive.match,update=m.update;m.update=function(dt){if(worldFreeze){this.elapsed+=dt;return}if(sceneFreeze&&this.cardScene){this.cardScene.age=1.5;this.elapsed+=dt;return}update.call(this,dt)};const r=await launched;status.textContent=r?'BRIDGE: '+r.homeGoals+'–'+r.awayGoals+' · '+r.winner:'ANNULLATO'}catch(e){status.textContent=e.message}};
+document.getElementById('preparefinal').onclick=async()=>{const w=frame.contentWindow,tm=w.S9ArcadeTournament;if(!qaCupPrepared){qaOriginalCup=await w.S9Save.getSetting('arcadePureCup');qaOriginalBest=await w.S9Save.getSetting('arcadeBestBonus');qaCupPrepared=true}const ids=tm.pool(w.S9V10.clubIds.map(id=>w.T(id)),w.S9V10.clubIds).map(t=>t.id),cup=tm.create('club',ids,ids[0]);const win=()=>{const f=tm.fixture(cup);tm.advance(cup,{homeGoals:f.h===cup.user?2:0,awayGoals:f.a===cup.user?2:0,winner:cup.user},(h,a)=>({hg:1,ag:0,winner:h}))};for(let i=0;i<5;i++)win();await w.S9Save.putSetting('arcadePureCup',cup);status.textContent='FINALE PRONTA · ARCADE → COPPA → RIPRENDI TORNEO'};
+document.getElementById('restorecup').onclick=async()=>{if(!qaCupPrepared)return;const w=frame.contentWindow;await w.S9Save.putSetting('arcadePureCup',qaOriginalCup||null);await w.S9Save.putSetting('arcadeBestBonus',qaOriginalBest||null);status.textContent='SALVATAGGI ORIGINALI RIPRISTINATI';qaCupPrepared=false};
+document.getElementById('pens').onclick=()=>frame.contentWindow.S9ArcadeActive?.match.startPenalties();
+document.getElementById('finish').onclick=()=>{const m=frame.contentWindow.S9ArcadeActive?.match;if(m){m.pen=null;m.rules.period='REGULAR';m.rules.score=[2,1];m.rules.finish()}};
+const active=()=>frame.contentWindow.S9ArcadeActive;
+document.getElementById('yellow').onclick=()=>{const a=active();if(!a)return;const m=a.match;m.phase='PLAY';m.restarts.data=null;const p=m.selected,o=m.teams[1].players.find(q=>!q.sentOff&&q.role!=='GK');p.x=50;p.y=31;o.x=52;o.y=31;o.face={x:1,y:0};o.burst=0;m.control(o);p.face={x:1,y:0};p.tackle(true);m.tackles(.001)};
+document.getElementById('red').onclick=()=>{const a=active();if(a)frame.contentWindow.S9ArcadeEngine.CardManager.issue(a.match,a.match.teams[0].players.find(p=>!p.sentOff&&p.role!=='GK'),true)};
+document.getElementById('freeze').onclick=()=>sceneFreeze=true;
+document.getElementById('resume').onclick=()=>{sceneFreeze=false;worldFreeze=false};
+document.getElementById('hold').onclick=()=>active()?.input.onDown({key:'z',preventDefault(){}});
+document.getElementById('release').onclick=()=>active()?.input.onUp({key:'z'});
+document.getElementById('goal').onclick=()=>active()?.match.rules.goal(0);
+document.getElementById('golden').onclick=()=>{const m=active()?.match;if(m){m.phase='PLAY';m.rules.remaining=0;m.rules.update(.01)}};
+function view(x,y){const m=active()?.match;if(!m)return;m.phase='PLAY';m.cardScene=null;m.messageTime=0;m.message='';m.selected=m.teams[0].players.find(p=>!p.sentOff&&p.role==='ST');m.selected.x=x;m.selected.y=y;m.selected.face={x:1,y:0};m.control(m.selected);m.ball.update(0);worldFreeze=true}
+document.getElementById('sideline').onclick=()=>view(50,3);
+document.getElementById('goalview').onclick=()=>view(97,27);
+setInterval(()=>{const a=active();if(a){const m=a.match;status.textContent=m.cardScene?m.cardScene.card+' #'+m.cardScene.number:'Z '+Math.round(a.input.shotCharge*100)+'% · SHOT '+(m.lastShot?.speed.toFixed(1)||'—')+' · '+m.phase}},100);
+</script></html>

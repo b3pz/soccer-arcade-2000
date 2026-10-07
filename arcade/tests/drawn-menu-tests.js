@@ -1,0 +1,11 @@
+var window=globalThis,raf,removed=false,disconnected=false,unlisten=0,draws=0;
+window.innerWidth=1028;window.innerHeight=611;window.addEventListener=()=>{};window.removeEventListener=()=>unlisten++;
+var requestAnimationFrame=fn=>raf=fn,Image=class{constructor(){this.width=this.naturalWidth=1536;this.height=this.naturalHeight=1024}};
+var MutationObserver=class{observe(){}disconnect(){disconnected=true}};
+var context=new Proxy({measureText:t=>({width:t.length*10}),drawImage(){draws++}},{get:(t,k)=>k in t?t[k]:()=>{}});
+var art,document={body:{append(){}},createElement:()=>art={style:{},dataset:{},setAttribute(){},getContext:()=>context,remove(){removed=true}},activeElement:null};
+var classes=new Set(),button={tagName:'BUTTON',className:'',classList:{contains:()=>false},childNodes:[{nodeType:3,textContent:'Z · START MATCH'}],getBoundingClientRect:()=>({x:20,y:100,width:220,height:50}),closest:()=>null};
+var box={isConnected:true,style:{},classList:{add:c=>classes.add(c),remove:c=>classes.delete(c)},addEventListener(){},removeEventListener(){unlisten++},querySelector:s=>s==='h1'?{textContent:'ARCADE FOOTBALL'}:null,querySelectorAll:s=>s==='button'||s.startsWith('h1,')?[button]:[]};
+load('arcade/ui/drawn-menu.js');var dispose=S9ArcadeDrawnMenu.mount(box);raf(100);if(!classes.has('arcade-drawn')||art.dataset.ready!=='true'||draws<10)throw Error('Artwork and nine slice controls not rendered');
+box.style.display='none';raf(200);if(art.style.display!=='none')throw Error('Menu canvas covers match');box.style.display='block';raf(300);if(art.style.display!=='block')throw Error('Menu did not return after match');dispose();dispose();if(!removed||!disconnected||classes.has('arcade-drawn')||unlisten!==2)throw Error('Leaked presentation listeners');
+print('PASS drawn menu paints bitmap controls, hides during match and disposes cleanly');

@@ -1,0 +1,96 @@
+#arcade-select{background:repeating-linear-gradient(0deg,#0002 0px,#0002 1px,transparent 1px,transparent 4px),radial-gradient(ellipse at top,#25477c,#080b22 75%)!important;border:8px ridge #487da9;box-sizing:border-box;text-shadow:2px 3px #000;font-family:monospace!important}#arcade-select h1{color:#ffe655;letter-spacing:3px;text-transform:uppercase;text-shadow:3px 3px #ac3032,6px 6px #080c24;font-size:36px!important}#arcade-select h1:after{content:"1P  •  PUSH START";display:block;color:#7de6ff;font-size:15px;letter-spacing:5px;margin-top:12px;text-shadow:2px 2px #000}#arcade-select button,#arcade-match button{background:linear-gradient(#273f72,#10182e)!important;border:4px ridge #4c9ecb!important;color:#ffe66b!important;font:bold 18px monospace!important;text-shadow:2px 2px #000;box-shadow:4px 4px #0008;border-radius:0!important}#arcade-select button:hover,#arcade-select button:focus-visible{outline:3px solid #ffdf39;filter:brightness(1.25)}#arcade-select button:disabled{opacity:.35}#arcade-select select{background:#0c1938;color:#fff27c;border:4px ridge #72cced;padding:18px;font:bold 20px monospace}#arcade-select svg{background:repeating-linear-gradient(0deg,#11325788 0,#11325788 1px,transparent 1px,transparent 25px),radial-gradient(#164d79,#071b3c);border:5px ridge #3883b2;box-shadow:0 0 24px #001024}#arcade-select .arcade-team-card{background:#081127;border:5px ridge #4489b5;padding:20px;box-sizing:border-box}#arcade-select .arcade-team-card p{font-size:23px;line-height:1.7;color:#ffe667}#arcade-select .arcade-team-card canvas{width:180px;height:192px;image-rendering:pixelated;background:radial-gradient(#327290,#101c3d);border-bottom:3px solid #75dcff}#arcade-select .arcade-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}#arcade-select .arcade-stat{background:#193153;padding:8px;color:#75deff;font-size:15px}#arcade-select .arcade-stat strong{display:block;font-size:26px;color:#ffec5b}#arcade-select .arcade-stat meter{width:100%;accent-color:#ffdc42}#arcade-select .arcade-prompt{color:#ffec65;letter-spacing:3px;font-size:18px}#arcade-match{background:#070b19!important}#arcade-match canvas{image-rendering:pixelated;border:4px ridge #407898;box-sizing:border-box}@media(max-width:700px){#arcade-select h1{font-size:24px!important}#arcade-select .arcade-layout{flex-wrap:wrap}#arcade-select svg{width:85vw!important;height:45vh!important;max-width:none!important}#arcade-select .arcade-team-card{width:90%!important}#arcade-select button{padding:10px!important}}
+
+#arcade-select .arcade-layout{align-items:flex-start!important}#arcade-select .arcade-layout svg{height:min(60vh,360px)!important}#arcade-select .arcade-team-card{padding:12px}#arcade-select .arcade-team-card p{font-size:18px;margin:8px 0;line-height:1.3}#arcade-select .arcade-team-card canvas{width:112px;height:120px}#arcade-select .arcade-team-card button{padding:10px!important;margin:5px!important}#arcade-select .arcade-stat strong{font-size:22px}#arcade-select h1{font-size:30px!important;margin:8px!important}#arcade-select>button:first-of-type{padding:8px!important;font-size:14px!important}
+
+.arcade-entry{background:linear-gradient(#243f74,#080e25)!important;border:4px ridge #53add8!important;border-radius:0!important;color:#ffe263!important;text-shadow:2px 2px #000}.arcade-bracket{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;max-width:1100px;margin:24px auto}.arcade-bracket span{padding:14px;background:#0b1631;border:3px ridge #468fbd;color:#bceaff;font-size:16px}
+
+#arcade-select .arcade-team-card{animation:arcade-card-enter .16s steps(4,end)}#arcade-select .arcade-team-card canvas{width:170px;height:187px;vertical-align:bottom}#arcade-select .arcade-selected-marker{animation:arcade-marker-pulse .6s steps(2,end) infinite}@keyframes arcade-card-enter{from{transform:translateX(40px)}to{transform:translateX(0)}}@keyframes arcade-marker-pulse{0%,100%{opacity:1}50%{opacity:.4}}@media(prefers-reduced-motion:reduce){#arcade-select .arcade-team-card,#arcade-select .arcade-selected-marker{animation:none}}
+
+#arcade-match canvas{width:min(1280px,100vw,calc((100vh - 54px)*16/9))!important;height:auto!important;max-height:calc(100vh - 54px)!important}#arcade-match button{min-height:42px}
+
+#arcade-select .arcade-team-card{display:grid;grid-template-columns:170px minmax(0,1fr);column-gap:12px}#arcade-select .arcade-team-card>p,#arcade-select .arcade-team-card>.arcade-stats{grid-column:1/-1}#arcade-select .arcade-team-card>canvas{grid-column:1}#arcade-select .arcade-team-controls{grid-column:2;align-self:center;display:grid;grid-template-columns:1fr 1fr;gap:8px}#arcade-select .arcade-team-controls button{margin:0!important;min-width:0}#arcade-select .arcade-team-controls button:last-child{grid-column:1/-1}@media(max-width:500px){#arcade-select .arcade-team-card{grid-template-columns:140px minmax(0,1fr)}#arcade-select .arcade-team-card canvas{width:140px;height:154px}#arcade-select .arcade-team-controls button{font-size:14px!important;padding:8px!important}}
+#arcade-select{position:fixed;inset:0;z-index:99998;overflow:auto;color:#fff;text-align:center;padding:12px;font:bold 18px monospace}
+#arcade-select .arcade-screen-head{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:1100px;margin:auto}
+#arcade-select .arcade-screen-head h1:after{display:none}
+#arcade-select .arcade-screen-head button{padding:8px 14px}
+.arcade-1p{color:#ffe744;font-size:25px;letter-spacing:3px}
+#arcade-select .arcade-mode-options{display:grid;grid-template-columns:1fr 1fr;gap:30px;max-width:950px;margin:60px auto 30px}
+#arcade-select .arcade-mode-tile{padding:40px 18px;font-size:38px!important;border-width:8px!important}
+.arcade-mode-tile strong{display:block;color:#5cddff;font-size:30px;margin:28px 0}
+.arcade-mode-tile small{display:block;font-size:16px;line-height:1.8}
+#arcade-select button.selected{border-color:#ffe851!important;background:linear-gradient(#2c568a,#122b52)!important;box-shadow:0 0 0 3px #fff391,5px 5px #02040e}
+#arcade-select .arcade-picker{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;max-width:1100px;margin:20px auto}
+.arcade-team-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+#arcade-select .arcade-team-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100px;font-size:16px!important;padding:8px}
+.arcade-team-tile img{width:46px;height:46px;object-fit:contain;margin-bottom:8px}
+.arcade-page-controls{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:10px}
+.arcade-player-card{background:#07122b;border:6px ridge #4689b8;padding:12px}
+.arcade-player-card h2{color:#ffe85e;font-size:25px;margin:6px}
+.arcade-player-card canvas{width:150px;height:165px;image-rendering:pixelated;background:radial-gradient(#286380,#0a1733);display:block;margin:6px auto}
+#arcade-select .arcade-player-card button{padding:12px;margin-top:15px}
+.arcade-formation-layout{display:grid;grid-template-columns:minmax(0,600px) 220px;gap:24px;justify-content:center;margin:25px auto}
+.arcade-formation-layout canvas{width:100%;image-rendering:pixelated;border:6px ridge #76b7d8;box-sizing:border-box}
+.arcade-formation-buttons{display:grid;gap:12px}
+.arcade-formation-buttons button{font-size:25px!important;padding:10px}
+.arcade-howto{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1050px;margin:20px auto}
+.arcade-howto section{background:#09214d;border:5px ridge #489ec7;padding:14px;text-align:left}
+.arcade-howto h2{color:#ff658d;text-align:center;letter-spacing:5px;margin:4px 0 14px}
+.arcade-command{display:grid;grid-template-columns:64px 1fr;column-gap:14px;align-items:center;background:#13213e;border:3px ridge #84afba;margin:8px 0;padding:10px}
+.arcade-command strong{font-size:23px;color:#fff4ca}
+.arcade-command small{grid-column:2;font-size:12px;line-height:1.6;color:#bce4ff}
+.arcade-key{grid-row:span 2;display:grid;place-content:center;width:56px;height:56px;border:5px ridge #ffdd8a;border-radius:50%;font-size:26px;box-shadow:3px 5px #020810;text-shadow:2px 2px #000}
+.arcade-key.red{background:#e63835}.arcade-key.yellow{background:#d59112}.arcade-key.green{background:#15963d;font-size:20px}
+.arcade-group-table{border-collapse:collapse;width:min(700px,95%);margin:28px auto;background:#09162e;border:5px ridge #439bc2}
+.arcade-group-table th,.arcade-group-table td{padding:14px 10px;border-bottom:2px solid #325783}
+.arcade-group-table th{color:#5fd7ff}.arcade-group-table .qualifies td:first-child{border-left:5px solid #79e949}.arcade-group-table .player-row{background:#203e63;color:#ffe85c}
+.arcade-next-match{color:#ffed73;margin:25px}.arcade-last-result{color:#8ad6ff}.arcade-error{color:#ff8294}
+@media(max-width:750px){#arcade-select .arcade-picker{grid-template-columns:1fr 220px;gap:12px}.arcade-team-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.arcade-howto,.arcade-formation-layout{grid-template-columns:1fr}.arcade-formation-buttons{grid-template-columns:repeat(2,1fr)}#arcade-select .arcade-mode-options{gap:15px;margin-top:35px}#arcade-select .arcade-mode-tile{font-size:26px!important;padding:25px 10px}.arcade-mode-tile strong{font-size:22px}}
+@media(max-width:500px){#arcade-select .arcade-picker{grid-template-columns:1fr}.arcade-mode-options{grid-template-columns:1fr!important}#arcade-select .arcade-screen-head h1{font-size:20px!important}.arcade-howto{gap:12px}}
+
+#arcade-select .arcade-screen-head{display:flex!important;height:auto!important;min-height:48px!important;padding:0!important;align-items:center!important;font-family:monospace!important} .arcade-entry .big,.arcade-entry .small{color:#ffe263!important}
+
+/* Shared cabinet artwork; interactive geographic layer stays crisp above it. */
+#arcade-select{background:repeating-linear-gradient(0deg,#0002 0px,#0002 1px,transparent 1px,transparent 4px),linear-gradient(#020a2133,#020a2144),url('../assets/arcade-menu-background.png?v=europe-1') center/cover fixed!important}
+#arcade-select .arcade-screen-head{background:#06152cb8;border-bottom:3px solid #3fc8dc;padding:8px!important;box-sizing:border-box}
+#arcade-select .arcade-map-picker{margin-top:10px;gap:18px}
+.arcade-europe-panel{position:relative;background:#082040;border:5px ridge #57accc;box-shadow:5px 5px #0009}
+.arcade-map-title{font-size:16px;color:#9df6ff;letter-spacing:4px;margin:6px}
+#arcade-select svg.arcade-europe-map{display:block;width:100%!important;height:auto!important;max-width:none!important;border:0;box-shadow:none;background:#082a50}
+.arcade-city-name{margin:0;padding:6px;background:#0a1632;color:#ffe95b;letter-spacing:3px;font-size:18px;border-top:2px solid #37779c}
+#arcade-select .arcade-map-team-strip{gap:5px;margin-top:10px}
+#arcade-select .arcade-map-team-strip .arcade-team-tile{min-height:48px;font-size:12px!important;padding:4px;flex-direction:row;gap:5px;border-width:2px!important}
+.arcade-map-team-strip .arcade-team-tile img{width:26px;height:26px;margin:0}
+#arcade-select .arcade-map-picker .arcade-page-controls{margin-top:6px;gap:16px}
+#arcade-select .arcade-map-picker .arcade-page-controls button{padding:4px 14px!important}
+#arcade-select .arcade-prompt{display:table;margin:12px auto;padding:8px 14px;background:#031128db;border-bottom:2px solid #48bce5;font-size:15px}
+@media(max-width:750px){#arcade-select .arcade-map-picker{grid-template-columns:minmax(0,1fr) 200px}.arcade-map-title{font-size:12px;letter-spacing:1px}.arcade-city-name{font-size:15px}.arcade-player-card h2{font-size:20px}.arcade-player-card canvas{width:120px;height:132px}}
+@media(max-width:500px){#arcade-select .arcade-map-picker{grid-template-columns:1fr}.arcade-map-picker .arcade-player-card{display:grid;grid-template-columns:130px 1fr;gap:4px}.arcade-map-picker .arcade-player-card h2{grid-column:1/-1}.arcade-map-picker .arcade-player-card canvas{grid-column:1;grid-row:2/5}.arcade-map-picker .arcade-player-card button{margin:0;font-size:14px!important}.arcade-map-picker .arcade-stats{gap:3px}.arcade-map-picker .arcade-stat{font-size:11px;padding:4px}.arcade-map-picker .arcade-stat strong{font-size:19px}}
+
+#arcade-select svg.arcade-europe-map{height:clamp(180px,calc(100vh - 390px),380px)!important}
+#arcade-select .arcade-map-picker .arcade-player-card canvas{width:130px;height:143px}
+#arcade-select .arcade-map-picker .arcade-player-card{align-self:start}
+@media(max-width:500px){#arcade-select svg.arcade-europe-map{height:220px!important}}
+
+#arcade-select .arcade-map-picker{margin-bottom:8px}
+
+/* Invisible semantic controls under a drawn game screen. */
+.arcade-menu-art{position:fixed;inset:0;z-index:99998;width:100vw;height:100vh;pointer-events:none;image-rendering:pixelated}
+#arcade-select.arcade-drawn>*{opacity:0!important}
+#arcade-select.arcade-drawn{background:transparent!important;border-color:transparent}
+#arcade-match>button{border:0!important;background:url('../assets/drawn-panel.png?v=drawn-1') center/100% 100%!important;box-shadow:none!important;padding:10px 26px}
+
+.arcade-victory{height:clamp(236px,35vh,350px);max-width:1050px;margin:auto}#arcade-select:has(.arcade-victory)>h2{margin:8px}#arcade-select:has(.arcade-victory) .arcade-prompt{font-size:13px}
+
+.arcade-region-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:5px}#arcade-select .arcade-region-tabs button{font-size:13px!important;padding:8px 2px;min-height:40px}.arcade-region-detail{font-size:12px;margin:6px;color:#8be8ff;letter-spacing:1px}.arcade-regional-content{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}#arcade-select .arcade-regional-picker .arcade-map-team-strip{grid-template-columns:repeat(2,minmax(0,1fr));margin:0;gap:8px}#arcade-select .arcade-regional-picker svg.arcade-europe-map{height:clamp(220px,calc(100vh - 305px),390px)!important}.arcade-regional-picker .arcade-map-title{font-size:13px;letter-spacing:2px}.arcade-regional-picker .arcade-city-name{font-size:14px;letter-spacing:1px}#arcade-select .arcade-regional-picker .arcade-player-card{margin-top:0}#arcade-select .arcade-regional-picker .arcade-player-card canvas{width:130px;height:143px}
+@media(max-width:750px){#arcade-select .arcade-regional-picker{grid-template-columns:minmax(0,1fr) 190px}.arcade-regional-content{gap:6px}#arcade-select .arcade-regional-picker .arcade-map-team-strip .arcade-team-tile{flex-direction:column;font-size:10px!important;min-height:55px}#arcade-select .arcade-regional-picker svg.arcade-europe-map{height:250px!important}.arcade-region-detail{font-size:10px}}@media(max-width:500px){#arcade-select .arcade-regional-picker{grid-template-columns:1fr}#arcade-select .arcade-regional-picker .arcade-player-card{margin-top:0}.arcade-region-tabs{gap:4px}}
+
+#arcade-select{background:repeating-linear-gradient(0deg,#0001 0,#0001 1px,transparent 1px,transparent 4px),url('../assets/cabinet-90s.png?v=cabinet-1') center/cover fixed!important}#arcade-select .arcade-howto{margin:12px auto}#arcade-select .arcade-command{margin:5px 0;padding:8px}.arcade-command strong{font-size:20px}#arcade-select .arcade-national-picker svg.arcade-europe-map{height:clamp(180px,calc(100vh - 370px),330px)!important}.arcade-national-picker .arcade-region-tabs{gap:5px}#arcade-select .arcade-national-picker .arcade-region-tabs button{min-height:32px;padding:5px 1px}.arcade-national-picker .arcade-region-detail{margin:4px;font-size:11px}
+
+#arcade-select .arcade-world-picker svg.arcade-europe-map{height:clamp(160px,calc(100vh - 405px),300px)!important}
+/* Full-screen match canvas: no DOM frame, every overlay is drawn on the canvas. */
+#arcade-match canvas{border:0!important;outline:none;width:min(100vw,calc(100vh*16/9))!important;height:auto!important;max-height:100vh!important;max-width:100vw!important}
+.arcade-formation-layout{grid-template-columns:minmax(0,760px) 220px!important}
+.arcade-formation-layout canvas{border:0!important}
+#arcade-select .arcade-mode-options.three{grid-template-columns:repeat(3,1fr);max-width:1100px}
+#arcade-select .arcade-mode-options.four{grid-template-columns:1fr 1fr;max-width:1000px}
+#arcade-select .arcade-mode-options.four .arcade-mode-tile{padding:16px 10px}

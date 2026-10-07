@@ -1,0 +1,549 @@
+{
+  "nations": {
+    "italy": [
+      "Roma",
+      12.5,
+      41.9,
+      "Italy",
+      "n-c"
+    ],
+    "brazil": [
+      "Brasilia",
+      -47.88,
+      -15.79,
+      "Brazil",
+      "n-south"
+    ],
+    "argentina": [
+      "Buenos Aires",
+      -58.38,
+      -34.6,
+      "Argentina",
+      "n-south"
+    ],
+    "germany": [
+      "Berlino",
+      13.41,
+      52.52,
+      "Germany",
+      "n-b"
+    ],
+    "france": [
+      "Parigi",
+      2.35,
+      48.86,
+      "France",
+      "n-a"
+    ],
+    "netherlands": [
+      "Amsterdam",
+      4.9,
+      52.37,
+      "Netherlands",
+      "n-b"
+    ],
+    "spain": [
+      "Madrid",
+      -3.7,
+      40.42,
+      "Spain",
+      "n-a"
+    ],
+    "england": [
+      "Londra",
+      -0.13,
+      51.51,
+      "United Kingdom",
+      "n-a"
+    ],
+    "portugal": [
+      "Lisbona",
+      -9.14,
+      38.72,
+      "Portugal",
+      "n-a"
+    ],
+    "denmark": [
+      "Copenaghen",
+      12.57,
+      55.68,
+      "Denmark",
+      "n-b"
+    ],
+    "czech": [
+      "Praga",
+      14.42,
+      50.08,
+      "Czechia",
+      "n-b"
+    ],
+    "croatia": [
+      "Zagabria",
+      15.98,
+      45.82,
+      "Croatia",
+      "n-c"
+    ],
+    "romania": [
+      "Bucarest",
+      26.1,
+      44.43,
+      "Romania",
+      "n-c"
+    ],
+    "bulgaria": [
+      "Sofia",
+      23.32,
+      42.7,
+      "Bulgaria",
+      "n-c"
+    ],
+    "sweden": [
+      "Stoccolma",
+      18.07,
+      59.33,
+      "Sweden",
+      "n-b"
+    ],
+    "nigeria": [
+      "Abuja",
+      7.49,
+      9.06,
+      "Nigeria",
+      "n-africa"
+    ],
+    "cameroon": [
+      "Yaoundé",
+      11.52,
+      3.87,
+      "Cameroon",
+      "n-africa"
+    ],
+    "turkey": [
+      "Ankara",
+      32.86,
+      39.93,
+      "Turkey",
+      "n-c"
+    ],
+    "korea": [
+      "Seul",
+      126.98,
+      37.57,
+      "South Korea",
+      "n-asia"
+    ],
+    "uruguay": [
+      "Montevideo",
+      -56.16,
+      -34.9,
+      "Uruguay",
+      "n-south"
+    ],
+    "mexico": [
+      "Città del Messico",
+      -99.13,
+      19.43,
+      "Mexico",
+      "n-north"
+    ],
+    "usa": [
+      "Washington",
+      -77.04,
+      38.91,
+      "United States of America",
+      "n-north"
+    ],
+    "japan": [
+      "Tokyo",
+      139.69,
+      35.68,
+      "Japan",
+      "n-asia"
+    ],
+    "belgium": [
+      "Bruxelles",
+      4.35,
+      50.85,
+      "Belgium",
+      "n-b"
+    ],
+    "switzerland": [
+      "Berna",
+      7.45,
+      46.95,
+      "Switzerland",
+      "n-b"
+    ],
+    "russia": [
+      "Mosca",
+      37.62,
+      55.75,
+      "Russia",
+      "n-c"
+    ],
+    "yugoslavia": [
+      "Belgrado",
+      20.45,
+      44.82,
+      "Republic of Serbia",
+      "n-c"
+    ],
+    "ireland": [
+      "Dublino",
+      -6.26,
+      53.35,
+      "Ireland",
+      "n-a"
+    ],
+    "norway": [
+      "Oslo",
+      10.75,
+      59.91,
+      "Norway",
+      "n-b"
+    ],
+    "colombia": [
+      "Bogotà",
+      -74.07,
+      4.71,
+      "Colombia",
+      "n-south"
+    ],
+    "chile": [
+      "Santiago",
+      -70.67,
+      -33.45,
+      "Chile",
+      "n-south"
+    ],
+    "paraguay": [
+      "Asunción",
+      -57.58,
+      -25.26,
+      "Paraguay",
+      "n-south"
+    ],
+    "saudi": [
+      "Riyad",
+      46.72,
+      24.71,
+      "Saudi Arabia",
+      "n-asia"
+    ],
+    "senegal": [
+      "Dakar",
+      -17.45,
+      14.72,
+      "Senegal",
+      "n-africa"
+    ],
+    "ghana": [
+      "Accra",
+      -0.19,
+      5.56,
+      "Ghana",
+      "n-africa"
+    ],
+    "ivory": [
+      "Yamoussoukro",
+      -5.28,
+      6.82,
+      "Ivory Coast",
+      "n-africa"
+    ],
+    "australia": [
+      "Canberra",
+      149.13,
+      -35.28,
+      "Australia",
+      "n-oceania"
+    ],
+    "scotland": [
+      "Edimburgo",
+      -3.19,
+      55.95,
+      "United Kingdom",
+      "n-a"
+    ],
+    "austria": [
+      "Vienna",
+      16.37,
+      48.21,
+      "Austria",
+      "n-b"
+    ],
+    "greece": [
+      "Atene",
+      23.73,
+      37.98,
+      "Greece",
+      "n-c"
+    ],
+    "poland": [
+      "Varsavia",
+      21.01,
+      52.23,
+      "Poland",
+      "n-b"
+    ],
+    "costarica": [
+      "San José",
+      -84.09,
+      9.93,
+      "Costa Rica",
+      "n-north"
+    ],
+    "morocco": [
+      "Rabat",
+      -6.84,
+      34.02,
+      "Morocco",
+      "n-africa"
+    ],
+    "southafrica": [
+      "Pretoria",
+      28.19,
+      -25.75,
+      "South Africa",
+      "n-africa"
+    ],
+    "canada": [
+      "Ottawa",
+      -75.7,
+      45.42,
+      "Canada",
+      "n-north"
+    ],
+    "jamaica": [
+      "Kingston",
+      -76.79,
+      17.97,
+      "Jamaica",
+      "n-north"
+    ],
+    "honduras": [
+      "Tegucigalpa",
+      -87.21,
+      14.08,
+      "Honduras",
+      "n-north"
+    ],
+    "panama": [
+      "Panama",
+      -79.52,
+      8.98,
+      "Panama",
+      "n-north"
+    ],
+    "ecuador": [
+      "Quito",
+      -78.47,
+      -0.18,
+      "Ecuador",
+      "n-south"
+    ],
+    "peru": [
+      "Lima",
+      -77.04,
+      -12.05,
+      "Peru",
+      "n-south"
+    ],
+    "venezuela": [
+      "Caracas",
+      -66.9,
+      10.48,
+      "Venezuela",
+      "n-south"
+    ],
+    "bolivia": [
+      "La Paz",
+      -68.12,
+      -16.5,
+      "Bolivia",
+      "n-south"
+    ],
+    "egypt": [
+      "Il Cairo",
+      31.24,
+      30.04,
+      "Egypt",
+      "n-africa"
+    ],
+    "algeria": [
+      "Algeri",
+      3.06,
+      36.75,
+      "Algeria",
+      "n-africa"
+    ],
+    "tunisia": [
+      "Tunisi",
+      10.18,
+      36.81,
+      "Tunisia",
+      "n-africa"
+    ],
+    "mali": [
+      "Bamako",
+      -8.0,
+      12.64,
+      "Mali",
+      "n-africa"
+    ],
+    "congo": [
+      "Kinshasa",
+      15.27,
+      -4.33,
+      "Democratic Republic of the Congo",
+      "n-africa"
+    ],
+    "zambia": [
+      "Lusaka",
+      28.28,
+      -15.39,
+      "Zambia",
+      "n-africa"
+    ],
+    "iran": [
+      "Teheran",
+      51.39,
+      35.69,
+      "Iran",
+      "n-asia"
+    ],
+    "china": [
+      "Pechino",
+      116.41,
+      39.9,
+      "China",
+      "n-asia"
+    ],
+    "qatar": [
+      "Doha",
+      51.53,
+      25.29,
+      "Qatar",
+      "n-asia"
+    ],
+    "uae": [
+      "Abu Dhabi",
+      54.37,
+      24.45,
+      "United Arab Emirates",
+      "n-asia"
+    ],
+    "iraq": [
+      "Baghdad",
+      44.37,
+      33.32,
+      "Iraq",
+      "n-asia"
+    ],
+    "uzbek": [
+      "Tashkent",
+      69.24,
+      41.3,
+      "Uzbekistan",
+      "n-asia"
+    ],
+    "newzealand": [
+      "Wellington",
+      174.78,
+      -41.29,
+      "New Zealand",
+      "n-oceania"
+    ]
+  },
+  "zones": [
+    [
+      "n-a",
+      "EUROPA A",
+      "OVEST · NAZIONALI",
+      [
+        -12,
+        11,
+        35,
+        59
+      ]
+    ],
+    [
+      "n-b",
+      "EUROPA B",
+      "CENTRO / NORD · NAZIONALI",
+      [
+        2,
+        26,
+        44,
+        72
+      ]
+    ],
+    [
+      "n-c",
+      "EUROPA C",
+      "SUD / EST · NAZIONALI",
+      [
+        8,
+        43,
+        34,
+        61
+      ]
+    ],
+    [
+      "n-north",
+      "NORD AM.",
+      "NORD / CENTRO AMERICA",
+      [
+        -126,
+        -60,
+        7,
+        52
+      ]
+    ],
+    [
+      "n-south",
+      "SUD AM.",
+      "SUD AMERICA",
+      [
+        -83,
+        -32,
+        -57,
+        14
+      ]
+    ],
+    [
+      "n-africa",
+      "AFRICA",
+      "AFRICA",
+      [
+        -20,
+        40,
+        -36,
+        38
+      ]
+    ],
+    [
+      "n-asia",
+      "ASIA",
+      "ASIA",
+      [
+        36,
+        147,
+        10,
+        52
+      ]
+    ],
+    [
+      "n-oceania",
+      "OCEANIA",
+      "OCEANIA",
+      [
+        110,
+        156,
+        -45,
+        -8
+      ]
+    ]
+  ]
+}

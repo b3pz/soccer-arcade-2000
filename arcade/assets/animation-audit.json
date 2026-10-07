@@ -1,0 +1,746 @@
+{
+  "cell": [
+    128,
+    128
+  ],
+  "baseline": 118,
+  "bodyHeight": 95,
+  "rawSizes": {
+    "idle": [
+      [
+        31,
+        67
+      ],
+      [
+        28,
+        66
+      ],
+      [
+        28,
+        67
+      ],
+      [
+        28,
+        67
+      ]
+    ],
+    "run": [
+      [
+        34,
+        67
+      ],
+      [
+        31,
+        67
+      ],
+      [
+        31,
+        66
+      ],
+      [
+        38,
+        67
+      ],
+      [
+        35,
+        64
+      ],
+      [
+        33,
+        65
+      ],
+      [
+        31,
+        66
+      ],
+      [
+        36,
+        69
+      ]
+    ],
+    "dribble": [
+      [
+        38,
+        68
+      ],
+      [
+        34,
+        69
+      ],
+      [
+        34,
+        70
+      ],
+      [
+        40,
+        68
+      ],
+      [
+        42,
+        67
+      ],
+      [
+        39,
+        70
+      ],
+      [
+        39,
+        66
+      ],
+      [
+        41,
+        69
+      ]
+    ],
+    "pass": [
+      [
+        62,
+        68
+      ],
+      [
+        57,
+        67
+      ],
+      [
+        46,
+        67
+      ],
+      [
+        21,
+        68
+      ],
+      [
+        46,
+        65
+      ],
+      [
+        30,
+        67
+      ]
+    ],
+    "shoot": [
+      [
+        55,
+        69
+      ],
+      [
+        37,
+        68
+      ],
+      [
+        52,
+        69
+      ],
+      [
+        47,
+        64
+      ],
+      [
+        46,
+        63
+      ],
+      [
+        49,
+        68
+      ]
+    ],
+    "tackle": [
+      [
+        54,
+        67
+      ],
+      [
+        53,
+        58
+      ],
+      [
+        62,
+        33
+      ],
+      [
+        65,
+        45
+      ]
+    ],
+    "fall": [
+      [
+        36,
+        63
+      ],
+      [
+        30,
+        54
+      ],
+      [
+        35,
+        53
+      ],
+      [
+        36,
+        45
+      ],
+      [
+        44,
+        39
+      ],
+      [
+        69,
+        40
+      ]
+    ],
+    "celebrate": [
+      [
+        52,
+        71
+      ],
+      [
+        33,
+        70
+      ],
+      [
+        36,
+        62
+      ],
+      [
+        37,
+        62
+      ],
+      [
+        47,
+        58
+      ],
+      [
+        33,
+        73
+      ]
+    ],
+    "gk_idle": [
+      [
+        41,
+        68
+      ],
+      [
+        43,
+        68
+      ],
+      [
+        41,
+        66
+      ],
+      [
+        41,
+        66
+      ]
+    ],
+    "gk_move": [
+      [
+        49,
+        67
+      ],
+      [
+        46,
+        66
+      ],
+      [
+        41,
+        67
+      ],
+      [
+        47,
+        70
+      ],
+      [
+        35,
+        69
+      ],
+      [
+        46,
+        70
+      ]
+    ],
+    "dive_left": [
+      [
+        93,
+        71
+      ],
+      [
+        81,
+        64
+      ],
+      [
+        62,
+        64
+      ],
+      [
+        51,
+        68
+      ],
+      [
+        68,
+        40
+      ],
+      [
+        88,
+        75
+      ]
+    ],
+    "dive_right": [
+      [
+        61,
+        54
+      ],
+      [
+        90,
+        62
+      ],
+      [
+        81,
+        54
+      ],
+      [
+        78,
+        55
+      ],
+      [
+        53,
+        26
+      ]
+    ],
+    "catch": [
+      [
+        60,
+        89
+      ],
+      [
+        31,
+        89
+      ],
+      [
+        50,
+        89
+      ],
+      [
+        40,
+        88
+      ],
+      [
+        63,
+        76
+      ],
+      [
+        51,
+        76
+      ]
+    ],
+    "hold": [
+      [
+        41,
+        68
+      ],
+      [
+        43,
+        68
+      ],
+      [
+        41,
+        66
+      ],
+      [
+        41,
+        66
+      ]
+    ],
+    "throw": [
+      [
+        30,
+        59
+      ],
+      [
+        31,
+        59
+      ],
+      [
+        35,
+        65
+      ],
+      [
+        40,
+        64
+      ],
+      [
+        48,
+        64
+      ]
+    ],
+    "referee": [
+      [
+        41,
+        83
+      ],
+      [
+        58,
+        81
+      ],
+      [
+        50,
+        80
+      ],
+      [
+        44,
+        86
+      ],
+      [
+        63,
+        86
+      ],
+      [
+        50,
+        82
+      ]
+    ],
+    "special": [
+      [
+        34,
+        67
+      ],
+      [
+        41,
+        66
+      ],
+      [
+        37,
+        66
+      ],
+      [
+        42,
+        65
+      ],
+      [
+        44,
+        69
+      ]
+    ],
+    "volley": [
+      [
+        50,
+        66
+      ],
+      [
+        47,
+        66
+      ],
+      [
+        50,
+        68
+      ]
+    ],
+    "getup": [
+      [
+        69,
+        40
+      ],
+      [
+        44,
+        39
+      ],
+      [
+        36,
+        45
+      ],
+      [
+        35,
+        53
+      ],
+      [
+        30,
+        54
+      ],
+      [
+        29,
+        65
+      ]
+    ],
+    "hard_tackle": [
+      [
+        62,
+        33
+      ],
+      [
+        65,
+        45
+      ],
+      [
+        69,
+        40
+      ]
+    ],
+    "gk_run": [
+      [
+        49,
+        67
+      ],
+      [
+        46,
+        66
+      ],
+      [
+        41,
+        67
+      ],
+      [
+        47,
+        70
+      ],
+      [
+        35,
+        69
+      ],
+      [
+        46,
+        70
+      ]
+    ],
+    "ref_idle": [
+      [
+        32,
+        67
+      ]
+    ],
+    "ref_point": [
+      [
+        73,
+        117
+      ]
+    ],
+    "ref_whistle": [
+      [
+        47,
+        115
+      ]
+    ],
+    "ref_yellow": [
+      [
+        42,
+        143
+      ]
+    ],
+    "ref_red": [
+      [
+        42,
+        141
+      ]
+    ],
+    "ref_run": [
+      [
+        46,
+        115
+      ]
+    ],
+    "kick_long": [
+      [
+        53,
+        57
+      ],
+      [
+        50,
+        70
+      ],
+      [
+        62,
+        70
+      ],
+      [
+        61,
+        71
+      ],
+      [
+        43,
+        71
+      ],
+      [
+        48,
+        72
+      ]
+    ]
+  },
+  "sequences": {
+    "pass": {
+      "frames": 6,
+      "sourcePoses": 6,
+      "derivedPoses": 0,
+      "repeatedExposure": false,
+      "technique": "clean common kick family, six-frame pass timing"
+    },
+    "dribble": {
+      "frames": 8,
+      "sourcePoses": 8,
+      "derivedPoses": 8,
+      "repeatedExposure": false,
+      "technique": "forward lean on clean running silhouettes; live ball separate"
+    },
+    "catch": {
+      "frames": 6,
+      "sourcePoses": 1,
+      "derivedPoses": 6,
+      "repeatedExposure": false,
+      "technique": "articulated clean goalkeeper body and gloves"
+    },
+    "hold": {
+      "frames": 4,
+      "sourcePoses": 1,
+      "derivedPoses": 4,
+      "repeatedExposure": false,
+      "technique": "articulated clean goalkeeper body and gloves"
+    },
+    "throw": {
+      "frames": 6,
+      "sourcePoses": 1,
+      "derivedPoses": 6,
+      "repeatedExposure": false,
+      "technique": "articulated clean goalkeeper body and gloves"
+    },
+    "ref_point": {
+      "frames": 4,
+      "sourcePoses": 1,
+      "derivedPoses": 4,
+      "repeatedExposure": false,
+      "technique": "articulated pixel arm on fixed source body"
+    },
+    "ref_whistle": {
+      "frames": 4,
+      "sourcePoses": 1,
+      "derivedPoses": 4,
+      "repeatedExposure": false,
+      "technique": "articulated pixel arm on fixed source body"
+    },
+    "ref_yellow": {
+      "frames": 4,
+      "sourcePoses": 1,
+      "derivedPoses": 4,
+      "repeatedExposure": false,
+      "technique": "articulated pixel arm on fixed source body"
+    },
+    "ref_red": {
+      "frames": 4,
+      "sourcePoses": 1,
+      "derivedPoses": 4,
+      "repeatedExposure": false,
+      "technique": "articulated pixel arm on fixed source body"
+    },
+    "ref_idle": {
+      "frames": 4,
+      "sourcePoses": 1,
+      "derivedPoses": 4,
+      "repeatedExposure": false,
+      "technique": "breathing torso, fixed feet"
+    },
+    "idle": {
+      "frames": 4,
+      "sourcePoses": 4,
+      "derivedPoses": 0,
+      "repeatedExposure": false
+    },
+    "run": {
+      "frames": 8,
+      "sourcePoses": 8,
+      "derivedPoses": 0,
+      "repeatedExposure": false
+    },
+    "shoot": {
+      "frames": 8,
+      "sourcePoses": 6,
+      "derivedPoses": 2,
+      "repeatedExposure": false
+    },
+    "volley": {
+      "frames": 6,
+      "sourcePoses": 3,
+      "derivedPoses": 3,
+      "repeatedExposure": false
+    },
+    "tackle": {
+      "frames": 8,
+      "sourcePoses": 4,
+      "derivedPoses": 4,
+      "repeatedExposure": false
+    },
+    "hard_tackle": {
+      "frames": 6,
+      "sourcePoses": 3,
+      "derivedPoses": 3,
+      "repeatedExposure": false
+    },
+    "special": {
+      "frames": 8,
+      "sourcePoses": 5,
+      "derivedPoses": 3,
+      "repeatedExposure": false
+    },
+    "fall": {
+      "frames": 6,
+      "sourcePoses": 6,
+      "derivedPoses": 0,
+      "repeatedExposure": false
+    },
+    "getup": {
+      "frames": 6,
+      "sourcePoses": 6,
+      "derivedPoses": 0,
+      "repeatedExposure": false
+    },
+    "celebrate": {
+      "frames": 6,
+      "sourcePoses": 6,
+      "derivedPoses": 0,
+      "repeatedExposure": false
+    },
+    "gk_idle": {
+      "frames": 4,
+      "sourcePoses": 4,
+      "derivedPoses": 0,
+      "repeatedExposure": false
+    },
+    "gk_move": {
+      "frames": 6,
+      "sourcePoses": 6,
+      "derivedPoses": 0,
+      "repeatedExposure": false
+    },
+    "gk_run": {
+      "frames": 6,
+      "sourcePoses": 6,
+      "derivedPoses": 0,
+      "repeatedExposure": false
+    },
+    "dive_left": {
+      "frames": 6,
+      "sourcePoses": 6,
+      "derivedPoses": 0,
+      "repeatedExposure": false
+    },
+    "dive_right": {
+      "frames": 6,
+      "sourcePoses": 6,
+      "derivedPoses": 0,
+      "repeatedExposure": false
+    },
+    "kick_long": {
+      "frames": 6,
+      "sourcePoses": 6,
+      "derivedPoses": 0,
+      "repeatedExposure": false
+    },
+    "penalty_save": {
+      "frames": 6,
+      "sourcePoses": 6,
+      "derivedPoses": 0,
+      "repeatedExposure": false
+    },
+    "ref_run": {
+      "frames": 6,
+      "sourcePoses": 8,
+      "derivedPoses": 0,
+      "repeatedExposure": false
+    }
+  }
+}

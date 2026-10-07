@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Soccer Arcade 2000</title>
+<link rel="stylesheet" href="arcade/ui/arcade.css?v=sa2000-1">
+<style>
+html,body{margin:0;height:100%;background:#000;overflow:hidden}
+#sa2000-stage{position:fixed;inset:0;margin:auto;width:min(100vw,calc(100vh*16/9));height:auto;aspect-ratio:16/9;image-rendering:pixelated;display:block;background:#000;cursor:pointer}
+</style>
+</head>
+<body>
+<canvas id="sa2000-stage" width="1280" height="720" aria-label="Soccer Arcade 2000"></canvas>
+<script src="game/shim.js?v=sa2000-1"></script>
+<script src="arcade/assets/italy-map.js?v=sa2000-1"></script>
+<script src="arcade/assets/europe-map.js?v=sa2000-1"></script>
+<script src="arcade/assets/regional-maps.js?v=sa2000-1"></script>
+<script src="arcade/assets/animations.js?v=sa2000-1"></script>
+<script src="arcade/assets/jurassic-frames.js?v=sa2000-1"></script>
+<script src="arcade/assets/offline-sprites.js?v=sa2000-1"></script>
+<script src="arcade/engine/core.js?v=sa2000-1"></script>
+<script src="arcade/engine/controllers.js?v=sa2000-1"></script>
+<script src="arcade/engine/art.js?v=sa2000-1"></script>
+<script src="arcade/engine/arcade-features.js?v=sa2000-1"></script>
+<script src="arcade/engine/assist.js?v=sa2000-1"></script>
+<script src="arcade/engine/difficulty.js?v=sa2000-1"></script>
+<script src="arcade/engine/penalties.js?v=sa2000-1"></script>
+<script src="arcade/engine/setpieces.js?v=sa2000-1"></script>
+<script src="arcade/engine/visual.js?v=sa2000-1"></script>
+<script src="arcade/engine/presentation-upgrade.js?v=sa2000-1"></script>
+<script src="arcade/engine/final-showdown.js?v=sa2000-1"></script>
+<script src="arcade/engine/freekick.js?v=sa2000-1"></script>
+<script src="arcade/engine/stadium-view.js?v=sa2000-1"></script>
+<script src="arcade/engine/training.js?v=sa2000-1"></script>
+<script src="arcade/engine/kits.js?v=sa2000-1"></script>
+<script src="arcade/engine/stadium.js?v=sa2000-1"></script>
+<script src="arcade/bridge.js?v=sa2000-1"></script>
+<script src="arcade/ui/controls.js?v=sa2000-1"></script>
+<script src="arcade/ui/tournament.js?v=sa2000-1"></script>
+<script src="arcade/ui/ceremony.js?v=sa2000-1"></script>
+<script src="arcade/ui/drawn-menu.js?v=sa2000-1"></script>
+<script src="arcade/ui/music.js?v=sa2000-1"></script>
+<script src="game/catalog.js?v=sa2000-1"></script>
+<script src="arcade/ui/roster.js?v=sa2000-1"></script>
+<script src="arcade/ui/menu.js?v=sa2000-1"></script>
+<script src="game/intro.js?v=sa2000-1"></script>
+<script>SA2000.boot();</script>
+</body>
+</html>

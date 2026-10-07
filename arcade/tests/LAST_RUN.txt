@@ -1,0 +1,141 @@
+PASS 1 Kickoff C, clock starts only after pass
+PASS 2 Lateral pass chooses teammate in facing direction
+PASS 3 Pressed player always passes
+PASS 4 Immediate shot
+PASS 5 Buffered shot on reception
+PASS 6 Aerial volley
+PASS 7 Physical normal tackle and recovery expires
+PASS 8 Hard tackle clears ball
+PASS 9 Special burst
+PASS 10 Throw-in uses different receiver, ball enters field
+PASS 11 Off-ball attacking team movement
+PASS 12 Defensive press and cover
+PASS 13 Loose-ball team has only two assigned chasers
+PASS 14 Goal resets formation and conceding kickoff
+PASS 15 Regulation then golden goal then penalties
+PASS All players remain finite over 150 seconds
+PASS GK holding is protected and contact awards a goalkeeper free kick
+PASS Golden Goal is exactly 30 seconds
+PASS Corner and goal kick
+PASS Close ball camera
+PASS Shootout mathematical early finish
+PASS Keeper positions, catches and distributes
+PASS Played penalty aim and shot
+PASS Receiver approaches passing ball
+PASS Golden goal first score ends match
+PASS Keeper dive rebounds fast shot
+PASS First leg may draw; return leg uses aggregate
+PASS Return leg honors away goals
+PASS Database player attributes and formation are retained
+PASS Replay stores frames and never resimulates
+PASS Dribble over touchline awards real throw in
+31 core scenarios passed
+PASS actual ArcadeMatchBridge result and disposal
+PASS match entry silences menu and event music, completion restores menu music
+PASS goal presentation pauses physics without changing score or match clock
+PASS cancellation returns no result and restores menu audio
+PASS RUN → SHOOT begins at frame 0 independently of match clock
+PASS shot reaches final exposure during action
+PASS sprite drawing restores shared manifest
+PASS human goalkeeper hand possession starts with catch pose
+PASS human goalkeeper transitions from catch to hold
+PASS distribution overrides stale catch state
+PASS long goalkeeper kick uses the full kick sequence
+PASS field and penalty presentation leave match state intact
+PASS card cinematic renderer leaves match rules untouched
+PASS referee moves continuously in world coordinates without teleporting
+PASS referee is not fixed to a ball-relative screen corner
+PASS power meter stays in HUD independently of player position and close camera
+PASS radar draws all world positions without modifying players or using camera projection
+PASS goal crowd cutaway draws independently of pitch camera and leaves players unchanged
+PASS arcade reference HUD puts full radar above timer and uses separate large scores
+PASS radar hides during replay so caption stays readable
+PASS Z press holds ball; release fires once
+PASS tap, medium and full charge produce increasing real ball speeds
+PASS charge caps and ignores keyboard auto-repeat
+PASS blur and passing cancel charge without phantom shot
+PASS player physical shot-power attribute affects charged ball speed
+PASS CPU shots retain original base speed independently of held Z
+PASS released shot is buffered for reception and airborne volley
+PASS penalty charge affects actual aimed trajectory
+PASS behind hard foul issues a real yellow card and pauses match clock
+PASS second yellow expels player from physics and restart selection
+PASS red-card goalkeeper gets a temporary eligible replacement
+PASS replay restores live players, ownership, camera and clocks even if drawing fails
+PASS X launches an aerial pass while C stays grounded
+PASS X cancels shot charge and works from a restart
+PASS Goalkeeper settles without oscillating, turning or restarting run poses
+PASS Goalkeeper dive pose survives its full action instead of flipping back next tick
+PASS Camera shows approximately nineteen metres around the ball
+PASS CPU leaves keeper with ball in hands alone and does not start tackles
+PASS Nine penalty cells produce distinct physical horizontal and vertical targets
+PASS Penalty goalkeeper waits on the line, result persists until explicit continue
+PASS In-match spot kick uses same grid and returns to play after result confirmation
+PASS Simultaneous direction and dive use the newly selected penalty cell
+PASS Secret final intro pauses clock and gives every CPU player an original creature
+PASS Secret final keeps physical shots and penalties at their ordinary speeds
+PASS Context keys: Z shoots only, X/C slide in defense and V changes action with possession
+PASS Assisted lob follows directional input and excludes sent-off receivers
+PASS Assisted lob distance determines landing rather than fixed overshoot
+PASS Kickoff opponents respect centre-circle distance and first pass goes to support
+PASS Opening ground pass is received by own side before CPU can steal it
+PASS CPU shot aim does not depend on player arrows and pressure worsens accuracy
+PASS Keeper stays near goal line and predicts incoming shot rather than charging shooter
+CPU SHOT BENCHMARK: 0 goals / 46 saves / 14 misses from 60 central long shots
+PASS CPU attack shots have physical saves and misses instead of automatic goals
+CPU CLOSE-RANGE BENCHMARK: 23 goals from 40 chances
+PASS Close-range CPU chances can still produce real goals
+PASS CPU chooses a pass instead of firing from a poor wide angle
+PASS Loose-ball recovery assigns two AI teammates even if controlled defender is closest
+PASS Keeper parries away from central striker and toward safer flank
+PASS Nearest eligible player wins loose ball regardless of roster ordering
+PASS Collecting own rebound preserves CPU shooting cooldown
+PASS Goalkeeper can smother attacker feet instead of letting CPU walk through goal
+PASS AI defender presses ball carrier even when the manual defender is closest
+PASS CPU reception allows a brief read window and slower dribble than player movement
+PASS Arcade has one selectable entry per club or nation
+PASS Exactly three group games, draws, real table and top-two qualification
+PASS Champions and World Cup finish after three groups plus three knockout games
+PASS Losing group side is eliminated only after all three matches
+PASS Knockout loss ends tournament, persisted state resumes the same fixture
+PASS Only the final fixture is special and champion bonus survives save/load
+PASS Secret final substitutes a valid creature opponent and loss ends the tournament
+PASS every Italian and foreign database club has a city inside the Europe map
+PASS geographic ordering and shared-city markers
+PASS Europe contains Italian, British and Turkish country outlines
+PASS Italy and Europe A/B/C partition every club exactly once and markers fit their dedicated map
+PASS regional coastlines and country highlights include every designated country
+PASS deduplicated club roster remains complete and Champions keeps its full 16-team pool
+PASS arrow-only navigation reaches every world area, Z enters squads and team navigation remains contextual
+PASS drawn menu paints bitmap controls, hides during match and disposes cleanly
+PASS automatic CPU kit contrast, white preference and dark fallback without database mutation
+PASS all 61 national database records have correct highlighted countries and capital markers across eight zones
+PASS original cabinet soundtrack obeys match mute, OFF preference and single-player lifecycle
+PASS 80 unique arcade clubs and 65 unique nations without altering historical database
+PASS all arcade squads have complete lineups, valid lookups and generated local crests
+PASS historical saved tournament IDs retain their identity and valid match winners
+PASS all nine club and eight national zones populated; expansion markers stay inside maps
+PASS world-representative draws and full 32-nation World Cup with three group games and four knockout rounds
+PASS new arcade IDs simulate without depending on historical SIM team lookup
+PASS every new squad loads through actual match bridge and plays its kickoff in all four formations
+PASS expanded national maps highlight all added countries including Canada, China and New Zealand
+PASS stadium ambience and goal roar play once, include winning goals and penalties, and stop cleanly
+PASS actual match bridge starts stadium sound, celebrates golden-goal win, stops sound and restores menu music on exit
+PASS local-file sprite sources are embedded PNGs while HTTP retains normal asset paths
+MATCH BALANCE 4-4-2 0-2 CPU shots 5 saves 10
+MATCH BALANCE 4-3-3 0-0 CPU shots 2 saves 8
+MATCH BALANCE 3-5-2 0-1 CPU shots 9 saves 9
+MATCH BALANCE 5-3-2 0-0 CPU shots 4 saves 5
+PASS complete Atalanta–Bari matches in four formations remain playable for a stationary, passing-only novice controller
+PASS SIM, calendar, league and save path
+PASS Arcade result, scorer, standings, archive, calendar and save
+PASS complete 8 team cup bracket
+PASS complete 16 team cup bracket
+PASS actual root music guards block every playback entry during Arcade and retain off preference
+PASS JavaScript syntax (modules and all root inline scripts)
+PASS extracted animation assets
+PASS 28 requested animation sequences, populated cells and unified baseline
+PASS referee gestures and goalkeeper glove actions have distinct bitmap exposures
+PASS requested sequences contain full silhouettes, not detached balls or tiny fragments
+PASS twelve complete creature poses, transparent trophy and original menu soundtrack asset
+PASS offline sprite package preserves exact original PNG bytes for both palette atlases
