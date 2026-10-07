@@ -49,7 +49,7 @@ function drawTitle(u,t){cover(bg,.55);beams(t);for(let i=0;i<40;i++){const x=(i*
  word('ARCADE',W/2-120,290,130,['#f4ffff','#9feaff','#35b8ff','#1450c8'],['#06143a','#0a1f5a','#12307a'],u,.9,.05,'slide');
  if(u>1.8){if(Math.floor(t*2.2)%2===0)text(window.S9ArcadeControls?.padConnected?'PREMI START':'PREMI START  ·  Z / INVIO',W/2,640,30,'#ffffff');text('1–4 GIOCATORI  ·  TASTIERA / JOYPAD  ·  F SCHERMO INTERO',W/2,692,15,'#7fd8ff');text('© 2026 SOCCER ARCADE 2000',W-24,30,13,'#ffe14a','right')}}
 function frame(now){raf=requestAnimationFrame(frame);const t=(now-start)/1000;c.save();if(shake>0){c.translate((Math.random()-.5)*shake*(window.S9ArcadeEvolution?.settings.effects??1),(Math.random()-.5)*shake*(window.S9ArcadeEvolution?.settings.effects??1));shake=Math.max(0,shake-1.2)}
- if(state==='boot')drawBoot(t);else if(state==='intro'){drawIntro(t);if(t>=(window.S9ArcadeCinematic?.duration||12))goTitle(1.8)}else if(state==='title'){drawTitle(t,t);if(t>32){idleSince=now;play()}}
+ if(state==='boot')drawBoot(t);else if(state==='intro'){drawIntro(t);if(t>=(window.S9ArcadeCinematic?.duration||12))goTitle(1.8)}else if(state==='title'){drawTitle(t,t);if(t>20){idleSince=now;demo()}}
  c.restore();if(flash>0){c.fillStyle='rgba(255,255,255,'+(flash*(window.S9ArcadeEvolution?.settings.effects??1))+')';c.fillRect(0,0,W,H);flash=Math.max(0,flash-.05)}if(state!=='intro')for(let y=0;y<H;y+=4){c.fillStyle='rgba(0,0,0,'+(.09*(window.S9ArcadeEvolution?.settings.effects??1))+')';c.fillRect(0,y,W,1)}}
 // ------------------------------------------------------------------ audio
 function audio(){if(crowd)return;try{crowd=new Audio('assets/audio/stadium-ambience.mp3');crowd.loop=true;crowd.volume=.18*(window.S9ArcadeEvolution?.settings.volume??1);roar=new Audio('assets/audio/goal-boato.mp3');roar.volume=.45*(window.S9ArcadeEvolution?.settings.volume??1);music=new Audio('arcade/assets/cabinet-theme.wav');music.loop=true;music.volume=.12*(window.S9ArcadeEvolution?.settings.volume??1)}catch(e){}}
@@ -61,12 +61,14 @@ function boot(){show('boot')}
 function play(){audio();window.S9SFX?.unlock?.();try{crowd.currentTime=0;crowd.play().catch(()=>{})}catch(e){}show('intro')}
 function goTitle(skipTo=0){shake=0;show('title');if(skipTo){start-=skipTo*1000;for(const k of ['2000'])cues.add(k);startMusic()}}
 function title(){audio();show('title');start-=1800;cues.add('2000');startMusic()}
+// Attract loop: title → demo match (any key returns to the title) → intro.
+function demo(){if(!window.S9ArcadeDemo||!window.launchArcadeMatch)return play();cancelAnimationFrame(raf);state='demo';stopAudio();canvas.style.display='none';const back=r=>{if(state!=='demo')return;canvas.style.display='block';if(r?.demo==='exit')title();else play()};S9ArcadeDemo.play().then(back,()=>back(null))}
 function menu(){cancelAnimationFrame(raf);state='menu';stopAudio();canvas.style.display='none';window.S9ArcadeUI?.open()}
-function onKey(e){if(state==='menu'||state==='idle'||window.S9ArcadeMenuOpen||window.S9ArcadeActive)return;const k=(e.key||'').toLowerCase();if(k===(window.S9ArcadeBindings?.key('fullscreen')||'f')||(e.ctrlKey||e.metaKey||e.altKey)&&!['control','meta','alt'].includes(k))return;e.preventDefault();
+function onKey(e){if(state==='menu'||state==='idle'||state==='demo'||window.S9ArcadeMenuOpen||window.S9ArcadeActive)return;const k=(e.key||'').toLowerCase();if(k===(window.S9ArcadeBindings?.key('fullscreen')||'f')||(e.ctrlKey||e.metaKey||e.altKey)&&!['control','meta','alt'].includes(k))return;e.preventDefault();
  if(state==='boot')return play();if(state==='intro')return goTitle(1.8);if(state==='title'){if((performance.now()-start)/1000<1.5){start-=1800;cues.add('2000');startMusic();return}if(window.S9ArcadeBindings?['confirm','back'].includes(S9ArcadeBindings.keyboard('menu',k)):['z','enter',' ','x','c'].includes(k))return menu()}}
 addEventListener('keydown',onKey);canvas.addEventListener('click',()=>onKey({key:window.S9ArcadeBindings?.key('confirm','menu')||'Enter',preventDefault(){}}));
 // Single still frame of a scene at time t (used for screenshots / QA).
 function preview(s,t){engine();state=s;start=performance.now()-t*1000;landed=new Set();cues=new Set(['2000','kick','flash']);if(s==='title')for(let i=0;i<20;i++)landed.add('x'+i);frame(performance.now());cancelAnimationFrame(raf);flash=0}
 engine();
-window.SA2000={boot,play,title,menu,preview};
+window.SA2000={boot,play,title,menu,preview,demo};
 })();

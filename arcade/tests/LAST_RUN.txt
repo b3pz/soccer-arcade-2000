@@ -210,6 +210,9 @@ PASS free kick into the wall stops at the wall and rebounds, never shown as a go
 PASS kick-off camera pulls back slowly from the centre ball
 PASS slim scoreboard and scorer name under the GOAL banner
 PASS crowd celebration cutaway is a tinted bitmap
+PASS demo bot plays short matches with 2 crosses, 10 volleys, 15 goals (6-0, 5-0, 4-0) and 12 different captions
+PASS CPU wingers reach the byline and cross (12/12), runners volley (5/12)
+PASS human cross: control moves to the striker and holding Z volleys it
 .....
 ----------------------------------------------------------------------
 Ran 5 tests in 0.000s
@@ -225,4 +228,4 @@ PASS offline sprite package preserves exact original PNG bytes for both palette 
 PASS private-room server authentication, signaling, expiry and rate limits
 PASS six spectacular-save sprite sequences have eight distinct full-body exposures each
 
-Sprite contact sheet visually reviewed. Kick-off camera, compact scoreboard, crowd cutaway and free-kick wall rebound rendered in headless Chrome. Real browser playback and two-browser networking have not been verified in this environment.
+Kick-off camera, compact scoreboard, crowd cutaway, free-kick wall rebound and the demo launch rendered in headless Chrome. Real browser playback and two-browser networking have not been verified in this environment.

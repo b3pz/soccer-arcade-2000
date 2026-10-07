@@ -58,5 +58,8 @@ R.scorerCaption=function(m){const s=m.scorers?.[m.scorers.length-1];if(!s||!/^GO
  const p=s.playerId?m.players.find(q=>q.source?.id===s.playerId):null,label=p?(p.number?p.number+'  ':'')+(p.source?.name||s.name||'').toUpperCase():s.name?'AUTOGOL':'';if(!label)return;
  const team=m.teams[s.team],tw=Math.min(700,label.length*17+120);this.panel(640-tw/2,290,tw,52,10);this.teamCrest(team,640-tw/2+14,296,34,40);this.text(label,640+14,325,24,'#fff')};
 const draw=R.draw;
-R.draw=function(m){draw.call(this,m);if(!this.replayMode&&!m.cardScene&&m.phase!=='FINISHED'&&m.phase!=='PENALTIES'&&m.phase!=='FREEKICK')this.scorerCaption(m)};
+R.draw=function(m){draw.call(this,m);if(!this.replayMode&&!m.cardScene&&m.phase!=='FINISHED'&&m.phase!=='PENALTIES'&&m.phase!=='FREEKICK')this.scorerCaption(m);if(m.demo)this.demoOverlay(m)};
+// Attract mode: DEMO tag, blinking start prompt and the button the bot is using right now.
+R.demoOverlay=function(m){const t=performance?.now?.()/1000||0,cap=m.demo.caption;this.panel(1000,14,262,50,10);this.text('DEMO',1060,47,24,'#ff8fa3');if(Math.floor(t*2)%2===0)this.text('PREMI START',1192,46,15,'#fff');
+ if(cap){const w=Math.min(760,cap.text.length*15+150),x=640-w/2,y=590;this.panel(x,y,w,58,12);const c=this.ctx;c.fillStyle='#ffe447';c.fillRect(x+16,y+12,Math.max(46,cap.keys.length*14+20),34);this.text(cap.keys,x+16+Math.max(46,cap.keys.length*14+20)/2,y+36,20,'#101830');this.text(cap.text,x+w/2+Math.max(46,cap.keys.length*14+20)/2,y+37,20,'#fff')}};
 })();

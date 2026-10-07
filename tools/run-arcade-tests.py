@@ -13,7 +13,7 @@ with tempfile.TemporaryDirectory(prefix='sa2000-qa-') as tmp:
  for index,f in enumerate(files):
   syntax=Path(tmp)/f'check-{index}.js';syntax.write_text(f'checkSyntax({str(f)!r});')
   subprocess.run([str(jsc),str(syntax)],cwd=root,check=True)
- for name in ['core','visual','features','tournament','drawn-menu','cabinet','catalog','stadium','offline','full-match-balance','assist','coop','evolution','evolution-ui','fantasy','online','cinematic','bindings','saves','presentation']:
+ for name in ['core','visual','features','tournament','drawn-menu','cabinet','catalog','stadium','offline','full-match-balance','assist','coop','evolution','evolution-ui','fantasy','online','cinematic','bindings','saves','presentation','demo']:
   subprocess.run([str(jsc),str(root/f'arcade/tests/{name}-tests.js')],cwd=root,check=True)
  print('PASS JavaScript syntax (modules and all root inline scripts)')
  for f in [root/'arcade/assets/animations.png',root/'arcade/assets/animations.json']:
