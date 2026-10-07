@@ -21,7 +21,7 @@ class InputManager {
  // Gamepads are read directly (standard mapping, left stick or d-pad) so several pads can drive several humans.
  poll(){if(!this.pads||!this.active||typeof navigator==='undefined'||!navigator.getGamepads)return;const list=[...(navigator.getGamepads()||[])].filter(Boolean),pads=this.pads==='all'?list:list.filter(p=>this.pads.includes(p.index)),now=new Set();
   for(const pad of pads){pad.buttons.forEach((b,i)=>{const action=window.S9ArcadeBindings?S9ArcadeBindings.padAction(i,pad.index):PADMAP[i];if((b.pressed||b.value>.5)&&['arrowup','arrowdown','arrowleft','arrowright','z','c','x','v','switch'].includes(action))now.add(action)});const [x=0,y=0]=pad.axes;if(x<-.45)now.add('arrowleft');if(x>.45)now.add('arrowright');if(y<-.45)now.add('arrowup');if(y>.45)now.add('arrowdown')}
-  const before=this.padDown||new Set();for(const k of now)if(!before.has(k))this.press(k,'pad');for(const k of before)if(!now.has(k))this.release(k,'pad');this.padDown=now}
+  const before=this.padDown||new Set([...now].filter(k=>!k.startsWith('arrow')));for(const k of now)if(!before.has(k))this.press(k,'pad');for(const k of before)if(!now.has(k))this.release(k,'pad');this.padDown=now}
  cancelShot(clearPressed=true){this.shotCharging=false;this.shotHeld=0;this.shotPower=null;this.shotBuffer=0;if(clearPressed)this.pressed.delete('z')}
  get shotCharge(){return this.shotCharging?Math.min(1,this.shotHeld/.85):this.shotPower||0}
 

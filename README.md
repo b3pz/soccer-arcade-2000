@@ -92,7 +92,15 @@ Il filmato d'apertura (12 s) racconta un'azione continua in un'unica notte, semp
 
 Ogni indicazione di comando mostra il tasto della tastiera e, con un joypad collegato, l'icona vera del pulsante: ✕ ○ □ △ colorati, L1/R1, START e croce direzionale sui PlayStation, A B X Y colorati sugli Xbox. Le icone seguono i comandi personalizzati. Sul titolo START del joypad avvia il gioco. Lo schermo intero da SELECT funziona solo subito dopo un tasto della tastiera o un clic, perché il browser non lo concede al solo joypad: se viene rifiutato, il gioco lo attiva al primo tasto o clic successivo e lo segnala.
 
-### Scatto e lancio a pressione
+### Scatto, lancio, difesa
 
-- **Scatto (tasto speciale: V, △ / Y sul joypad):** toccalo ripetutamente, come a Track & Field. Ogni tocco dà velocità, che cala se smetti; una barra azzurra sopra il giocatore mostra la carica. Con la palla e un avversario davanti, lo stesso tasto fa il dribbling (non ripetibile: ricarica di 2,3 s); senza palla, con il portatore avversario a contatto, fa il contrasto duro.
-- **Lancio a pressione (passaggio alto: X, □ sul joypad):** tieni premuto e rilascia. La barra LANCIO sopra il giocatore indica la potenza: da circa 15 m con un tocco a 50 m a piena carica, nella direzione della levetta/frecce. Il compagno più vicino al punto di caduta ci corre incontro. Senza palla resta la scivolata.
+- **Scatto (tasto speciale: V, △ / Y sul joypad):** toccalo ripetutamente, come a Track & Field: fino a circa +40% di velocità già nel primo secondo, con scie dietro al giocatore e una barra azzurra; cala se smetti. Con la palla e un avversario davanti fa il dribbling (ricarica 2,3 s).
+- **Lancio a pressione (passaggio alto: X, □ sul joypad):** tieni premuto e rilascia, da circa 15 m a 50 m nella direzione delle frecce; il compagno più vicino al punto di caduta ci corre incontro.
+- **Difesa:** V o X vicino al portatore = **scivolata** (può essere fallo se arriva da dietro). C (○ sul joypad) **toccato** = contrasto in piedi; **tenuto premuto** = pressing: il tuo uomo si mette tra il portatore e la porta e lo segue (scritta PRESSING); intanto puoi tentare la scivolata.
+- La CPU ha la scritta **CPU** sul giocatore che sta comandando.
+
+### Prima del calcio d'inizio e rallenty
+
+- **Lancio della moneta:** scegli TESTA o CROCE con le frecce e conferma; chi vince sceglie se attaccare a sinistra o a destra, l'altra squadra batte il calcio d'inizio. Il campo scelto specchia immagine e comandi (la simulazione non cambia). Non c'è in demo, allenamento, sfide, finale segreta e online.
+- I tasti già premuti quando parte la partita vengono ignorati finché non li rilasci (prima il pulsante usato per avviare poteva battere il calcio d'inizio da solo).
+- **Rallenty:** quando un tiro sta per arrivare nello specchio della porta (gol o parata) la partita rallenta per circa un secondo, con bande nere da cinema.

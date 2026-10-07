@@ -88,8 +88,23 @@ R.pauseScreen=function(m){const c=this.ctx,at=this.pauseIndex||0,golden=m.rules.
 R.scorerCaption=function(m){const s=m.scorers?.[m.scorers.length-1];if(!s||!/^GOAL!|^GOLDEN GOAL!$/.test(m.message||'')||m.messageTime<=0)return;
  const p=s.playerId?m.players.find(q=>q.source?.id===s.playerId):null,label=p?(p.number?p.number+'  ':'')+(p.source?.name||s.name||'').toUpperCase():s.name?'AUTOGOL':'';if(!label)return;
  const team=m.teams[s.team],tw=Math.min(700,label.length*17+120);this.panel(640-tw/2,290,tw,52,10);this.teamCrest(team,640-tw/2+14,296,34,40);this.text(label,640+14,325,24,'#fff')};
+// ---------------------------------------------------------------- CPU marker
+// The player the CPU is driving right now (its ball carrier, else its player closest to the ball) is labelled, like 1P.
+R.cpuMarker=function(m){const b=m.ball;for(const t of m.teams||[]){if((m.humans||[]).some(h=>h.team===t.id))continue;const own=b.owner?.team===t?b.owner:null,p=own||t.players.filter(q=>!q.sentOff&&q.role!=='GK').sort((a,c)=>Math.hypot(a.x-b.x,a.y-b.y)-Math.hypot(c.x-b.x,c.y-b.y))[0];if(!p)continue;
+ const pr=this.project(p.x,p.y),c=this.ctx;c.strokeStyle='#ff6b7d';c.lineWidth=2;c.beginPath();c.ellipse(pr.x,pr.y+6,13*pr.scale,4.6*pr.scale,0,0,7);c.stroke();this.text('CPU',pr.x,pr.y-75*pr.scale,18,'#ff8fa3')}};
+
+// ---------------------------------------------------------------- slow motion
+// A shot that will reach the goal frame within ~0.4 s slows the match down (goal or save), like the cabinet replays live.
+const SLOW=.3,WINDOW=.42,MAXREAL=1.6;
+function slowScale(m,dt){const b=m.ball,s=m.slowmo=m.slowmo||{amount:0,real:0,shot:null};let want=0;
+ if(m.phase==='PLAY'&&!b.owner&&b.state==='shot'&&Math.abs(b.vx)>8){const line=b.vx>0?100:0,t=(line-b.x)/b.vx;if(t>0&&t<WINDOW){const y=b.y+b.vy*t,z=b.z+b.vz*t-12*t*t,key=m.lastShot?.time;
+  if(y>23.5&&y<38.5&&z<6){if(s.shot!==key){s.shot=key;s.real=0}if(s.real<MAXREAL)want=1}}}
+ s.real+=dt;s.amount+=(want-s.amount)*Math.min(1,dt*(want?14:5));return 1-(1-SLOW)*s.amount}
+window.S9ArcadeSlowmo={scale:slowScale};
 const draw=R.draw;
-R.draw=function(m){draw.call(this,m);if(!this.replayMode&&!m.cardScene&&m.phase!=='FINISHED'&&m.phase!=='PENALTIES'&&m.phase!=='FREEKICK')this.scorerCaption(m);if(m.demo)this.demoOverlay(m)};
+R.draw=function(m){draw.call(this,m);if(!this.replayMode&&!m.cardScene&&(m.phase==='PLAY'||m.phase==='RESTART'))this.cpuMarker(m);if(!this.replayMode&&!m.cardScene&&m.phase!=='FINISHED'&&m.phase!=='PENALTIES'&&m.phase!=='FREEKICK')this.scorerCaption(m);if(m.demo)this.demoOverlay(m);
+ // Slow-motion look: cinema bars and a soft vignette while it lasts.
+ const a=m.slowmo?.amount||0;if(a>.02&&!this.replayMode){const c=this.ctx;c.fillStyle='rgba(0,0,0,'+(.85*a)+')';c.fillRect(0,0,1280,46*a);c.fillRect(0,720-46*a,1280,46*a);const g=c.createRadialGradient(640,360,260,640,360,760);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,'+(.35*a)+')');c.fillStyle=g;c.fillRect(0,0,1280,720)}};
 // Attract mode: DEMO tag, blinking start prompt and the button the bot is using right now.
 R.demoOverlay=function(m){const t=performance?.now?.()/1000||0,cap=m.demo.caption;this.panel(1000,14,262,50,10);this.text('DEMO',1060,47,24,'#ff8fa3');if(Math.floor(t*2)%2===0)this.text('PREMI START',1192,46,15,'#fff');
  if(cap){const w=Math.min(820,cap.text.length*15+260),x=640-w/2,y=590;this.panel(x,y,w,58,12);this.text(cap.keys+'  '+cap.text,640,y+37,20,'#fff')}};
