@@ -72,7 +72,7 @@ function open(){
    button('{m:confirm} INSERISCI GETTONE · RIGIOCA',()=>{stopCountdown();cup.coins--;S9Save.putSetting(saveKey,cup);pending=null;step='tournament';return play()});button('{m:back} ACCETTA LA SCONFITTA',()=>{stopCountdown();return accept()});return;
   }
   if(step==='friendly-ready'||step==='friendly-result'){
-   title('MATCH RESULT');box.append(el('h2',user.name+' VS '+opponent.name));if(friendlyResult){box.append(el('h2',friendlyResult.homeGoals+' : '+friendlyResult.awayGoals));window.S9ArcadeHub?.result(box,friendlyResult)}button('{m:confirm} RIVINCITA',playFriendly);button('{m:back} CAMBIA SQUADRE',()=>{step='teams';index=0;friendlyResult=null;render()});return;
+   title('MATCH RESULT');box.append(el('h2',user.name+' VS '+opponent.name));if(friendlyResult){box.append(el('h2',friendlyResult.homeGoals+' : '+friendlyResult.awayGoals));window.S9ArcadeHub?.result(box,friendlyResult,[user.name,opponent.name])}button('{m:confirm} RIVINCITA',playFriendly);button('{m:back} CAMBIA SQUADRE',()=>{step='teams';index=0;friendlyResult=null;render()});return;
   }
   if(step==='category'){
    title('SOCCER ARCADE 2000');const options=el('div',undefined,'arcade-mode-options');

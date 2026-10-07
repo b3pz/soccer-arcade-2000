@@ -236,4 +236,4 @@ PASS offline sprite package preserves exact original PNG bytes for both palette 
 PASS private-room server authentication, signaling, expiry and rate limits
 PASS six spectacular-save sprite sequences have eight distinct full-body exposures each
 
-Coin toss stages rendered in headless Chrome. A physical joypad has not been verified in this environment.
+Friendly result screen rendered in headless Chrome. A physical joypad has not been verified in this environment.

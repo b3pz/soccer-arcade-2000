@@ -130,3 +130,4 @@
 
 #arcade-match>.sa-options{position:fixed!important;inset:0!important;width:auto!important;box-shadow:none!important;z-index:100000}#arcade-match .sa-options canvas{width:min(100vw,calc(100vh*16/9))!important;height:auto!important;max-height:100vh!important;border:0!important}
 .sa-options.evo-settings{padding:0!important;border:0!important;border-radius:0!important;max-height:none!important;overflow:hidden!important;background:#000!important}
+#arcade-select .evo-result{width:min(640px,86vw);margin:14px auto;padding:14px 22px;border:0;background:none;box-sizing:border-box}#arcade-select .evo-result table{width:100%;table-layout:fixed;text-align:center}#arcade-select .evo-result th:first-child{width:46%;text-align:left}#arcade-select .evo-result td,#arcade-select .evo-result th{padding:7px 4px;border-bottom:0}#arcade-select .evo-result p{text-align:center;margin:8px 0}
