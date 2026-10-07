@@ -68,3 +68,15 @@ In Arcade Evolution → Impostazioni puoi rimappare movimento e azioni di entram
 - **Nomi**: tutti i giocatori hanno nomi inventati (`tools/fictional-player-names.py`), con sonorità coerenti con la nazione della squadra.
 - **Demo**: restando fermi sulla schermata del titolo per circa 20 secondi parte una partita dimostrativa (75 secondi di gioco). Il giocatore 1P è guidato da un bot che usa i comandi veri e una didascalia mostra il tasto usato (passaggio, tiro caricato, cross dal fondo, tiro al volo, scivolata, calci piazzati). Un tasto qualsiasi, un clic o un pulsante del joypad riporta al titolo; a fine demo riparte l'intro.
 - **Cross e tiri al volo**: le ali della CPU scendono sul fondo e crossano verso un compagno in area, mentre punte e centrocampisti attaccano primo palo, secondo palo e dischetto. Sui cross gli attaccanti della CPU calciano spesso al volo. Quando crossi tu, il controllo passa al compagno che riceve appena il pallone sta per arrivare: tieni premuto **Z** e il tiro al volo parte da solo. Il portiere esce solo sui cross diretti nell'area piccola.
+
+### Opzioni, joypad e difficoltà
+
+- **OPZIONI** si apre dal menu principale (voce *OPZIONI · COMANDI · JOYPAD*), dal Centro Arcade e dalla pausa. È tutta navigabile col joypad: croce/stick per muoversi, A conferma, B indietro, LB/RB cambiano scheda (GIOCO, JOYPAD, TASTIERA 1P, TASTIERA 2P, MENU · SISTEMA).
+- **Mappatura per pressione**: scegli un comando e premi il pulsante (o il tasto) da assegnargli. I pulsanti compaiono con il nome stampato sul joypad: A/B/X/Y/LB… su Xbox e compatibili, ✕/○/□/△/L1… su PlayStation. Se il pulsante è già usato nello stesso profilo, i due comandi si scambiano.
+- **Pausa** (START/ESC): menu con cursore RIPRENDI / OPZIONI / ESCI SENZA REGISTRARE. B riprende la partita, non la abbandona.
+- **Camera**: in *campo largo* giocatori e pallone si rimpiccioliscono in proporzione.
+- **Difficoltà**: la CPU protegge palla e scatta via quando è pressata, passa in avanti al compagno libero, tira dal limite e difende tra il portatore e la porta. Portieri CPU più reattivi in *normale* e *difficile*. Il raggio dei contrasti umani e la precisione dei tiri da lontano dipendono dal livello.
+
+### Intro
+
+Il filmato d'apertura (12 s) è montato con le immagini del gioco: stadio notturno, stadio anni '90, porta con curva in pixel-art, sprite dei giocatori ingranditi con divise di fantasia, pallone pixel-art (`arcade/assets/ball.png`, generatore `tools/generate-ball-sprite.py`) e curva in festa.
