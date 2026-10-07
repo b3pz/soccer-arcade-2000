@@ -218,10 +218,10 @@ PASS kick-off camera pulls back slowly from the centre ball
 PASS slim scoreboard and scorer name under the GOAL banner
 PASS crowd celebration cutaway uses animated bitmap artwork
 PASS slow motion when a shot is about to reach the goal frame, not for shots going wide
-PASS coin toss: call, flip, choice of end, kick-off to the other side (1P)
+PASS coin toss: call, flip, choice of end, kick-off to the other side (CPU)
 PASS holding the pass button in defence shadows the carrier goal-side
 PASS CPU label on the player the CPU is driving
-PASS demo bot plays short matches with 25 crosses, 5 volleys, 14 goals (5-0, 3-0, 6-0) and 12 different captions
+PASS demo bot plays short matches with 24 crosses, 0 volleys, 16 goals (4-0, 5-0, 7-0) and 12 different captions
 PASS CPU wingers reach the byline and cross (12/12), runners volley (5/12)
 PASS human cross: control moves to the striker and holding Z volleys it
 PASS keeper holds the middle of the goal on wing play and still moves onto shots
@@ -239,5 +239,3 @@ PASS offline sprite package preserves exact original PNG bytes for both palette 
 PASS private-room server authentication, signaling, expiry and rate limits
 PASS six spectacular-save sprite sequences have eight distinct full-body exposures each
 PASS raster environments, transparent title, favicon, Jurassic Kickers crest and 12 regional maps
-
-Phone layout (844x390) and touch controls rendered in headless Chrome with simulated touch; a real phone has not been tested.

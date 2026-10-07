@@ -44,7 +44,7 @@ Dal menu principale apri **PARTITA RAPIDA · NUOVE MODALITÀ · IMPOSTAZIONI** p
 Preferenze, medaglie e progressi sono locali al browser (`sa2000:preferences`, `sa2000:progress`, `sa2000:evolutionRun`). Le coppe esistenti mantengono il proprio salvataggio.
 
 ## Fantasia arcade
-- Carica il tiro fino al **100%**: aura sul giocatore, **FIRE SHOT!**, pallone infuocato con scia e scintille. Funziona anche nei rigori e nelle punizioni dirette a piena potenza.
+- Carica il tiro fino al **95%** (circa 0,6 s tenendo premuto TIRO): aura sul giocatore, **FIRE SHOT!**, pallone infuocato con scia e scintille. Funziona anche nei rigori e nelle punizioni dirette a piena potenza.
 - Un tiro al volo a piena potenza diventa **METEOR VOLLEY!**, con scia viola.
 - Il dribbling speciale lascia scie turchesi; un gol su tiro infuocato durante il gioco normale produce **SUPER GOAL!** e un'onda d'urto grafica.
 - In Impostazioni, **Fantasia arcade** attiva/disattiva questi effetti; **Flash e scanline** ne regola anche l'intensità. A zero gli effetti sono spenti.

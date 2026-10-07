@@ -49,7 +49,7 @@ const receive=M.receive;
 M.receive=function(){const b=this.ball;if(!b.owner&&b.lock<=0&&b.z>.6&&b.z<3.2&&(b.state==='aerial'||b.state==='rebound')){
   for(const p of [...this.players].sort((a,c)=>dist(a,b)-dist(c,b))){if(p.sentOff||p.role==='GK'||p.stun>0||p.recovery>0)continue;if(dist(p,b)>3.2)break;const t=p.team;if(!inBox(t,p)||t.id!==b.lastTeam)continue;
    const h=this.humanOf(p);
-   if(h){if(h.input.shotCharging){h.input.shotPower=Math.min(1,Math.max(.55,h.input.shotHeld/.85));h.input.shotBuffer=.28;h.input.shotCharging=false;h.input.down.delete('z');this.as(h,()=>this.shoot(p,true));return}}
+   if(h){if(h.input.shotCharging){h.input.shotPower=Math.min(1,Math.max(.55,h.input.shotHeld/.6));h.input.shotBuffer=.28;h.input.shotCharging=false;h.input.down.delete('z');this.as(h,()=>this.shoot(p,true));return}}
    // The keeper gets there first in his own six-yard area: no first-time strike, he claims it.
    else if(this.players.some(k=>k.role==='GK'&&k.team!==t&&!k.sentOff&&dist(k,b)<dist(p,b)+.6))break;
    else if(b.state==='aerial'&&roll(this,b)<(this.teamHasHumans(t)?.3:({facile:.45,normale:.6,difficile:.8}[this.difficulty]??.6))){this.shoot(p,true,.45+chance(this,7)*.4);mistime(this,p);return}

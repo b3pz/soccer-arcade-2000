@@ -17,19 +17,19 @@ class InputManager {
  this.onBlur=()=>{this.down.clear();this.pressed.clear();this.sources.clear();this.cancelShot()};addEventListener('keydown',this.onDown);addEventListener('keyup',this.onUp);addEventListener('blur',this.onBlur);}
  press(k,source='kb'){const held=this.sources.get(k)||new Set();this.sources.set(k,held);if(held.has(source))return;held.add(source);if(this.down.has(k))return;this.down.add(k);
   if(k==='z'&&this.context?.phase==='PENALTIES'&&this.context.pen?.stage==='result'){this.pressed.add(k);return}if(k==='z'){this.shotCharging=true;this.shotHeld=0;this.shotBuffer=0;this.shotPower=null}else this.pressed.add(k)}
- release(k,source='kb'){const held=this.sources.get(k);if(held){held.delete(source);if(held.size)return}if(k==='z'&&this.active&&this.shotCharging){this.shotPower=Math.min(1,this.shotHeld/.85);this.shotBuffer=.28;this.pressed.add('z');this.shotCharging=false}this.down.delete(k)}
+ release(k,source='kb'){const held=this.sources.get(k);if(held){held.delete(source);if(held.size)return}if(k==='z'&&this.active&&this.shotCharging){this.shotPower=Math.min(1,this.shotHeld/.6);this.shotBuffer=.28;this.pressed.add('z');this.shotCharging=false}this.down.delete(k)}
  // Gamepads are read directly (standard mapping, left stick or d-pad) so several pads can drive several humans.
  poll(){if(!this.pads||!this.active||typeof navigator==='undefined'||!navigator.getGamepads)return;const list=[...(navigator.getGamepads()||[])].filter(Boolean),pads=this.pads==='all'?list:list.filter(p=>this.pads.includes(p.index)),now=new Set();
   for(const pad of pads){pad.buttons.forEach((b,i)=>{const action=window.S9ArcadeBindings?S9ArcadeBindings.padAction(i,pad.index):PADMAP[i];if((b.pressed||b.value>.5)&&['arrowup','arrowdown','arrowleft','arrowright','z','c','x','v','switch'].includes(action))now.add(action)});const [x=0,y=0]=pad.axes;if(x<-.45)now.add('arrowleft');if(x>.45)now.add('arrowright');if(y<-.45)now.add('arrowup');if(y>.45)now.add('arrowdown')}
   const before=this.padDown||new Set([...now].filter(k=>!k.startsWith('arrow')));for(const k of now)if(!before.has(k))this.press(k,'pad');for(const k of before)if(!now.has(k))this.release(k,'pad');this.padDown=now}
  cancelShot(clearPressed=true){this.shotCharging=false;this.shotHeld=0;this.shotPower=null;this.shotBuffer=0;if(clearPressed)this.pressed.delete('z')}
- get shotCharge(){return this.shotCharging?Math.min(1,this.shotHeld/.85):this.shotPower||0}
+ get shotCharge(){return this.shotCharging?Math.min(1,this.shotHeld/.6):this.shotPower||0}
 
  dispose(){this.active=false;removeEventListener('keydown',this.onDown);removeEventListener('keyup',this.onUp);removeEventListener('blur',this.onBlur);this.onBlur();}
 
  axis(){return unit(Number(this.down.has('arrowright'))-Number(this.down.has('arrowleft')),Number(this.down.has('arrowdown'))-Number(this.down.has('arrowup')))}
  take(k){const yes=this.pressed.has(k);this.pressed.delete(k);return yes}
- end(dt){if(this.active&&this.shotCharging)this.shotHeld=Math.min(.85,this.shotHeld+dt);this.shotBuffer=Math.max(0,this.shotBuffer-dt);if(!this.shotCharging&&!this.shotBuffer)this.shotPower=null;this.pressed.clear()}
+ end(dt){if(this.active&&this.shotCharging)this.shotHeld=Math.min(.6,this.shotHeld+dt);this.shotBuffer=Math.max(0,this.shotBuffer-dt);if(!this.shotCharging&&!this.shotBuffer)this.shotPower=null;this.pressed.clear()}
 }
 InputManager.KEYMAPS=KEYMAPS;InputManager.PADMAP=PADMAP;
 class Player {

@@ -25,7 +25,7 @@ M.shoot=function(p,volley=false,power=null){
  if(!p||p.sentOff)return;
  const count=this.stats.teams[p.team.id].shots;
  const result=shoot.call(this,p,volley,power);
- if(p&&this.stats.teams[p.team.id].shots>count&&this.lastShot?.player===p&&this.lastShot.charge>=.999&&this.ball.state==='shot')ignite(this,p,volley);
+ if(p&&this.stats.teams[p.team.id].shots>count&&this.lastShot?.player===p&&this.lastShot.charge>=.95&&this.ball.state==='shot')ignite(this,p,volley);
  return result;
 };
 const update=M.update;
