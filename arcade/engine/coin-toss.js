@@ -30,7 +30,10 @@ function create(m,config={}){
  const human=m.humans?.[0],hTeam=human?.team??0,cpuOnly=!human;let stage='call',age=0,call=0,result=null,winner=null,side=0,done=false,last=0;
  const rnd=()=>Math.random();
  function take(i,k){return i.take?.(k)}
- function update(dt,inputs){age+=dt;const i=human?.input||inputs[0],left=take(i,'arrowleft')||take(i,'arrowup'),right=take(i,'arrowright')||take(i,'arrowdown'),ok=take(i,'z')||take(i,'c')||take(i,'x');
+ // Touch: a tap on the left half picks TESTA / attack left, on the right half CROCE / attack right; a second tap confirms.
+ let tap=null;const onTap=e=>{const r=e.target?.getBoundingClientRect?.();if(!r||!r.width)return;const x=(e.changedTouches?.[0]?.clientX??e.clientX)-r.left;tap=x<r.width/2?0:1};
+ if(typeof addEventListener==='function'){addEventListener('touchend',onTap,true)}
+ function update(dt,inputs){age+=dt;if(done&&typeof removeEventListener==='function')removeEventListener('touchend',onTap,true);const t0=tap;tap=null;if(t0!=null&&stage==='call'){if(t0===call)inputs[0]?.pressed.add('z');call=t0}if(t0!=null&&stage==='won'&&winner===hTeam){if(t0===side&&age>.4)inputs[0]?.pressed.add('z');side=t0}const i=human?.input||inputs[0],left=take(i,'arrowleft')||take(i,'arrowup'),right=take(i,'arrowright')||take(i,'arrowdown'),ok=take(i,'z')||take(i,'c')||take(i,'x');
   if(stage==='call'){if(cpuOnly||age>8)call=rnd()<.5?0:1;if(left)call=0;if(right)call=1;if(ok||cpuOnly||age>8){stage='flip';age=0;result=rnd()<.5?0:1;window.S9SFX?.kick?.()}return}
   if(stage==='flip'){if(age>2.1){stage='won';age=0;winner=result===call?hTeam:1-hTeam;side=rnd()<.5?0:1}return}
   if(stage==='won'){if(winner===hTeam&&!cpuOnly){if(left)side=0;if(right)side=1;if(ok&&age>.4){stage='go';age=0}}else if(age>1.8){stage='go';age=0}return}
@@ -47,11 +50,11 @@ function create(m,config={}){
   for(const [p,x,flip] of [[cap(0),430,false],[ref,640,false],[cap(1),850,true]]){c.save();c.translate(x,560);if(flip)c.scale(-1,1);r.sprite(p,{...m,elapsed:m.elapsed+age,goalCelebration:null,ball:{owner:null}},{scale:3});c.restore()}
   drawCoin(r,640,330,110);r.teamCrest(team(0),300,470,60,70);r.teamCrest(team(1),920,470,60,70);r.text(code(0),330,560,22,'#fff');r.text(code(1),950,560,22,'#fff');
   if(stage==='call'){for(const [i,label,x] of [[0,'TESTA',470],[1,'CROCE',810]]){r.panel(x-110,226,220,50,10);r.text(label,x,260,26,i===call?'#ffe447':'#9fc2d4');if(i===call){c.strokeStyle='#ffe447';c.lineWidth=3;c.strokeRect(x-110,226,220,50)}}
-   if(!cpuOnly)r.text('{arrows} SCEGLI    {m:confirm} LANCIA',640,650,20,'#ffe55b')}
+   if(!cpuOnly)r.text(window.S9ArcadeTouch?'TOCCA TESTA O CROCE · TOCCA DI NUOVO PER LANCIARE':'{arrows} SCEGLI    {m:confirm} LANCIA',640,650,20,'#ffe55b')}
   if(stage==='won'||stage==='go'){const mine=winner===hTeam&&!cpuOnly;r.panel(290,190,700,90,14);r.text((result===0?'TESTA':'CROCE')+'! · VINCE '+team(winner).name.toUpperCase(),640,228,24,'#ffe447');
    r.text(mine?'SCEGLI DOVE ATTACCARE':(team(winner).name.toUpperCase()+' SCEGLIE IL CAMPO'),640,262,18,'#b3eaff');
    for(const [i,label,x] of [[0,'◀ ATTACCA A SINISTRA',430],[1,'ATTACCA A DESTRA ▶',850]]){const on=i===side;r.panel(x-170,600,340,52,10);r.text(label,x,634,20,on?'#ffe447':'#7f93a8');if(on){c.strokeStyle='#ffe447';c.lineWidth=3;c.strokeRect(x-170,600,340,52)}}
-   if(mine&&stage==='won')r.text('{arrows} SCEGLI    {m:confirm} CONFERMA',640,690,18,'#ffe55b');else if(stage==='go')r.text('CALCIO D’INIZIO: '+team(1-winner).name.toUpperCase(),640,690,18,'#fff')}}
+   if(mine&&stage==='won')r.text(window.S9ArcadeTouch?'TOCCA UN LATO · TOCCA DI NUOVO PER CONFERMARE':'{arrows} SCEGLI    {m:confirm} CONFERMA',640,690,18,'#ffe55b');else if(stage==='go')r.text('CALCIO D’INIZIO: '+team(1-winner).name.toUpperCase(),640,690,18,'#fff')}}
  return {update,draw:drawScene,get done(){return done}};
 }
 window.S9ArcadeCoinToss={create};

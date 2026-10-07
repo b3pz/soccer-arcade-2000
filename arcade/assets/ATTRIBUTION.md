@@ -18,3 +18,5 @@ Mappe nazionali: confini Natural Earth 1:110m, otto viewport Mercator. Coordinat
 Musica cabinet-theme.wav: composizione e sintesi originali del progetto, generate da tools/create-arcade-music.py; nessun campione esterno.
 
 Espansione mondiale Arcade: identità club/nazioni e coordinate città approssimative per la selezione; nuovi giocatori generici e rating progettati per il gioco, senza pretesa di autenticità storica. Stemmi SVG originali con iniziali e colori della squadra. Confini: world-countries.geo.json, Natural Earth 1:110m pubblico dominio, sorgente nvkelso/natural-earth-vector. Generazione: tools/prepare-world-roster.py.
+
+Colonne sonore in arcade/assets/music/ (kick-off, world-tour, night-final, extra-time): composizioni e sintesi originali generate da tools/create-arcade-soundtracks.py; nessun campione esterno.

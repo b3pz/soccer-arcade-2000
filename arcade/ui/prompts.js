@@ -8,10 +8,17 @@ const XB={0:['A','#3fbf55'],1:['B','#e8473f'],2:['X','#3a7fe0'],3:['Y','#f2c12e'
 const TOKEN=/\{(p|m|s):(\w+)\}|\{arrows\}/g;
 const pad=()=>{try{return [...(navigator.getGamepads?.()||[])].find(Boolean)||null}catch(e){return null}};
 const isPS=p=>/playstation|dualshock|dualsense|054c|sony/i.test(p?.id||'')||!!window.S9ArcadePads?.has(p?.raw||p);
-function resolve(kind,action){const B=window.S9ArcadeBindings;if(kind==='arrows')return {key:'FRECCE',slot:'dpad'};if(!B)return {key:action.toUpperCase(),slot:null};
+// Touch screen without a pad: commands are named like the on-screen buttons, confirm is a tap.
+const touchOnly=()=>!pad()&&typeof matchMedia==='function'&&matchMedia('(pointer:coarse)').matches&&('ontouchstart' in window||navigator.maxTouchPoints>0);
+const TOUCH={z:'TIRO',c:'PASSA',x:'LANCIO',v:'SCATTO',switch:'CAMBIO',pause:'PAUSA',confirm:'TOCCA',back:'INDIETRO',arrowleft:'LEVETTA',arrowright:'LEVETTA',arrowup:'LEVETTA',arrowdown:'LEVETTA',fullscreen:''};
+function touchText(text){
+ if(/\{arrows\}[^{]*SCEGLI/.test(text)&&!/\{p:/.test(text))return 'TOCCA UNA VOCE PER SCEGLIERLA';
+ if(/PREMI START|PREMI UN TASTO/.test(text))return 'TOCCA LO SCHERMO';
+ return text.replace(/\{arrows\}/g,'{arrows}')}
+function resolve(kind,action){if(touchOnly()){const label=kind==='arrows'?'LEVETTA':TOUCH[action]??action.toUpperCase();return {key:label,slot:null,touch:true}}const B=window.S9ArcadeBindings;if(kind==='arrows')return {key:'FRECCE',slot:'dpad'};if(!B)return {key:action.toUpperCase(),slot:null};
  const key=kind==='p'?B.map('p1')[action]:kind==='m'?B.map('menu')[action]:B.key(action),slot=kind==='m'?B.map('padmenu')[action]:B.map('pad0')[action];return {key:B.label(key),slot}}
-function parts(text){const out=[];let last=0,m;TOKEN.lastIndex=0;while((m=TOKEN.exec(text))){if(m.index>last)out.push({text:text.slice(last,m.index)});out.push(resolve(m[0]==='{arrows}'?'arrows':m[1],m[2]));last=TOKEN.lastIndex}if(last<text.length)out.push({text:text.slice(last)});return out}
-const has=text=>typeof text==='string'&&text.includes('{')&&(TOKEN.lastIndex=0,TOKEN.test(text));
+function parts(text){if(touchOnly())text=touchText(text);const out=[];let last=0,m;TOKEN.lastIndex=0;while((m=TOKEN.exec(text))){if(m.index>last)out.push({text:text.slice(last,m.index)});out.push(resolve(m[0]==='{arrows}'?'arrows':m[1],m[2]));last=TOKEN.lastIndex}if(last<text.length)out.push({text:text.slice(last)});return out}
+const has=text=>typeof text==='string'&&(text.includes('{')&&(TOKEN.lastIndex=0,TOKEN.test(text))||touchOnly()&&/PREMI START|PREMI UN TASTO/.test(text));
 // Plain text (DOM, aria labels): keyboard key, plus the pad button name when a pad is connected.
 function plain(text){if(!has(text))return text;const p=pad();return parts(text).map(x=>x.text!=null?x.text:x.key+(p&&x.slot!=null?'/'+(x.slot==='dpad'?'CROCE':((isPS(p)?PS:XB)[x.slot]||['?'])[0]):'')).join('')}
 function round(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
@@ -29,7 +36,7 @@ function draw(c,text,x,y,size,color='#fff',align='center',shadow='#07101b',maxW=
  const iconW=slot=>{if(slot==='dpad'||slot>=12&&slot<=15)return size*1.1*1.1;const t=(isPS(p)?PS:XB)[slot]||['?'];if(t[1])return size*1.1*1.1;c.font='900 '+Math.round(size*1.1*.48)+'px monospace';return c.measureText(t[0]).width+size*1.1*.6};
  const widthOf=b=>{if(b.text!=null){c.font='bold '+size+'px monospace';return c.measureText(b.text).width}return capW(b.key)+(p&&b.slot!=null?gap+iconW(b.slot):0)+gap};
  const widths=bits.map(widthOf),total=widths.reduce((a,b)=>a+b,0);let cx=align==='center'?x-total/2:align==='right'?x-total:x;const mid=y-size*.34;
- bits.forEach((b,i)=>{if(b.text!=null){c.font='bold '+size+'px monospace';c.textAlign='left';c.textBaseline='alphabetic';c.fillStyle=shadow;c.fillText(b.text,cx+2,y+2);c.fillStyle=color;c.fillText(b.text,cx,y)}else{let w=keycap(c,b.key,cx,mid,size*1.1);if(p&&b.slot!=null)padIcon(c,b.slot,cx+w+gap,mid,size*1.1,p)}cx+=widths[i]});
+ bits.forEach((b,i)=>{if(b.text!=null){c.font='bold '+size+'px monospace';c.textAlign='left';c.textBaseline='alphabetic';c.fillStyle=shadow;c.fillText(b.text,cx+2,y+2);c.fillStyle=color;c.fillText(b.text,cx,y)}else{if(b.touch&&!b.key)return;let w=keycap(c,b.key,cx,mid,size*1.1);if(p&&b.slot!=null)padIcon(c,b.slot,cx+w+gap,mid,size*1.1,p)}cx+=widths[i]});
  c.restore();return total}
 // Measuring pass: same maths, nothing painted.
 function fake(c){return new Proxy(c,{get:(t,k)=>k==='measureText'?s=>t.measureText(s):typeof t[k]==='function'?()=>{}:t[k],set:(t,k,v)=>{if(k==='font')t.font=v;return true}})}
