@@ -137,3 +137,6 @@
 #arcade-evolution.arcade-drawn>*,#arcade-online.arcade-drawn>*{opacity:0!important}
 #arcade-evolution.arcade-drawn,#arcade-online.arcade-drawn{background:transparent!important}
 #arcade-online-badge{background:transparent url('../assets/drawn-panel.png') center/100% 100%!important;border:0!important;border-radius:0!important;font-family:monospace!important}
+
+/* One shared bitmap frame for every remaining native action target. */
+#arcade-match>button,#arcade-online-badge{background:transparent url('../assets/art/ui/panel.png?v=art-2') center/100% 100%!important;border:0!important;border-radius:0!important;font-family:monospace!important}

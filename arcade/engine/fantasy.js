@@ -45,7 +45,7 @@ if(M.fkStrike){const strike=M.fkStrike;M.fkStrike=function(){const result=strike
 
 // Tongues of flame and embers trail behind the ball. Motion is deterministic.
 R.fantasyFlame=function(x,y,r,dx,dy,time,kind){
- const strength=intensity();if(!strength)return;
+ const strength=intensity();if(!strength)return;if(window.S9ArcadeArt?.effectTrail(this.ctx,kind,x,y,r,dx,dy,time,strength))return;
  const c=this.ctx,angle=Math.atan2(dy,dx),length=r*(5.5+strength*2),purple=kind==='meteor';
  c.save();c.translate(x,y);c.rotate(angle);c.globalAlpha=.55+strength*.4;
  const layers=purple?['#733bff','#e559ff','#ffe9ff']:['#ff4823','#ff9a24','#fff39a'];
@@ -82,22 +82,24 @@ R.draw=function(m){
   const p=h.selected;if(!p||p.sentOff)continue;const pr=this.project(p.x,p.y);
   // Full charge gets a pulsing aura, ready to become a fire shot on release.
   if(!this.replayMode&&h.input.shotCharging&&h.input.shotCharge>=.999){
-   c.globalAlpha=.55+strength*.35;ring(c,pr.x,pr.y+6,pr.scale*(21+Math.sin(time*16)*2),'#ffe65e',3);
+   c.globalAlpha=.55+strength*.35;if(window.S9ArcadeArt?.effect(c,'charge',Math.floor(time*10)%4,pr.x-42*pr.scale,pr.y-57*pr.scale,84*pr.scale,68*pr.scale))continue;ring(c,pr.x,pr.y+6,pr.scale*(21+Math.sin(time*16)*2),'#ffe65e',3);
    for(let i=0;i<7;i++){const a=time*3+i*Math.PI*2/7,x=pr.x+Math.cos(a)*22*pr.scale,y=pr.y+Math.sin(a)*7*pr.scale-((time*30+i*11)%32);c.fillStyle=i%2?'#ff8833':'#fff59a';c.fillRect(x,y,3*pr.scale,5*pr.scale)}
   }
  }
  // Cyan speed slashes behind a special dribble, including recorded replays.
  for(const p of m.players||[]){if(!p.burst||p.sentOff)continue;const pr=this.project(p.x,p.y),fx=p.face?.x||p.team.dir,fy=(p.face?.y||0)*.65;
-  c.globalAlpha=.3+strength*.4;c.strokeStyle='#8cfff0';c.lineWidth=3;
+  c.globalAlpha=.3+strength*.4;if(window.S9ArcadeArt?.motion(c,pr.x,pr.y,fx,fy,pr.scale,time,strength))continue;c.strokeStyle='#8cfff0';c.lineWidth=3;
   for(let i=0;i<3;i++){const distance=(22+i*15)*pr.scale;c.beginPath();c.moveTo(pr.x-fx*distance,pr.y+3-fy*distance+i*5);c.lineTo(pr.x-fx*(distance+18*pr.scale),pr.y+3-fy*(distance+18*pr.scale)+i*5);c.stroke()}
  }
  const event=m.arcadeImpact,age=event?time-event.started:99;
  if(event&&age>=0&&age<(event.kind==='goal'?.75:.32)){
   const pr=this.project(event.x,event.y),duration=event.kind==='goal'?.75:.32,u=age/duration;
   c.globalAlpha=(1-u)*(.35+strength*.6);
-  const radius=pr.scale*(12+u*(event.kind==='goal'?85:40));ring(c,pr.x,pr.y,radius,'#ffda63',4*(1-u)+1);
-  for(let i=0;i<12;i++){const a=i*Math.PI/6+(event.kind==='goal'?u*.4:0);c.strokeStyle=i%2?'#fff5b0':'#ff7641';c.lineWidth=2;c.beginPath();c.moveTo(pr.x+Math.cos(a)*radius,pr.y+Math.sin(a)*radius*.65);c.lineTo(pr.x+Math.cos(a)*radius*(1.2+u*.3),pr.y+Math.sin(a)*radius*.65*(1.2+u*.3));c.stroke()}
+  const radius=pr.scale*(12+u*(event.kind==='goal'?85:40));if(!window.S9ArcadeArt?.effect(c,'impact',u*4,pr.x-radius,pr.y-radius*.65,radius*2,radius*1.3)){ring(c,pr.x,pr.y,radius,'#ffda63',4*(1-u)+1);
+  for(let i=0;i<12;i++){const a=i*Math.PI/6+(event.kind==='goal'?u*.4:0);c.strokeStyle=i%2?'#fff5b0':'#ff7641';c.lineWidth=2;c.beginPath();c.moveTo(pr.x+Math.cos(a)*radius,pr.y+Math.sin(a)*radius*.65);c.lineTo(pr.x+Math.cos(a)*radius*(1.2+u*.3),pr.y+Math.sin(a)*radius*.65*(1.2+u*.3));c.stroke()}}
  }
+ // Dust sprites follow actual sliding actions; they never change tackling or ball physics.
+ for(const p of m.players||[]){if(p.sentOff||!['tackle','hard_tackle'].includes(p.action))continue;const pr=this.project(p.x,p.y);c.globalAlpha=.3+strength*.25;window.S9ArcadeArt?.effect(c,'dust',Math.floor(time*12+p.number)%4,pr.x-40*pr.scale,pr.y-18*pr.scale,80*pr.scale,30*pr.scale)}
  c.restore();
 };
 window.S9ArcadeFantasy={intensity,ignite};

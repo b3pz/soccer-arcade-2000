@@ -6,7 +6,7 @@ const ready=im=>!!(im&&im.complete&&im.naturalWidth);
 bitmap(BEZEL);
 R.bitmap=bitmap;
 // Nine-slice of the drawn panel, same source rectangle as the menu skin.
-R.panel=function(x,y,w,h,edge=16){const c=this.ctx,im=bitmap(BEZEL);if(w<=0||h<=0)return;if(!ready(im)){c.fillStyle='#071933';c.fillRect(x,y,w,h);return}
+R.panel=function(x,y,w,h,edge=16){if(window.S9ArcadeArt?.panel(this.ctx,x,y,w,h,edge))return;const c=this.ctx,im=bitmap(BEZEL);if(w<=0||h<=0)return;if(!ready(im)){c.fillStyle='#071933';c.fillRect(x,y,w,h);return}
  const sw=im.naturalWidth,sy=im.naturalHeight*.074,sh=im.naturalHeight*.85,s=sw*.12,dx=Math.min(edge,w/3),dy=Math.min(edge,h/3),xs=[0,s,sw-s,sw],ys=[sy,sy+s,sy+sh-s,sy+sh],xd=[x,x+dx,x+w-dx,x+w],yd=[y,y+dy,y+h-dy,y+h],smooth=c.imageSmoothingEnabled;
  c.imageSmoothingEnabled=false;for(let j=0;j<3;j++)for(let i=0;i<3;i++)c.drawImage(im,xs[i],ys[j],xs[i+1]-xs[i],ys[j+1]-ys[j],xd[i],yd[j],xd[i+1]-xd[i],yd[j+1]-yd[j]);c.imageSmoothingEnabled=smooth};
 R.crestSource=team=>{const src=team?.source?.crest||(team?.source?.id&&!team.source.arcadeCreatures?'assets/crests/italian/'+team.source.id+'.png':null);return src&&src+'?v=crest-3'};

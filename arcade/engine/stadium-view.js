@@ -2,7 +2,7 @@
 (function(){
 const E=window.S9ArcadeEngine,R=E.Renderer.prototype;
 const SKIN=['#ecc39a','#cf8550','#9a5d3e','#f4d6b4'],SHIRTS=['#ffcb44','#56caff','#f2536b','#ddd7bf','#7be37a','#ffffff'],ADS=['SUPER FOOTBALL','PUSH START','ARCADE LEAGUE','INSERT COIN','ARCADE CUP'];
-function turf(r){if(r.turf)return r.turf;const t=document.createElement('canvas');t.width=1000;t.height=620;const q=t.getContext('2d');let seed=1998;const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};q.fillStyle='#238f38';q.fillRect(0,0,1000,620);for(let i=0;i<10;i++){q.fillStyle=i%2?'#299b40':'#218536';q.fillRect(i*100,0,100,620)}for(let i=0;i<75000;i++){q.fillStyle=rand()>.5?'#8cda4933':'#043f3138';q.fillRect(Math.floor(rand()*1000),Math.floor(rand()*620),1+Math.floor(rand()*3),1)}return r.turf=t}
+function turf(r){const art=window.S9ArcadeArt,im=art?.image('turf');if(art?.ready(im))return im;if(r.turf)return r.turf;const t=document.createElement('canvas');t.width=1000;t.height=620;const q=t.getContext('2d');let seed=1998;const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};q.fillStyle='#238f38';q.fillRect(0,0,1000,620);for(let i=0;i<10;i++){q.fillStyle=i%2?'#299b40':'#218536';q.fillRect(i*100,0,100,620)}for(let i=0;i<75000;i++){q.fillStyle=rand()>.5?'#8cda4933':'#043f3138';q.fillRect(Math.floor(rand()*1000),Math.floor(rand()*620),1+Math.floor(rand()*3),1)}return r.turf=t}
 // Supporters: seat index anchored to the stand edge so the crowd scrolls with the pitch; scarves in the scoring kit.
 R.crowdBlock=function(x0,x1,y0,rows,anchor,dirY,time,celebrating){const c=this.ctx,kit=this.stadiumKit;const k0=Math.max(0,Math.ceil((-16-(x0-anchor))/12)),start=anchor+k0*12;
  for(let row=0;row<rows;row++){const y=y0+dirY*row*13;if(y<-14||y>734)continue;c.fillStyle=row%2?'#1d2740':'#222d4a';c.fillRect(x0,y-2,x1-x0,13);
@@ -25,8 +25,10 @@ R.pitch=function(){const c=this.ctx,a=this.project(0,0),b=this.project(100,62),t
  for(const [x0,x1] of [[track.l-320,track.l-12],[track.r+12,track.r+320]])if(x1>-20&&x0<1300)this.crowdBlock(x0,x1,track.t-20,Math.ceil((track.b-track.t+40)/13),x0,1,time,celebrating);
  // Wall and athletics track with lanes
  c.fillStyle='#6b7385';c.fillRect(track.l-12,track.t-12,track.r-track.l+24,track.b-track.t+24);c.fillStyle='#aab1c0';c.fillRect(track.l-12,track.t-12,track.r-track.l+24,3);
+ const trackArt=window.S9ArcadeArt,trackImage=trackArt?.image('track');if(trackArt?.ready(trackImage))c.drawImage(trackImage,track.l,track.t,track.r-track.l,track.b-track.t);else{
  c.fillStyle='#b4553d';c.fillRect(track.l,track.t,track.r-track.l,track.b-track.t);c.strokeStyle='#f6e2d4aa';c.lineWidth=1.5;
  for(let i=1;i<6;i++){const k=i/6;c.strokeRect(track.l+(apron.l-track.l)*k,track.t+(apron.t-track.t)*k,track.r-track.l-(track.r-apron.r+apron.l-track.l)*k,track.b-track.t-(track.b-apron.b+apron.t-track.t)*k)}
+ }
  // Grass apron, boards, benches
  c.fillStyle='#1d7533';c.fillRect(apron.l,apron.t,apron.r-apron.l,apron.b-apron.t);
  this.adBoards(a.x-60,b.x+60,a.y-52,24);this.adBoards(a.x-60,b.x+60,b.y+26,24);
