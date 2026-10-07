@@ -33,6 +33,7 @@ PASS Dribble over touchline awards real throw in
 PASS actual ArcadeMatchBridge result and disposal
 PASS match entry silences menu and event music, completion leaves the menu to restart its own theme
 PASS goal presentation pauses physics without changing score or match clock
+PASS conceding a goal keeps the match running; celebration overlays keep the match methods
 PASS pause menu: Z resumes, X resumes, ESCI leaves without result and restores menu audio (no DOM button)
 PASS RUN → SHOOT begins at frame 0 independently of match clock
 PASS shot reaches final exposure during action
@@ -215,7 +216,7 @@ PASS CPU wingers reach the byline and cross (12/12), runners volley (5/12)
 PASS human cross: control moves to the striker and holding Z volleys it
 .....
 ----------------------------------------------------------------------
-Ran 5 tests in 0.001s
+Ran 5 tests in 0.000s
 
 OK
 PASS JavaScript syntax (modules and all root inline scripts)
@@ -228,4 +229,4 @@ PASS offline sprite package preserves exact original PNG bytes for both palette 
 PASS private-room server authentication, signaling, expiry and rate limits
 PASS six spectacular-save sprite sequences have eight distinct full-body exposures each
 
-Intro contacts reviewed frame by frame (overhead kick, tip-over save, half-volley, goal), guided joypad setup simulated end to end with a PlayStation Classic id. A physical joypad has not been verified in this environment.
+Conceding a goal reproduced in headless Chrome through launchArcadeMatch: the match keeps running (0-1, kick-off to the human side). A physical joypad has not been verified in this environment.
