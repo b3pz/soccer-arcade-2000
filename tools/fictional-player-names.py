@@ -105,11 +105,22 @@ def invent(team, player):
         return name
     raise SystemExit('no free name for ' + player['id'])
 
+# Names chosen by the project owner, kept on every run (player id -> name).
+NAMED = {}
+for team in data['club']:
+    if team['name'] == 'Fiorentina':
+        NAMED[[p for p in team['players'] if p['pos'] == 'ST'][0]['id']] = 'Marco Paolini'
+    if team['name'] == 'Inter':
+        strikers = [p for p in team['players'] if p['pos'] == 'ST']
+        NAMED[strikers[0]['id']] = 'Francesco Infusini'
+        NAMED[strikers[1]['id']] = 'Giuseppe Milano'
+used.update(NAMED.values())
+
 for team in teams:
     for player in team['players']:
-        player['name'] = invent(team, player)
+        player['name'] = NAMED.get(player['id']) or invent(team, player)
 
-leftover = real_full & {p['name'] for t in teams for p in t['players']}
+leftover = (real_full & {p['name'] for t in teams for p in t['players']}) - set(NAMED.values())
 assert not leftover, leftover
 path.write_text(source[:start] + json.dumps(data, ensure_ascii=False, separators=(',', ':')) + source[end:])
 print('renamed', sum(len(t['players']) for t in teams), 'players')

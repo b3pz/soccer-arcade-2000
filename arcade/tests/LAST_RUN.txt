@@ -217,7 +217,7 @@ PASS human cross: control moves to the striker and holding Z volleys it
 PASS keeper holds the middle of the goal on wing play and still moves onto shots
 .....
 ----------------------------------------------------------------------
-Ran 5 tests in 0.001s
+Ran 5 tests in 0.000s
 
 OK
 PASS JavaScript syntax (modules and all root inline scripts)
@@ -230,4 +230,4 @@ PASS offline sprite package preserves exact original PNG bytes for both palette 
 PASS private-room server authentication, signaling, expiry and rate limits
 PASS six spectacular-save sprite sequences have eight distinct full-body exposures each
 
-Keeper behaviour measured over six simulated matches (human side driven by the demo bot). A physical joypad has not been verified in this environment.
+A physical joypad has not been verified in this environment.
