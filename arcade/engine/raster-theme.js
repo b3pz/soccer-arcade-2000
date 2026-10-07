@@ -6,7 +6,7 @@ if(!A)return;
 const crowd=R.crowdBlock;
 R.crowdBlock=function(x0,x1,y0,rows,anchor,dirY,time,celebrating){const im=A.image('crowd');if(!A.ready(im))return crowd.call(this,x0,x1,y0,rows,anchor,dirY,time,celebrating);const height=Math.max(24,rows*13),top=dirY<0?y0-height:y0,c=this.ctx;
  // Tiles at the picture's own proportions (never stretched), anchored to the stand so they scroll with the pitch.
- const th=Math.min(height,120),tw=th*(im.naturalWidth/2)/(im.naturalHeight/2),start=anchor+Math.floor((x0-anchor)/tw)*tw,t=celebrating?time:Math.floor(time/3)*.125;c.save();c.beginPath();c.rect(x0,top,x1-x0,height);c.clip();
+ const th=Math.min(height,46*((this.camera?.zoom||36)/36)),tw=th*(im.naturalWidth/2)/(im.naturalHeight/2),start=anchor+Math.floor((x0-anchor)/tw)*tw,t=celebrating?time:Math.floor(time/3)*.125;c.save();c.beginPath();c.rect(x0,top,x1-x0,height);c.clip();
  for(let y=top;y<top+height;y+=th)for(let x=start;x<x1;x+=tw)if(x+tw>-10&&x<1290&&y+th>-10&&y<730)A.crowd(c,t,x,y,tw,th);c.restore()};
 R.adBoards=function(x0,x1,y,h){const c=this.ctx;c.fillStyle='#060d19';c.fillRect(x0,y,x1-x0,h);let i=0;for(let x=x0;x<x1;x+=230,i++)A.sponsor(c,i,x+2,y+2,Math.min(226,x1-x-2),h-4)};
 const oldBench=R.bench;

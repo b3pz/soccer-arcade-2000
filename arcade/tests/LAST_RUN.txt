@@ -213,7 +213,7 @@ PASS kick-off camera pulls back slowly from the centre ball
 PASS slim scoreboard and scorer name under the GOAL banner
 PASS crowd celebration cutaway uses animated bitmap artwork
 PASS slow motion when a shot is about to reach the goal frame, not for shots going wide
-PASS coin toss: call, flip, choice of end, kick-off to the other side (1P)
+PASS coin toss: call, flip, choice of end, kick-off to the other side (CPU)
 PASS holding the pass button in defence shadows the carrier goal-side
 PASS CPU label on the player the CPU is driving
 PASS demo bot plays short matches with 25 crosses, 5 volleys, 14 goals (5-0, 3-0, 6-0) and 12 different captions
@@ -230,4 +230,4 @@ Traceback (most recent call last):
                              output=stdout, stderr=stderr)
 subprocess.CalledProcessError: Command '['/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpers/jsc', '/Users/milanog91gmail.com/Desktop/soccer-arcade-2000/arcade/tests/artwork-tests.js']' returned non-zero exit status 3.
 
-PENDING: artwork crest test waits for the crest atlases (being regenerated). Intro edit, card cutscene and new turf/track rendered in headless Chrome.
+PENDING: artwork crest test (crest atlases being regenerated). Benches, coach, stands and team names rendered in headless Chrome.

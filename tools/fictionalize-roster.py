@@ -8,7 +8,8 @@ first=['Yoren','Kavri','Zeylo','Aroven','Nivak','Velrin','Toryn','Seyra','Korvi'
 syllables=['va','ki','zor','ren','vak','lo','mir','dra','xen','jor','tal','vek','nor','sy','ry','vor','kal','dor','zel','ny','tar','vex','lor','ka','ryn','fer','xel','tor','ma','zen','val','kor']
 aliases={};number=0
 for ti,t in enumerate(catalog['club']+catalog['national']):
- if not t.get('arcadeFictional'): aliases[t['name']]=prefix[ti%len(prefix)]+' '+suffix[(ti//len(prefix))%len(suffix)]
+ plan={e['id']:e['name'] for e in json.loads((root/'arcade/assets/art/crests/branding-plan.json').read_text())}
+ aliases[t['name']]=plan.get(t['id']) or prefix[ti%len(prefix)]+' '+suffix[(ti//len(prefix))%len(suffix)]
  t['name']=aliases.get(t['name'],t['name']);t['season']='';t['arcadeFictional']=True;t['crest']='arcade/assets/art/crests/team-'+str(ti).zfill(3)+'.png'
  number+=len(t['players'])  # player names come from tools/fictional-player-names.py (nation-flavoured, owner-chosen names kept)
 path.write_text('/* Fictional arcade identities; stable internal IDs preserve existing saves. */\nwindow.SA2000_CATALOG='+json.dumps(catalog,separators=(',',':'),ensure_ascii=False)+';\n')

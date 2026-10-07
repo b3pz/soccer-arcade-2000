@@ -4,7 +4,7 @@ var texts=[],ctx=new Proxy({fillText:function(s){texts.push(String(s))},getImage
 load('game/artwork.js');load('arcade/assets/animations.js');load('arcade/engine/core.js');load('arcade/engine/controllers.js');load('arcade/engine/penalties.js');load('arcade/engine/arcade-features.js');load('arcade/engine/setpieces.js');load('arcade/engine/art.js');load('arcade/engine/visual.js');load('arcade/engine/presentation-upgrade.js');load('arcade/engine/freekick.js');load('arcade/engine/match-presentation.js');load('arcade/engine/human-controls.js');load('arcade/engine/coin-toss.js');load('arcade/bridge.js');load('game/catalog.js');
 function assert(v,s){if(!v)throw Error(s)}function pass(s){print('PASS '+s)}
 const E=S9ArcadeEngine,clubs=SA2000_CATALOG.club;
-function game(){const input=new E.InputManager({keys:null});input.active=true;const m=new E.Match(input);ArcadeMatchBridge.setupTeam(m.teams[0],clubs.find(t=>t.name==='Sorya Falcons'),{cleanNames:true});ArcadeMatchBridge.setupTeam(m.teams[1],clubs.find(t=>t.name==='Draxen Falcons'),{cleanNames:true});m.setHumans([{team:0,input}]);m.rules.allowDraw=true;return m}
+function game(){const input=new E.InputManager({keys:null});input.active=true;const m=new E.Match(input);ArcadeMatchBridge.setupTeam(m.teams[0],clubs.find(t=>t.name==='Joventis'),{cleanNames:true});ArcadeMatchBridge.setupTeam(m.teams[1],clubs.find(t=>t.name==='Milara'),{cleanNames:true});m.setHumans([{team:0,input}]);m.rules.allowDraw=true;return m}
 
 // No real footballer names: every squad uses invented names.
 {const all=[...SA2000_CATALOG.club,...SA2000_CATALOG.national].flatMap(t=>t.players.map(p=>p.name));

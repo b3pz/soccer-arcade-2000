@@ -110,6 +110,7 @@ NAMED = {}
 for team in data['club']:
     if team['id'].startswith('fiorentina'):
         NAMED[[p for p in team['players'] if p['pos'] == 'ST'][0]['id']] = 'Marco Paolini'
+        NAMED[[p for p in team['players'] if p['pos'] == 'ST'][1]['id']] = 'Don Dilik'
     if team['id'].startswith('inter_'):
         strikers = [p for p in team['players'] if p['pos'] == 'ST']
         NAMED[strikers[0]['id']] = 'Francesco Infusini'
