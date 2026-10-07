@@ -1,3 +1,8 @@
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
 PASS 1 Kickoff C, clock starts only after pass
 PASS 2 Lateral pass chooses teammate in facing direction
 PASS 3 Pressed player always passes
@@ -32,7 +37,9 @@ PASS Dribble over touchline awards real throw in
 31 core scenarios passed
 PASS actual ArcadeMatchBridge result and disposal
 PASS match entry silences menu and event music, completion leaves the menu to restart its own theme
-FAIL bridge TypeError: document.querySelector is not a function. (In 'document.querySelector('.evo-settings')', 'document.querySelector' is undefined)
+PASS goal presentation pauses physics without changing score or match clock
+PASS conceding a goal keeps the match running; celebration overlays keep the match methods
+PASS pause menu: Z resumes, X resumes, ESCI leaves without result and restores menu audio (no DOM button)
 PASS RUN → SHOOT begins at frame 0 independently of match clock
 PASS shot reaches final exposure during action
 PASS sprite drawing restores shared manifest
@@ -213,11 +220,6 @@ PASS demo bot plays short matches with 12 crosses, 9 volleys, 12 goals (4-0, 2-0
 PASS CPU wingers reach the byline and cross (12/12), runners volley (5/12)
 PASS human cross: control moves to the striker and holding Z volleys it
 PASS keeper holds the middle of the goal on wing play and still moves onto shots
-.....
-----------------------------------------------------------------------
-Ran 5 tests in 0.000s
-
-OK
 PASS JavaScript syntax (modules and all root inline scripts)
 PASS extracted animation assets
 PASS 34 animation sequences, populated cells and unified baseline
@@ -228,4 +230,4 @@ PASS offline sprite package preserves exact original PNG bytes for both palette 
 PASS private-room server authentication, signaling, expiry and rate limits
 PASS six spectacular-save sprite sequences have eight distinct full-body exposures each
 
-Pause, OPZIONI in a match, title and main menu rendered in headless Chrome with a simulated PlayStation Classic pad (button icons). A physical joypad has not been verified in this environment.
+A physical joypad has not been verified in this environment.

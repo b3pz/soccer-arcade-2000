@@ -14,7 +14,9 @@ with tempfile.TemporaryDirectory(prefix='sa2000-qa-') as tmp:
   syntax=Path(tmp)/f'check-{index}.js';syntax.write_text(f'checkSyntax({str(f)!r});')
   subprocess.run([str(jsc),str(syntax)],cwd=root,check=True)
  for name in ['core','visual','features','tournament','drawn-menu','cabinet','catalog','stadium','offline','full-match-balance','assist','coop','evolution','evolution-ui','fantasy','online','cinematic','bindings','saves','presentation','demo']:
-  subprocess.run([str(jsc),str(root/f'arcade/tests/{name}-tests.js')],cwd=root,check=True)
+  run=subprocess.run([str(jsc),str(root/f'arcade/tests/{name}-tests.js')],cwd=root,check=True,capture_output=True,text=True);print(run.stdout,end='');print(run.stderr,end='')
+  # Async blocks report failures by printing FAIL without a non-zero exit: treat them as failures too.
+  assert not any(line.startswith('FAIL') for line in run.stdout.splitlines()),name+' tests printed FAIL'
  print('PASS JavaScript syntax (modules and all root inline scripts)')
  for f in [root/'arcade/assets/animations.png',root/'arcade/assets/animations.json']:
   assert f.exists() and f.stat().st_size>100
