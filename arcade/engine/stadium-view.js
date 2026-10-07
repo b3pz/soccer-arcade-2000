@@ -34,7 +34,10 @@ R.pitch=function(){const c=this.ctx,a=this.project(0,0),b=this.project(100,62),t
  c.fillStyle='#8c9880';c.fillRect(a.x-6,a.y-6,b.x-a.x+12,b.y-a.y+12);c.drawImage(turf(this),a.x,a.y,b.x-a.x,b.y-a.y);
  const cam=this.camera||{zoom:36},line=pts=>{c.beginPath();pts.forEach(([x,y],i)=>{const p=this.project(x,y);i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y)});c.strokeStyle='#173e2444';c.lineWidth=5;c.stroke();c.strokeStyle='#f1f1cb';c.lineWidth=2.7;c.stroke()};
  line([[0,0],[100,0],[100,62],[0,62],[0,0]]);line([[50,0],[50,62]]);const mid=this.project(50,31);c.strokeStyle='#f1f1cb';c.lineWidth=2.7;c.beginPath();c.ellipse(mid.x,mid.y,9.15*cam.zoom,9.15*cam.zoom*.65,0,0,Math.PI*2);c.stroke();
- for(const x of [0,100]){line([[x,14],[x?84:16,14],[x?84:16,48],[x,48]]);line([[x,23],[x?94:6,23],[x?94:6,39],[x,39]]);const p=this.project(x?89:11,31);c.fillStyle='#f1f1cb';c.fillRect(p.x-2,p.y-2,4,4);this.goal(x)}
+ for(const x of [0,100]){line([[x,14],[x?84:16,14],[x?84:16,48],[x,48]]);line([[x,23],[x?94:6,23],[x?94:6,39],[x,39]]);
+  // Penalty arc: 9.15 m around the spot, only the part outside the box.
+  const limit=Math.acos(5/9.15),arc=[];for(let i=0;i<=16;i++){const a=-limit+2*limit*i/16;arc.push([(x?89:11)+(x?-1:1)*Math.cos(a)*9.15,31+Math.sin(a)*9.15])}line(arc);
+  const p=this.project(x?89:11,31);c.fillStyle='#f1f1cb';c.fillRect(p.x-2,p.y-2,4,4);this.goal(x)}
  // corner flags
  for(const [x,y] of [[0,0],[100,0],[0,62],[100,62]]){const p=this.project(x,y);c.fillStyle='#e8e8e8';c.fillRect(p.x-1,p.y-30,3,30);c.fillStyle='#ff4b3a';c.fillRect(p.x+2,p.y-30,12,8)}};
 // Goal seen from the side: shaded posts and bar, net panels with mesh, back sag, stanchions and ground shadow.

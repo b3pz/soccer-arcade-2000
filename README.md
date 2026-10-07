@@ -72,6 +72,7 @@ In Arcade Evolution → Impostazioni puoi rimappare movimento e azioni di entram
 ### Opzioni, joypad e difficoltà
 
 - **OPZIONI** si apre dal menu principale (voce *OPZIONI · COMANDI · JOYPAD*), dal Centro Arcade e dalla pausa. È tutta navigabile col joypad: croce/stick per muoversi, A conferma, B indietro, LB/RB cambiano scheda (GIOCO, JOYPAD, TASTIERA 1P, TASTIERA 2P, MENU · SISTEMA).
+- **Configura joypad** (OPZIONI → JOYPAD, prima voce): per i joypad che il browser non riconosce come standard, come quello della PlayStation Classic, il controller disegnato fa lampeggiare un tasto alla volta (↑ ↓ ← → ✕ ○ □ △ L1 R1 L2 R2 SELECT START): premilo e passa al successivo. Il profilo viene salvato per quel modello di joypad e usato ovunque: partita, menu e opzioni. Un joypad non standard mai configurato apre la procedura da solo alla prima pressione. Nella scheda JOYPAD ogni tasto premuto si illumina sul disegno.
 - **Mappatura per pressione**: scegli un comando e premi il pulsante (o il tasto) da assegnargli. I pulsanti compaiono con il nome stampato sul joypad: A/B/X/Y/LB… su Xbox e compatibili, ✕/○/□/△/L1… su PlayStation. Se il pulsante è già usato nello stesso profilo, i due comandi si scambiano.
 - **Pausa** (START/ESC): menu con cursore RIPRENDI / OPZIONI / ESCI SENZA REGISTRARE. B riprende la partita, non la abbandona.
 - **Camera**: in *campo largo* giocatori e pallone si rimpiccioliscono in proporzione.
@@ -79,4 +80,10 @@ In Arcade Evolution → Impostazioni puoi rimappare movimento e azioni di entram
 
 ### Intro
 
-Il filmato d'apertura (12 s) è montato con le immagini del gioco: stadio notturno, stadio anni '90, porta con curva in pixel-art, sprite dei giocatori ingranditi con divise di fantasia, pallone pixel-art (`arcade/assets/ball.png`, generatore `tools/generate-ball-sprite.py`) e curva in festa.
+Il filmato d'apertura (12 s) racconta un'azione continua in un'unica notte: dribbling, pallonetto, rovesciata (il piede colpisce il pallone), parata del portiere, tiro decisivo e gol. È montato con le immagini del gioco: stadio notturno, porta con curva in pixel-art, sprite dei giocatori ingranditi con divise di fantasia, pallone pixel-art (`arcade/assets/ball.png`, generatore `tools/generate-ball-sprite.py`) e curva in festa.
+
+### Portiere e campo
+
+- Le parate in tuffo, in volo sulla traversa e in stacco verticale usano i fotogrammi originali del portiere (tuffo, presa, attesa), ruotati e riallineati (`tools/add-keeper-save-frames.py`). Valgono anche in partita.
+- In partita il tiro al volo usa il fotogramma della gamba tesa invece della corsa.
+- Le aree di rigore hanno la lunetta.

@@ -5,6 +5,8 @@ const humanOf=(m,p)=>(m.humans||[]).find(h=>h.selected===p)||null;
 const loop=new Set(['idle','run','dribble','gk_idle','gk_move','gk_run','hold','ref_idle','ref_run','celebrate','charge','throwin_hold']);
 // Throw-in: arms-up exposure of the celebration row, ball held overhead, then release.
 if(window.S9ArcadeFrames){S9ArcadeFrames.throwin_hold=S9ArcadeFrames.throwin_hold||[S9ArcadeFrames.celebrate[5]];S9ArcadeFrames.throwin=S9ArcadeFrames.throwin||[S9ArcadeFrames.celebrate[5],S9ArcadeFrames.celebrate[3],S9ArcadeFrames.celebrate[2]]}
+// The atlas 'volley' row is a sprint; a first-time strike uses the shooting leg (wind-up, leg out, follow-through).
+if(window.S9ArcadeFrames?.shoot){const S=S9ArcadeFrames.shoot;S9ArcadeFrames.volley=[S[2],S[3],S[3],S[4],S[6],S[7]]}
 R.sprite=function(p,m,pr){
  this.poseStates=this.poseStates||new WeakMap();
  const save=window.S9ArcadeSaves?.pose(p,m,this.animationTime??m.presentationTime??m.elapsed);let action=p.role==='REF'?'ref_'+(p.action||'idle'):p.role==='GK'?(p.action==='pass'?'throw':p.action==='shoot'?'kick_long':m.ball.owner===p&&m.ball.controlMode==='HANDS'?'hold':p.keeperState==='GK_CATCHING'?'catch':p.keeperState==='GK_HOLDING'?'hold':save?save:p.keeperState==='GK_DIVING'?((m.phase==='PENALTIES'?p.y-31:p.face?.y)<0?'dive_left':'dive_right'):p.keeperState==='GK_RUSHING'?'gk_run':p.action==='run'?'gk_move':'gk_idle'):p.stun?'fall':p.burst?'special':p.action==='tackle'?(p.hard?'hard_tackle':'tackle'):m.ball.owner===p&&p.action==='run'?'dribble':p.action||'idle';

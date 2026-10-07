@@ -44,7 +44,7 @@ function keyFor(button,index=0){const online=window.S9ArcadeOnline?.session,acti
 
 function send(type,key){const target=doc.activeElement&&doc.activeElement!==doc.body?doc.activeElement:doc;target.dispatchEvent(new KeyboardEvent(type,{key,bubbles:true,cancelable:true,composed:true}))}
 const held=new Map(),stick=new Map(),repeat=new Map();let polling=false,connected=false;
-function poll(now){const pads=(navigator.getGamepads?.()||[]).filter(Boolean);connected=pads.length>0;api.padConnected=connected;if(!connected){for(const [b,k] of held)send('keyup',k);held.clear();polling=false;return}
+function poll(now){if(window.S9ArcadePads?.capture){for(const [,k] of held)send('keyup',k);held.clear();requestAnimationFrame(poll);return}const pads=(navigator.getGamepads?.()||[]).filter(Boolean);connected=pads.length>0;api.padConnected=connected;if(!connected){for(const [b,k] of held)send('keyup',k);held.clear();polling=false;return}
  const pressed=new Set(),arrows=new Set();
  for(const pad of pads){pad.buttons.forEach((b,i)=>{if(b.pressed||b.value>.5)pressed.add(pad.index*100+i)});const [x=0,y=0]=pad.axes;if(x<-.5)arrows.add(window.S9ArcadeBindings?.key('arrowleft','menu')||'ArrowLeft');if(x>.5)arrows.add(window.S9ArcadeBindings?.key('arrowright','menu')||'ArrowRight');if(y<-.5)arrows.add(window.S9ArcadeBindings?.key('arrowup','menu')||'ArrowUp');if(y>.5)arrows.add(window.S9ArcadeBindings?.key('arrowdown','menu')||'ArrowDown')}
  for(const i of pressed)if(!held.has(i)){const k=keyFor(i%100,Math.floor(i/100));if(k){held.set(i,k);send('keydown',k);repeat.set('b'+i,now+420)}}

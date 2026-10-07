@@ -8,7 +8,7 @@ const shots=[{name:'final',start:0,end:1.6},{name:'dribble',start:1.6,end:3.6},{
 function sceneAt(t){return shots.find(s=>t<s.end)||shots[shots.length-1]}
 const cache={},img=src=>{if(!(src in cache)){try{const i=new Image();i.src=src;cache[src]=i}catch(e){cache[src]=null}}return cache[src]};
 const ready=i=>!!(i&&i.complete&&i.naturalWidth);
-const ART={night:'arcade/assets/arcade-menu-background.png',day:'arcade/assets/cabinet-90s.png',goal:'arcade/assets/freekick-backdrop.png?v=fk-1',crowd:'arcade/assets/crowd-celebration.png?v=crowd-1',ball:'arcade/assets/ball.png?v=ball-1'};
+const ART={night:'arcade/assets/arcade-menu-background.png',goal:'arcade/assets/freekick-backdrop.png?v=fk-1',crowd:'arcade/assets/crowd-celebration.png?v=crowd-1',ball:'arcade/assets/ball.png?v=ball-1'};
 for(const src of Object.values(ART))img(src);
 // Fictional finalists.
 const BLUE={shirtPrimary:'#2f6fe4',shirtSecondary:'#ffffff',shorts:'#ffffff',socks:'#2f6fe4',pattern:'trim'},RED={shirtPrimary:'#d22b2b',shirtSecondary:'#ffffff',shorts:'#1b1b1f',socks:'#d22b2b',pattern:'trim'},KEEPER={shirtPrimary:'#9bd424',shirtSecondary:'#1b1b1f',shorts:'#1b1b1f',socks:'#9bd424',pattern:'solid'};
@@ -53,41 +53,48 @@ function draw(c,t,h={}){
   ball(c,x,y,r,t,fire&&u<.75,-1,fx);
   if(u<.65){c.save();c.globalAlpha=(1-u/.65)*fx;for(let i=0;i<18;i++){const a=i*2.399,radius=80+u*400;oval(c,x+Math.cos(a)*radius,y+Math.sin(a)*radius,3,2,i%2?'#ffb51b':'#e5f6ff')}c.restore()}
  }else if(scene.name==='final'){
-  // Night stadium, slow push in; the scoreboard of the final.
+  // One night, one stadium for the whole film: wide push-in on the final's last minute.
   shot(c,ART.night,1+u*.12,.5,.62,0,.15);title(c,'LA FINALE',640,150,64,'#ffe36b');title(c,'89:59   •   2 – 2',640,205,26,'#d6e7ff');
   flash(c,1-clamp(u*4),'#000');cue(h,'whistle',.6,t,'whistle');
  }else if(scene.name==='dribble'){
-  // Tracking shot along the touchline: the blue 10 takes on two red defenders.
-  shot(c,ART.day,1.7,.5,.8,-u*320);streaks(c,t,'#ffffff',fx);const x=470+u*220,ground=700;
-  sprite(c,'chaser',x-330+u*70,ground-10,7.4,'run',RED,t);
-  const slide=clamp((u-.28)/.45),slider=1320-slide*760;
-  sprite(c,'star',x,ground,8.4,'dribble',BLUE,t);sprite(c,'slider',slider,ground+8,7.8,u<.28?'run':u<.73?'hard_tackle':'fall',RED,t,{flip:true});
-  const hop=Math.abs(Math.sin(u*Math.PI*5));ball(c,x+190,ground-28-hop*(slide>0&&slide<.7?190:40),40,t);
+  // Pitch level, tracking: the blue 10 runs at the red slider, taps the ball on, then flicks it over him.
+  shot(c,ART.night,1.7,.5,.9,-u*300,.05);streaks(c,t,'#cfe6ff',fx*.6);const ground=690,x=360+u*360,S=7.6;
+  sprite(c,'chaser',x-300+u*40,ground-6,6.8,'run',RED,t);
+  const slide=clamp((u-.35)/.4),slider=1250-slide*560;sprite(c,'slider',slider,ground+6,7.2,u<.35?'run':u<.78?'hard_tackle':'fall',RED,t,{flip:true});
+  sprite(c,'star',x,ground,S,'dribble',BLUE,t);
+  // Ball: at the front boot (17·scale ahead), a light tap every stride; from u=.62 a flick over the tackle, out of the top of the frame.
+  const foot=x+17*S+22,flick=clamp((u-.62)/.38),tap=Math.abs(Math.sin(t*Math.PI*5))*14;
+  ball(c,mix(foot,foot+260,flick),flick?mix(ground-24,-60,flick)-Math.sin(flick*Math.PI)*120:ground-24-tap,34,t);
   cue(h,'dribble1',2.05,t,'kick');cue(h,'dribble2',2.8,t,'kick');
  }else if(scene.name==='bicycle'){
-  // Low angle into the floodlights: overhead kick.
-  shot(c,ART.night,1.75,.16+u*.08,.3);streaks(c,t,'#ffe9a8',fx);const lift=Math.sin(clamp(u*1.15)*Math.PI);
-  sprite(c,'star',660,620-lift*150,8.6,'volley',BLUE,t,{rot:-.5-u*2.6,shadow:false});
-  const hit=u>.45,k=clamp(u/.45),b=hit?clamp((u-.45)/.55):0;ball(c,hit?mix(560,1300,b):mix(-40,560,k),hit?mix(250,40,b):mix(560,250,k)-Math.sin(k*Math.PI)*80,40,t,hit&&fire,1,fx);
-  if(u>.45&&u<.55)flash(c,(.55-u)*4*fx);cue(h,'bicycle',4.35,t,'powerShot');
+  // Same night, low angle: the ball drops in from the right, the 10 rises back first and meets it over his head.
+  shot(c,ART.night,1.5,.5,.55,0,.05);streaks(c,t,'#ffe9a8',fx*.5);const S=8,uc=.5,tc=scene.start+uc*(scene.end-scene.start);
+  const jump=smooth(clamp((u-.2)/.3)),fall=clamp((u-.62)/.38),lift=jump*190-fall*fall*190,a=-1.05*jump+.5*fall,pivot={x:700,y:600-lift};
+  // Boot of shoot frame 3 (leg straight out): (24,-46)·scale from the standing foot; hips are 30·scale above it.
+  // Tilting the body back ~60° turns that leg straight up over the head; frame 3 is shown at the moment of contact.
+  const boot={x:pivot.x+(24*Math.cos(a)+16*Math.sin(a))*S+15*S,y:pivot.y+(24*Math.sin(a)-16*Math.cos(a))*S+12.5*S}; // +offset measured on the rendered frame
+  c.save();c.translate(pivot.x,pivot.y);c.rotate(a);sprite(c,'star',0,30*S,S,t>=tc-.21?'shoot':'run',BLUE,t,{shadow:false});c.restore();oval(c,pivot.x,700,110,14,'#0006');
+  if(u<uc){const k=clamp(u/uc);ball(c,mix(1350,boot.x,k),mix(-60,boot.y,k*k),38,t)}
+  else{const k=clamp((u-uc)/(1-uc));ball(c,mix(boot.x,-120,k),mix(boot.y,140,k)-Math.sin(k*Math.PI)*40,38-k*10,t,fire,-1,fx)}
+  if(u>uc&&u<uc+.08)flash(c,(uc+.08-u)*8*fx);cue(h,'bicycle',4.35,t,'powerShot');
  }else if(scene.name==='save'){
-  // From behind the goal line: the keeper flies and tips it over.
-  const v=shot(c,ART.goal,1.45,.5,.42);goalStand(c,v,t,false);const p=clamp(u/.58),k=ease(clamp(u/.6)),line=at(v,640,430),corner=at(v,880,262);
-  sprite(c,'keeper',mix(line.x,corner.x-40,k),line.y-k*70,5.2,u<.12?'gk_idle':'save_tip_right',KEEPER,t,{rot:-k*.25});
-  const tipped=u>.58,q=clamp((u-.58)/.42);ball(c,tipped?mix(corner.x+30,corner.x+160,q):mix(200,corner.x+30,p),tipped?mix(corner.y-40,-40,q):mix(700,corner.y-40,p)-Math.sin(p*Math.PI)*80,38,t);
+  // Towards the goal: the overhead kick dips at the top corner and the keeper tips it over the bar.
+  const v=shot(c,ART.goal,1.45,.5,.42);goalStand(c,v,t,false);const line=at(v,640,430),corner=at(v,880,262),dive=ease(clamp((u-.12)/.5)),p=clamp(u/.58);
+  sprite(c,'keeper',mix(line.x,corner.x-70,dive),line.y-dive*60,5.4,u<.12?'gk_idle':'save_tip_right',KEEPER,t);
+  const tipped=u>.58,q=clamp((u-.58)/.42);ball(c,tipped?mix(corner.x+20,corner.x+170,q):mix(-40,corner.x+20,p),tipped?mix(corner.y-30,-50,q)-Math.sin(q*Math.PI)*30:mix(120,corner.y-30,p)+Math.sin(p*Math.PI)*-40,34,t,!tipped&&fire,1,fx);
   if(tipped&&q<.25)flash(c,(.25-q)*2*fx);cue(h,'save',6.25,t,'saveSound');
  }else if(scene.name==='anonymous'){
-  // The deciding strike, seen as a silhouette against the lit goal.
+  // Last chance: the rebound falls to the 10, seen against the floodlit goal.
   const v=shot(c,ART.goal,1.08,.5,.5,0,.35);goalStand(c,v,t,false);c.fillStyle='rgba(2,5,14,.35)';c.fillRect(0,0,W,H*.2);
   sprite(c,'taker',330,760,9,u<.5?'idle':'shoot',null,t,{silhouette:true,shadow:false});
-  if(u>.55){const b=ease(clamp((u-.55)/.45));ball(c,mix(470,700,b),mix(650,300,b),mix(30,16,b),t,fire,1,fx)}else ball(c,470,660,30,0);
+  if(u>.55){const b=ease(clamp((u-.55)/.45)),corner=at(v,880,262);ball(c,mix(500,corner.x,b),mix(700,corner.y,b),mix(32,16,b),t,fire,1,fx)}else{const drop=clamp(u/.5);ball(c,mix(620,500,drop),mix(420,700,drop*drop),32,t)}
   c.save();c.globalCompositeOperation='lighter';c.globalAlpha=.25*fx;oval(c,640,240,420,160,'#ffe8a8');c.restore();cue(h,'decidingShot',7.945,t,'powerShot');
  }else if(scene.name==='net'){
-  // Top corner: the net bellies, the keeper is beaten, the end erupts.
+  // Top corner: the keeper stretches and misses, the net bellies, the end erupts.
   const impact=clamp((u-.38)/.25),view=shot(c,ART.goal,1.9,.62,.33);goalStand(c,view,t,u>.38);const corner=at(view,860,275);
   if(u>.38&&view){c.save();c.beginPath();c.ellipse(corner.x,corner.y,170,120,0,0,Math.PI*2);c.clip();const s=1+.14*Math.sin(impact*Math.PI),im=img(ART.goal);c.translate(corner.x,corner.y);c.scale(s,s);c.translate(-corner.x,-corner.y);c.imageSmoothingEnabled=false;c.drawImage(im,view.x,view.y,im.naturalWidth*view.k,im.naturalHeight*view.k);c.restore()}
-  const foot=at(view,700,430);if(u<.6)sprite(c,'keeper',mix(foot.x-260,foot.x-60,clamp(u/.45)),foot.y-clamp(u/.45)*60,5.6,'save_stretch_right',KEEPER,t,{rot:-.15});
-  const k=clamp(u/.4);ball(c,u<.38?mix(-60,corner.x,k):corner.x+Math.sin(impact*9)*8*(1-impact),u<.38?mix(620,corner.y,k):corner.y,40,t,fire&&u<.38,1,fx);
+  const foot=at(view,700,430);if(u<.6)sprite(c,'keeper',mix(foot.x-260,foot.x-80,clamp(u/.45)),foot.y-clamp(u/.45)*50,5.6,'save_stretch_right',KEEPER,t);
+  const k=clamp(u/.4);ball(c,u<.38?mix(-60,corner.x,k):corner.x+Math.sin(impact*9)*8*(1-impact),u<.38?mix(620,corner.y,k):corner.y,36,t,fire&&u<.38,1,fx);
   if(u>.38){cue(h,'netBreak',9.091,t,'slam');h.impact?.(impact);flash(c,(1-impact)*.5*fx);const rise=ease(clamp((u-.45)/.3));crowd(c,0,H-rise*360,W,t);if(u>.55)sprite(c,'star',360,H+40-rise*60,9,'celebrate',BLUE,t,{shadow:false})}
  }
  // Widescreen bars and vignette (not on the title, which has its own frame).

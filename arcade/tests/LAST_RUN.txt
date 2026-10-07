@@ -228,4 +228,4 @@ PASS offline sprite package preserves exact original PNG bytes for both palette 
 PASS private-room server authentication, signaling, expiry and rate limits
 PASS six spectacular-save sprite sequences have eight distinct full-body exposures each
 
-Intro keyframes, OPZIONI screen, pause menu and demo launch rendered in headless Chrome. Real joypad input, real browser playback and two-browser networking have not been verified in this environment.
+Intro keyframes (overhead-kick contact), guided joypad setup with a simulated PlayStation Classic pad, penalty arc and keeper rows rendered and reviewed. A physical joypad and real browser playback have not been verified in this environment.
