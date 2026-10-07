@@ -239,3 +239,5 @@ PASS offline sprite package preserves exact original PNG bytes for both palette 
 PASS private-room server authentication, signaling, expiry and rate limits
 PASS six spectacular-save sprite sequences have eight distinct full-body exposures each
 PASS raster environments, transparent title, favicon, Jurassic Kickers crest and 12 regional maps
+
+Phone layout (844x390) and touch controls rendered in headless Chrome with simulated touch; a real phone has not been tested.

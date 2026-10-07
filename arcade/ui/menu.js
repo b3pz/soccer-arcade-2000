@@ -45,7 +45,7 @@ function open(){
  }
 
  // Every screen fits the window: the content is scaled down (never up) until nothing is cut off at the bottom.
- function fit(){box.style.zoom='';const need=box.scrollHeight,have=box.clientHeight;if(need>have+2)box.style.zoom=String(Math.max(.55,have/need))}
+ function fit(){box.style.zoom='';const need=box.scrollHeight,have=box.clientHeight;if(need>have+2)box.style.zoom=String(Math.max(.4,have/need))}
  function render(){renderStep();fit()}
  function fitLater(){requestAnimationFrame(fit)}
  function renderStep(){

@@ -24,13 +24,15 @@ function padIcon(c,slot,x,cy,s,p){const table=isPS(p)?PS:XB;
   else{c.fillStyle=color;c.beginPath();c.arc(cx,cy,r-3,0,Math.PI*2);c.fill();c.fillStyle='#fff';c.font='900 '+Math.round(s*.62)+'px monospace';c.textAlign='center';c.textBaseline='middle';c.fillText(label,cx,cy+1)}return r*2}
  c.font='900 '+Math.round(s*.48)+'px monospace';const w=c.measureText(label).width+s*.6;round(c,x,cy-s*.42,w,s*.84,s*.42);c.fillStyle='#0a0f1e';c.fill();round(c,x+2,cy-s*.42+2,w-4,s*.84-4,s*.38);c.fillStyle='#3a4152';c.fill();c.fillStyle='#fff';c.textAlign='center';c.textBaseline='middle';c.fillText(label,x+w/2,cy+1);return w}
 // Draws text with prompt tokens; returns the total width. y is the text baseline (as fillText).
-function draw(c,text,x,y,size,color='#fff',align='center',shadow='#07101b'){const p=pad(),bits=parts(text),gap=size*.25;c.save();c.font='bold '+size+'px monospace';
+function draw(c,text,x,y,size,color='#fff',align='center',shadow='#07101b',maxW=Infinity){const p=pad(),bits=parts(text);if(maxW<Infinity){const w=draw(fake(c),text,0,0,size,color,align,shadow);if(w>maxW)size=Math.max(6,size*maxW/w)}const gap=size*.25;c.save();c.font='bold '+size+'px monospace';
  const capW=label=>{c.font='900 '+Math.round(size*1.1*.62)+'px monospace';return Math.max(size*1.1*1.05,c.measureText(label).width+size*1.1*.5)};
  const iconW=slot=>{if(slot==='dpad'||slot>=12&&slot<=15)return size*1.1*1.1;const t=(isPS(p)?PS:XB)[slot]||['?'];if(t[1])return size*1.1*1.1;c.font='900 '+Math.round(size*1.1*.48)+'px monospace';return c.measureText(t[0]).width+size*1.1*.6};
  const widthOf=b=>{if(b.text!=null){c.font='bold '+size+'px monospace';return c.measureText(b.text).width}return capW(b.key)+(p&&b.slot!=null?gap+iconW(b.slot):0)+gap};
  const widths=bits.map(widthOf),total=widths.reduce((a,b)=>a+b,0);let cx=align==='center'?x-total/2:align==='right'?x-total:x;const mid=y-size*.34;
  bits.forEach((b,i)=>{if(b.text!=null){c.font='bold '+size+'px monospace';c.textAlign='left';c.textBaseline='alphabetic';c.fillStyle=shadow;c.fillText(b.text,cx+2,y+2);c.fillStyle=color;c.fillText(b.text,cx,y)}else{let w=keycap(c,b.key,cx,mid,size*1.1);if(p&&b.slot!=null)padIcon(c,b.slot,cx+w+gap,mid,size*1.1,p)}cx+=widths[i]});
  c.restore();return total}
+// Measuring pass: same maths, nothing painted.
+function fake(c){return new Proxy(c,{get:(t,k)=>k==='measureText'?s=>t.measureText(s):typeof t[k]==='function'?()=>{}:t[k],set:(t,k,v)=>{if(k==='font')t.font=v;return true}})}
 window.S9ArcadePrompts={draw,plain,has,parts,buttonGlyph:(slot,p=pad())=>((isPS(p)?PS:XB)[slot]||['?'])[0]};
 // Every canvas text drawn by the match renderer understands the tokens.
 const R=window.S9ArcadeEngine?.Renderer?.prototype;if(R){const text=R.text;R.text=function(s,x,y,size=20,color='#fff',align='center'){if(has(s))return draw(this.ctx,s,x,y,size,color,align);return text.call(this,s,x,y,size,color,align)}}

@@ -121,3 +121,7 @@ Squadre e calciatori hanno nomi inventati, inclusi quelli delle vecchie formazio
 ### Stemmi
 
 Ogni squadra ha il suo stemma ricamato (scudo con bordo oro) con il **nome arcade** in alto, sigla nel medaglione, colori della maglia o della bandiera e anno: `arcade/assets/crests-arcade/`, generati da `tools/rename-crests.py` con lo stesso disegno di `tools/generate-coherent-crests.py`. Gli stemmi originali restano in `assets/crests/` e `arcade/assets/crests/` (il catalogo ne conserva il percorso in `crestOriginal`).
+
+### Mobile
+
+Su telefono e tablet (schermo touch) in partita compaiono una levetta virtuale a sinistra (appare dove appoggi il pollice) e i pulsanti TIRO, PASSA, LANCIO, SCATTO a destra, più CAMBIO e PAUSA in alto. Funzionano come i tasti: TIRO e LANCIO si tengono premuti per caricare, SCATTO si tocca ripetutamente. In pausa la levetta sposta il cursore. Un tocco sull'intro equivale a START; nei menu si tocca direttamente la voce. In verticale compare l'invito a girare il telefono. I menu si adattano allo schermo e i testi non escono dai riquadri.
