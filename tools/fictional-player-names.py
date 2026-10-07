@@ -115,6 +115,10 @@ for team in data['club']:
         strikers = [p for p in team['players'] if p['pos'] == 'ST']
         NAMED[strikers[0]['id']] = 'Francesco Infusini'
         NAMED[strikers[1]['id']] = 'Giuseppe Milano'
+for team in data['national']:
+    if team['id'] == 'italy_2006':
+        for p, n in zip([p for p in team['players'] if p['pos'] == 'ST'], ['Francesco Infusini', 'Giuseppe Milano', 'Marco Paolini', 'Don Dilik']):
+            NAMED[p['id']] = n
 used.update(NAMED.values())
 
 for team in teams:

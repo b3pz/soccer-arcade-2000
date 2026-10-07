@@ -2,7 +2,7 @@
 (function(){
 'use strict';
 const ROOT='arcade/assets/art/',cache=new Map(),paths={logo:'title-logo.png',stadium:'stadium-menu.png',crowd:'crowd-sheet.png',film:'cinematic-wide-sheet.png',sponsors:'sponsors.png',world:'world-map.png',ceremonies:'ceremonies.png',turf:'world/pitch-turf.png',track:'world/track-floor.png',benches:'world/bench-sheet.png',coach:'world/coach-sheet.png',panel:'ui/panel.png',fire:'effects/fire-sheet.png',meteor:'effects/meteor-sheet.png',speed:'effects/speed-sheet.png',impacts:'effects/impact-sheet.png'};
-function image(key){const file=paths[key]||key;if(!cache.has(file)){const im=new Image();im.src=ROOT+file+'?v=art-1';cache.set(file,im)}return cache.get(file)}
+function image(key){const file=paths[key]||key;if(!cache.has(file)){const im=new Image();im.src=ROOT+file+'?v=art-2';cache.set(file,im)}return cache.get(file)}
 const ready=im=>!!im?.complete&&im.naturalWidth>0;
 function cover(c,key,x=0,y=0,w=1280,h=720,alpha=1){const im=image(key);if(!ready(im))return false;const k=Math.max(w/im.naturalWidth,h/im.naturalHeight),sw=w/k,sh=h/k;c.save();c.globalAlpha*=alpha;c.drawImage(im,(im.naturalWidth-sw)/2,(im.naturalHeight-sh)/2,sw,sh,x,y,w,h);c.restore();return true}
 function frame(c,key,index,cols,rows,x,y,w,h,zoom=1,pan=0){const im=image(key);if(!ready(im))return false;const fw=im.naturalWidth/cols,fh=im.naturalHeight/rows,ratio=w/h,sw=Math.min(fw,fh*ratio)/zoom,sh=sw/ratio,sx=(index%cols)*fw+(fw-sw)/2+pan*Math.max(0,(fw-sw)/2),sy=Math.floor(index/cols)*fh+(fh-sh)/2;c.drawImage(im,sx,sy,sw,sh,x,y,w,h);return true}
@@ -19,7 +19,8 @@ function logo(c,{box,hole=false,alpha=1}={}){const im=image('logo');if(!ready(im
 const shots={final:0,dribble:1,bicycle:2,save:3,anonymous:4,net:5};
 function cinematic(c,name,u){if(!(name in shots))return false;return frame(c,'film',shots[name],3,2,0,0,1280,720,1.025+u*.055,(u-.5)*.7)}
 function crowd(c,time,x,y,w,h){return frame(c,'crowd',Math.floor(time*8)%4,2,2,x,y,w,h)}
-function sponsor(c,index,x,y,w,h){const im=image('sponsors');if(!ready(im))return false;const fh=im.naturalHeight/4;c.drawImage(im,0,(Math.abs(index)%4)*fh,im.naturalWidth,fh,x,y,w,h);return true}
+// Board strips are 2172x181 each; their count follows the sheet height. Order scrambled so neighbours differ.
+function sponsor(c,index,x,y,w,h){const im=image('sponsors');if(!ready(im))return false;const n=Math.max(1,Math.round(im.naturalHeight/181)),fh=im.naturalHeight/n,row=(Math.abs(index)*5+3)%n;c.drawImage(im,0,row*fh,im.naturalWidth,fh,x,y,w,h);return true}
 Object.keys(paths).forEach(image);
 window.S9ArcadeArt={image,ready,cover,frame,blit,panel,effectTrail,motion,effect,metadata,logo,logoBox,logoTarget,cinematic,crowd,sponsor};
 })();

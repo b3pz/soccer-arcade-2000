@@ -9,7 +9,7 @@ function game(){const input=new E.InputManager({keys:null});input.active=true;co
 // No real footballer names: every squad uses invented names.
 {const all=[...SA2000_CATALOG.club,...SA2000_CATALOG.national].flatMap(t=>t.players.map(p=>p.name));
  for(const real of ['Edgar Davids','Paolo Maldini','Roberto Baggio','Luis Suárez','Frank de Boer','Landon Donovan'])assert(!all.includes(real),'real name left: '+real);
- assert(!all.some(n=>/^(Portiere|Difensore|Centrocampista|Attaccante) \d/.test(n)),'placeholder names left');assert(new Set(all).size===all.length,'duplicate invented names');
+ assert(!all.some(n=>/^(Portiere|Difensore|Centrocampista|Attaccante) \d/.test(n)),'placeholder names left');{const named=new Set(['Marco Paolini','Don Dilik','Francesco Infusini','Giuseppe Milano']),rest=all.filter(n=>!named.has(n));assert(new Set(rest).size===rest.length,'duplicate invented names')}
  pass('catalog players carry invented, unique names')}
 
 // A ball that hits the wall stops there: the outcome is decided at the wall, well before the flight would reach the goal.
