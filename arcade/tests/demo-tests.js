@@ -25,3 +25,11 @@ function match(h,a,level='facile'){const input=new E.InputManager({keys:null});i
  for(const p of m.teams[1].players)if(p.role!=='GK'){p.x=dir>0?20:80;p.y=31}winger.x=dir>0?88:12;winger.y=winger.home.y<31?6:56;striker.x=dir>0?85:15;striker.y=31;m.control(winger);h.selected=winger;h.input.down.clear();m.pass(winger,true);assert(m.ball.passTarget===striker,'cross not aimed at the striker in the box');h.input.press('z');
  let volleyed=false;humanVolleys=0;for(let k=0;k<360&&!volleyed;k++){m.update(1/120);m.input.end(1/120);volleyed=humanVolleys>0}
  assert(h.selected===striker,'control not handed to the receiver');assert(volleyed,'human did not volley the cross');pass('human cross: control moves to the striker and holding Z volleys it')}
+
+// Keeper positioning: with the ball on the wing he stays near the middle of his goal (never out at the post),
+// and on a shot already on its way he still goes for the ball.
+{const m=match('Roma','Inter');m.phase='PLAY';m.restarts.data=null;const k=m.teams[0].players.find(p=>p.role==='GK'),wing=m.teams[1].players.find(p=>p.role==='LM'||p.role==='RM'),own=m.teams[0].dir>0?0:100;
+ wing.x=own===0?20:80;wing.y=5;m.control(wing);wing.aiWait=9;m.ball.x=wing.x;m.ball.y=wing.y;k.x=own===0?3:97;k.y=31;for(let i=0;i<240;i++){k.update(m,1/120)}
+ assert(Math.abs(k.y-31)<=4.1,'keeper drifted to the post: y='+k.y.toFixed(1));
+ const b=m.ball;b.owner=null;b.x=own===0?14:86;b.y=31;b.z=1;b.vx=own===0?-50:50;b.vy=12;b.state='shot';b.lock=0;b.flight=.2;const y0=k.y;for(let i=0;i<6;i++){k.update(m,1/120);b.x+=b.vx/120;b.y+=b.vy/120}
+ assert(k.y>y0+.2||m.ball.owner===k||k.keeperState==='GK_DIVING','keeper ignored a shot heading for the corner');pass('keeper holds the middle of the goal on wing play and still moves onto shots')}

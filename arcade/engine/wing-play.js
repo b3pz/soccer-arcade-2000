@@ -50,7 +50,9 @@ M.receive=function(){const b=this.ball;if(!b.owner&&b.lock<=0&&b.z>.6&&b.z<3.2&&
   for(const p of [...this.players].sort((a,c)=>dist(a,b)-dist(c,b))){if(p.sentOff||p.role==='GK'||p.stun>0||p.recovery>0)continue;if(dist(p,b)>3.2)break;const t=p.team;if(!inBox(t,p)||t.id!==b.lastTeam)continue;
    const h=this.humanOf(p);
    if(h){if(h.input.shotCharging){h.input.shotPower=Math.min(1,Math.max(.55,h.input.shotHeld/.85));h.input.shotBuffer=.28;h.input.shotCharging=false;h.input.down.delete('z');this.as(h,()=>this.shoot(p,true));return}}
-   else if(b.state==='aerial'&&roll(this,b)<(this.teamHasHumans(t)?.3:({facile:.55,normale:.75,difficile:.9}[this.difficulty]??.75))){this.shoot(p,true,.45+chance(this,7)*.4);mistime(this,p);return}
+   // The keeper gets there first in his own six-yard area: no first-time strike, he claims it.
+   else if(this.players.some(k=>k.role==='GK'&&k.team!==t&&!k.sentOff&&dist(k,b)<dist(p,b)+.6))break;
+   else if(b.state==='aerial'&&roll(this,b)<(this.teamHasHumans(t)?.3:({facile:.45,normale:.6,difficile:.8}[this.difficulty]??.6))){this.shoot(p,true,.45+chance(this,7)*.4);mistime(this,p);return}
    break}}
  return receive.call(this)};
 // A human cross hands control to the receiver as the ball drops in, so the human can meet it with a volley.
@@ -62,7 +64,11 @@ M.update=function(dt){const b=this.ball,q=b.passTarget;if(this.phase==='PLAY'&&!
  return result};
 // Keepers claim crosses dropping in the six-yard area, but stay on their line for crosses aimed at the penalty spot and beyond.
 const keeper=E.Goalkeeper.prototype.update;
-E.Goalkeeper.prototype.update=function(m,dt){const b=m.ball,line=this.team.id?100:0,land=b.passTarget?.receiverIntent,far=!b.owner&&b.state==='aerial'&&b.lastTeam!==this.team.id&&land&&Math.abs(land.x-line)>7.5;
- keeper.call(this,m,dt);if(far&&b.owner!==this){const limit=this.team.id?94.5:5.5;this.x=this.team.id?Math.max(this.x,limit):Math.min(this.x,limit)}};
+E.Goalkeeper.prototype.update=function(m,dt){const b=m.ball,line=this.team.id?100:0,land=b.passTarget?.receiverIntent,far=!b.owner&&b.state==='aerial'&&b.lastTeam!==this.team.id&&land&&Math.abs(land.x-line)>7.5,y0=this.y;
+ keeper.call(this,m,dt);
+ // Positioning across the goal: a fraction of the way towards the ball (towards where a cross will land), never out to a post,
+ // so a ball played back to the middle does not find the goal empty. Shots on their way, dives and holding are untouched.
+ const incoming=!b.owner&&b.state==='shot'&&b.vx*this.team.dir<0;
+ if(!incoming&&(this.keeperState==='GK_POSITIONING'||far&&this.keeperState==='GK_RUSHING')&&b.owner!==this&&m.phase==='PLAY'){const ref=!b.owner&&b.state==='aerial'&&land?land.y:b.y,want=31+clamp((ref-31)*.35,-4,4),step=11*dt;this.y=y0+clamp(want-y0,-step,step)}if(far&&b.owner!==this){const limit=this.team.id?94.5:5.5;this.x=this.team.id?Math.max(this.x,limit):Math.min(this.x,limit)}};
 window.S9ArcadeWingPlay={onWing,inBox,depth};
 })();

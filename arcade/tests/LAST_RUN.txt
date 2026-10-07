@@ -211,12 +211,13 @@ PASS free kick into the wall stops at the wall and rebounds, never shown as a go
 PASS kick-off camera pulls back slowly from the centre ball
 PASS slim scoreboard and scorer name under the GOAL banner
 PASS crowd celebration cutaway is a tinted bitmap
-PASS demo bot plays short matches with 7 crosses, 2 volleys, 17 goals (5-0, 7-0, 5-0) and 11 different captions
+PASS demo bot plays short matches with 12 crosses, 9 volleys, 12 goals (4-0, 2-0, 6-0) and 11 different captions
 PASS CPU wingers reach the byline and cross (12/12), runners volley (5/12)
 PASS human cross: control moves to the striker and holding Z volleys it
+PASS keeper holds the middle of the goal on wing play and still moves onto shots
 .....
 ----------------------------------------------------------------------
-Ran 5 tests in 0.000s
+Ran 5 tests in 0.001s
 
 OK
 PASS JavaScript syntax (modules and all root inline scripts)
@@ -229,4 +230,4 @@ PASS offline sprite package preserves exact original PNG bytes for both palette 
 PASS private-room server authentication, signaling, expiry and rate limits
 PASS six spectacular-save sprite sequences have eight distinct full-body exposures each
 
-Penalty scene rendered in headless Chrome (aim, flight, result) on the goal backdrop. A physical joypad has not been verified in this environment.
+Keeper behaviour measured over six simulated matches (human side driven by the demo bot). A physical joypad has not been verified in this environment.
