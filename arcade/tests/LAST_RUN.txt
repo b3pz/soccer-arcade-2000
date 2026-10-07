@@ -230,4 +230,4 @@ Traceback (most recent call last):
                              output=stdout, stderr=stderr)
 subprocess.CalledProcessError: Command '['/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpers/jsc', '/Users/milanog91gmail.com/Desktop/soccer-arcade-2000/arcade/tests/artwork-tests.js']' returned non-zero exit status 3.
 
-PENDING: artwork crest test (crest atlases being regenerated). Benches, coach, stands and team names rendered in headless Chrome.
+PENDING: artwork crest test (crest atlases being regenerated). Fire, meteor, speed effects and new panel rendered in headless Chrome.

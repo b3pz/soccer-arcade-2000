@@ -13,8 +13,8 @@ const project=R.project;
 R.project=function(x,y){if(!this.mirror)return project.call(this,x,y);const cam=this.camera,saved=cam?.x;if(cam)cam.x=100-saved;try{return project.call(this,100-x,y)}finally{if(cam)cam.x=saved}};
 const draw=R.draw;
 R.draw=function(m){this.mirror=!!m.mirror&&!['PENALTIES','FREEKICK'].includes(m.phase);if(!this.mirror)return draw.call(this,m);
- const flipped=[];for(const p of [...m.players,this.referee].filter(Boolean)){for(const key of ['face','visualKickFace'])if(p[key]&&typeof p[key].x==='number'){flipped.push([p[key],p[key].x]);p[key].x=-p[key].x}}
- const b=m.ball,vx=b.vx;b.vx=-vx;try{return draw.call(this,m)}finally{for(const [o,x] of flipped)o.x=x;b.vx=vx;this.mirror=false}};
+ const flipped=[],flippedVx=[];for(const p of [...m.players,this.referee].filter(Boolean)){for(const key of ['face','visualKickFace'])if(p[key]&&typeof p[key].x==='number'){flipped.push([p[key],p[key].x]);p[key].x=-p[key].x}if(typeof p.vx==='number'){flippedVx.push([p,p.vx]);p.vx=-p.vx}}
+ const b=m.ball,vx=b.vx;b.vx=-vx;try{return draw.call(this,m)}finally{for(const [o,x] of flipped)o.x=x;for(const [p,v] of flippedVx)p.vx=v;b.vx=vx;this.mirror=false}};
 const radar=R.radar;R.radar=function(m){if(!this.mirror)return radar.call(this,m);const saved=m.players.map(p=>p.x),bx=m.ball.x;m.players.forEach(p=>p.x=100-p.x);m.ball.x=100-bx;try{return radar.call(this,m)}finally{m.players.forEach((p,i)=>p.x=saved[i]);m.ball.x=bx}};
 // The stadium is symmetric: drawn unmirrored with the camera reflected (track, stands and boards keep their geometry).
 const pitch=R.pitch;R.pitch=function(...args){if(!this.mirror||!this.camera)return pitch.apply(this,args);const cam=this.camera,x=cam.x;this.mirror=false;cam.x=100-x;try{return pitch.apply(this,args)}finally{cam.x=x;this.mirror=true}};
