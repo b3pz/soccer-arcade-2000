@@ -9,6 +9,7 @@ syllables=['va','ki','zor','ren','vak','lo','mir','dra','xen','jor','tal','vek',
 aliases={};number=0
 for ti,t in enumerate(catalog['club']+catalog['national']):
  plan={e['id']:e['name'] for e in json.loads((root/'arcade/assets/art/crests/branding-plan.json').read_text())}
+ if t in catalog['national']: continue  # national teams keep their real names
  aliases[t['name']]=plan.get(t['id']) or prefix[ti%len(prefix)]+' '+suffix[(ti//len(prefix))%len(suffix)]
  t['name']=aliases.get(t['name'],t['name']);t['season']='';t['arcadeFictional']=True  # crests: the original per-team crests are kept (owner's choice)
  number+=len(t['players'])  # player names come from tools/fictional-player-names.py (nation-flavoured, owner-chosen names kept)
