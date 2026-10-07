@@ -52,6 +52,28 @@ R.crowdCutaway=function(m){const event=this.stadiumCelebration;if(!event||event.
  const w=CROWD_W*2,h=CROWD_H*2,slide=Math.min(1,event.age/.18),out=Math.max(0,(event.age-1.4)/.2),x=640-w/2,y=720-h-26+Math.round((1-slide+out)*(h+40)),frame=Math.floor(event.age*9)%CROWD_FRAMES;
  this.panel(x-10,y-10,w+20,h+20,12);const smooth=c.imageSmoothingEnabled;c.imageSmoothingEnabled=false;c.drawImage(sheet,0,frame*CROWD_H,CROWD_W,CROWD_H,x,y,w,h);c.imageSmoothingEnabled=smooth};
 
+// ---------------------------------------------------------------- penalties
+// Shoot-out and single penalties on the goal backdrop seen from behind the spot (same picture as close free kicks):
+// nothing of the match stadium shows around it. Picture geometry: posts x 360/920, bar y 246, goal line y 430, spot (640,554).
+const GOAL_BG='arcade/assets/freekick-backdrop.png?v=fk-1';R.bitmap?.(GOAL_BG);
+const PEN={left:360,right:920,bar:246,line:430,spotX:640,spotY:554,perY:560/12,perZ:184/5};
+R.drawPenalty=function(m){const c=this.ctx,pen=m.pen,team=pen.turn%2,g=m.teams[1-team].players.find(p=>!p.sentOff&&p.role==='GK'),shooter=m.teams[team].players.find(p=>!p.sentOff&&p.role==='ST')||m.teams[team].players.find(p=>!p.sentOff&&p.role!=='GK'),b=m.ball,bg=this.bitmap(GOAL_BG),pad=!!window.S9ArcadeControls?.padConnected;
+ c.clearRect(0,0,1280,720);if(bg?.complete&&bg.naturalWidth){const sm=c.imageSmoothingEnabled;c.imageSmoothingEnabled=false;c.drawImage(bg,0,0,1280,720);c.imageSmoothingEnabled=sm}else{c.fillStyle='#1d7a35';c.fillRect(0,0,1280,720)}
+ // Detailed supporters over the backdrop's stand, in the shooting side's colours.
+ const sheet=tinted(this,m.teams[team]?.kit);if(sheet){const h=218,w=h*CROWD_W/CROWD_H,f=Math.floor((m.presentationTime??m.elapsed)*4)%CROWD_FRAMES,sm=c.imageSmoothingEnabled;c.imageSmoothingEnabled=false;for(let x=0;x<1280;x+=w)c.drawImage(sheet,0,f*CROWD_H,CROWD_W,CROWD_H,x,4,w,h);c.imageSmoothingEnabled=sm}
+ const lift=pen.keeperCommitted?Math.max(0,E.PenaltyTargets.cell(pen.diveCell).z-1.2)*PEN.perZ:0;c.save();c.translate(PEN.spotX+(g.y-31)*PEN.perY,PEN.line+2-lift);this.sprite(g,m,{scale:2.1});c.restore();
+ const progress=pen.flight?Math.max(0,Math.min(1,Math.abs(b.x-(team?18:82))/18)):0,bx=PEN.spotX+(b.y-31)*PEN.perY*progress,ground=PEN.spotY-progress*(PEN.spotY-PEN.line),by=ground-b.z*PEN.perZ;
+ c.fillStyle='#0005';c.beginPath();c.ellipse(bx,ground+4,10-progress*5,4-progress*2,0,0,7);c.fill();this.drawBall(bx,by,11-progress*5,m);
+ if(!pen.flight||pen.age<.4||pen.stage==='result'){c.save();c.translate(PEN.spotX-58,PEN.spotY+70);this.sprite(shooter,m,{scale:2.4});c.restore()}
+ this.hud(Object.assign(Object.create(Object.getPrototypeOf(m)),m,{messageTime:0}));
+ // Shoot-out record: one strip per side, in the free grass below the box line.
+ if(!pen.single)for(const side of [0,1]){const x=side?1010:30;this.panel(x,560,240,64,10);this.text(this.teamCode?.(m.teams[side])||'',x+40,600,18,'#fff');this.text(pen.history[side].map(v=>v?'●':'○').join(' ')||'—',x+150,600,20,'#ffe55b')}
+ const shooterHuman=(m.humans||[]).some(h=>h.team===team),keeperHuman=(m.humans||[]).some(h=>h.team===1-team),chosen=shooterHuman?pen.aim:pen.saveCell,a=PEN.left,z=PEN.right,top=PEN.bar,bottom=PEN.line;
+ if((shooterHuman||keeperHuman)&&(pen.stage==='ready'||keeperHuman&&pen.stage==='flight'&&!pen.keeperCommitted)){for(let row=0;row<3;row++)for(let col=0;col<3;col++){const x=a+col*(z-a)/3,y=top+row*(bottom-top)/3,on=row*3+col===chosen;c.strokeStyle=on?'#fff257':'#87dfff88';c.lineWidth=on?5:2;c.strokeRect(x+3,y+3,(z-a)/3-6,(bottom-top)/3-6);if(on){c.fillStyle='#ffe85122';c.fillRect(x+3,y+3,(z-a)/3-6,(bottom-top)/3-6)}this.text(String(row*3+col+1),x+(z-a)/6,y+(bottom-top)/6+7,20,on?'#fff257':'#9fc2d4')}}
+ if(pen.stage==='result'){this.panel(330,96,620,140,18);this.text(pen.outcome.label,640,156,48,pen.outcome.goal?'#ffe743':'#ff8294');this.text((pen.single?'RIGORE':'RIGORE '+(Math.floor(pen.turn/2)+1))+' · '+m.teams[team].name,640,190,20,'#b3eaff');if(pen.age>=.7)this.text(pad?'A · CONTINUA':'Z · CONTINUA',640,222,22,'#fff06a')} // above the bar: the goal stays visible
+ else{this.panel(250,84,780,42,10);this.text(shooterHuman?'FRECCE · 9 POSIZIONI   '+(pad?'A':'Z')+' · TIRA':'FRECCE · 9 POSIZIONI   '+(pad?'B / X':'X / C')+' · TUFFO DOPO IL TIRO',640,112,19,'#ffe55b')}
+};
+
 // ---------------------------------------------------------------- scorer caption
 // Under the GOAL! banner: shirt number and (fictional) name of the scorer, or own goal.
 R.scorerCaption=function(m){const s=m.scorers?.[m.scorers.length-1];if(!s||!/^GOAL!|^GOLDEN GOAL!$/.test(m.message||'')||m.messageTime<=0)return;

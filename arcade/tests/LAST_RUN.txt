@@ -229,4 +229,4 @@ PASS offline sprite package preserves exact original PNG bytes for both palette 
 PASS private-room server authentication, signaling, expiry and rate limits
 PASS six spectacular-save sprite sequences have eight distinct full-body exposures each
 
-Conceding a goal reproduced in headless Chrome through launchArcadeMatch: the match keeps running (0-1, kick-off to the human side). A physical joypad has not been verified in this environment.
+Penalty scene rendered in headless Chrome (aim, flight, result) on the goal backdrop. A physical joypad has not been verified in this environment.
