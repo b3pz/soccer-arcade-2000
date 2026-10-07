@@ -37,5 +37,5 @@ R.resultScreen=function(m){const c=this.ctx,age=(m.presentationTime??m.elapsed)-
  this.text(m.message,640,482,24,'#75dbff');if(age>.8&&Math.floor(age*2.5)%2===0)this.text(pad?'A / START · CONTINUA':'Z / INVIO · CONTINUA',640,530,22,'#ffe55a')};
 R.pauseScreen=function(m){const c=this.ctx,pad=!!window.S9ArcadeControls?.padConnected;c.fillStyle='#02061299';c.fillRect(0,0,1280,720);this.panel(330,200,620,320,26);
  this.text('PAUSA',640,268,44,'#ffe55a');this.text(m.teams[0].name+'  '+m.rules.score.join(' : ')+'  '+m.teams[1].name,640,314,20,'#b3eaff');
- this.text(pad?'A · RIPRENDI':'Z / ESC · RIPRENDI',640,372,24,'#fff');this.text(pad?'X · ESCI SENZA REGISTRARE':'X · ESCI SENZA REGISTRARE',640,414,22,'#ff8294');this.text(pad?'BACK · SCHERMO INTERO':'F · SCHERMO INTERO',640,456,20,'#75dbff')};
+ const B=window.S9ArcadeBindings,key=(action,group='system')=>B?pad?'JOY '+B.map('pad0')[action==='confirm'?'z':action==='back'?'x':action]:B.label(B.key(action,group)):null;this.text(B?key('confirm','menu')+' / '+key('pause')+' · RIPRENDI':pad?'A · RIPRENDI':'Z / ESC · RIPRENDI',640,372,24,'#fff');this.text(B?key('back','menu')+' · ESCI SENZA REGISTRARE':'X · ESCI SENZA REGISTRARE',640,414,22,'#ff8294');this.text(B?key('fullscreen')+' · SCHERMO INTERO':pad?'BACK · SCHERMO INTERO':'F · SCHERMO INTERO',640,456,20,'#75dbff')};
 })();

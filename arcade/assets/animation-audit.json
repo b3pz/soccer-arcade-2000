@@ -741,6 +741,48 @@
       "sourcePoses": 8,
       "derivedPoses": 0,
       "repeatedExposure": false
+    },
+    "save_stretch_left": {
+      "frames": 8,
+      "sourcePoses": 0,
+      "derivedPoses": 8,
+      "repeatedExposure": false,
+      "technique": "original articulated pixel body: push-off, extension, glove contact, landing, recovery"
+    },
+    "save_stretch_right": {
+      "frames": 8,
+      "sourcePoses": 0,
+      "derivedPoses": 8,
+      "repeatedExposure": false,
+      "technique": "original articulated pixel body: push-off, extension, glove contact, landing, recovery"
+    },
+    "save_tip_left": {
+      "frames": 8,
+      "sourcePoses": 0,
+      "derivedPoses": 8,
+      "repeatedExposure": false,
+      "technique": "original articulated pixel body: push-off, extension, glove contact, landing, recovery"
+    },
+    "save_tip_right": {
+      "frames": 8,
+      "sourcePoses": 0,
+      "derivedPoses": 8,
+      "repeatedExposure": false,
+      "technique": "original articulated pixel body: push-off, extension, glove contact, landing, recovery"
+    },
+    "save_punch_left": {
+      "frames": 8,
+      "sourcePoses": 0,
+      "derivedPoses": 8,
+      "repeatedExposure": false,
+      "technique": "original articulated pixel body: push-off, extension, glove contact, landing, recovery"
+    },
+    "save_punch_right": {
+      "frames": 8,
+      "sourcePoses": 0,
+      "derivedPoses": 8,
+      "repeatedExposure": false,
+      "technique": "original articulated pixel body: push-off, extension, glove contact, landing, recovery"
     }
   }
 }

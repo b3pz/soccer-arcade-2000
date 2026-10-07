@@ -5,7 +5,9 @@ const E=window.S9ArcadeEngine,M=E.Match.prototype,R=E.Renderer.prototype,RM=E.Re
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),lerp=(a,b,t)=>a+(b-a)*t;
 // Screen geometry shared with tools/generate-freekick-backdrop.py.
 const G={left:360,right:920,bar:246,line:430,wallY:548,ballX:640,ballY:652},BACKDROP='arcade/assets/freekick-backdrop.png?v=fk-1';
-const goalX=team=>team?0:100;R.bitmap?.(BACKDROP);
+const goalX=team=>team?0:100;
+// Fraction of the flight at which the ball crosses the wall plane (scene path below uses the same value).
+const WALL_T=.4;R.bitmap?.(BACKDROP);
 // Free kick between the box and ~32 m, central enough to shoot: played in the scene.
 M.isSceneFreeKick=function(team,x,y){const d=Math.abs(goalX(team)-x);return d>16&&d<=32&&Math.abs(y-31)<18};
 const award=RM.award;
@@ -37,9 +39,11 @@ M.freeKick=function(dt){const fk=this.fk,{shooter,keeper}=this.fkHumans();fk.age
   // Wall: CPU wall jumps by odds, a human wall jumps on Z (timing counts).
   if(keeper){if(keeper.input.take('z')||fk.jumpQueued){fk.jump=fk.age<.35;fk.jumpQueued=false}const a=keeper.input.axis();if(!fk.dive){fk.kp=clamp(fk.kp+a.x*dt*2.3,-1.1,1.1);if(keeper.input.take('x')||keeper.input.take('c')){fk.dive=true;fk.diveDir=Math.sign(a.x)||Math.sign(fk.lateral-fk.kp)||1}}else fk.kp=clamp(fk.kp+fk.diveDir*dt*3.4,-1.2,1.2)}
   else{fk.jump=fk.cpuJump;const react=.16+({facile:.16,normale:.08,difficile:0}[this.difficulty]??.08),speed=.9+gk/150,guess=fk.lateral+(((this.elapsed*7.3)%1)-.5)*.5*({facile:1.5,normale:1,difficile:.7}[this.difficulty]??1);if(fk.age>react)fk.kp+=clamp(guess-fk.kp,-speed*dt,speed*dt);if(fk.age>T*.55)fk.dive=true}
+  // The wall is decided when the ball reaches it, so a block is seen as a block and never as a goal first.
+  if(!fk.wallChecked&&t>=WALL_T){fk.wallChecked=true;const hit=resolve(fk,0);if(hit.kind==='wall'){fk.outcome=hit;fk.stage='result';fk.age=0;fk.bounce=Math.sign(hit.Lw-fk.wallCenter*.55)||(fk.curl>0?-1:1);this.say(hit.label,3);return}}
   if(t>=1){const reach=.24+(gk-60)/400+(keeper?(fk.dive?.12:0):fk.dive?.08:0);fk.outcome=resolve(fk,reach);fk.stage='result';fk.age=0;this.say(fk.outcome.label,3);if(fk.outcome.kind==='save')this.stats.teams[1-fk.team].saves++}
   return}
- if(fk.stage==='result'){for(const h of this.humans)h.input.cancelShot(false);const go=fk.age>.6&&this.humans.map(h=>h.input.take('z')).some(Boolean)||fk.age>2.4;if(go)this.fkResume()}};
+ if(fk.stage==='result'){for(const h of this.humans)h.input.cancelShot(false);const go=fk.age>(fk.outcome.kind==='wall'?1:.6)&&this.humans.map(h=>h.input.take('z')).some(Boolean)||fk.age>2.4;if(go)this.fkResume()}};
 M.fkStrike=function(){const fk=this.fk;fk.stage='flight';fk.age=0;fk.duration=1.05-.45*fk.power;fk.lateral=clamp(fk.lateral,-1.4,1.4);this.stats.teams[fk.team].shots++;this.lastShooter=fk.taker;this.lastAssist=null;fk.taker.action='shoot';fk.taker.actionTime=.32;for(const h of this.humans)h.input.cancelShot();this.say('TIRO!',.5)};
 // Back to the pitch with a world state matching what was shown.
 M.fkResume=function(){const fk=this.fk,o=fk.outcome,team=fk.team,gx=goalX(team),dir=this.teams[team].dir,b=this.ball;this.fk=null;
@@ -59,19 +63,22 @@ R.drawFreeKick=function(m){const views=this.fkViews=this.fkViews||new Map(),view
  // Keeper on the line, wall in front, taker at the bottom.
  if(fk.keeper){const dive=fk.dive&&fk.stage!=='ready';c.save();c.translate(gx(fk.kp),G.line+2-(dive?18:0));this.sprite(view('keeper',fk.keeper,{keeperState:dive?'GK_DIVING':'GK_POSITIONING',action:dive?'keeper':'idle',actionTime:dive?.6:0,face:{x:1,y:dive?(fk.diveDir||Math.sign(fk.lateral-fk.kp)||1):0}}),m,{scale:2.1});c.restore()}
  const jumpLift=fk.jump&&fk.stage!=='ready'?Math.max(0,Math.sin(Math.min(1,fk.age/.55)*Math.PI))*34:0;
- fk.wall.forEach((p,i)=>{const x=wx(fk.wallCenter*.55+(i-1.5)*.21);c.fillStyle='#0006';c.beginPath();c.ellipse(x,G.wallY+4,26,7,0,0,7);c.fill();c.save();c.translate(x,G.wallY-jumpLift);this.sprite(view('wall'+i,p,{role:'ST',action:jumpLift>2?'wall_jump':'wall',actionTime:0,stun:0,burst:0,face:{x:1,y:0}}),m,{scale:1.9});c.restore()});
+ fk.wall.forEach((p,i)=>{const x=wx(fk.wallCenter*.55+(i-1.5)*.21);c.fillStyle='#0006';c.beginPath();c.ellipse(x,G.wallY+4,26,7,0,0,7);c.fill();const jolt=o?.kind==='wall'&&fk.stage==='result'&&fk.age<.25?Math.round(Math.sin(fk.age*90+i)*4):0;c.save();c.translate(x+jolt,G.wallY-jumpLift+Math.abs(jolt));this.sprite(view('wall'+i,p,{role:'ST',action:jumpLift>2?'wall_jump':'wall',actionTime:0,stun:0,burst:0,face:{x:1,y:0}}),m,{scale:1.9});c.restore()});
  c.save();c.translate(560,690);this.sprite(view('taker',fk.taker,{action:fk.stage==='flight'&&fk.age<.32?'shoot':'idle',actionTime:.32,face:{x:1,y:0}}),m,{scale:2.3});c.restore();
  // Ball: quadratic path through the wall plane, curl bends the line.
- const end=o?.kind==='wall'?{x:wx(Lw),y:G.wallY-(o.uw/.8)*150}:{x:gx(fk.lateral),y:G.line-ug*(G.line-G.bar)},mid={x:wx(Lw),y:G.wallY-(uw/.8)*150},tw=.4,q=tt=>{const a=(tt-tw)*(tt-1)/(tw),b=tt*(tt-1)/(tw*(tw-1)),cc=tt*(tt-tw)/(1-tw);return {x:G.ballX*a+mid.x*b+end.x*cc,y:G.ballY*a+mid.y*b+end.y*cc}};
- const bt=o?.kind==='wall'?Math.min(t,tw)/tw:t,ball=fk.stage==='ready'?{x:G.ballX,y:G.ballY}:o?.kind==='wall'?{x:lerp(G.ballX,mid.x,bt),y:lerp(G.ballY,mid.y,bt)-Math.sin(bt*Math.PI)*30}:q(t);
- c.fillStyle='#0006';c.beginPath();c.ellipse(lerp(G.ballX,end.x,t),lerp(G.ballY+6,G.line+4,t),10-t*5,4-t*2,0,0,7);c.fill();this.drawBall(ball.x,ball.y,12-t*6,{ball:{x:fk.lateral*t*30,y:t*30,vx:1,vy:0}});
+ const end=o?.kind==='wall'?{x:wx(Lw),y:G.wallY-(o.uw/.8)*150}:{x:gx(fk.lateral),y:G.line-ug*(G.line-G.bar)},mid={x:wx(Lw),y:G.wallY-(uw/.8)*150},tw=WALL_T,q=tt=>{const a=(tt-tw)*(tt-1)/(tw),b=tt*(tt-1)/(tw*(tw-1)),cc=tt*(tt-tw)/(1-tw);return {x:G.ballX*a+mid.x*b+end.x*cc,y:G.ballY*a+mid.y*b+end.y*cc}};
+ const blocked=o?.kind==='wall'&&fk.stage==='result',rb=blocked?Math.min(1,fk.age/.75):0,bounce=fk.bounce||1;
+ // Blocked: the ball stops on the wall, then bounces back towards the taker and off to one side.
+ const ball=fk.stage==='ready'?{x:G.ballX,y:G.ballY}:blocked?{x:mid.x+bounce*rb*300,y:mid.y+rb*(G.ballY+20-mid.y)-Math.sin(rb*Math.PI)*90}:q(t),shadow=blocked?{x:ball.x,y:lerp(G.wallY+6,G.ballY+26,rb)}:{x:lerp(G.ballX,end.x,t),y:lerp(G.ballY+6,G.line+4,t)},size=blocked?12-tw*6+rb*8:12-t*6;
+ c.fillStyle='#0006';c.beginPath();c.ellipse(shadow.x,shadow.y,size*.85,size*.35,0,0,7);c.fill();this.drawBall(ball.x,ball.y,size,{elapsed:fk.arcadeShot?fk.arcadeShot.started+fk.age:m.elapsed,ball:{x:fk.lateral*t*30,y:t*30,vx:1,vy:0,state:fk.stage==='flight'?'shot':'loose',arcadeShot:fk.arcadeShot,fantasyScreenDirection:{x:end.x-G.ballX,y:end.y-G.ballY}}});
+ if(blocked&&fk.age<.3){const k=fk.age/.3;c.save();c.strokeStyle='#fff6b0';c.lineWidth=4;c.globalAlpha=1-k;for(let i=0;i<8;i++){const an=i*Math.PI/4,r0=14+k*20,r1=30+k*44;c.beginPath();c.moveTo(mid.x+Math.cos(an)*r0,mid.y+Math.sin(an)*r0);c.lineTo(mid.x+Math.cos(an)*r1,mid.y+Math.sin(an)*r1);c.stroke()}c.restore();this.text('TUNK!',mid.x,mid.y-48-k*20,26,'#fff6b0')}
  // Aim: swinging arrow onto the goal, power gauge, curl.
  if(fk.stage==='ready'&&(shooter||fk.button)){const tx=gx(fk.lateral),ty=G.line-(fk.button?ug:.45)*(G.line-G.bar),color=pw>.8?'#ff5a36':pw>.45?'#ffe23d':'#7dff6a',cx=(G.ballX+tx)/2+fk.curl*-140,cy=(G.ballY+ty)/2;
   c.save();c.setLineDash([16,10]);c.lineWidth=6;c.strokeStyle='#061021';c.beginPath();c.moveTo(G.ballX,G.ballY-10);c.quadraticCurveTo(cx,cy,tx,ty);c.stroke();c.lineWidth=3;c.strokeStyle=color;c.stroke();c.setLineDash([]);c.fillStyle=color;c.strokeStyle='#061021';c.lineWidth=3;c.beginPath();c.arc(tx,ty,14,0,7);c.stroke();c.beginPath();c.arc(tx,ty,4,0,7);c.fill();c.restore();
   if(fk.button){this.panel(1010,560,240,70,12);for(let i=0;i<12;i++){c.fillStyle=i<Math.ceil(pw*12)?i>8?'#ff6436':i>4?'#ffe44a':'#79e752':'#253c50';c.fillRect(1040+i*15,592,12,20)}this.text('POTENZA · EFFETTO '+(fk.curl<-.15?'◀':fk.curl>.15?'▶':'—'),1130,585,14,'#ffe569')}}
  const rm=this.replayMode;this.replayMode=true;try{this.hud({...m,messageTime:0})}finally{this.replayMode=rm}this.panel(470,104,340,48,12);this.text('PUNIZIONE · '+fk.dist+' M',640,136,22,'#ffe55a');
- if(fk.stage==='result'){this.panel(250,262,780,170,22);this.text(o.label,640,340,54,o.kind==='goal'?'#ffe743':'#ff8294');this.text(m.teams[fk.team].name,640,388,22,'#b3eaff')}
- else{const pad=!!window.S9ArcadeControls?.padConnected;this.panel(250,158,780,46,10);this.text(shooter?(fk.button?'TIENI = POTENZA · ←/→ EFFETTO · RILASCIA = TIRO':(pad?'A/B/X':'Z/C/X')+' FERMA LA MIRA'):keeper?'←/→ PORTIERE · '+(pad?'B/X':'X/C')+' TUFFO · '+(pad?'A':'Z')+' SALTO BARRIERA':'PUNIZIONE',640,188,19,'#ffe55b')}};
+ if(fk.stage==='result'&&(o.kind!=='wall'||fk.age>.55)){this.panel(250,262,780,170,22);this.text(o.label,640,340,54,o.kind==='goal'?'#ffe743':'#ff8294');this.text(m.teams[fk.team].name,640,388,22,'#b3eaff')}
+ else if(fk.stage!=='result'){const pad=!!window.S9ArcadeControls?.padConnected;this.panel(250,158,780,46,10);this.text(shooter?(fk.button?'TIENI = POTENZA · ←/→ EFFETTO · RILASCIA = TIRO':(pad?'A/B/X':'Z/C/X')+' FERMA LA MIRA'):keeper?'←/→ PORTIERE · '+(pad?'B/X':'X/C')+' TUFFO · '+(pad?'A':'Z')+' SALTO BARRIERA':'PUNIZIONE',640,188,19,'#ffe55b')}};
 // Free-kick goals get their own replay: the recorded scene is played back instead of the pitch frames.
 const RP=E.ReplayManager.prototype,record=RP.record,start=RP.start,replayDraw=RP.draw;
 RP.record=function(m,dt,camera){this.match=m;return record.call(this,m,dt,camera)};

@@ -8,18 +8,18 @@ class CameraController {
 }
 class ReplayManager {
  constructor(){this.frames=[];this.playback=null;this.time=0}
- record(m,dt,camera){this.time+=dt;if(this.time<1/30)return;this.time=0;this.frames.push({elapsed:m.elapsed,selected:(m.humans||[]).map(h=>h.selected),camera:camera?{x:camera.x,y:camera.y,zoom:camera.zoom}:null,ball:{x:m.ball.x,y:m.ball.y,z:m.ball.z,owner:m.ball.owner},players:m.players.map(p=>({player:p,role:p.role,x:p.x,y:p.y,action:p.action,visualKickFace:p.visualKickFace,actionTime:p.actionTime,keeperState:p.keeperState,stun:p.stun,burst:p.burst,face:{...p.face}}))});if(this.frames.length>90)this.frames.shift()}
+ record(m,dt,camera){this.time+=dt;if(this.time<1/30)return;this.time=0;this.frames.push({elapsed:m.elapsed,selected:(m.humans||[]).map(h=>h.selected),arcadeImpact:m.arcadeImpact,camera:camera?{x:camera.x,y:camera.y,zoom:camera.zoom}:null,ball:{x:m.ball.x,y:m.ball.y,z:m.ball.z,owner:m.ball.owner,state:m.ball.state,vx:m.ball.vx,vy:m.ball.vy,vz:m.ball.vz,arcadeShot:m.ball.arcadeShot},players:m.players.map(p=>({player:p,role:p.role,x:p.x,y:p.y,action:p.action,visualKickFace:p.visualKickFace,actionTime:p.actionTime,keeperState:p.keeperState,saveAnimation:p.saveAnimation,stun:p.stun,burst:p.burst,face:{...p.face}}))});if(this.frames.length>90)this.frames.shift()}
  start(){this.playback=this.frames.slice();this.index=0}
  draw(m,renderer,dt=1/60){
   const f=this.playback?.[Math.floor(this.index)];if(!f){this.playback=null;return false}
-  const players=m.players,selected=(m.humans||[]).map(h=>h.selected),ball={x:m.ball.x,y:m.ball.y,z:m.ball.z,owner:m.ball.owner},camera={...renderer.camera},animationTime=renderer.animationTime;
-  const fields=['x','y','role','action','actionTime','keeperState','stun','burst','face','visualKickFace'];
+  const players=m.players,selected=(m.humans||[]).map(h=>h.selected),ball={x:m.ball.x,y:m.ball.y,z:m.ball.z,owner:m.ball.owner,state:m.ball.state,vx:m.ball.vx,vy:m.ball.vy,vz:m.ball.vz,arcadeShot:m.ball.arcadeShot},camera={...renderer.camera},animationTime=renderer.animationTime,arcadeImpact=m.arcadeImpact;
+  const fields=['x','y','role','action','actionTime','keeperState','saveAnimation','stun','burst','face','visualKickFace'];
   const saved=f.players.map((pose,i)=>{const p=pose.player||players[i];return {p,values:Object.fromEntries(fields.map(key=>[key,p[key]]))}});
   try{
    m.players=saved.map(item=>item.p);(m.humans||[]).forEach((h,i)=>h.selected=(Array.isArray(f.selected)?f.selected[i]:f.selected)||selected[i]);
-   saved.forEach(({p},i)=>{for(const key of fields)if(key in f.players[i])p[key]=f.players[i][key]});Object.assign(m.ball,f.ball);
+   saved.forEach(({p},i)=>{for(const key of fields)if(key in f.players[i])p[key]=f.players[i][key]});Object.assign(m.ball,f.ball);m.arcadeImpact=f.arcadeImpact;
    if(f.camera)Object.assign(renderer.camera,f.camera);renderer.animationTime=f.elapsed;renderer.draw(m);renderer.text('REPLAY · Z SALTA',640,155,30,'#ffea52');this.index+=dt*30;return true;
-  }finally{saved.forEach(({p,values})=>Object.assign(p,values));m.players=players;(m.humans||[]).forEach((h,i)=>h.selected=selected[i]);Object.assign(m.ball,ball);Object.assign(renderer.camera,camera);renderer.animationTime=animationTime}
+  }finally{saved.forEach(({p,values})=>Object.assign(p,values));m.players=players;(m.humans||[]).forEach((h,i)=>h.selected=selected[i]);Object.assign(m.ball,ball);Object.assign(renderer.camera,camera);renderer.animationTime=animationTime;m.arcadeImpact=arcadeImpact}
  }
 
 }

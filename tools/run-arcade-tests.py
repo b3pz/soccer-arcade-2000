@@ -13,7 +13,7 @@ with tempfile.TemporaryDirectory(prefix='sa2000-qa-') as tmp:
  for index,f in enumerate(files):
   syntax=Path(tmp)/f'check-{index}.js';syntax.write_text(f'checkSyntax({str(f)!r});')
   subprocess.run([str(jsc),str(syntax)],cwd=root,check=True)
- for name in ['core','visual','features','tournament','drawn-menu','cabinet','catalog','stadium','offline','full-match-balance','assist','coop']:
+ for name in ['core','visual','features','tournament','drawn-menu','cabinet','catalog','stadium','offline','full-match-balance','assist','coop','evolution','evolution-ui','fantasy','online','cinematic','bindings','saves','presentation']:
   subprocess.run([str(jsc),str(root/f'arcade/tests/{name}-tests.js')],cwd=root,check=True)
  print('PASS JavaScript syntax (modules and all root inline scripts)')
  for f in [root/'arcade/assets/animations.png',root/'arcade/assets/animations.json']:
@@ -30,7 +30,7 @@ for action,info in audit['sequences'].items():
  for index in frames[action]:
   cell=sheet.crop((index%8*128,index//8*128,index%8*128+128,index//8*128+128));bounds=cell.getbbox()
   assert bounds and bounds[3]==118,(action,index,bounds)
-print('PASS 28 requested animation sequences, populated cells and unified baseline')
+print('PASS '+str(len(audit['sequences']))+' animation sequences, populated cells and unified baseline')
 
 import hashlib
 for action in ['ref_idle','ref_point','ref_whistle','ref_yellow','ref_red','catch','hold','throw']:
@@ -63,3 +63,12 @@ embedded=json.loads(re.search(r'const embedded=(\{.*?\});window', (root/'arcade/
 for key,asset in {'players':'animations.png','creatures':'jurassic-players.png'}.items():
  assert base64.b64decode(embedded[key].split(',',1)[1])==(root/'arcade/assets'/asset).read_bytes(), 'Embedded sprite data is stale'
 print('PASS offline sprite package preserves exact original PNG bytes for both palette atlases')
+
+subprocess.run(['python3', str(root/'online/test_server.py')], cwd=root, check=True)
+print('PASS private-room server authentication, signaling, expiry and rate limits')
+
+for action,indices in frames.items():
+ if not action.startswith('save_'):continue
+ cells=[sheet.crop((i%8*128,i//8*128,i%8*128+128,i//8*128+128)) for i in indices]
+ assert len(cells)==8 and len({hashlib.sha256(cell.tobytes()).hexdigest() for cell in cells})==8, action
+print('PASS six spectacular-save sprite sequences have eight distinct full-body exposures each')

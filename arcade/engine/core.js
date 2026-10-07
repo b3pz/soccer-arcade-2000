@@ -5,13 +5,13 @@ const unit=(x,y)=>{const l=Math.hypot(x,y)||1;return {x:x/l,y:y/l}};
 const ROLES=['GK','LB','CB','CB','RB','LM','CM','CM','RM','ST','ST'];
 const HOMES=[[4,31],[20,8],[18,23],[18,39],[20,54],[38,7],[36,24],[36,39],[38,55],[57,23],[57,39]];
 // One input per human. Logical keys stay arrowup/…/z/x/c/v whatever the device: keyboard layout or a gamepad index.
-const KEYMAPS={arrows:{arrowup:'arrowup',arrowdown:'arrowdown',arrowleft:'arrowleft',arrowright:'arrowright',z:'z',x:'x',c:'c',v:'v',r:'r',d:'d'},
- wasd:{w:'arrowup',s:'arrowdown',a:'arrowleft',d:'arrowright',j:'z',l:'x',k:'c',i:'v'}};
+const KEYMAPS={arrows:{arrowup:'arrowup',arrowdown:'arrowdown',arrowleft:'arrowleft',arrowright:'arrowright',z:'z',x:'x',c:'c',v:'v',shift:'switch',r:'r',d:'d'},
+ wasd:{w:'arrowup',s:'arrowdown',a:'arrowleft',d:'arrowright',j:'z',l:'x',k:'c',i:'v',u:'switch'}};
 KEYMAPS.arrowsPlay={...KEYMAPS.arrows};delete KEYMAPS.arrowsPlay.r;delete KEYMAPS.arrowsPlay.d;
-const PADMAP={0:'z',1:'c',2:'x',3:'v',4:'c',5:'v',7:'z',12:'arrowup',13:'arrowdown',14:'arrowleft',15:'arrowright'};
+const PADMAP={0:'z',1:'c',2:'x',3:'v',4:'switch',5:'v',7:'z',12:'arrowup',13:'arrowdown',14:'arrowleft',15:'arrowright'};
 class InputManager {
  constructor(options={}){this.active=false;this.down=new Set();this.pressed=new Set();this.shotBuffer=0;this.shotPower=null;this.shotHeld=0;this.shotCharging=false;
- this.keymap=options.keys===null?null:KEYMAPS[options.keys||'arrows'];this.pads=options.pads||null;this.sources=new Map();
+ this.keymap=options.keys===null?null:window.S9ArcadeBindings?S9ArcadeBindings.keymap(options.keys==='wasd'?'p2':'p1'):{...KEYMAPS[options.keys||'arrows']};if(this.keymap&&!window.S9ArcadeBindings&&window.S9ArcadeEvolution&&options.keys!=='wasd'){for(const [action,key] of Object.entries(S9ArcadeEvolution.settings.keys)){for(const old of Object.keys(this.keymap))if(this.keymap[old]===action)delete this.keymap[old];this.keymap[key]=action}}this.pads=options.pads||null;this.sources=new Map();
  this.onDown=e=>{if(!this.active||!this.keymap)return;const k=this.keymap[(e.key||'').toLowerCase()];if(!k)return;e.preventDefault();if(e.repeat)return;this.press(k,'kb')};
  this.onUp=e=>{if(!this.keymap)return;const k=this.keymap[(e.key||'').toLowerCase()];if(k)this.release(k,'kb')};
  this.onBlur=()=>{this.down.clear();this.pressed.clear();this.sources.clear();this.cancelShot()};addEventListener('keydown',this.onDown);addEventListener('keyup',this.onUp);addEventListener('blur',this.onBlur);}
@@ -20,7 +20,7 @@ class InputManager {
  release(k,source='kb'){const held=this.sources.get(k);if(held){held.delete(source);if(held.size)return}if(k==='z'&&this.active&&this.shotCharging){this.shotPower=Math.min(1,this.shotHeld/.85);this.shotBuffer=.28;this.pressed.add('z');this.shotCharging=false}this.down.delete(k)}
  // Gamepads are read directly (standard mapping, left stick or d-pad) so several pads can drive several humans.
  poll(){if(!this.pads||!this.active||typeof navigator==='undefined'||!navigator.getGamepads)return;const list=[...(navigator.getGamepads()||[])].filter(Boolean),pads=this.pads==='all'?list:list.filter(p=>this.pads.includes(p.index)),now=new Set();
-  for(const pad of pads){pad.buttons.forEach((b,i)=>{if((b.pressed||b.value>.5)&&PADMAP[i])now.add(PADMAP[i])});const [x=0,y=0]=pad.axes;if(x<-.45)now.add('arrowleft');if(x>.45)now.add('arrowright');if(y<-.45)now.add('arrowup');if(y>.45)now.add('arrowdown')}
+  for(const pad of pads){pad.buttons.forEach((b,i)=>{const action=window.S9ArcadeBindings?S9ArcadeBindings.padAction(i,pad.index):PADMAP[i];if((b.pressed||b.value>.5)&&['arrowup','arrowdown','arrowleft','arrowright','z','c','x','v','switch'].includes(action))now.add(action)});const [x=0,y=0]=pad.axes;if(x<-.45)now.add('arrowleft');if(x>.45)now.add('arrowright');if(y<-.45)now.add('arrowup');if(y>.45)now.add('arrowdown')}
   const before=this.padDown||new Set();for(const k of now)if(!before.has(k))this.press(k,'pad');for(const k of before)if(!now.has(k))this.release(k,'pad');this.padDown=now}
  cancelShot(clearPressed=true){this.shotCharging=false;this.shotHeld=0;this.shotPower=null;this.shotBuffer=0;if(clearPressed)this.pressed.delete('z')}
  get shotCharge(){return this.shotCharging?Math.min(1,this.shotHeld/.85):this.shotPower||0}
@@ -34,7 +34,7 @@ class InputManager {
 InputManager.KEYMAPS=KEYMAPS;InputManager.PADMAP=PADMAP;
 class Player {
  constructor(team,i){this.team=team;this.number=i+1;this.role=ROLES[i];this.home={x:team.id?100-HOMES[i][0]:HOMES[i][0],y:HOMES[i][1]};this.reset()}
- reset(){Object.assign(this,{x:this.home.x,y:this.home.y,vx:0,vy:0,face:{x:this.team.dir,y:0},target:{...this.home},receiverIntent:null,receiveState:'none',action:'idle',actionTime:0,visualKickFace:null,recovery:0,burst:0,specialCooldown:0,stun:0,aiWait:1,cpuSettle:0,tackleHit:false});}
+ reset(){Object.assign(this,{x:this.home.x,y:this.home.y,vx:0,vy:0,face:{x:this.team.dir,y:0},target:{...this.home},saveAnimation:null,receiverIntent:null,receiveState:'none',action:'idle',actionTime:0,visualKickFace:null,recovery:0,burst:0,specialCooldown:0,stun:0,aiWait:1,cpuSettle:0,tackleHit:false});}
  move(dx,dy,dt,speed=14){speed*=(.7+(this.attributes?.speed??75)/250)*(.94+(this.morale??65)/1000);if(this.stun>0||this.recovery>0)return;const n=unit(dx,dy);this.vx=n.x*speed;this.vy=n.y*speed;this.x+=this.vx*dt;this.y+=this.vy*dt;if(dx||dy){this.face=n;if(this.actionTime<=0)this.action='run'}else if(this.actionTime<=0)this.action='idle';this.x=clamp(this.x,-1,101);this.y=clamp(this.y,-1,63)}
  tick(dt){const wasStunned=this.stun;for(const k of ['actionTime','recovery','burst','specialCooldown','stun','aiWait','cpuSettle'])this[k]=Math.max(0,this[k]-dt);if(wasStunned>0&&this.stun===0){this.action='getup';this.actionTime=.28}this.vx=this.vy=0;if(!this.actionTime&&['pass','shoot','volley','getup'].includes(this.action))this.action='idle';if(this.actionTime===0&&this.action==='tackle'){this.recovery=this.hard?.38:.18;this.action='idle';}}
  tackle(hard){if(this.recovery||this.actionTime||this.stun)return;this.action='tackle';this.actionTime=hard?.42:.3;this.hard=hard;this.tackleHit=false;}
@@ -62,19 +62,19 @@ class TeamAI {
  constructor(team){this.team=team}
  update(m,dt){const t=this.team,b=m.ball,own=b.owner?.team===t,opponent=!!b.owner&&!own;
  t.state=own?(m.transition>0?'TRANSITION_ATTACK':'ATTACKING'):opponent?(m.transition>0?'TRANSITION_DEFEND':'DEFENDING'):'LOOSE_BALL';
- const active=t.players.filter(p=>!p.sentOff),ranked=active.filter(p=>p.role!=='GK').sort((a,c)=>distance(a,b)-distance(c,b)),chasers=ranked.filter(p=>!m.isControlled(p)).slice(0,2),danger=!own&&(t.id?b.x>72:b.x<28)&&Math.abs(b.y-31)<25,cover=ranked.filter(p=>!m.isControlled(p)&&['LB','CB','RB','CM'].includes(p.role)).slice(0,4),cpu=t.cpu||{},pace=cpu.pace||1;
+ const active=t.players.filter(p=>!p.sentOff),ranked=active.filter(p=>p.role!=='GK').sort((a,c)=>distance(a,b)-distance(c,b)),chasers=ranked.filter(p=>!m.isControlled(p)).slice(0,t.style==='press'?3:t.style==='counter'?1:2),danger=!own&&(t.id?b.x>72:b.x<28)&&Math.abs(b.y-31)<25,cover=ranked.filter(p=>!m.isControlled(p)&&['LB','CB','RB','CM'].includes(p.role)).slice(0,4),cpu=t.cpu||{},pace=cpu.pace||1;
  for(const p of active){if(p.role==='GK'){if(!m.isControlled(p)||b.owner!==p)p.update(m,dt);continue}if(m.isControlled(p))continue;
  let tx=p.home.x,ty=p.home.y;const attacking=own||(!opponent&&b.lastTeam===t.id);const local=t.id?100-b.x:b.x;
  const tactical=t.mentality==='Offensivo'?4:t.mentality==='Difensivo'?-4:0;const shift=tactical+(attacking?clamp(local*.32-4,0,23):clamp((local-50)*.24,-10,10));tx+=shift*t.dir;
  ty=clamp(p.home.y+(b.y-31)*.18+Math.sin(m.elapsed*1.8+p.number)*2.1,3,59);
  if(attacking){if(p.role==='ST')tx+=t.dir*(m.transition>0?10:5);if(['LM','RM','LB','RB'].includes(p.role))ty=p.home.y<31?5:57;if(p.role==='CM')tx+=t.dir*Math.sin(m.elapsed*1.3+p.number)*5;}
- if(opponent&&b.controlMode!=='HANDS'&&p===chasers[0]){tx=b.owner.x;ty=b.owner.y} else if(opponent&&b.controlMode!=='HANDS'&&p===chasers[1]){tx=b.x-t.dir*5;ty=b.y+(p.home.y<31?-4:4)}
+ if(opponent&&b.controlMode!=='HANDS'&&p===chasers[0]){tx=b.owner.x;ty=b.owner.y} else if(opponent&&b.controlMode!=='HANDS'&&p===chasers[1]){tx=b.x-t.dir*5;ty=b.y+(p.home.y<31?-4:4)}else if(opponent&&b.controlMode!=='HANDS'&&p===chasers[2]){tx=b.x+t.dir*7;ty=b.y+(p.home.y<31?-6:6)}
  if(!b.owner&&chasers.includes(p)){tx=b.x+b.vx*.12;ty=b.y+b.vy*.12}
  if(danger&&cover.includes(p)&&!chasers.includes(p)){const slot=cover.indexOf(p);tx=clamp(b.x-t.dir*5,t.id?76:5,t.id?95:24);ty=clamp(31+(slot%2?-5:5),7,55)}
  if(b.passTarget===p){p.receiveState='approaching';const predicted=b.state==='aerial'&&p.receiverIntent?p.receiverIntent:{x:b.x+b.vx*.15,y:b.y+b.vy*.15};tx=predicted.x;ty=predicted.y;p.receiverIntent={x:tx,y:ty};}
  if(opponent&&b.controlMode==='HANDS'&&distance(p,b.owner)<7){tx=b.owner.x-t.dir*8;ty=b.owner.y+(p.home.y<31?-6:6)}
  p.target={x:clamp(tx,2,98),y:clamp(ty,2,60)};
- if(b.owner===p){if(p.cpuSettle>0)p.move(0,0,dt);else p.move(t.dir*16,clamp(31-p.y,-8,8),dt,(m.teamHasHumans(t)?12:9)*pace);if(p.aiWait<=0){const shootingZone=(t.id?p.x<24:p.x>76)&&Math.abs(p.y-31)<16;if(shootingZone)m.shoot(p);else m.pass(p);p.aiWait=shootingZone?1.65:1.1;} }
+ if(b.owner===p){if(p.cpuSettle>0)p.move(0,0,dt);else p.move(t.dir*16,clamp(31-p.y,-8,8),dt,(m.teamHasHumans(t)?12:9)*pace);if(p.aiWait<=0){const shootingZone=(t.id?p.x<24:p.x>76)&&Math.abs(p.y-31)<16;if(shootingZone)m.shoot(p);else m.pass(p);p.aiWait=(shootingZone?1.65:t.style==='possession'?.65:t.style==='counter'?1.5:1.1)+(cpu.react||0);} }
  else {if(distance(p,p.target)>.6)p.move(p.target.x-p.x,p.target.y-p.y,dt,13*pace);if(opponent&&b.canBeStolen&&distance(p,b.owner)<3&&p.aiWait<=0){p.tackle(false);p.aiWait=(m.isControlled(b.owner)?1.5:.9)*(cpu.tackleWait||1);}}
  }
  }

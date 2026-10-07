@@ -94,3 +94,35 @@
 #arcade-select .arcade-mode-options.three{grid-template-columns:repeat(3,1fr);max-width:1100px}
 #arcade-select .arcade-mode-options.four{grid-template-columns:1fr 1fr;max-width:1000px}
 #arcade-select .arcade-mode-options.four .arcade-mode-tile{padding:16px 10px}
+
+/* Arcade evolution hub: readable at desktop and short window heights. */
+#arcade-evolution{position:fixed;inset:0;z-index:100000;overflow:auto;background:linear-gradient(135deg,#071329f5,#12364af5),url('../assets/arcade-menu-background.png') center/cover;color:#eef7ff;padding:clamp(12px,3vw,36px);font:18px system-ui,sans-serif;box-sizing:border-box}
+#arcade-evolution header{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:1150px;margin:auto}
+#arcade-evolution main{max-width:1100px;margin:auto;padding-bottom:30px}#arcade-evolution h1{font-size:clamp(24px,4vw,40px);color:#ffe767}#arcade-evolution button,.evo-settings button{padding:14px 20px;margin:6px;border:2px solid #508799;border-radius:8px;background:#122e48;color:#fff;font:700 16px system-ui;cursor:pointer}#arcade-evolution button:hover,.evo-settings button:hover{background:#21556a;border-color:#ffe767}#arcade-evolution button:disabled{opacity:.45;cursor:default}
+.evo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:18px 0}.evo-grid small{display:block;font-weight:400;margin-top:8px;color:#bed7e4}.evo-grid section,.evo-result,.evo-settings{padding:16px;border:1px solid #4d788a;border-radius:10px;background:#09182ad9}
+#arcade-evolution input,#arcade-evolution select,.evo-settings input,.evo-settings select{box-sizing:border-box;padding:10px;font:16px system-ui;background:#061427;color:#fff;border:1px solid #6c94a5;border-radius:5px;margin:6px;max-width:100%}.evo-grid select[size]{display:block;width:95%;min-height:170px}#arcade-evolution table,.evo-result table{width:100%;border-collapse:collapse;text-align:left}#arcade-evolution td,#arcade-evolution th,.evo-result td,.evo-result th{padding:9px;border-bottom:1px solid #406477}.evo-settings label{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px}.evo-settings{color:#fff;font:16px system-ui;max-height:85vh;overflow:auto}.evo-settings h2{color:#ffe767}#arcade-match>.evo-settings{position:absolute;z-index:2;width:min(750px,90vw);box-sizing:border-box;box-shadow:0 0 0 100vmax #0009}
+#arcade-select{background:repeating-linear-gradient(0deg,var(--arcade-scanline,#0001) 0,var(--arcade-scanline,#0001) 1px,transparent 1px,transparent 4px),url('../assets/cabinet-90s.png') center/cover fixed!important}@media(max-width:600px){.evo-settings label{flex-wrap:wrap}#arcade-evolution{font-size:16px}}
+
+#arcade-online{position:fixed;inset:0;z-index:100002;overflow:auto;background:#071329f5;color:#eef7ff;font:18px system-ui,sans-serif;padding:24px;box-sizing:border-box}#arcade-online main{max-width:1050px;margin:auto}#arcade-online h1{color:#ffe767}#arcade-online button,#arcade-online input,#arcade-online select{margin:6px;padding:12px;font:16px system-ui;border:2px solid #508799;border-radius:6px;background:#122e48;color:#fff;max-width:100%;box-sizing:border-box}#arcade-online button{cursor:pointer}#arcade-online button:disabled{opacity:.4;cursor:default}#arcade-online label{display:block}#arcade-online input[type=url],#arcade-online input[readonly]{width:95%}#arcade-online video{display:block;width:100%;aspect-ratio:16/9;background:#000;object-fit:contain;border:2px solid #508799}#arcade-online-badge{position:fixed;right:10px;bottom:8px;z-index:100003;max-width:340px;padding:6px 10px;font:12px system-ui;background:#081a2bee;color:#b7f6df;border:1px solid #508799;border-radius:6px;cursor:pointer}
+
+/* Crest gallery: badges are the main selection surface, map is supporting context. */
+#arcade-select .arcade-regional-content{grid-template-columns:minmax(0,.65fr) minmax(0,1.35fr);align-items:start}
+#arcade-select .arcade-regional-picker .arcade-map-team-strip{gap:10px}
+#arcade-select .arcade-regional-picker .arcade-map-team-strip .arcade-team-tile,
+#arcade-select .arcade-team-tile{flex-direction:column;gap:4px;min-height:112px;padding:9px 7px;background:linear-gradient(150deg,#124785,#071933);border:2px solid #4689b8!important}
+#arcade-select .arcade-team-tile.selected{background:linear-gradient(150deg,#21629d,#10264b);border-color:#ffe64a!important}
+#arcade-select .arcade-team-tile img{width:76px;height:76px;margin:0;object-fit:contain;filter:drop-shadow(0 3px 3px #0008)}
+#arcade-select .arcade-team-name{display:block;width:100%;font-size:14px;line-height:1.15;text-align:center;font-weight:900}
+#arcade-select .arcade-selected-crest{display:block;width:140px;height:140px;margin:12px auto;object-fit:contain;filter:drop-shadow(0 4px 5px #0009)}
+#arcade-select .arcade-regional-picker svg.arcade-europe-map{height:clamp(180px,calc(100vh - 420px),270px)!important}
+#arcade-select .arcade-regional-picker .arcade-player-card canvas{width:100px;height:110px}
+@media(max-width:750px){
+ #arcade-select .arcade-regional-content{grid-template-columns:1fr}
+ #arcade-select .arcade-regional-content .arcade-europe-panel{display:none}
+ #arcade-select .arcade-team-tile img{width:68px;height:68px}
+ #arcade-select .arcade-selected-crest{width:115px;height:115px}
+}
+@media(max-width:500px){
+ #arcade-select .arcade-map-picker .arcade-player-card{display:flex;flex-direction:column;align-items:center}
+ #arcade-select .arcade-selected-crest{width:128px;height:128px}
+}

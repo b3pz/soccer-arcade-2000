@@ -1,14 +1,14 @@
 /* Stadium around the pitch: grass apron, 3D advertising boards, athletics track, benches, wall and stands; detailed goals. */
 (function(){
 const E=window.S9ArcadeEngine,R=E.Renderer.prototype;
-const SKIN=['#ecc39a','#cf8550','#9a5d3e','#f4d6b4'],SHIRTS=['#ffcb44','#56caff','#f2536b','#ddd7bf','#7be37a','#ffffff'],ADS=['SUPER FOOTBALL','PUSH START','SERIE A 2000','INSERT COIN','ARCADE CUP'];
+const SKIN=['#ecc39a','#cf8550','#9a5d3e','#f4d6b4'],SHIRTS=['#ffcb44','#56caff','#f2536b','#ddd7bf','#7be37a','#ffffff'],ADS=['SUPER FOOTBALL','PUSH START','ARCADE LEAGUE','INSERT COIN','ARCADE CUP'];
 function turf(r){if(r.turf)return r.turf;const t=document.createElement('canvas');t.width=1000;t.height=620;const q=t.getContext('2d');let seed=1998;const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};q.fillStyle='#238f38';q.fillRect(0,0,1000,620);for(let i=0;i<10;i++){q.fillStyle=i%2?'#299b40':'#218536';q.fillRect(i*100,0,100,620)}for(let i=0;i<75000;i++){q.fillStyle=rand()>.5?'#8cda4933':'#043f3138';q.fillRect(Math.floor(rand()*1000),Math.floor(rand()*620),1+Math.floor(rand()*3),1)}return r.turf=t}
 // Supporters: seat index anchored to the stand edge so the crowd scrolls with the pitch; scarves in the scoring kit.
 R.crowdBlock=function(x0,x1,y0,rows,anchor,dirY,time,celebrating){const c=this.ctx,kit=this.stadiumKit;const k0=Math.max(0,Math.ceil((-16-(x0-anchor))/12)),start=anchor+k0*12;
  for(let row=0;row<rows;row++){const y=y0+dirY*row*13;if(y<-14||y>734)continue;c.fillStyle=row%2?'#1d2740':'#222d4a';c.fillRect(x0,y-2,x1-x0,13);
   for(let k=k0,x=start;x<Math.min(x1,1296);k++,x+=12){if(x<x0)continue;const seat=Math.abs(k*31+row*17+(dirY>0?5:0));if(seat%29<2)continue;const jump=celebrating?-Math.abs(Math.round(Math.sin(time*13+seat)*5)):seat%9===0?Math.round(Math.sin(time*4+seat)):0;
    c.fillStyle=celebrating&&seat%3===0?(kit?.shirtPrimary||'#ffdb29'):SHIRTS[seat%SHIRTS.length];c.fillRect(x+1,y+4+jump,7,6);c.fillStyle=SKIN[seat%4];c.fillRect(x+2,y+jump,5,4);
-   if(celebrating&&seat%4===1||seat%23===0){c.fillStyle=celebrating?(kit?.shirtSecondary||'#fff'):'#eacc3f';c.fillRect(x-1,y-3+jump,11,2)}}}};
+   if(celebrating&&seat%4===1||seat%23===0){c.fillStyle=celebrating?(kit?.shirtSecondary||'#fff'):'#eacc3f';c.fillRect(x-1,y-3+jump,11,2)}if(seat%13===0&&row%2===0)this.supporterFlag?.(x+5,y-20+jump,22,13,this.supporterTeam?.(seat,celebrating),time,seat,celebrating)}}};
 R.bench=function(cx,y,team,label){const c=this.ctx,kit=team?.kit||{},w=210;
  c.fillStyle='#0006';c.fillRect(cx-w/2+6,y+52,w,8);c.fillStyle='#16304d';c.fillRect(cx-w/2,y,w,54);c.fillStyle='#24507a';c.fillRect(cx-w/2,y,w,6);
  for(let i=0;i<8;i++){const x=cx-w/2+14+i*24;c.fillStyle='#0d1b2c';c.fillRect(x-2,y+30,20,16);c.fillStyle=SKIN[i%4];c.fillRect(x+3,y+12,8,8);c.fillStyle=kit.shirtPrimary||'#3a73b2';c.fillRect(x,y+20,14,12);c.fillStyle=kit.shirtSecondary||'#fff';c.fillRect(x+5,y+22,4,3);c.fillStyle=kit.shorts||'#eee';c.fillRect(x+1,y+32,12,6)}

@@ -1,0 +1,13 @@
+# Optional signaling service for the GitHub Pages game; one instance holds private rooms.
+services:
+  - type: web
+    name: soccer-arcade-2000-online
+    runtime: python
+    plan: free
+    buildCommand: python -m compileall -q online/server.py
+    startCommand: python online/server.py --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: SA2000_ALLOWED_ORIGINS
+        value: https://b3pz.github.io
+      - key: SA2000_ICE_SERVERS
+        value: '[{"urls":"stun:stun.cloudflare.com:3478"}]'

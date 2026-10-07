@@ -3,6 +3,10 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 import json
 root=Path(__file__).resolve().parents[1]
+if not (root/'serieasim_arcade_sprite_pack/new_atlases/arcade_sprite_atlas_complete_A.png').exists():
+ import runpy
+ runpy.run_path(str(root/'tools/add-keeper-save-frames.py'))
+ raise SystemExit(0)
 im=Image.open(root/'serieasim_arcade_sprite_pack/new_atlases/arcade_sprite_atlas_complete_A.png').convert('RGBA')
 def write_asset(name,text):
  path=root/'arcade/assets'/name;temporary=path.with_suffix(path.suffix+'.atomic');temporary.write_text(text);temporary.replace(path)
@@ -174,6 +178,16 @@ for name,count in counts.items():
      shifted=Image.new('RGBA',(128,128));shifted.alpha_composite(cell,(2,0));cell=shifted
     upper=cell.crop((25,20,103,75));cell.paste((0,0,0,0),(25,20,103,75));cell.alpha_composite(upper,(27,19));manifest[name][j]=len(frames);frames.append(cell)
  audit[name]={'frames':count,'sourcePoses':len(source),'derivedPoses':max(0,count-len(source)),'repeatedExposure':False}
+# New full-body keeper exposures generated in the atlas' established pixel palette.
+import importlib.util
+spec=importlib.util.spec_from_file_location('keeper_save_poses',root/'tools/keeper-save-poses.py')
+save_poses=importlib.util.module_from_spec(spec);spec.loader.exec_module(save_poses)
+for kind in ['stretch','tip','punch']:
+ for side in ['left','right']:
+  name='save_'+kind+'_'+side;manifest[name]=[]
+  for index in range(8):
+   manifest[name].append(len(frames));frames.append(save_poses.pose(kind,index,side=='left'))
+  audit[name]={'frames':8,'sourcePoses':0,'derivedPoses':8,'repeatedExposure':False,'technique':'original articulated pixel body: push-off, extension, glove contact, landing, recovery'}
 write_asset('animation-audit.json',json.dumps({'cell':[128,128],'baseline':118,'bodyHeight':95,'rawSizes':raw_sizes,'sequences':audit},indent=2))
 used=sorted({i for sequence in manifest.values() for i in sequence});lookup={old:new for new,old in enumerate(used)};frames=[frames[i] for i in used];manifest={name:[lookup[i] for i in sequence] for name,sequence in manifest.items()}
 sheet=Image.new('RGBA',(128*8,128*((len(frames)+7)//8)))
