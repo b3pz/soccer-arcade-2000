@@ -91,3 +91,8 @@ Il filmato d'apertura (12 s) racconta un'azione continua in un'unica notte, semp
 ### Icone dei tasti
 
 Ogni indicazione di comando mostra il tasto della tastiera e, con un joypad collegato, l'icona vera del pulsante: ✕ ○ □ △ colorati, L1/R1, START e croce direzionale sui PlayStation, A B X Y colorati sugli Xbox. Le icone seguono i comandi personalizzati. Sul titolo START del joypad avvia il gioco. Lo schermo intero da SELECT funziona solo subito dopo un tasto della tastiera o un clic, perché il browser non lo concede al solo joypad: se viene rifiutato, il gioco lo attiva al primo tasto o clic successivo e lo segnala.
+
+### Scatto e lancio a pressione
+
+- **Scatto (tasto speciale: V, △ / Y sul joypad):** toccalo ripetutamente, come a Track & Field. Ogni tocco dà velocità, che cala se smetti; una barra azzurra sopra il giocatore mostra la carica. Con la palla e un avversario davanti, lo stesso tasto fa il dribbling (non ripetibile: ricarica di 2,3 s); senza palla, con il portatore avversario a contatto, fa il contrasto duro.
+- **Lancio a pressione (passaggio alto: X, □ sul joypad):** tieni premuto e rilascia. La barra LANCIO sopra il giocatore indica la potenza: da circa 15 m con un tocco a 50 m a piena carica, nella direzione della levetta/frecce. Il compagno più vicino al punto di caduta ci corre incontro. Senza palla resta la scivolata.

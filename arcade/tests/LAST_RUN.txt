@@ -1,6 +1,6 @@
 .....
 ----------------------------------------------------------------------
-Ran 5 tests in 0.001s
+Ran 5 tests in 0.000s
 
 OK
 PASS 1 Kickoff C, clock starts only after pass
@@ -216,10 +216,12 @@ PASS free kick into the wall stops at the wall and rebounds, never shown as a go
 PASS kick-off camera pulls back slowly from the centre ball
 PASS slim scoreboard and scorer name under the GOAL banner
 PASS crowd celebration cutaway is a tinted bitmap
-PASS demo bot plays short matches with 12 crosses, 9 volleys, 12 goals (4-0, 2-0, 6-0) and 11 different captions
+PASS demo bot plays short matches with 31 crosses, 6 volleys, 10 goals (2-0, 4-0, 4-0) and 12 different captions
 PASS CPU wingers reach the byline and cross (12/12), runners volley (5/12)
 PASS human cross: control moves to the striker and holding Z volleys it
 PASS keeper holds the middle of the goal on wing play and still moves onto shots
+PASS tapping the special button sprints (1.17x); next to an opponent it still dribbles
+PASS long ball distance follows the hold: tap 15 m, full 50 m
 PASS JavaScript syntax (modules and all root inline scripts)
 PASS extracted animation assets
 PASS 34 animation sequences, populated cells and unified baseline

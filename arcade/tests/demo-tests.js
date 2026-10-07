@@ -1,8 +1,9 @@
 var window=globalThis;function addEventListener(){}function removeEventListener(){};var navigator={};
-load('arcade/engine/core.js');load('arcade/engine/controllers.js');load('arcade/engine/penalties.js');load('arcade/engine/arcade-features.js');load('arcade/engine/assist.js');load('arcade/engine/difficulty.js');load('arcade/engine/setpieces.js');load('arcade/bridge.js');load('game/catalog.js');load('arcade/engine/freekick.js');load('arcade/engine/wing-play.js');load('game/demo.js');
+load('arcade/engine/core.js');load('arcade/engine/controllers.js');load('arcade/engine/penalties.js');load('arcade/engine/arcade-features.js');load('arcade/engine/assist.js');load('arcade/engine/difficulty.js');load('arcade/engine/setpieces.js');load('arcade/bridge.js');load('game/catalog.js');load('arcade/engine/freekick.js');load('arcade/engine/wing-play.js');load('arcade/engine/human-controls.js');load('game/demo.js');
 function assert(v,s){if(!v)throw Error(s)}function pass(s){print('PASS '+s)}
 const E=S9ArcadeEngine,M=E.Match.prototype,clubs=SA2000_CATALOG.club;let crosses=0,volleys=0,humanVolleys=0,crossDepth=0;
-const passFn=M.pass;M.pass=function(p,aerial){if(aerial&&!this.restarts.data&&S9ArcadeWingPlay.onWing(p.team,p)){crosses++;crossDepth=S9ArcadeWingPlay.depth(p.team,p)}return passFn.apply(this,arguments)};
+// Crosses counted at the kick: assisted passes and the charged long ball both end up here.
+const kickFn=E.Ball.prototype.kick;E.Ball.prototype.kick=function(p,vx,vy,vz,state){if(state==='aerial'&&p&&p.role!=='GK'&&S9ArcadeWingPlay.onWing(p.team,p)&&(p.team.dir>0?p.x>62:p.x<38)){crosses++;crossDepth=S9ArcadeWingPlay.depth(p.team,p)}return kickFn.apply(this,arguments)};
 const shootFn=M.shoot;M.shoot=function(p,volley){if(volley){volleys++;if(this.isControlled(p))humanVolleys++}return shootFn.apply(this,arguments)};
 function match(h,a,level='facile'){const input=new E.InputManager({keys:null});input.active=true;const m=new E.Match(input);ArcadeMatchBridge.setupTeam(m.teams[0],clubs.find(t=>t.name===h),{cleanNames:true});ArcadeMatchBridge.setupTeam(m.teams[1],clubs.find(t=>t.name===a),{cleanNames:true});m.setHumans([{team:0,input}]);S9ArcadeDifficulty.apply(m,level);m.rules.allowDraw=true;return m}
 
@@ -33,3 +34,14 @@ function match(h,a,level='facile'){const input=new E.InputManager({keys:null});i
  assert(Math.abs(k.y-31)<=4.1,'keeper drifted to the post: y='+k.y.toFixed(1));
  const b=m.ball;b.owner=null;b.x=own===0?14:86;b.y=31;b.z=1;b.vx=own===0?-50:50;b.vy=12;b.state='shot';b.lock=0;b.flight=.2;const y0=k.y;for(let i=0;i<6;i++){k.update(m,1/120);b.x+=b.vx/120;b.y+=b.vy/120}
  assert(k.y>y0+.2||m.ball.owner===k||k.keeperState==='GK_DIVING','keeper ignored a shot heading for the corner');pass('keeper holds the middle of the goal on wing play and still moves onto shots')}
+
+// Sprint by tapping the special button; dribble when an opponent is close; long ball charged by holding.
+{const run=taps=>{const m=match('Roma','Inter');m.phase='PLAY';m.restarts.data=null;const h=m.humans[0],p=h.selected;for(const o of m.teams[1].players)if(o.role!=='GK'){o.x=o.x<50?2:98;o.y=60}p.x=30;p.y=31;p.face={x:1,y:0};m.control(p);p.cpuSettle=0;
+  h.input.down.add('arrowright');const x0=p.x;for(let k=0;k<120;k++){if(taps&&k%taps===0)h.input.pressed.add('v');m.as(h,()=>m.humanStep(1/120));p.tick(1/120)}return p.x-x0};
+ const walk=run(0),sprint=run(24);assert(sprint>walk*1.15,'tapping did not speed up: '+walk.toFixed(2)+' vs '+sprint.toFixed(2));
+ const m=match('Roma','Inter');m.phase='PLAY';m.restarts.data=null;const h=m.humans[0],p=h.selected;p.x=40;p.y=31;p.face={x:1,y:0};m.control(p);const o=m.teams[1].players.find(q=>q.role!=='GK');o.x=42;o.y=31;h.input.pressed.add('v');m.as(h,()=>m.humanStep(1/120));
+ assert(p.burst>0,'no dribble burst next to an opponent');pass('tapping the special button sprints ('+(sprint/walk).toFixed(2)+'x); next to an opponent it still dribbles')}
+{const throwFor=hold=>{const m=match('Roma','Inter');m.phase='PLAY';m.restarts.data=null;const h=m.humans[0],p=h.selected;for(const o of m.teams[1].players)if(o.role!=='GK'){o.x=o.x<50?2:98;o.y=60}p.x=30;p.y=31;p.face={x:1,y:0};m.control(p);
+  h.input.press('x');for(let k=0;k<Math.round(hold*120);k++){m.as(h,()=>m.humanStep(1/120))}h.input.release('x');m.as(h,()=>m.humanStep(1/120));const b=m.ball;assert(!b.owner&&b.state==='aerial','long ball not played');
+  let t=0;while(b.z>0.05&&t<600&&b.state==='aerial'){b.update(1/120);t++}return b.x-30};
+ const short=throwFor(.05),long=throwFor(.85);assert(long>short+18,'holding did not lengthen the ball: '+short.toFixed(1)+' vs '+long.toFixed(1));pass('long ball distance follows the hold: tap '+short.toFixed(0)+' m, full '+long.toFixed(0)+' m')}
