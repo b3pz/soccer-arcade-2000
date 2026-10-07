@@ -21,16 +21,22 @@ R.pitch=function(){const c=this.ctx,a=this.project(0,0),b=this.project(100,62),t
  const track={l:a.x-200,r:b.x+200,t:a.y-168,b:b.y+150},apron={l:a.x-84,r:b.x+84,t:a.y-70,b:b.y+56};
  c.fillStyle='#141c33';c.fillRect(0,0,1280,720);
  // Stands beyond the wall on every side
- this.crowdBlock(track.l-60,track.r+60,track.t-22,9,a.x-200,-1,time,celebrating);this.crowdBlock(track.l-60,track.r+60,track.b+14,6,a.x-200,1,time,celebrating);
+ this.crowdBlock(track.l-332,track.r+332,track.t-22,9,a.x-200,-1,time,celebrating);this.crowdBlock(track.l-332,track.r+332,track.b+14,6,a.x-200,1,time,celebrating);
  for(const [x0,x1] of [[track.l-320,track.l-12],[track.r+12,track.r+320]])if(x1>-20&&x0<1300)this.crowdBlock(x0,x1,track.t-20,Math.ceil((track.b-track.t+40)/13),x0,1,time,celebrating);
  // Wall and athletics track with lanes
  c.fillStyle='#6b7385';c.fillRect(track.l-12,track.t-12,track.r-track.l+24,track.b-track.t+24);c.fillStyle='#aab1c0';c.fillRect(track.l-12,track.t-12,track.r-track.l+24,3);
- const trackArt=window.S9ArcadeArt,trackImage=trackArt?.image('track');if(trackArt?.ready(trackImage))c.drawImage(trackImage,track.l,track.t,track.r-track.l,track.b-track.t);else{
+ const trackArt=window.S9ArcadeArt,trackImage=trackArt?.image('track');const trackPainted=trackArt?.ready(trackImage);if(trackPainted){
+  // Nine-slice: curved corners keep their shape, straights stretch; the lane band is as wide as the old track
+  // (track edge to apron edge) and the picture's inner grass is the apron, so the pitch sits inside the curves.
+  const SW=1586,SH=992,IL=174,IR=SW-1411,IT=161,IB=SH-824,CR=130,src=[[0,IL+CR,SW-IR-CR,SW],[0,IT+CR,SH-IB-CR,SH]];
+  const kl=(apron.l-track.l)/IL,kr=(track.r-apron.r)/IR,kt=(apron.t-track.t)/IT,kb=(track.b-apron.b)/IB;
+  const xs=[track.l,track.l+(IL+CR)*kl,track.r-(IR+CR)*kr,track.r],ys=[track.t,track.t+(IT+CR)*kt,track.b-(IB+CR)*kb,track.b],sx=[0,IL+CR,SW-IR-CR,SW],sy=[0,IT+CR,SH-IB-CR,SH];
+  const sm=c.imageSmoothingEnabled;c.imageSmoothingEnabled=false;for(let j=0;j<3;j++)for(let i=0;i<3;i++)if(xs[i+1]>xs[i]&&ys[j+1]>ys[j])c.drawImage(trackImage,sx[i],sy[j],sx[i+1]-sx[i],sy[j+1]-sy[j],xs[i],ys[j],xs[i+1]-xs[i]+.5,ys[j+1]-ys[j]+.5);c.imageSmoothingEnabled=sm}else{
  c.fillStyle='#b4553d';c.fillRect(track.l,track.t,track.r-track.l,track.b-track.t);c.strokeStyle='#f6e2d4aa';c.lineWidth=1.5;
  for(let i=1;i<6;i++){const k=i/6;c.strokeRect(track.l+(apron.l-track.l)*k,track.t+(apron.t-track.t)*k,track.r-track.l-(track.r-apron.r+apron.l-track.l)*k,track.b-track.t-(track.b-apron.b+apron.t-track.t)*k)}
  }
  // Grass apron, boards, benches
- c.fillStyle='#1d7533';c.fillRect(apron.l,apron.t,apron.r-apron.l,apron.b-apron.t);
+ if(!trackPainted){c.fillStyle='#1d7533';c.fillRect(apron.l,apron.t,apron.r-apron.l,apron.b-apron.t)}
  this.adBoards(a.x-60,b.x+60,a.y-52,24);this.adBoards(a.x-60,b.x+60,b.y+26,24);
  for(const [x,id] of [[38,0],[62,1]]){const p=this.project(x,0);this.bench(p.x,track.t+28,m?.teams?.[id],(m?.teams?.[id]?.name||(id?'OSPITI':'CASA')).toUpperCase())}
  c.fillStyle='#8c9880';c.fillRect(a.x-6,a.y-6,b.x-a.x+12,b.y-a.y+12);c.drawImage(turf(this),a.x,a.y,b.x-a.x,b.y-a.y);

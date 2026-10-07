@@ -46,7 +46,7 @@ function sprite(c,key,x,y,scale,action,kit,t,{flip=false,rot=0,shadow=true,silho
  try{renderer.sprite(p,{elapsed:t,presentationTime:t,ball:{owner:null},phase:'PLAY',humans:[]},{scale})}catch(e){}c.restore()}
 // Ball: the pixel sprite sheet, spinning; optional comet of fire behind it.
 function ball(c,x,y,r,t,fire=false,dx=1,fx=1){
- if(fire&&!window.S9ArcadeArt?.effectTrail(c,'fire',x,y,r,dx,0,t,fx)){c.save();c.globalCompositeOperation='lighter';for(let i=15;i>=0;i--){const k=i/15,xx=x-dx*(r*2+260)*k,yy=y+Math.sin(t*22-i*.9)*r*.4*k;c.globalAlpha=(1-k)*.7*fx;oval(c,xx,yy,r*(1-k*.8),r*(1-k*.7),i<4?'#fff3a2':i<9?'#ffae26':'#ff4b0c')}c.restore()}
+ if(fire&&!window.S9ArcadeArt?.effectTrail(c,'fire',x,y,Math.min(r,26)*.5,dx,0,t,fx)){c.save();c.globalCompositeOperation='lighter';for(let i=15;i>=0;i--){const k=i/15,xx=x-dx*(r*2+260)*k,yy=y+Math.sin(t*22-i*.9)*r*.4*k;c.globalAlpha=(1-k)*.7*fx;oval(c,xx,yy,r*(1-k*.8),r*(1-k*.7),i<4?'#fff3a2':i<9?'#ffae26':'#ff4b0c')}c.restore()}
  const im=img(ART.ball);if(ready(im)){const f=((Math.floor(t*14)%8)+8)%8,s=c.imageSmoothingEnabled;c.imageSmoothingEnabled=false;c.drawImage(im,f*64,0,64,64,Math.round(x-r),Math.round(y-r),Math.round(r*2),Math.round(r*2));c.imageSmoothingEnabled=s}else oval(c,x,y,r,r,'#f2f6fa')}
 // Celebrating end, tinted with the blue kit (same masks as the match cutaway).
 let crowdSheet=null;
@@ -68,7 +68,7 @@ function draw(c,t,h={}){
   h.logo?.(clamp(u*2),u);const x=mix(710,target.x,p),y=mix(360,target.y,p),r=mix(72,target.r,p);
   c.save();c.globalAlpha*=u>.75?clamp((1-u)/.25):1;ball(c,x,y,r,t,fire&&u<.75&&!!window.S9ArcadeArt?.ready(S9ArcadeArt.image('fire')),-1,fx);c.restore();
   if(u<.65){c.save();c.globalAlpha=(1-u/.65)*fx;for(let i=0;i<18;i++){const a=i*2.399,radius=80+u*400;oval(c,x+Math.cos(a)*radius,y+Math.sin(a)*radius,3,2,i%2?'#ffb51b':'#e5f6ff')}c.restore()}
- }else if((scene.name!=='net'||fire)&&painting(c,scene.name,u,t,fx)){
+ }else if(painting(c,scene.name,u,t,fx)){
   if(scene.name==='final'){title(c,'LA FINALE',640,125,46,'#ffe36b');title(c,'INTERNOVA × MILARA · 89:59 · 2–2',640,178,24,'#d6e7ff');flash(c,1-clamp(u*4),'#000')}
   for(const [key,when,kind] of [['whistle',.6,'whistle'],['dribble1',2.1,'kick'],['dribble2',2.45,'kick'],['decidingShot',3.66,'powerShot'],['save',5.23,'saveSound'],['bicycle',6.95,'powerShot'],['netBreak',8.34,'slam']])cue(h,key,when,t,kind);
   if(scene.name==='net'){const impact=clamp((u-.2)/.25);h.impact?.(impact)}
@@ -123,7 +123,7 @@ function draw(c,t,h={}){
   if(u>.38&&view){c.save();c.beginPath();c.ellipse(corner.x,corner.y,170,120,0,0,Math.PI*2);c.clip();const s=1+.14*Math.sin(impact*Math.PI),im=img(ART.goal);c.translate(corner.x,corner.y);c.scale(s,s);c.translate(-corner.x,-corner.y);c.imageSmoothingEnabled=false;c.drawImage(im,view.x,view.y,im.naturalWidth*view.k,im.naturalHeight*view.k);c.restore()}
   const foot=at(view,700,430),S=4.1,d=clamp(u/.42),kf=Math.min(5,Math.floor(d*5)+1);if(u<.62){if(d<.05)sprite(c,'keeper',foot.x-260,foot.y,S,'gk_idle',KEEPER,t);else frame(c,'keeper',mix(foot.x-260,corner.x-cellPoint(...GLOVE_STRETCH,S).x-40,smooth(d)),foot.y,S,'save_stretch_right',kf,KEEPER,t)}
   const k=clamp(u/.4);ball(c,u<.38?mix(-60,corner.x,k):corner.x+Math.sin(impact*9)*8*(1-impact),u<.38?mix(620,corner.y,k):corner.y,36,t,fire&&u<.38,1,fx);
-  if(u>.38){cue(h,'netBreak',8.34,t,'slam');h.impact?.(impact);flash(c,(1-impact)*.5*fx);const rise=ease(clamp((u-.45)/.3));crowd(c,0,H-rise*360,W,t);if(u>.55)sprite(c,'star',360,H+40-rise*60,9,'celebrate',BLUE,t,{shadow:false})}
+  if(u>.38){cue(h,'netBreak',8.34,t,'slam');h.impact?.(impact);flash(c,(1-impact)*.5*fx);const rise=ease(clamp((u-.45)/.3));crowd(c,0,H-rise*360,W,t)}
  }
  // Widescreen bars and vignette (not on the title, which has its own frame).
  if(scene.name!=='logo'){const shade=c.createRadialGradient(640,340,260,640,340,760);shade.addColorStop(0,'#00000000');shade.addColorStop(1,'#01040b99');c.fillStyle=shade;c.fillRect(0,0,W,H);c.fillStyle='#02040b';c.fillRect(0,0,W,36);c.fillRect(0,H-36,W,36)}
