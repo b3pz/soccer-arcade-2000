@@ -219,7 +219,7 @@ PASS kick-off camera pulls back slowly from the centre ball
 PASS slim scoreboard and scorer name under the GOAL banner
 PASS crowd celebration cutaway uses animated bitmap artwork
 PASS slow motion when a shot is about to reach the goal frame, not for shots going wide
-PASS coin toss: call, flip, choice of end, kick-off to the other side (1P)
+PASS coin toss: call, flip, choice of end, kick-off to the other side (CPU)
 PASS holding the pass button in defence shadows the carrier goal-side
 PASS CPU label on the player the CPU is driving
 PASS rain: ball rolls 16% further; night is visual only
@@ -234,6 +234,7 @@ PASS panoramic film crops, full sponsor strips and image-logo landing target
 PASS fictional teams, bitmap crests and legacy-name migration preserve player identities and ratings
 angle 1
 PASS replays: X cycles the camera angle, C saves the goal film with its scorer
+PASS team editor: team name, kit colours and player names are saved and applied; reset restores the original
 PASS JavaScript syntax (modules and all root inline scripts)
 PASS extracted animation assets
 PASS 34 animation sequences, populated cells and unified baseline
