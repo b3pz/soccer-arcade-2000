@@ -43,6 +43,7 @@ function open({parent=document.body,onClose,inMatch=false,setup=false}={}){
   if(id==='game')return [
    {label:'CAMERA',value:()=>CAMERA.find(x=>x[0]===S.camera)?.[1]||'PANORAMICA',step:d=>{const i=CAMERA.findIndex(x=>x[0]===S.camera);S.camera=CAMERA[(i+d+CAMERA.length)%CAMERA.length][0]}},
    {label:'METEO',value:()=>({auto:'CASUALE',day:'SERENO',night:'NOTTE',rain:'PIOGGIA'})[S.weather||'auto'],step:d=>{const L=['auto','day','night','rain'];S.weather=L[(L.indexOf(S.weather||'auto')+d+L.length)%L.length]}},
+   {label:'TELECRONACA',value:()=>({scritte:'SCRITTE',voce:'SCRITTE + VOCE',no:'NO'})[S.commentary||'scritte'],step:d=>{const L=['scritte','voce','no'];S.commentary=L[(L.indexOf(S.commentary||'scritte')+d+L.length)%L.length]}},
    {label:'RADAR',toggle:'radar'},{label:'VIBRAZIONE JOYPAD',toggle:'vibration'},{label:'FANTASIA ARCADE · FIAMME E SCIE',toggle:'fantasy'},
    {label:'MUSICA DEI MENU',value:()=>{const t=window.S9ArcadeMusic?.track||'';return t.split('/').pop().replace('.wav','').replace('cabinet-theme','cabinet theme').toUpperCase()},step:()=>{window.S9ArcadeMusic?.next()}},
    {label:'VOLUME',bar:'volume'},{label:'FLASH E SCANLINE',bar:'effects'},
