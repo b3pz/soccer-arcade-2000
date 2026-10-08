@@ -13,7 +13,7 @@ with tempfile.TemporaryDirectory(prefix='sa2000-qa-') as tmp:
  for index,f in enumerate(files):
   snapshot=Path(tmp)/f'source-{index}.js';snapshot.write_text(f.read_text());syntax=Path(tmp)/f'check-{index}.js';syntax.write_text(f'checkSyntax({str(snapshot)!r});')
   subprocess.run([str(jsc),str(syntax)],cwd=root,check=True)
- for name in ['core','visual','features','tournament','drawn-menu','cabinet','catalog','stadium','offline','full-match-balance','assist','coop','evolution','evolution-ui','fantasy','online','cinematic','bindings','saves','presentation','demo','artwork']:
+ for name in ['core','visual','features','tournament','drawn-menu','cabinet','catalog','stadium','offline','full-match-balance','assist','coop','evolution','evolution-ui','fantasy','online','cinematic','bindings','saves','presentation','demo','artwork','replay']:
   run=subprocess.run([str(jsc),str(root/f'arcade/tests/{name}-tests.js')],cwd=root,check=True,capture_output=True,text=True);print(run.stdout,end='');print(run.stderr,end='')
   # Async blocks report failures by printing FAIL without a non-zero exit: treat them as failures too.
   assert not any(line.startswith('FAIL') for line in run.stdout.splitlines()),name+' tests printed FAIL'

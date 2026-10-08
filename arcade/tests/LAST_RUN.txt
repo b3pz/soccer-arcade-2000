@@ -232,6 +232,8 @@ PASS tapping the special button sprints (1.41x); next to an opponent it still dr
 PASS long ball distance follows the hold: tap 15 m, full 50 m
 PASS panoramic film crops, full sponsor strips and image-logo landing target
 PASS fictional teams, bitmap crests and legacy-name migration preserve player identities and ratings
+angle 1
+PASS replays: X cycles the camera angle, C saves the goal film with its scorer
 PASS JavaScript syntax (modules and all root inline scripts)
 PASS extracted animation assets
 PASS 34 animation sequences, populated cells and unified baseline
