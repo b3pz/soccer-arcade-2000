@@ -1,7 +1,7 @@
 var window=globalThis;function addEventListener(){}function removeEventListener(){}
 var Image=class{constructor(){this.complete=true;this.naturalWidth=1260;this.width=1260;this.height=480}};
 var texts=[],ctx=new Proxy({fillText:function(s){texts.push(String(s))},getImageData:()=>({data:new Uint8ClampedArray(4)})},{get:(t,k)=>k in t?t[k]:()=>{},set:(t,k,v)=>(t[k]=v,true)});var document={createElement:()=>({width:0,height:0,getContext:()=>ctx})};
-load('game/artwork.js');load('arcade/assets/animations.js');load('arcade/engine/core.js');load('arcade/engine/controllers.js');load('arcade/engine/penalties.js');load('arcade/engine/arcade-features.js');load('arcade/engine/setpieces.js');load('arcade/engine/art.js');load('arcade/engine/visual.js');load('arcade/engine/presentation-upgrade.js');load('arcade/engine/freekick.js');load('arcade/engine/match-presentation.js');load('arcade/engine/human-controls.js');load('arcade/engine/coin-toss.js');load('arcade/bridge.js');load('game/catalog.js');
+load('game/artwork.js');load('arcade/assets/animations.js');load('arcade/engine/core.js');load('arcade/engine/controllers.js');load('arcade/engine/penalties.js');load('arcade/engine/arcade-features.js');load('arcade/engine/setpieces.js');load('arcade/engine/art.js');load('arcade/engine/visual.js');load('arcade/engine/presentation-upgrade.js');load('arcade/engine/freekick.js');load('arcade/engine/match-presentation.js');load('arcade/engine/human-controls.js');load('arcade/engine/coin-toss.js');load('arcade/bridge.js');load('arcade/engine/weather.js');load('game/catalog.js');
 function assert(v,s){if(!v)throw Error(s)}function pass(s){print('PASS '+s)}
 const E=S9ArcadeEngine,clubs=SA2000_CATALOG.club;
 function game(){const input=new E.InputManager({keys:null});input.active=true;const m=new E.Match(input);ArcadeMatchBridge.setupTeam(m.teams[0],clubs.find(t=>t.name==='Joventis'),{cleanNames:true});ArcadeMatchBridge.setupTeam(m.teams[1],clubs.find(t=>t.name==='Milara'),{cleanNames:true});m.setHumans([{team:0,input}]);m.rules.allowDraw=true;return m}
@@ -58,3 +58,7 @@ function game(){const input=new E.InputManager({keys:null});input.active=true;co
 
 // The CPU's active player is labelled.
 {const m=game();m.phase='PLAY';m.restarts.data=null;m.control(m.teams[1].players[5]);const r=new E.Renderer({getContext:()=>ctx});r.camera=new E.CameraController();texts.length=0;r.cpuMarker(m);assert(texts.includes('CPU'),'no CPU label');pass('CPU label on the player the CPU is driving')}
+
+// Weather: a rolling ball runs further on a wet pitch; dry and night are unchanged.
+{const roll=w=>{S9ArcadeWeather.current=w;const m=game(),b=m.ball;b.reset();b.x=30;b.y=31;b.z=0;b.vx=20;b.vy=0;b.state='loose';for(let i=0;i<240;i++)b.update(1/120);S9ArcadeWeather.current=null;return b.x-30};const dry=roll('day'),wet=roll('rain');
+ assert(wet>dry*1.05,'rain does not change rolling: '+dry.toFixed(2)+' vs '+wet.toFixed(2));assert(Math.abs(roll('night')-dry)<1e-9,'night changes physics');pass('rain: ball rolls '+(wet/dry*100-100).toFixed(0)+'% further; night is visual only')}

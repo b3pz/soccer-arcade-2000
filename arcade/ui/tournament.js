@@ -10,15 +10,22 @@
  }
  function standings(c,g){const rows=c.groups[g].map(id=>({id,played:0,points:0,gf:0,ga:0}));for(const r of c.results.filter(r=>r.stage==='groups'&&r.group===g)){const h=rows.find(t=>t.id===r.h),a=rows.find(t=>t.id===r.a);h.played++;a.played++;h.gf+=r.hg;h.ga+=r.ag;a.gf+=r.ag;a.ga+=r.hg;h.points+=r.hg>r.ag?3:r.hg===r.ag?1:0;a.points+=r.ag>r.hg?3:r.hg===r.ag?1:0}return rows.sort((a,b)=>b.points-a.points||(b.gf-b.ga)-(a.gf-a.ga)||b.gf-a.gf||c.groups[g].indexOf(a.id)-c.groups[g].indexOf(b.id))}
  function fixture(c){if(c.stage==='groups'){const g=c.groups.findIndex(ids=>ids.includes(c.user)),ids=c.groups[g];const pair=schedule[c.round].find(p=>p.map(i=>ids[i]).includes(c.user));return {h:ids[pair[0]],a:ids[pair[1]],group:g,allowDraw:true}}if(c.stage==='knockout'){if(c.bracket.length===2)return {h:c.user,a:'arcade_jurassic',allowDraw:false,specialFinal:true,bonusFinal:true};const i=c.bracket.indexOf(c.user);return {h:c.bracket[i-i%2],a:c.bracket[i-i%2+1],allowDraw:false,specialFinal:c.bracket.length===2}}return null}
+ // Top scorers: the played match uses its real scorers; simulated matches draw scorers from the squad (strikers most often).
+ const WEIGHT={ST:6,AM:3,MF:2,DF:.5,GK:0};
+ function squad(id){return window.S9ArcadeRoster?.get(id)?.players||[]}
+ function credit(c,teamId,name){if(!name)return;c.scorers=c.scorers||{};const k=teamId+'|'+name;c.scorers[k]=c.scorers[k]||{name,team:teamId,goals:0};c.scorers[k].goals++}
+ function simulatedScorers(c,teamId,n){const ps=squad(teamId).filter(p=>WEIGHT[p.pos]>0);if(!ps.length)return;const total=ps.reduce((s,p)=>s+WEIGHT[p.pos]*(p.overall||70),0);for(let g=0;g<n;g++){let r=Math.random()*total;for(const p of ps){r-=WEIGHT[p.pos]*(p.overall||70);if(r<=0){credit(c,teamId,p.name);break}}}}
+ function tally(c,h,a,hg,ag,result){if(result?.scorers){for(const s of result.scorers)credit(c,s.team===0?c.user:(h===c.user?a:h),s.name)}else{simulatedScorers(c,h,hg);simulatedScorers(c,a,ag)}}
+ function topScorers(c,n=5){return Object.values(c.scorers||{}).sort((x,y)=>y.goals-x.goals||x.name.localeCompare(y.name)).slice(0,n)}
  function advance(c,result,simulate){
   const f=fixture(c);if(f?.bonusFinal)c.bracket=[c.user,'arcade_jurassic'];if(!f)throw Error('Torneo concluso');
   if(c.stage==='groups'){
-   c.groups.forEach((ids,g)=>schedule[c.round].forEach(pair=>{const h=ids[pair[0]],a=ids[pair[1]],r=h===c.user||a===c.user?result:simulate(h,a,true);c.results.push({stage:'groups',group:g,round:c.round,h,a,hg:r.homeGoals??r.hg,ag:r.awayGoals??r.ag})}));c.round++;
+   c.groups.forEach((ids,g)=>schedule[c.round].forEach(pair=>{const h=ids[pair[0]],a=ids[pair[1]],r=h===c.user||a===c.user?result:simulate(h,a,true);c.results.push({stage:'groups',group:g,round:c.round,h,a,hg:r.homeGoals??r.hg,ag:r.awayGoals??r.ag});tally(c,h,a,r.homeGoals??r.hg,r.awayGoals??r.ag,r===result?result:null)}));c.round++;
    if(c.round===3){const ranks=c.groups.map((_,g)=>standings(c,g));if(!ranks.some(rows=>rows.slice(0,2).some(t=>t.id===c.user))){c.stage='out';return c}c.bracket=[];for(let g=0;g<ranks.length;g+=2)c.bracket.push(ranks[g][0].id,ranks[g+1][1].id,ranks[g+1][0].id,ranks[g][1].id);c.stage='knockout';c.round=0}
   }else{
-   const winners=[];for(let i=0;i<c.bracket.length;i+=2){const h=c.bracket[i],a=c.bracket[i+1],r=h===c.user||a===c.user?result:simulate(h,a,false);if(r.winner!==h&&r.winner!==a)throw Error('Vincitore eliminazione diretta non valido');winners.push(r.winner);c.results.push({stage:'knockout',round:c.round,h,a,hg:r.homeGoals??r.hg,ag:r.awayGoals??r.ag,winner:r.winner})}c.bracket=winners;c.round++;c.stage=!winners.includes(c.user)?'out':winners.length===1?'won':'knockout';
+   const winners=[];for(let i=0;i<c.bracket.length;i+=2){const h=c.bracket[i],a=c.bracket[i+1],r=h===c.user||a===c.user?result:simulate(h,a,false);if(r.winner!==h&&r.winner!==a)throw Error('Vincitore eliminazione diretta non valido');winners.push(r.winner);c.results.push({stage:'knockout',round:c.round,h,a,hg:r.homeGoals??r.hg,ag:r.awayGoals??r.ag,winner:r.winner});tally(c,h,a,r.homeGoals??r.hg,r.awayGoals??r.ag,r===result?result:null)}c.bracket=winners;c.round++;c.stage=!winners.includes(c.user)?'out':winners.length===1?'won':'knockout';
   }if(c.stage==='won')c.bonus=bonus(c);return c;
  }
  function bonus(c){const played=c.results.filter(r=>r.h===c.user||r.a===c.user),wins=played.filter(r=>r.winner===c.user||(r.h===c.user?r.hg>r.ag:r.ag>r.hg)).length,goals=played.reduce((n,r)=>n+(r.h===c.user?r.hg:r.ag),0);return {champion:10000,finalShowdown:5000,wins:wins*1000,goals:goals*250,total:15000+wins*1000+goals*250}}
- window.S9ArcadeTournament={pool,create,standings,fixture,advance,bonus};
+ window.S9ArcadeTournament={pool,create,standings,fixture,advance,bonus,topScorers};
 })();
