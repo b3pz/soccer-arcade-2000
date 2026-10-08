@@ -125,3 +125,12 @@ Ogni squadra ha il suo stemma ricamato (scudo con bordo oro) con il **nome arcad
 ### Mobile
 
 Su telefono e tablet (schermo touch) in partita compaiono una levetta virtuale a sinistra (appare dove appoggi il pollice) e i pulsanti TIRO, PASSA, LANCIO, SCATTO a destra, più CAMBIO e PAUSA in alto. Funzionano come i tasti: TIRO e LANCIO si tengono premuti per caricare, SCATTO si tocca ripetutamente. In pausa la levetta sposta il cursore. Un tocco sull'intro equivale a START; nei menu si tocca direttamente la voce. In verticale compare l'invito a girare il telefono. I menu si adattano allo schermo e i testi non escono dai riquadri.
+
+### Novità: telecronaca, meteo, marcatori, replay, editor
+
+- **Telecronaca** (OPZIONI → GIOCO → TELECRONACA: SCRITTE / SCRITTE + VOCE / NO): commento su gol (con il nome del marcatore, pareggio, sorpasso, goleada), parate, pali, occasioni sfumate, falli, rigori, cartellini, inizio e fine. La voce usa la sintesi vocale italiana del browser. Il pubblico fa "ooh" sulle occasioni, applaude le parate e batte le mani a ritmo quando una squadra è avanti di due.
+- **Meteo** (OPZIONI → GIOCO → METEO: CASUALE / SERENO / NOTTE / PIOGGIA): notturna sotto i riflettori; con la pioggia il pallone scorre circa il 16% in più sull'erba bagnata.
+- **Coppa:** tabella MARCATORI durante il torneo e CAPOCANNONIERE alla fine.
+- **Replay:** durante il replay il passaggio alto cambia inquadratura (TV, RAVVICINATA, CONTROCAMPO), il passaggio salva il gol. Centro Arcade → **GOL SALVATI** per rivederli (fino a 8).
+- **Editor squadre** (Centro Arcade → EDITOR SQUADRE): nome della squadra, nomi dei giocatori, colori di maglia, secondo colore, pantaloncini e calzettoni, con anteprima; RIPRISTINA torna all'originale. Lo stemma resta quello originale.
+- **Centro Arcade:** scelta delle squadre con griglia di stemmi; le pagine si adattano allo schermo. OPZIONI si usa anche col tocco (✕ in alto a destra per uscire).

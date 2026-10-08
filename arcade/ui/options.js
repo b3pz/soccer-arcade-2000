@@ -87,6 +87,7 @@ function open({parent=document.body,onClose,inMatch=false,setup=false}={}){
  function draw(){const now=performance.now(),list=rows(),padNow=pads()[0];c.fillStyle='#050a1c';c.fillRect(0,0,1280,720);
   if(bg?.complete&&bg.naturalWidth){c.globalAlpha=.55;c.drawImage(bg,0,0,1280,720);c.globalAlpha=1}c.fillStyle='#030716aa';c.fillRect(0,0,1280,720);
   r.arcadeBanner?r.arcadeBanner('OPZIONI','#ffe447',96,1):r.text('OPZIONI',640,90,52,'#ffe447');
+  if(window.S9ArcadeTouch){r.panel(1188,16,76,60,10);r.text('✕',1226,58,30,'#ffe447')}
   // Tabs
   const tw=228;tabs.forEach((t,i)=>{const x=640-tabs.length*tw/2+i*tw;r.panel(x+4,150,tw-8,46,10);if(i===tab){c.fillStyle=row<0?'#ffe447':'#ffe44766';c.fillRect(x+12,188,tw-24,4)}r.text(t.label,x+tw/2,181,17,i===tab?'#ffe447':'#9fc2d4')});
   // Rows
@@ -108,6 +109,15 @@ function open({parent=document.body,onClose,inMatch=false,setup=false}={}){
  }
  function frame(){if(!alive)return;pollWizard(performance.now());pollPad();draw();raf=requestAnimationFrame(frame)}
  function close(){if(!alive)return;alive=false;if(window.S9ArcadePads)window.S9ArcadePads.capture=false;cancelAnimationFrame(raf);removeEventListener('keydown',key,true);root.remove();onClose?.()}
+ // Touch / mouse: tap a tab to switch, tap a row to select it and tap it again to act; on value rows the left
+ // third of the value steps back and the right part steps forward; ✕ (top right) closes; any tap ends a wait.
+ canvas.addEventListener('click',e=>{const b=canvas.getBoundingClientRect(),x=(e.clientX-b.left)*1280/b.width,y=(e.clientY-b.top)*720/b.height;
+  if(wiz){if(wiz.testing){endWizard()}return}if(listen){listen=null;say('ANNULLATO');return}
+  if(x>1180&&y<80){close();return}
+  if(y>=150&&y<=196){const tw=228,i=Math.floor((x-(640-tabs.length*tw/2))/tw);if(i>=0&&i<tabs.length&&i!==tab){tab=i;row=selectable(rows())[0];scroll=0;confirmReset=false}return}
+  const list=rows(),k=Math.round((y-246+4)/34),i=k+scroll;if(k<0||k>10||!list[i]||list[i].header)return;
+  if(i!==row){row=i;confirmReset=false;return}const it=list[i],right=tabs[tab].id==='pad'?690:1080;
+  if((it.step||it.toggle||it.bar)&&x>right-260){change(it,x<right-150?-1:1);return}activate(it)});
  addEventListener('keydown',key,true);row=selectable(rows())[0];if(setup){tab=1;row=0;startWizard()}frame();
  return root}
 // A non-standard pad that was never set up opens the guided setup by itself (outside matches), once per session.

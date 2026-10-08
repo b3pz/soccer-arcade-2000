@@ -219,7 +219,7 @@ PASS kick-off camera pulls back slowly from the centre ball
 PASS slim scoreboard and scorer name under the GOAL banner
 PASS crowd celebration cutaway uses animated bitmap artwork
 PASS slow motion when a shot is about to reach the goal frame, not for shots going wide
-PASS coin toss: call, flip, choice of end, kick-off to the other side (CPU)
+PASS coin toss: call, flip, choice of end, kick-off to the other side (1P)
 PASS holding the pass button in defence shadows the carrier goal-side
 PASS CPU label on the player the CPU is driving
 PASS rain: ball rolls 16% further; night is visual only
@@ -245,3 +245,5 @@ PASS offline sprite package preserves exact original PNG bytes for both palette 
 PASS private-room server authentication, signaling, expiry and rate limits
 PASS six spectacular-save sprite sequences have eight distinct full-body exposures each
 PASS raster environments, transparent title, favicon, Jurassic Kickers crest and 12 regional maps
+
+Weather, commentary, replay angles, saved goals viewer, team editor, hub crest picker and OPZIONI taps rendered in headless Chrome. A real phone has not been tested.
