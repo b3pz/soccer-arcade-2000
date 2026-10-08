@@ -1,0 +1,6 @@
+var window=globalThis;function addEventListener(){}function removeEventListener(){};var navigator={};
+load('arcade/engine/core.js');load('arcade/engine/controllers.js');load('arcade/engine/penalties.js');load('arcade/engine/arcade-features.js');load('arcade/engine/assist.js');load('arcade/engine/difficulty.js');load('arcade/engine/setpieces.js');load('arcade/bridge.js');load('game/catalog.js');load('arcade/engine/human-controls.js');
+const E=S9ArcadeEngine,cl=SA2000_CATALOG.club,input=new E.InputManager({keys:null});input.active=true;const m=new E.Match(input);ArcadeMatchBridge.setupTeam(m.teams[0],cl[4],{cleanNames:true});ArcadeMatchBridge.setupTeam(m.teams[1],cl[9],{cleanNames:true});m.setHumans([{team:0,input}]);m.phase='PLAY';m.restarts.data=null;
+const gk=m.teams[0].players.find(p=>p.role==='GK');m.control(gk);m.ball.controlMode='HANDS';const h=m.humans[0];
+let wasHuman=false,released=false;for(let i=0;i<600;i++){m.update(1/120);input.end(1/120);if(h.selected===gk)wasHuman=true;if(m.ball.owner!==gk)released=true}
+if(wasHuman)throw Error('keeper selected by the human');if(!released)throw Error('AI keeper never released the ball');print('PASS the human side keeper stays AI-driven after holding the ball, and distributes it himself');

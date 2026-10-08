@@ -14,6 +14,12 @@ function lob(m,h,p,power){const b=m.ball,a=h.input.axis(),dir=unit(a.x||a.y?a.x:
  h.input.cancelShot();m.stats.teams[p.team.id].passes++;m.lastPasser=p;p.face=dir;p.visualKickFace={...dir};
  const target=q&&dist(q,land)<14?q:null;b.kick(p,dir.x*speed,dir.y*speed,(12*f*f-2)/f,'aerial',target);
  if(target){target.receiverIntent=land;target.receiveState='running'}b.assisted=true;b.assistedBy=h;p.action='pass';p.actionTime=.3;m.say(power>.75?'LANCIO LUNGO!':'LANCIO!',.45)}
+// The human side's goalkeeper is always driven by the AI: a save or a back pass never hands him to a human,
+// and a human never ends up selecting him (he throws or kicks the ball out on his own).
+const assign=M.assignControl;
+M.assignControl=function(p){if(p?.role==='GK')return;return assign.call(this,p)};
+const human=M.humanStep;
+M.humanStep=function(dt){const h=this.human;if(h?.selected?.role==='GK'){h.selected=null;this.assignIdle?.()}return human.call(this,dt)};
 const step=M.humanStep;
 M.humanStep=function(dt){const h=this.human,p=this.selected,b=this.ball,input=this.input;
  if(!h||!p){return step.call(this,dt)}
