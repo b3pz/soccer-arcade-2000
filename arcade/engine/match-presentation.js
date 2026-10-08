@@ -10,9 +10,9 @@ R.bitmap?.(CROWD);
 // Every kick-off opens close on the ball at the centre spot and pulls back slowly to the playing view.
 const KICKOFF_CAMERA=3.2,update=CAM.update,ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
 CAM.update=function(m,dt){update.call(this,m,dt);const d=m.restarts?.data;
- if(m.phase==='RESTART'&&d?.type==='KICKOFF'&&d!==this.kickoffSeen){this.kickoffSeen=d;this.kickoff={age:0};if(!m.rules?.period||m.rules.period!=='PENALTIES')d.delay=Math.max(d.delay||0,KICKOFF_CAMERA-.5)}
+ if(m.phase==='RESTART'&&d?.type==='KICKOFF'&&d!==this.kickoffSeen&&!m.training){this.kickoffSeen=d;this.kickoff={age:0};if(!m.rules?.period||m.rules.period!=='PENALTIES')d.delay=Math.max(d.delay||0,KICKOFF_CAMERA-.5)}
  const k=this.kickoff;if(!k)return;k.age+=Math.min(dt,.1);const t=Math.min(1,k.age/KICKOFF_CAMERA);if(t>=1){this.kickoff=null;return}
- const e=ease(t),b=m.ball,zoom=this.zoom;this.x=b.x+(this.x-b.x)*e;this.y=b.y+.6*(1-e)+(this.y-b.y)*e;this.zoom=zoom*(3.4-2.4*e)};
+ const e=ease(t),b=m.ball,zoom=this.zoom;this.x=b.x+(this.x-b.x)*e;this.y=b.y+.6*(1-e)+(this.y-b.y)*e;this.zoom=Math.min(140,zoom*(3.4-2.4*e))};
 
 // ---------------------------------------------------------------- compact scoreboard
 // Two compact corner scoreboards and a central clock.
@@ -90,6 +90,6 @@ R.draw=function(m){draw.call(this,m);if(!this.replayMode&&!m.cardScene&&(m.phase
  // Slow-motion look: cinema bars and a soft vignette while it lasts.
  const a=m.slowmo?.amount||0;if(a>.02&&!this.replayMode){const c=this.ctx;c.fillStyle='rgba(0,0,0,'+(.85*a)+')';c.fillRect(0,0,1280,46*a);c.fillRect(0,720-46*a,1280,46*a);const g=c.createRadialGradient(640,360,260,640,360,760);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,'+(.35*a)+')');c.fillStyle=g;c.fillRect(0,0,1280,720)}};
 // Attract mode: DEMO tag, blinking start prompt and the button the bot is using right now.
-R.demoOverlay=function(m){const t=performance?.now?.()/1000||0,cap=m.demo.caption;this.panel(1000,14,262,50,10);this.text('DEMO',1060,47,24,'#ff8fa3');if(Math.floor(t*2)%2===0)this.text('PREMI START',1192,46,15,'#fff');
+R.demoOverlay=function(m){const t=performance?.now?.()/1000||0,cap=m.demo.caption;this.panel(1000,66,262,46,10);this.text('DEMO',1060,97,22,'#ff8fa3');if(Math.floor(t*2)%2===0)this.text('PREMI START',1192,96,15,'#fff');
  if(cap){const w=Math.min(820,cap.text.length*15+260),x=640-w/2,y=590;this.panel(x,y,w,58,12);this.text(cap.keys+'  '+cap.text,640,y+37,20,'#fff')}};
 })();

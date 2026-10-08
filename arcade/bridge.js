@@ -32,7 +32,7 @@ function launchArcadeMatch(config){if(window.S9ArcadeActive)return Promise.rejec
  // Presentation-only variants of the match: own fields copied (later {...view} copies still work) and the Match prototype kept (m.as, m.humanOf…).
  const view=extra=>Object.assign(Object.create(Object.getPrototypeOf(m)),m,extra);
  const toss=window.S9ArcadeCoinToss?.create(m,config)||null;let openingSeen=null,opening=null;
- function frame(now){if(!alive)return;try{inputs.forEach(i=>i.poll());if(config.demo?.exit?.()){close();resolve({demo:'exit'});return}const dt=Math.min((now-previous)/1000,.1);previous=now;renderer.stadiumCelebration=stadium?.tick(dt);
+ function frame(now){if(!alive)return;try{inputs.forEach(i=>i.poll());if(config.demo?.exit?.()){close();resolve({demo:'exit'});return}now=performance.now();const dt=Math.max(0,Math.min((now-previous)/1000,.1));previous=now; // one clock for start and framesrenderer.stadiumCelebration=stadium?.tick(dt);
  if(paused){renderer.draw(goalCelebration?view({goalCelebration}):m);renderer.pauseScreen?.(m);requestAnimationFrame(frame);return}
  // Pre-match ceremony (coin toss, choice of end): the match waits until it is over.
  if(toss&&!toss.done){toss.update(dt,inputs);m.preMatch=!toss.done;renderer.draw(m);toss.draw(renderer);inputs.forEach(i=>i.end(dt));if(toss.done)inputs.forEach(i=>{i.pressed.clear();i.cancelShot()});requestAnimationFrame(frame);return}
