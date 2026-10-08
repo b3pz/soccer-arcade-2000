@@ -31,7 +31,7 @@ function create(m,config={}){
  const rnd=()=>Math.random();
  function take(i,k){return i.take?.(k)}
  // Touch: a tap on the left half picks TESTA / attack left, on the right half CROCE / attack right; a second tap confirms.
- let tap=null;const onTap=e=>{const r=e.target?.getBoundingClientRect?.();if(!r||!r.width)return;const x=(e.changedTouches?.[0]?.clientX??e.clientX)-r.left;tap=x<r.width/2?0:1};
+ let tap=null;const onTap=e=>{if(e.target?.closest?.('#sa-touch .pad,#sa-touch .top'))return;const x=e.changedTouches?.[0]?.clientX??e.clientX;tap=x<window.innerWidth/2?0:1};
  if(typeof addEventListener==='function'){addEventListener('touchend',onTap,true)}
  function update(dt,inputs){age+=dt;if(done&&typeof removeEventListener==='function')removeEventListener('touchend',onTap,true);const t0=tap;tap=null;if(t0!=null&&stage==='call'){if(t0===call)inputs[0]?.pressed.add('z');call=t0}if(t0!=null&&stage==='won'&&winner===hTeam){if(t0===side&&age>.4)inputs[0]?.pressed.add('z');side=t0}const i=human?.input||inputs[0],left=take(i,'arrowleft')||take(i,'arrowup'),right=take(i,'arrowright')||take(i,'arrowdown'),ok=take(i,'z')||take(i,'c')||take(i,'x');
   if(stage==='call'){if(cpuOnly||age>8)call=rnd()<.5?0:1;if(left)call=0;if(right)call=1;if(ok||cpuOnly||age>8){stage='flip';age=0;result=rnd()<.5?0:1;window.S9SFX?.kick?.()}return}

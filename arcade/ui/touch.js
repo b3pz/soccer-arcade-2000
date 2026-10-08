@@ -44,6 +44,6 @@ let lastMenu=null;function menuStick(dx,dy){const dir=Math.abs(dy)>30?(dy<0?'Arr
 // Visible only during a match; the portrait warning only matters while playing or on the title.
 setInterval(()=>{const a=window.S9ArcadeActive,on=!!a&&!a.match?.demo;ui.style.display=on?'block':'none';rotate.classList.toggle('show',!!a||!window.S9ArcadeMenuOpen)},250);
 // Intro and title: a tap is START (the canvas click already confirms; this also covers the boot screen).
-doc.getElementById('sa2000-stage')?.addEventListener('touchend',e=>{if(window.S9ArcadeActive||window.S9ArcadeMenuOpen)return;e.preventDefault();dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}))},{passive:false});
+doc.getElementById('sa2000-stage')?.addEventListener('touchend',e=>{if(window.S9ArcadeActive||window.S9ArcadeMenuOpen)return;e.preventDefault();const key=window.S9ArcadeBindings?.key('confirm','menu')||'z';dispatchEvent(new KeyboardEvent('keydown',{key,bubbles:true,cancelable:true}))},{passive:false});
 window.S9ArcadeTouch={ui};
 })();
